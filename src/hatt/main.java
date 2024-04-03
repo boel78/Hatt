@@ -6,10 +6,6 @@ package hatt;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-/**
- *
- * @author joakimfockstedt
- */
 public class main {
     
     private static InfDB idb;
