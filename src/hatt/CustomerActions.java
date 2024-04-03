@@ -6,8 +6,33 @@ package hatt;
 
 /**
  *
- * @author Alexa
+ * @author Alexander & Carl
  */
 public class CustomerActions {
+    
+    //private Fält
+    
+    public CustomerActions() {
+        //Koppling till databsen sker i konstruktorn för att peka på den kunden man vill ha
+    }
+    
+    /*
+    private void addCustomer() {
+        
+    }
+    */
+    
+    /*
+    private void updateCustomer(){
+        
+    }
+    */
+    
+    /*
+    private void deleteCustomer() {
+        
+    }
+    */
+    
     
 }
