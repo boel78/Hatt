@@ -21,6 +21,10 @@
 *.tar.gz
 
 
+# Properties
+*.properties
+
+
 
 # Directories
 
