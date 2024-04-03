@@ -17,19 +17,19 @@ public class CustomerActions {
     }
     
     /*
-    private void addCustomer() {
+    private void addCustomer(allt) {
         
     }
     */
     
     /*
-    private void updateCustomer(){
+    private void updateCustomer(id){
         
     }
     */
     
     /*
-    private void deleteCustomer() {
+    private void deleteCustomer(id) {
         
     }
     */
