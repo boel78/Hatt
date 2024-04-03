@@ -28,3 +28,6 @@ CREATE USER hattmakare@localhost IDENTIFIED BY 'Hattsweatshop';
 GRANT ALL PRIVILEGES ON hattmakardb.* TO hattmakare@localhost;
 /*This code is to enable a connection to the database mibdb*/
 
+CREATE TABLE Kund (
+  id varchar(5)
+);
