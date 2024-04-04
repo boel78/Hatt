@@ -173,7 +173,7 @@ create table order
 
 alter table invoice
     add constraint invoice_order_oid_fk
-        foreign key (oid) references `order` (oid);
+        foreign key (oid) references order (oid);
 
 create table order_consists_of_materials
 (
@@ -183,7 +183,7 @@ create table order_consists_of_materials
     constraint order_consists_of_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
     constraint order_consists_of_materials_order_oid_fk
-        foreign key (oid) references `order` (oid)
+        foreign key (oid) references order (oid)
 );
 
 create table ordering_materials
@@ -234,7 +234,7 @@ create table waybill
     package_count varchar(5)  null,
     primary key (wid, oid),
     constraint waybill_order_oid_fk
-        foreign key (oid) references `order` (oid)
+        foreign key (oid) references order (oid)
 );
 
 INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (42, 2, 50);
