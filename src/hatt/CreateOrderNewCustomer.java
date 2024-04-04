@@ -315,7 +315,7 @@ private static InfDB idb;
     }//GEN-LAST:event_cobCustomersActionPerformed
     
     private void fillCobCustomers() {
-
+        cobCustomers.addItem("");
         ArrayList<String> emails;
         try {
             String query = "SELECT email FROM customer";

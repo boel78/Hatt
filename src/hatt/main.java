@@ -16,6 +16,7 @@ public class main {
     public static void main(String[] args) {
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
+            new CreateOrderNewCustomer(idb).setVisible(true);
         }
         catch(InfException ex){
             ex.printStackTrace();
