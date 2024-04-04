@@ -4,7 +4,6 @@
  */
 package hatt;
 
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +11,15 @@ import javax.swing.JOptionPane;
  */
 public class CustomerActions {
     
-    //private Fält
+    private String customerID = "";
     
     public CustomerActions() {
-        //Koppling till databsen sker i konstruktorn för att peka på den kunden man vill ha
+        //Koppling till databsen sker i konstruktorn där kunden ska skapas
     }
     
+    public CustomerActions(String customerID) {
+        //Koppling till databsen sker i konstruktorn med en kund som readan finns 
+    }
     
     public void addCustomer() {
         
@@ -50,6 +52,7 @@ public class CustomerActions {
         String testEmail = test2;
         
         System.out.println(testName + " " + testEmail);
+        
     }
     
 }
