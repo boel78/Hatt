@@ -21,9 +21,6 @@
 *.tar.gz
 
 
-# Properties
-*.properties
-
 
 
 # Directories
@@ -34,7 +31,6 @@ dist/
 
 build/
 
-resurser/
 
 
 
