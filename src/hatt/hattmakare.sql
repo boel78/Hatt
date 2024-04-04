@@ -114,7 +114,7 @@ create table employee
         foreign key (uid) references user (uid)
 );
 
-create table handles_product
+create table handles_stocked_product
 (
     uid int not null,
     sid int not null,
@@ -235,5 +235,44 @@ create table waybill
         foreign key (oid) references `order` (oid)
 );
 
-INSERT INTO hattmakardb.accessories (amount, mid) VALUES (42, 2);
-INSERT INTO hattmakardb.accessories (amount, mid) VALUES (3, 4);
+INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (42, 2, 50);
+INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (3, 4, 5);
+INSERT INTO hattmakardb.accountant (uid) VALUES (3);
+INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 1);
+INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 2);
+INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 3);
+INSERT INTO hattmakardb.business_customer (cid, org_number) VALUES (3, '12345');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (1, 'Billy', 'Skogen 3', '073-0675981', 'billy@svt.se');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (2, 'Leif', 'Skogen 3', '073-0758691', 'leif@svt.se');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (3, 'Ulf Kristersson', 'Riksgatan 1', '070-1234785', 'ulf@kort.se');
+INSERT INTO hattmakardb.employee (uid) VALUES (1);
+INSERT INTO hattmakardb.employee (uid) VALUES (2);
+INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (1, 23, 40);
+INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (3, 12, 15);
+INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (5, 8, 9);
+INSERT INTO hattmakardb.handles_stocked_product (uid, sid) VALUES (1, 1);
+INSERT INTO hattmakardb.invoice (inid, cost, oid) VALUES (1, 1200, 1);
+INSERT INTO hattmakardb.invoice (inid, cost, oid) VALUES (2, 674.3, 2);
+INSERT INTO hattmakardb.invoice (inid, cost, oid) VALUES (3, 2542, 3);
+INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (1, 'Jeans', 257.5, 1);
+INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (2, 'Feather', 43.7, 1);
+INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (3, 'Silk', 569.4, 1);
+INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (4, 'Ribbon', 45.6, 2);
+INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (5, 'Manchester', 543.2, 2);
+INSERT INTO hattmakardb.order (oid, description, estimated_time, created_by, invoice, customer) VALUES (1, 'Jeanshat', 4, 1, 1, 1);
+INSERT INTO hattmakardb.order (oid, description, estimated_time, created_by, invoice, customer) VALUES (2, 'Doctorateshat', 2, 1, 2, 1);
+INSERT INTO hattmakardb.order (oid, description, estimated_time, created_by, invoice, customer) VALUES (3, 'Silkbonnet', 3, 2, 3, 2);
+INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1);
+INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
+INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
+INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
+INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
+INSERT INTO hattmakardb.requests (rid, description, reviewed_by, customer) VALUES (1, 'En jeanshatt', 1, 1);
+INSERT INTO hattmakardb.stocked_product (sid, name, description, starting_price) VALUES (1, 'Doctorateshat', 'A Doctorates hat', 1200);
+INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (1, 'Lollos Jeans', 'lollo.jeans@gmail.com', '070-0000000');
+INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (2, 'Alis Accessories', 'aliexpress@gmail.com', '073-0200472');
+INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (3, 'Silvias Silk', 'silkysmooth@hotmail.com', '042-0739282');
+INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (1, 'Otto', 'ottohatt@gmail.com', 'partner', '070-5551231');
+INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (2, 'Judith', 'judithhatt@gmail.com', 'partner', '070-1234565');
+INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (3, 'Joakim', 'joakimrevisor@gmail.com', 'accountant', '073-9876543');
+INSERT INTO hattmakardb.waybill (wid, oid, volume, weight, content, package_count) VALUES (1, 1, 1, 5, 'Jeanshat', '1');
