@@ -8,7 +8,7 @@ package hatt;
  *
  * @author Alexa
  */
-public class SkapaKund extends javax.swing.JFrame {
+public class TestSkapaKund extends javax.swing.JFrame {
 
     private String test1 = "";
     private String test2 = "";
@@ -16,7 +16,7 @@ public class SkapaKund extends javax.swing.JFrame {
     /**
      * Creates new form SkapaKund
      */
-    public SkapaKund() {
+    public TestSkapaKund() {
         initComponents();
     }
 
@@ -138,20 +138,21 @@ public class SkapaKund extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestSkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestSkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestSkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TestSkapaKund.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SkapaKund().setVisible(true);
+                new TestSkapaKund().setVisible(true);
             }
         });
     }
