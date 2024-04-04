@@ -5,8 +5,8 @@
 package hatt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
+import oru.inf.InfDB;
 import oru.inf.InfException;
 
 
@@ -18,8 +18,10 @@ import oru.inf.InfException;
  */
 public class CreateOrderNewCustomer extends javax.swing.JFrame {
 
+private static InfDB idb;
 
-    public CreateOrderNewCustomer() {
+    public CreateOrderNewCustomer(InfDB idb) {
+        this.idb = idb;
         initComponents();
         fillCobCustomers();
         
@@ -288,7 +290,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_tfNameActionPerformed
 
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
-/*
+
         String customerEmail = cobCustomers.getSelectedItem().toString();
         try {
             String nameQuery = "SELECT Name FROM Customer WHERE Email = '" + customerEmail + "'";
@@ -308,15 +310,15 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Database error!");
             System.out.println("Internal error message!" + e.getMessage());
         }
-*/
+
 
     }//GEN-LAST:event_cobCustomersActionPerformed
     
     private void fillCobCustomers() {
 
-       /* ArrayList<String> emails;
+        ArrayList<String> emails;
         try {
-            String query = "SELECT Email FROM Customer";
+            String query = "SELECT email FROM customer";
             emails = idb.fetchColumn(query);
 
             for (String email : emails) {
@@ -324,10 +326,10 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
 
             }
 
-        } catch (infException e) {
+        } catch (InfException e) {
             System.out.println("Databasfel");
         }
-        */
+        
     }
 
     /**
@@ -367,7 +369,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateOrderNewCustomer().setVisible(true);
+                new CreateOrderNewCustomer(idb).setVisible(true);
             }
         });
     }
