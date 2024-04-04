@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.19, for macos10.15 (x86_64)
 --
--- Host: 127.0.0.1    Database: mibdb
+-- Host: 127.0.0.1    Database: hattmakare
 -- ------------------------------------------------------
 -- Server version	8.0.19
 
@@ -26,5 +26,8 @@ USE hattmakardb;
 --
 CREATE USER hattmakare@localhost IDENTIFIED BY 'Hattsweatshop';
 GRANT ALL PRIVILEGES ON hattmakardb.* TO hattmakare@localhost;
-/*This code is to enable a connection to the database mibdb*/
+/*This code is to enable a connection to the database hattmakardb*/
 
+CREATE TABLE Kund (
+  id varchar(5)
+);
