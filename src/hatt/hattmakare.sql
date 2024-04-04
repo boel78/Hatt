@@ -119,9 +119,9 @@ create table handles_stocked_product
     uid int not null,
     sid int not null,
     primary key (uid, sid),
-    constraint handles_product_stocked_product_sid_fk
+    constraint handles_stocked_product_stocked_product_sid_fk
         foreign key (sid) references stocked_product (sid),
-    constraint handles_product_user_uid_fk
+    constraint handles_stocked_product_user_uid_fk
         foreign key (uid) references user (uid)
 );
 
@@ -140,19 +140,21 @@ create table accessories
 (
     amount int null,
     mid    int not null,
+    stock  int null,
     constraint accessories_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
 
 create table fabric
 (
-    mid  int    not null,
-    size double null,
+    mid   int    not null,
+    size  double null,
+    stock double null,
     constraint fabric_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
 
-create table `order`
+create table order
 (
     oid            int         not null
         primary key,
