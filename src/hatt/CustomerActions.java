@@ -30,6 +30,7 @@ public class CustomerActions {
     
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
+        this.customerID = customerID;
     }
     
     private void initializeAddCustomer() {
@@ -42,20 +43,14 @@ public class CustomerActions {
     
     System.out.println("Kund tillagd"); 
     }
-    
-    
-    
+     
     public void updateCustomer(){
       System.out.println("Kund updaterad");  
     }
     
-    
-    
     public void deleteCustomer() {
         System.out.println("Kund bortagen"); 
     }
-    
-    
     
     public String getCustomer() {
         System.out.println("Kund hämtad");
@@ -67,7 +62,5 @@ public class CustomerActions {
         String testEmail = test2;
         
         System.out.println(testName + " " + testEmail);
-        
     }
-    
 }
