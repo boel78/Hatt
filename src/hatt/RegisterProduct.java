@@ -4,16 +4,19 @@
  */
 package hatt;
 
+import javax.swing.JOptionPane;
+import oru.inf.InfDB;
+
 /**
  *
  * @author danagliana
  */
 public class LagerforaModell extends javax.swing.JFrame {
-
+private static InfDB idb;
     /**
      * Creates new form LagerforaModell
      */
-    public LagerforaModell() {
+    public LagerforaModell(InfDB idb) {
         initComponents();
     }
 
@@ -26,8 +29,17 @@ public class LagerforaModell extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        NameF = new javax.swing.JTextField();
+        PriceF = new javax.swing.JTextField();
+        SupplierF = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +53,18 @@ public class LagerforaModell extends javax.swing.JFrame {
             }
         });
 
+        NameF.setText("jTextField1");
+
+        PriceF.setText("jTextField3");
+
+        SupplierF.setText("jTextField4");
+
+        jLabel2.setText("Name");
+
+        jLabel3.setText("Price");
+
+        jLabel4.setText("Supplier");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -51,8 +75,17 @@ public class LagerforaModell extends javax.swing.JFrame {
                         .addGap(120, 120, 120)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(jButton1)))
+                        .addGap(85, 85, 85)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addComponent(PriceF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SupplierF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -60,7 +93,19 @@ public class LagerforaModell extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NameF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PriceF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SupplierF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(46, 46, 46))
         );
@@ -69,7 +114,25 @@ public class LagerforaModell extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-int Summa = 20;        // TODO add your handling code here:
+
+        try {
+            String Name = NameF.getText();
+            String Price = PriceF.getText();
+            String Supplier = SupplierF.getText();
+            
+            String QueryNamePrice = "Insert Into Materials (name,price) VALUES('" + Name + "'" + "," + Price + ")";
+            String QuerySupplier = "Insert Into Supplier (name,price) VALUES('" + Name + "'" + "," + Price + ")";
+         //validering ska ske här innan datan införs i databasen.
+            idb.insert(QueryNamePrice);
+            
+            
+        
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(null, "Fel inträffade");
+           
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -108,7 +171,14 @@ int Summa = 20;        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField NameF;
+    private javax.swing.JTextField PriceF;
+    private javax.swing.JTextField SupplierF;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
