@@ -11,17 +11,32 @@ package hatt;
  */
 public class CustomerActions {
     
-    private String customerID = "";
+    private String customerID = ""; //Database: customer/cid
+    private String name = ""; //Database: customer/name
+    private String address = ""; //Database: customer/address
+    private String phone = ""; //Database: customer/phone
+    private String email = ""; //Database: customer/email
     
-    public CustomerActions() {
-        //Koppling till databsen sker i konstruktorn där kunden ska skapas
+    public CustomerActions(String customerID, String name, String address, String phone, String email) {
+        //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
+        this.customerID = customerID;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+        
+        initializeAddCustomer();
     }
     
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
     }
     
-    public void addCustomer() {
+    private void initializeAddCustomer() {
+        addCustomer(customerID, name, address, phone, email);
+    }
+    
+    public void addCustomer(String customerID, String name, String address, String phone, String email) {
         
     
     
