@@ -16,6 +16,7 @@ public class CustomerActions {
     private String address = ""; //Database: customer/address
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
+    private String orgNumber = ""; //Database: business/org_number
     
     public CustomerActions(String customerID, String name, String address, String phone, String email) {
         //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
