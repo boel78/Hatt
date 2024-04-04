@@ -19,7 +19,7 @@ public class CustomerActions {
     }
     
     
-    private void addCustomer() {
+    public void addCustomer() {
         
     
     
@@ -28,22 +28,28 @@ public class CustomerActions {
     
     
     
-    private void updateCustomer(){
+    public void updateCustomer(){
       System.out.println("Kund updaterad");  
     }
     
     
     
-    private void deleteCustomer() {
+    public void deleteCustomer() {
         System.out.println("Kund bortagen"); 
     }
     
     
     
-    private String getCustomer() {
+    public String getCustomer() {
         System.out.println("Kund hämtad");
         return ("test lyckats");
     }
     
+    public static void testMethod(String test1, String test2) {
+        String testName = test1;
+        String testEmail = test2;
+        
+        System.out.println(testName + " " + testEmail);
+    }
     
 }
