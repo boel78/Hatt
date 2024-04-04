@@ -28,6 +28,212 @@ CREATE USER hattmakare@localhost IDENTIFIED BY 'Hattsweatshop';
 GRANT ALL PRIVILEGES ON hattmakardb.* TO hattmakare@localhost;
 /*This code is to enable a connection to the database hattmakardb*/
 
-CREATE TABLE Kund (
-  id varchar(5)
+create table customer
+(
+    cid     int         not null
+        primary key,
+    name    varchar(25) null,
+    address varchar(25) null,
+    phone   varchar(25) null,
+    email   varchar(25) null
 );
+
+create table business_customer
+(
+    cid        int         not null,
+    org_number varchar(25) null,
+    constraint business_customer_customer_cid_fk
+        foreign key (cid) references customer (cid)
+);
+
+create table invoice
+(
+    inid int    not null
+        primary key,
+    cost double null,
+    oid  int    null
+);
+
+create table private_customer
+(
+    cid int not null,
+    constraint private_customer_customer_cid_fk
+        foreign key (cid) references customer (cid)
+);
+
+create table stocked_product
+(
+    sid            int          not null
+        primary key,
+    name           varchar(25)  null,
+    description    varchar(100) null,
+    starting_price double       null
+);
+
+create table supplier
+(
+    sid   int         not null
+        primary key,
+    name  varchar(25) null,
+    email varchar(25) null,
+    phone varchar(25) null
+);
+
+create table user
+(
+    uid      int         not null
+        primary key,
+    name     varchar(25) null,
+    email    varchar(25) null,
+    position varchar(25) null,
+    phone    varchar(25) null
+);
+
+create table accountant
+(
+    uid int not null,
+    constraint accountant_user_uid_fk
+        foreign key (uid) references user (uid)
+);
+
+create table accountant_access
+(
+    uid  int not null,
+    inid int not null,
+    primary key (inid, uid),
+    constraint accountant_access_accountant_uid_fk
+        foreign key (uid) references accountant (uid),
+    constraint accountant_access_invoice_inid_fk
+        foreign key (inid) references invoice (inid)
+);
+
+create table employee
+(
+    uid int not null,
+    constraint employee_user_uid_fk
+        foreign key (uid) references user (uid)
+);
+
+create table handles_product
+(
+    uid int not null,
+    sid int not null,
+    primary key (uid, sid),
+    constraint handles_product_stocked_product_sid_fk
+        foreign key (sid) references stocked_product (sid),
+    constraint handles_product_user_uid_fk
+        foreign key (uid) references user (uid)
+);
+
+create table materials
+(
+    mid        int         not null
+        primary key,
+    name       varchar(25) null,
+    price      double      null,
+    handled_by int         not null,
+    constraint materials_employee_uid_fk
+        foreign key (handled_by) references employee (uid)
+);
+
+create table accessories
+(
+    amount int null,
+    mid    int not null,
+    constraint accessories_materials_mid_fk
+        foreign key (mid) references materials (mid)
+);
+
+create table fabric
+(
+    mid  int    not null,
+    size double null,
+    constraint fabric_materials_mid_fk
+        foreign key (mid) references materials (mid)
+);
+
+create table `order`
+(
+    oid            int         not null
+        primary key,
+    description    varchar(25) null,
+    estimated_time double      null,
+    created_by     int         not null,
+    invoice        int         null,
+    customer       int         not null,
+    constraint order_customer_cid_fk
+        foreign key (customer) references customer (cid),
+    constraint order_employee_uid_fk
+        foreign key (created_by) references employee (uid),
+    constraint order_invoice_inid_fk
+        foreign key (invoice) references invoice (inid)
+);
+
+alter table invoice
+    add constraint invoice_order_oid_fk
+        foreign key (oid) references `order` (oid);
+
+create table order_consists_of_materials
+(
+    oid int not null,
+    mid int not null,
+    primary key (mid, oid),
+    constraint order_consists_of_materials_materials_mid_fk
+        foreign key (mid) references materials (mid),
+    constraint order_consists_of_materials_order_oid_fk
+        foreign key (oid) references `order` (oid)
+);
+
+create table ordering_materials
+(
+    mid  int not null,
+    sid  int not null,
+    inid int not null,
+    primary key (mid, inid, sid),
+    constraint ordering_materials_invoice_inid_fk
+        foreign key (inid) references invoice (inid),
+    constraint ordering_materials_materials_mid_fk
+        foreign key (mid) references materials (mid),
+    constraint ordering_materials_supplier_sid_fk
+        foreign key (sid) references supplier (sid)
+);
+
+create table product_materials
+(
+    sid int not null,
+    mid int not null,
+    primary key (mid, sid),
+    constraint product_materials_materials_mid_fk
+        foreign key (mid) references materials (mid),
+    constraint product_materials_stocked_product_sid_fk
+        foreign key (sid) references stocked_product (sid)
+);
+
+create table requests
+(
+    rid         int         not null
+        primary key,
+    description varchar(25) null,
+    reviewed_by int         not null,
+    customer    int         not null,
+    constraint requests_customer_cid_fk
+        foreign key (customer) references customer (cid),
+    constraint requests_employee_uid_fk
+        foreign key (reviewed_by) references employee (uid)
+);
+
+create table waybill
+(
+    wid           int         not null,
+    oid           int         not null,
+    volume        double      null,
+    weight        double      null,
+    content       varchar(25) null,
+    package_count varchar(5)  null,
+    primary key (wid, oid),
+    constraint waybill_order_oid_fk
+        foreign key (oid) references `order` (oid)
+);
+
+INSERT INTO hattmakardb.accessories (amount, mid) VALUES (42, 2);
+INSERT INTO hattmakardb.accessories (amount, mid) VALUES (3, 4);
