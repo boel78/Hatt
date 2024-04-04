@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alexander & Carl
@@ -16,28 +18,32 @@ public class CustomerActions {
         //Koppling till databsen sker i konstruktorn för att peka på den kunden man vill ha
     }
     
-    /*
-    private void addCustomer(allt) {
-        
-    }
-    */
     
-    /*
-    private void updateCustomer(id){
+    private void addCustomer() {
         
-    }
-    */
     
-    /*
-    private void deleteCustomer(id) {
-        
-    }
-    */
     
-    /*
+    System.out.println("Kund tillagd"); 
+    }
+    
+    
+    
+    private void updateCustomer(){
+      System.out.println("Kund updaterad");  
+    }
+    
+    
+    
+    private void deleteCustomer() {
+        System.out.println("Kund bortagen"); 
+    }
+    
+    
+    
     private String getCustomer() {
-        
+        System.out.println("Kund hämtad");
+        return ("test lyckats");
     }
-    */
+    
     
 }
