@@ -4,7 +4,6 @@
  */
 package hatt;
 
-import java.util.HashSet;
 
 /**
  *
@@ -212,13 +211,11 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
     
-      customerID = txtCustomerID.getText();
+      String customerID = txtCustomerID.getText();
 
-      
-      // for loop
-
-      CustomerActions.getCustomer(customerID);
-
+        ArrayList<String> customer = CustomerActions.getCustomer(customerID);
+        
+        // for loop
       
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
