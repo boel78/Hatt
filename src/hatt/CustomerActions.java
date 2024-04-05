@@ -65,6 +65,7 @@ public class CustomerActions {
         
         customers = Database.fetchColumn(columnName, tableName, columnWhere, columnIdentifier);
         return customers;
+        
     }
     
     public static void testMethod(String test1, String test2) {
