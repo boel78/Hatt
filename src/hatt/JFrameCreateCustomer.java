@@ -212,13 +212,13 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
     
-      String customerID = txtCustomerID.getText();
-<<<<<<< Updated upstream
+      customerID = txtCustomerID.getText();
+
       
       // for loop
-=======
+
       CustomerActions.getCustomer(customerID);
->>>>>>> Stashed changes
+
       
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
