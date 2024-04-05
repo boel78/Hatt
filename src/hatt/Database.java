@@ -26,14 +26,27 @@ public class Database {
    
 // Metod som hämtar allt ur customer databasen eller specifik column. Inte ett ensamt värde
     public ArrayList<String> getCustomerColumns(String columns, String condition)    {
-        //String column: column namn som man vill få ut data ifrån ex. *, name eller email.
-        //String condition: (column där man vill granska vilkor) = '(värdet man vill hitta)'
+        
+        /*
+        *   String column: column namn som man vill få ut data ifrån ex. *, name eller email.
+        *   ex. Om du vill hämta alla kolumner: "*"
+        *   Om du vill hämta kolumnen för kundnamn: "name"
+        *   Om du vill hämta kolumnen för kundens e-postadress: "email"
+        *   
+        *   String condition: Här ska du ange ett villkor som specificerar vilka rader som ska hämtas från databastabellen.
+        *   Det måste formateras på detta sätt i parametern. "(Kolumn) = '(värde)'
+        *   Där du ersätter (kolumn) med namnet på kolumnen du vill granska ditt vilkor emot.
+        *   och (värde) mot det värdet du vill ha i vilkoret.
+        *   Ex. på parameter värden för String condition: 
+        *   "CID = '1'"
+        *   Det här värdet kan vara null eller tom sträng vilket ger inget vilkor i SQL frågan.
+        */
         
         ArrayList<String> customers = new ArrayList<>();
         String query = "Select " + columns + " From Customer;";
         
         if (columns != null && !condition.isEmpty())  {
-            query += " Where" + condition + "";
+            query += " Where " + condition + ";";
         }
         try {
             customers = idb.fetchColumn(query);
@@ -47,14 +60,28 @@ public class Database {
 
     // Metod som hämtar ett enskilt värde från kundtabellen 
     public String getCustomerSingle(String columns, String condition)    {
-        //String column: column namn som man vill få ut data ifrån ex. *, name eller email.
-        //String condition: (column där man vill granska vilkor) = '(värdet man vill hitta)'
+        
+        
+        /*
+        *   String column: column namn som man vill få ut data ifrån ex. *, name eller email.
+        *   ex. Om du vill hämta alla kolumner: "*"
+        *   Om du vill hämta kolumnen för kundnamn: "name"
+        *   Om du vill hämta kolumnen för kundens e-postadress: "email"
+        *   
+        *   String condition: Här ska du ange ett villkor som specificerar vilka rader som ska hämtas från databastabellen.
+        *   Det måste formateras på detta sätt i parametern. "(Kolumn) = '(värde)'
+        *   Där du ersätter (kolumn) med namnet på kolumnen du vill granska ditt vilkor emot.
+        *   och (värde) mot det värdet du vill ha i vilkoret.
+        *   Ex. på parameter värden för String condition: 
+        *   "CID = '1'"
+        *   Det här värdet kan vara null eller tom sträng vilket ger inget vilkor i SQL frågan.
+        */
         
         String customerValue = "";
         String query = "Select " + columns + " From Customer;";
         
-        if (columns != null && !condition.isEmpty())  {
-            query += " Where" + condition + "";
+        if (condition != null && !condition.isEmpty())  {
+            query += " Where " + condition + ";";
         }
         try {
             customerValue = idb.fetchSingle(query);
