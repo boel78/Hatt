@@ -13,11 +13,11 @@ import java.util.ArrayList;
  */
 public class CustomerActions {
     
-    private String customerID = "testID"; //Database: customer/cid
-    private String name = "testName"; //Database: customer/name
-    private String address = "testAddress"; //Database: customer/address
-    private String phone = "testPhone"; //Database: customer/phone
-    private String email = "testEmail"; //Database: customer/email
+    private String customerID = ""; //Database: customer/cid
+    private String name = ""; //Database: customer/name
+    private String address = ""; //Database: customer/address
+    private String phone = ""; //Database: customer/phone
+    private String email = ""; //Database: customer/email
     private String orgNumber = ""; //Database: business/org_number
     
     public CustomerActions(String customerID, String name, String address, String phone, String email) {
