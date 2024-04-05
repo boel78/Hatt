@@ -20,9 +20,14 @@ public class createRequest extends javax.swing.JFrame {
     /**
      * Creates new form createRequest
      */
-    public createRequest(InfDB idb) {
+    public createRequest() {
         initComponents();
-        this.idb=idb;
+        try {
+            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
+        }
+        catch(InfException ex){
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -116,10 +121,14 @@ public class createRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         description = txtDescription.getText();
+        System.out.print(description);
         
         try
         {
-            idb.insert("INSERT INTO requests VALUES (10, '" + description + "')");
+            int workerID = 1;
+            
+            String nextID = idb.getAutoIncrement("requests", "rid");
+            idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ", " + customerID + ")");
         } 
         catch (InfException ex)
         {
@@ -162,11 +171,11 @@ public class createRequest extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+                new createRequest().setVisible(true);
             }
         });
     }
