@@ -62,7 +62,7 @@ public class CustomerActions {
         String columnIdentifier = ""; // Avgörs i gränsittet.
         ArrayList<String> customers = new ArrayList<>();
         
-        customers = Database.fetchColum(columnName, tableName, columnWhere, columnIdentifier);
+        customers = Database.fetchColumn(columnName, tableName, columnWhere, columnIdentifier);
         return customers;
     }
     
