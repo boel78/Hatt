@@ -55,12 +55,12 @@ public class CustomerActions {
         System.out.println("Kund bortagen"); 
     }
     
-    public ArrayList<String> getCustomer() {
+    public ArrayList<String> getCustomer(String customerID) {
         String test = "Test getCustomer Lyckats";
         String columnName = "*";
         String tableName = "Customer";
         String columnWhere = "cid";
-        String columnIdentifier = ""; // Avgörs i gränsittet.
+        String columnIdentifier = customerID; // Avgörs i gränsittet.
         ArrayList<String> customers = new ArrayList<>();
         
         customers = Database.fetchColumn(columnName, tableName, columnWhere, columnIdentifier);
