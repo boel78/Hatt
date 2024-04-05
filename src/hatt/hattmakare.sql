@@ -33,9 +33,9 @@ create table customer
     cid     int         not null
         primary key,
     name    varchar(25) null,
-    address varchar(25) null,
+    address varchar(50) null,
     phone   varchar(25) null,
-    email   varchar(25) null
+    email   varchar(50) null
 );
 
 create table business_customer
@@ -75,7 +75,7 @@ create table supplier
     sid   int         not null
         primary key,
     name  varchar(25) null,
-    email varchar(25) null,
+    email varchar(50) null,
     phone varchar(25) null
 );
 
@@ -84,7 +84,7 @@ create table user
     uid      int         not null
         primary key,
     name     varchar(25) null,
-    email    varchar(25) null,
+    email    varchar(50) null,
     position varchar(25) null,
     phone    varchar(25) null
 );
@@ -158,17 +158,14 @@ create table xOrder
 (
     oid            int         not null
         primary key,
-    description    varchar(25) null,
+    description    varchar(50) null,
     estimated_time double      null,
     created_by     int         not null,
-    invoice        int         null,
     customer       int         not null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint xOrder_employee_uid_fk
-        foreign key (created_by) references employee (uid),
-    constraint xOrder_invoice_inid_fk
-        foreign key (invoice) references invoice (inid)
+        foreign key (created_by) references employee (uid)
 );
 
 alter table invoice
@@ -179,6 +176,7 @@ create table order_consists_of_materials
 (
     oid int not null,
     mid int not null,
+    amount double null,
     primary key (mid, oid),
     constraint order_consists_of_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
@@ -215,7 +213,7 @@ create table requests
 (
     rid         int         not null
         primary key,
-    description varchar(25) null,
+    description varchar(100) null,
     reviewed_by int         not null,
     customer    int         not null,
     constraint requests_customer_cid_fk
@@ -230,7 +228,7 @@ create table waybill
     oid           int         not null,
     volume        double      null,
     weight        double      null,
-    content       varchar(25) null,
+    content       varchar(50) null,
     package_count varchar(5)  null,
     primary key (wid, oid),
     constraint waybill_xOrder_oid_fk
@@ -262,10 +260,10 @@ INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (3, 12, 15);
 INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (5, 8, 9);
 INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (42, 2, 50);
 INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (3, 4, 5);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, invoice, customer) VALUES (1, 'Jeanshat', 4, 1, 1, 1);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, invoice, customer) VALUES (2, 'Doctorateshat', 2, 1, 2, 1);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, invoice, customer) VALUES (3, 'Silkbonnet', 3, 2, 3, 2);
-INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (1, 'Jeanshat', 4, 1, 1);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (2, 'Doctorateshat', 2, 1, 1);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (3, 'Silkbonnet', 3, 2, 2);
+INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
