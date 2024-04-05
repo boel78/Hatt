@@ -4,6 +4,7 @@
  */
 package hatt;
 
+import java.util.ArrayList;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -23,5 +24,51 @@ public class Database {
         }
     }
    
+// Metod som hämtar allt ur customer databasen eller specifik column. Inte ett ensamt värde
+    public ArrayList<String> getCustomerColumns(String columns, String condition)    {
+        //String column: column namn som man vill få ut data ifrån ex. *, name eller email.
+        //String condition: (column där man vill granska vilkor) = '(värdet man vill hitta)'
+        
+        ArrayList<String> customers = new ArrayList<>();
+        String query = "Select " + columns + " From Customer;";
+        
+        if (columns != null && !condition.isEmpty())  {
+            query += " Where" + condition + "";
+        }
+        try {
+            customers = idb.fetchColumn(query);
+        }
+        catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return customers;
+    }
 
+    // Metod som hämtar en Single värde ur customer databasen. Inte en hel Table eller column. 
+    public ArrayList<String> getCustomerSingle(String columns, String condition)    {
+        //String column: column namn som man vill få ut data ifrån ex. *, name eller email.
+        //String condition: (column där man vill granska vilkor) = '(värdet man vill hitta)'
+        
+        ArrayList<String> customers = new ArrayList<>();
+        String query = "Select " + columns + " From Customer;";
+        
+        if (columns != null && !condition.isEmpty())  {
+            query += " Where" + condition + "";
+        }
+        try {
+            customers = idb.fetchColumn(query);
+        }
+        catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return customers;
+    }
+
+    
+    
+    
+    
+    
 }
