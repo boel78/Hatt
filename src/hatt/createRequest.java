@@ -1,4 +1,5 @@
 package hatt;
+import java.util.ArrayList;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -6,20 +7,16 @@ import oru.inf.InfException;
 
 public class createRequest extends javax.swing.JFrame {
     
+    private String[] cbHatModels;
     private String description;
     private String hattModel;
     private String ID;
     private boolean createOrder;
-    private InfDB idb;
+    private static InfDB idb;
     
     public createRequest() {
         initComponents();
-        try {
-            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        }
-        catch(InfException ex){
-            ex.printStackTrace();
-        }
+        
     }
 
     /**
@@ -48,7 +45,7 @@ public class createRequest extends javax.swing.JFrame {
 
         jLabel1.setText("Baserad på redan lagerförd modell?");
 
-        cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(getCBHatModels()));
         cbHatModel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbHatModelActionPerformed(evt);
@@ -76,8 +73,6 @@ public class createRequest extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Vilken kund?");
-
-        cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -146,7 +141,25 @@ public class createRequest extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_btnSendActionPerformed
-
+    
+    public static String[] getCBHatModels(){
+        ArrayList<String> CBAL = new ArrayList<>();
+        
+        try{
+            CBAL = idb.fetchColumn("SELECT name FROM stocked_product");
+            System.out.println();
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+        
+        String[] CBHatModelsx = new String[CBAL.size()];
+        CBAL.toArray(CBHatModelsx);
+        
+        
+        System.out.println(CBHatModelsx);
+        return CBHatModelsx;
+    }
+    
     private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
         // TODO add your handling code here:
         
@@ -182,7 +195,12 @@ public class createRequest extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+        try {
+            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
+        }
+        catch(InfException ex){
+            ex.printStackTrace();
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
