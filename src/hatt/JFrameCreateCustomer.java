@@ -191,18 +191,10 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
-        String CustomerId = "";
-        String Name = "";
-        String Phone = "";
-        String Address = "";
-        String Email = "";
-        
-        
-        
-        
-        
-        
-        
+    
+      String customerID = txtCustomerID.getText();
+      
+      
         
     }//GEN-LAST:event_btnGetActionPerformed
 
