@@ -46,14 +46,19 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblCustomerID.setForeground(new java.awt.Color(255, 255, 255));
         lblCustomerID.setText("Customer ID:");
 
+        lblName.setForeground(new java.awt.Color(255, 255, 255));
         lblName.setText("Name:");
 
+        lblAddress.setForeground(new java.awt.Color(255, 255, 255));
         lblAddress.setText("Address:");
 
+        lblPhone.setForeground(new java.awt.Color(255, 255, 255));
         lblPhone.setText("Phone:");
 
+        lblEmail.setForeground(new java.awt.Color(255, 255, 255));
         lblEmail.setText("Email:");
 
         txtCustomerID.addActionListener(new java.awt.event.ActionListener() {
@@ -80,12 +85,17 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
             }
         });
 
+        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Add");
 
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
 
+        btnRemove.setForeground(new java.awt.Color(255, 51, 51));
         btnRemove.setText("Remove");
 
+        btnGet.setBackground(new java.awt.Color(102, 102, 102));
+        btnGet.setForeground(new java.awt.Color(255, 255, 255));
         btnGet.setText("Get");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +107,7 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         messageBox.setViewportView(jTextArea1);
 
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("TestKnapp");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -105,9 +116,6 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(messageBox, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +135,7 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(24, 24, Short.MAX_VALUE)
                                 .addComponent(btnGet))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -140,6 +148,10 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnUpdate)))))
                 .addGap(15, 15, 15))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(messageBox)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
