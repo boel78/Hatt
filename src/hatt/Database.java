@@ -54,8 +54,9 @@ public class Database {
     }
 
     public HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
-        String query = "SELECT * FROM" + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
+        String query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
         HashMap<String, String> response = new HashMap<String, String>();
+        System.out.println(query);
         try {
             response = idb.fetchRow(query);
         } catch (InfException ex) {

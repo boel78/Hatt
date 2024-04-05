@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hatt;
+import java.util.HashMap;
 
 /**
  *
@@ -93,13 +94,29 @@ public class showMaterialInfo extends javax.swing.JFrame {
     private void btnShowInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnShowInfoMouseClicked
         // TODO add your handling code here:
         String name = txtMaterial.getText();
+        txtAreaShowInfo.setText("");
         String id = db.fetchSingle("mid", "materials", "name", name);
         if (id != null) {
-            System.out.println(id);
             String supplierID = db.fetchSingle("sid", "ordering_materials", "mid", id);
-            System.out.println(supplierID);
-            String supplierName = db.fetchSingle("name", "supplier", "sid", supplierID);
-            System.out.println(supplierName);
+            HashMap<String, String> supplierInfo = new HashMap<>();
+            supplierInfo = db.fetchRow("supplier", "sid", supplierID);
+            for(String key : supplierInfo.keySet()){
+                if(!key.equals("sid")){
+                    txtAreaShowInfo.append(key + " = " + supplierInfo.get(key) + "\n");
+                }
+            }
+            HashMap<String, String> fabrics = db.fetchRow("fabric", "mid", id);
+            if(fabrics.isEmpty()){
+                HashMap<String, String> accessories = db.fetchRow("accessories", "mid", id);
+                txtAreaShowInfo.append("Type = Accessories\n");
+                txtAreaShowInfo.append("Amount = " + accessories.get("amount") + "\n");
+            }
+            else{
+                txtAreaShowInfo.append("Type = Fabric\n");
+                txtAreaShowInfo.append("Size = " + fabrics.get("size") + "\n");
+            }
+            txtAreaShowInfo.append("Price = " + db.fetchSingle("price", "materials", "mid", id));
+
 
         } else {
             System.out.println("Materialet finns inte. Kolla efter stavfel.");
