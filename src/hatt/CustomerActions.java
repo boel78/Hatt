@@ -55,7 +55,7 @@ public class CustomerActions {
         System.out.println("Kund bortagen"); 
     }
     
-    public void getCustomer() {
+    public ArrayList<String> getCustomer() {
         String columnName = "*";
         String tableName = "Customer";
         String columnWhere = "cid";
@@ -63,7 +63,7 @@ public class CustomerActions {
         ArrayList<String> customers = new ArrayList<>();
         
         customers = Database.fetchColum(columnName, tableName, columnWhere, columnIdentifier);
-        
+        return customers;
     }
     
     public static void testMethod(String test1, String test2) {
