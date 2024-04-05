@@ -4,17 +4,21 @@
  */
 package hatt;
 
+import oru.inf.InfDB;
+
 /**
  *
  * @author hanna
  */
 public class CreateOrderNewCustomer extends javax.swing.JFrame {
 
+    private static InfDB idb;
     /**
      * Creates new form CreateOrderNewCustomer
      */
-    public CreateOrderNewCustomer() {
+    public CreateOrderNewCustomer(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -260,7 +264,8 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         String email = tfEmail.getText();
         
         //Inserts the values into a new customer and creates a customer ID
-        
+        String id = idb.getAutoIncrement("customer", "cid");
+        String query = "INSERT INTO customer VALUES (" + id + ",'" + name "','" + address + "'," + phone +  email + "')";
         
         //Fetches the textfields for ordering a hat
         
@@ -307,7 +312,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateOrderNewCustomer().setVisible(true);
+                new CreateOrderNewCustomer(idb).setVisible(true);
             }
         });
     }
