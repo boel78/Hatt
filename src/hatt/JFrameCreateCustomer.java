@@ -215,7 +215,27 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
 
         ArrayList<String> customer = CustomerActions.getCustomer(customerID);
         
-        // for loop
+
+        
+        for(String row : customer)   {
+            String[] rowData = row.split(",");
+            
+            if (rowData.length >= 5 && rowData[0].equals(customerID)) {
+            String name = rowData[1]; // Namnet är på index 1
+            String address = rowData[2]; // Adressen är på index 2
+            String phone = rowData[3]; // Telefonnumret är på index 3
+            String email = rowData[4]; // E-posten är på index 4
+            
+            
+            txtName.setText(name);
+            txtAddress.setText(address);
+            txtPhone.setText(phone);
+            txtEmail.setText(email);
+            
+            
+            break;
+            }
+        }
       
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
