@@ -294,9 +294,13 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         String accessories4 = tfMaterial8.getText();
         String amount4 = tfAmount8.getText();
         
-        //Här behövs en metod som först skapar en invoice och där behövs ett pris
+        //Här behövs en metod som kontrollerar om materialen finns i systemet annars felmeddelande.
+        //Såsmåningom ska det leda till en pop-up av att lägga till nytt material
         
-        //Här behövs en metod som kan visa vilken anstäld som lagt ordern
+        //Även en metod som kontrollerar om matieralet har saldo, annars pop-up med att beställa nytt
+        
+        //Här behövs en metod som kan visa vilken anstäld som lagt ordern 
+        //Nu i början kan det alltid vara kopplat till Otto, dvs id 1
         
         //Inserts the values into a new order
         //lägg en metod här som finns i databasen för att lägga till en ny order

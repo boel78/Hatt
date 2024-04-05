@@ -313,15 +313,55 @@ private static InfDB idb;
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        //Fetches the customer info based on the choice in th ecombobox
+        //Fetches the customer info based on the choice in the combobox
         //En metod som hämtar kundID för den valde kund-Eposten för att lägga en order
                 
         //Fetches the textfields for ordering a hat
         String description = tfDescription.getText();
         double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
         
+        //Här behövs en metod som kan visa vilken anstäld som lagt ordern 
+        //Nu i början kan det alltid vara kopplat till Otto, dvs id 1
+        //Här ska även ett increment för orderID ligga
+        
         //Fetches the fabrics
         //Här behövs enorm validering beroende på hur många fält som är ifyllda
+       ArrayList<String> tfs = new ArrayList<>();
+       
+       
+        tfs.add(tfMaterial1.getText());
+        tfs.add(tfMaterial2.getText());
+        tfs.add(tfMaterial3.getText());
+        tfs.add(tfMaterial4.getText());
+        
+        //Temporära databasfrågor
+        
+        try{
+          String nameQuery = "SELECT name FROM materials";
+        ArrayList<String> names;
+        names = idb.fetchColumn(nameQuery);
+        
+        
+        
+        for(String tf : tfs){
+            if (Validation.hasValueNoError(tf)){
+                for(String name : names){
+                    if(tf.equalsIgnoreCase(name)){
+                       String idQuery = "SELECT mid FROM materials WHERE name = '" + tf +" '";
+                       String id = idb.fetchSingle(idQuery);
+                      // String instertId = "INSERT INTO order_consists_of_materials VALUES ("
+                        
+                    }
+                }
+            } 
+        }  
+        }
+        catch(InfException ex){
+            JOptionPane.showMessageDialog(null, "Database error!");
+            System.out.println("Internal error message!" + ex.getMessage());
+        }
+        
+        
         
         String fabric1 = tfMaterial1.getText();
         String size1 = tfAmount1.getText();     
@@ -349,9 +389,12 @@ private static InfDB idb;
         String accessories4 = tfMaterial8.getText();
         String amount4 = tfAmount8.getText();
         
-        //Här behövs en metod som först skapar en invoice och där behövs ett pris
+        //Här behövs en metod som kontrollerar om materialen finns i systemet annars felmeddelande.
+        //Såsmåningom ska det leda till en pop-up av att lägga till nytt material
         
-        //Här behövs en metod som kan visa vilken anstäld som lagt ordern
+        //Även en metod som kontrollerar om matieralet har saldo, annars pop-up med att beställa nytt
+        
+        
         
         //Inserts the values into a new order
         //lägg en metod här som finns i databasen för att lägga till en ny order

@@ -5,6 +5,7 @@
 package hatt;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -45,4 +46,11 @@ public class Validation {
         return valid;
     }
 
+    public static boolean hasValueNoError(String tf){
+        boolean hasValue = true;
+        if (tf.isEmpty()){
+            hasValue = false;
+        }                
+       return hasValue;
+    }
 }
