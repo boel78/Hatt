@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -53,9 +55,15 @@ public class CustomerActions {
         System.out.println("Kund bortagen"); 
     }
     
-    public String getCustomer() {
-        System.out.println("Kund hämtad");
-        return ("test lyckats");
+    public void getCustomer() {
+        String columnName = "*";
+        String tableName = "Customer";
+        String columnWhere = "cid";
+        String columnIdentifier = ""; // Avgörs i gränsittet.
+        ArrayList<String> customers = new ArrayList<>();
+        
+        customers = Database.fetchColum(columnName, tableName, columnWhere, columnIdentifier);
+        
     }
     
     public static void testMethod(String test1, String test2) {
