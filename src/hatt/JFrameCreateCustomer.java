@@ -204,10 +204,10 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
       
       // for loop
       
-        String name = "testname"; //Database: customer/name
-        String address = "testaddress"; //Database: customer/address
-        String phone = "testphone"; //Database: customer/phone
-        String email = "testemail"; //Database: customer/email
+        String name = ""; //Database: customer/name
+        String address = ""; //Database: customer/address
+        String phone = ""; //Database: customer/phone
+        String email = ""; //Database: customer/email
         
         txtName.setText(name);
         txtAddress.setText(address);
