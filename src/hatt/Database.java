@@ -5,7 +5,6 @@
 package hatt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -14,7 +13,7 @@ import oru.inf.InfException;
  * @author lukasdenfete
  */
 public class Database {
-    private InfDB idb;
+    private static InfDB idb;
     
     public Database(){
         try {
@@ -24,25 +23,37 @@ public class Database {
             ex.printStackTrace();
         }
     }
-    
-    
-    public void fetchRows(boolean whereBool, String table, String whereColumn, String value) {
-
-        try {
-            if (whereBool) {
-                String query1 = "SELECT * FROM " + table + " WHERE " + whereColumn + " = " + value;
-                ArrayList<HashMap<String, String>> rows1;
-                rows1 = idb.fetchRows(query1);
-            } else {
-                String query2 = "SELECT * FROM " + table;
-                ArrayList<HashMap<String, String>> rows2;
-                rows2 = idb.fetchRows(query2);
-            }
-
-        } catch (InfException ex) {
+   
+    public static ArrayList<String> getAllCustomerID(){
+        ArrayList<String> customerIDList = new ArrayList<>(); 
+        
+        try
+        {
+            customerIDList = idb.fetchColumn("SELECT cid FROM customer");
+        }
+        catch (InfException ex)
+        {
             ex.printStackTrace();
         }
+        
+        return customerIDList;
     }
-   
-
+    
+    public static void main(String[] args){
+        new Database();
+    }
+    
+      public String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier){
+        String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
+        String response = "";
+        try{
+            response = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+            
+        }
+        return response;
+    }
+    
 }

@@ -33,9 +33,9 @@ create table customer
     cid     int         not null
         primary key,
     name    varchar(25) null,
-    address varchar(25) null,
+    address varchar(50) null,
     phone   varchar(25) null,
-    email   varchar(25) null
+    email   varchar(50) null
 );
 
 create table business_customer
@@ -75,7 +75,7 @@ create table supplier
     sid   int         not null
         primary key,
     name  varchar(25) null,
-    email varchar(25) null,
+    email varchar(50) null,
     phone varchar(25) null
 );
 
@@ -84,7 +84,7 @@ create table user
     uid      int         not null
         primary key,
     name     varchar(25) null,
-    email    varchar(25) null,
+    email    varchar(50) null,
     position varchar(25) null,
     phone    varchar(25) null
 );
@@ -158,7 +158,7 @@ create table xOrder
 (
     oid            int         not null
         primary key,
-    description    varchar(25) null,
+    description    varchar(50) null,
     estimated_time double      null,
     created_by     int         not null,
     invoice        int         null,
@@ -216,7 +216,7 @@ create table requests
 (
     rid         int         not null
         primary key,
-    description varchar(25) null,
+    description varchar(100) null,
     reviewed_by int         not null,
     customer    int         not null,
     constraint requests_customer_cid_fk
@@ -231,7 +231,7 @@ create table waybill
     oid           int         not null,
     volume        double      null,
     weight        double      null,
-    content       varchar(25) null,
+    content       varchar(50) null,
     package_count varchar(5)  null,
     primary key (wid, oid),
     constraint waybill_xOrder_oid_fk
