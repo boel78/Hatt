@@ -179,6 +179,7 @@ create table order_consists_of_materials
 (
     oid int not null,
     mid int not null,
+    amount double null,
     primary key (mid, oid),
     constraint order_consists_of_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
@@ -265,7 +266,7 @@ INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (3, 4, 5);
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, invoice, customer) VALUES (1, 'Jeanshat', 4, 1, 1, 1);
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, invoice, customer) VALUES (2, 'Doctorateshat', 2, 1, 2, 1);
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, invoice, customer) VALUES (3, 'Silkbonnet', 3, 2, 3, 2);
-INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1);
+INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
