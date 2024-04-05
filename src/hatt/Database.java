@@ -13,47 +13,43 @@ import oru.inf.InfException;
  * @author lukasdenfete
  */
 public class Database {
+
     private static InfDB idb;
-    
-    public Database(){
+
+    public Database() {
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        }
-        catch(InfException ex){
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
     }
-   
-    public static ArrayList<String> getAllCustomerID(){
-        ArrayList<String> customerIDList = new ArrayList<>(); 
-        
-        try
-        {
+
+    public static ArrayList<String> getAllCustomerID() {
+        ArrayList<String> customerIDList = new ArrayList<>();
+
+        try {
             customerIDList = idb.fetchColumn("SELECT cid FROM customer");
-        }
-        catch (InfException ex)
-        {
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
-        
+
         return customerIDList;
     }
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         new Database();
     }
-    
-      public String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier){
+
+    public String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
-        try{
+        try {
             response = idb.fetchSingle(query);
-        }
-        catch(InfException ex){
+        } catch (InfException ex) {
             System.out.println(ex.getMessage());
-            
+
         }
         return response;
     }
-    
+
 }
