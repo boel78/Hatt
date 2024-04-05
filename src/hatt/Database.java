@@ -43,24 +43,5 @@ public class Database {
     public static void main(String[] args){
         new Database();
     }
-   
-    public static ArrayList<String> getAllCustomerID(){
-        ArrayList<String> customerIDList = new ArrayList<>(); 
-        
-        try
-        {
-            customerIDList = idb.fetchColumn("SELECT cid FROM customer");
-        }
-        catch (InfException ex)
-        {
-            ex.printStackTrace();
-        }
-        
-        return customerIDList;
-    }
-    
-    public static void main(String[] args){
-        new Database();
-    }
     
 }
