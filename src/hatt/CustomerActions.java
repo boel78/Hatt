@@ -56,6 +56,7 @@ public class CustomerActions {
     }
     
     public ArrayList<String> getCustomer() {
+        String test = "Test getCustomer Lyckats";
         String columnName = "*";
         String tableName = "Customer";
         String columnWhere = "cid";

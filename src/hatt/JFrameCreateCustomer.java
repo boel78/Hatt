@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.HashSet;
+
 /**
  *
  * @author calletegerup
@@ -212,7 +214,18 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
     
       String customerID = txtCustomerID.getText();
       
+      // for loop
       
+        String name = "testname"; //Database: customer/name
+        String address = "testaddress"; //Database: customer/address
+        String phone = "testphone"; //Database: customer/phone
+        String email = "testemail"; //Database: customer/email
+        
+        txtName.setText(name);
+        txtAddress.setText(address);
+        txtPhone.setText(phone);
+        txtEmail.setText(email);
+        
         
     }//GEN-LAST:event_btnGetActionPerformed
 
