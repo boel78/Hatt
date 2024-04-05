@@ -4,7 +4,6 @@
  */
 package hatt;
 
-import oru.inf.InfDB;
 
 /**
  *
@@ -12,13 +11,11 @@ import oru.inf.InfDB;
  */
 public class CreateOrderNewCustomer extends javax.swing.JFrame {
 
-    private static InfDB idb;
     /**
      * Creates new form CreateOrderNewCustomer
      */
-    public CreateOrderNewCustomer(InfDB idb) {
+    public CreateOrderNewCustomer() {
         initComponents();
-        this.idb = idb;
     }
 
     /**
@@ -34,7 +31,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         lblSize = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         tfAmount7 = new javax.swing.JTextField();
-        lblAdress = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
         tfAmount5 = new javax.swing.JTextField();
         tfAddress = new javax.swing.JTextField();
         tfAmount6 = new javax.swing.JTextField();
@@ -58,10 +55,10 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         tfMaterial1 = new javax.swing.JTextField();
         lblMaterial = new javax.swing.JLabel();
         tfDescription = new javax.swing.JTextField();
-        tfMaterial5 = new javax.swing.JTextField();
-        btnConfirm = new javax.swing.JButton();
-        tfMaterial6 = new javax.swing.JTextField();
         tfMaterial7 = new javax.swing.JTextField();
+        btnConfirm = new javax.swing.JButton();
+        tfMaterial5 = new javax.swing.JTextField();
+        tfMaterial6 = new javax.swing.JTextField();
         tfMaterial8 = new javax.swing.JTextField();
         tfAmount3 = new javax.swing.JTextField();
         tfName = new javax.swing.JTextField();
@@ -72,7 +69,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
 
         lblName.setText("Namn");
 
-        lblAdress.setText("Adress");
+        lblAddress.setText("Adress");
 
         lblEmail.setText("Epost");
 
@@ -99,12 +96,6 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
             }
         });
 
-        tfName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNameActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,7 +107,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(lblPhone)
                         .addComponent(lblEmail)
-                        .addComponent(lblAdress)
+                        .addComponent(lblAddress)
                         .addComponent(lblName)
                         .addComponent(tfAddress)
                         .addComponent(tfEmail)
@@ -132,9 +123,9 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfMaterial5)
                                     .addComponent(tfMaterial6)
                                     .addComponent(tfMaterial7)
-                                    .addComponent(tfMaterial5)
                                     .addComponent(tfMaterial8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(layout.createSequentialGroup()
@@ -180,7 +171,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAdress)
+                        .addComponent(lblAddress)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -218,11 +209,11 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
                                         .addGap(5, 5, 5)
                                         .addComponent(tfAmount8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfMaterial5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfMaterial6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfMaterial7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfMaterial5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(5, 5, 5)
                                         .addComponent(tfMaterial8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,23 +255,54 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         String email = tfEmail.getText();
         
         //Inserts the values into a new customer and creates a customer ID
-        String id = idb.getAutoIncrement("customer", "cid");
-        String query = "INSERT INTO customer VALUES (" + id + ",'" + name "','" + address + "'," + phone +  email + "')";
+        //String id = hämta metod från databasen
+        //Raden under ska in i databasklassen
+        //String query = "INSERT INTO customer VALUES (" + id + ",'" + name + "','" + address + "','" + phone + "','" +  email + "')";
+        //lägg en metod här som finns i databasen för att lägga till en ny kund
         
+        //When a customer is added the order will continue
         //Fetches the textfields for ordering a hat
+        String description = tfDescription.getText();
+        double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
         
+        //Fetches the fabrics
+        //Här behövs enorm validering beroende på hur många fält som är ifyllda
+        
+        String fabric1 = tfMaterial1.getText();
+        String size1 = tfAmount1.getText();     
+        
+        String fabric2 = tfMaterial2.getText();
+        String size2 = tfAmount2.getText();   
+        
+        String fabric3 = tfMaterial3.getText();
+        String size3 = tfAmount3.getText();    
+        
+        String fabric4 = tfMaterial4.getText();
+        String size4 = tfAmount4.getText();
+        
+        //Fetches the accessories
+        //Samma validering behövs här
+        String accessories1 = tfMaterial5.getText();
+        String amount1 = tfAmount5.getText();
+        
+        String accessories2 = tfMaterial6.getText();
+        String amount2 = tfAmount6.getText();
+        
+        String accessories3 = tfMaterial7.getText();
+        String amount3 = tfAmount7.getText();
+        
+        String accessories4 = tfMaterial8.getText();
+        String amount4 = tfAmount8.getText();
+        
+        //Här behövs en metod som först skapar en invoice och där behövs ett pris
+        
+        //Här behövs en metod som kan visa vilken anstäld som lagt ordern
         
         //Inserts the values into a new order
+        //lägg en metod här som finns i databasen för att lägga till en ny order
         
         
     }//GEN-LAST:event_btnConfirmActionPerformed
-
-    private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
-        // TODO add your handling code here:
-        String descprition = tfDescription.getText();
-        double time = Double.parseDouble(tfEstimatedTime.getText());
-
-    }//GEN-LAST:event_tfNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,7 +334,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateOrderNewCustomer(idb).setVisible(true);
+                new CreateOrderNewCustomer().setVisible(true);
             }
         });
     }
@@ -320,7 +342,7 @@ public class CreateOrderNewCustomer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirm;
     private javax.swing.JLabel lblAccessories;
-    private javax.swing.JLabel lblAdress;
+    private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAmount;
     private javax.swing.JLabel lblCustomerInfo;
     private javax.swing.JLabel lblDescription;

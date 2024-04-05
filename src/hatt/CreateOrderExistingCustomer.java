@@ -39,8 +39,8 @@ private static InfDB idb;
 
         tfName = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
-        lblAdress = new javax.swing.JLabel();
-        tfAdress = new javax.swing.JTextField();
+        lblAddress = new javax.swing.JLabel();
+        tfAddress = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         tfEmail = new javax.swing.JTextField();
         tfPhone = new javax.swing.JTextField();
@@ -53,9 +53,9 @@ private static InfDB idb;
         tfMaterial3 = new javax.swing.JTextField();
         tfMaterial1 = new javax.swing.JTextField();
         lblMaterial = new javax.swing.JLabel();
+        tfMaterial7 = new javax.swing.JTextField();
         tfMaterial5 = new javax.swing.JTextField();
         tfMaterial6 = new javax.swing.JTextField();
-        tfMaterial7 = new javax.swing.JTextField();
         tfMaterial8 = new javax.swing.JTextField();
         tfAmount3 = new javax.swing.JTextField();
         tfAmount1 = new javax.swing.JTextField();
@@ -78,17 +78,12 @@ private static InfDB idb;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tfName.setEditable(false);
-        tfName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNameActionPerformed(evt);
-            }
-        });
 
         lblName.setText("Namn");
 
-        lblAdress.setText("Adress");
+        lblAddress.setText("Adress");
 
-        tfAdress.setEditable(false);
+        tfAddress.setEditable(false);
 
         lblEmail.setText("Epost");
 
@@ -143,9 +138,9 @@ private static InfDB idb;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblPhone)
                             .addComponent(lblEmail)
-                            .addComponent(lblAdress)
+                            .addComponent(lblAddress)
                             .addComponent(lblName)
-                            .addComponent(tfAdress)
+                            .addComponent(tfAddress)
                             .addComponent(tfEmail)
                             .addComponent(tfName)
                             .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -165,9 +160,9 @@ private static InfDB idb;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfMaterial5)
                                     .addComponent(tfMaterial6)
                                     .addComponent(tfMaterial7)
-                                    .addComponent(tfMaterial5)
                                     .addComponent(tfMaterial8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(layout.createSequentialGroup()
@@ -217,9 +212,9 @@ private static InfDB idb;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAdress)
+                        .addComponent(lblAddress)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblPhone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -255,11 +250,11 @@ private static InfDB idb;
                                         .addGap(5, 5, 5)
                                         .addComponent(tfAmount8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(tfMaterial5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfMaterial6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfMaterial7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfMaterial5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(5, 5, 5)
                                         .addComponent(tfMaterial8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,13 +287,6 @@ private static InfDB idb;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNameActionPerformed
-        // TODO add your handling code here:
-        String descprition = tfDescription.getText();
-        double time = Double.parseDouble(tfEstimatedTime.getText());
-        
-    }//GEN-LAST:event_tfNameActionPerformed
-
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
 
         String customerEmail = cobCustomers.getSelectedItem().toString();
@@ -312,7 +300,7 @@ private static InfDB idb;
             String phone = idb.fetchSingle(phoneQuery);
 
             tfName.setText(name);
-            tfAdress.setText(address);
+            tfAddress.setText(address);
             tfPhone.setText(phone);
             tfEmail.setText(customerEmail);
 
@@ -325,7 +313,49 @@ private static InfDB idb;
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        // TODO add your handling code here:
+        //Fetches the customer info based on the choice in th ecombobox
+        //En metod som hämtar kundID för den valde kund-Eposten för att lägga en order
+                
+        //Fetches the textfields for ordering a hat
+        String description = tfDescription.getText();
+        double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
+        
+        //Fetches the fabrics
+        //Här behövs enorm validering beroende på hur många fält som är ifyllda
+        
+        String fabric1 = tfMaterial1.getText();
+        String size1 = tfAmount1.getText();     
+        
+        String fabric2 = tfMaterial2.getText();
+        String size2 = tfAmount2.getText();   
+        
+        String fabric3 = tfMaterial3.getText();
+        String size3 = tfAmount3.getText();    
+        
+        String fabric4 = tfMaterial4.getText();
+        String size4 = tfAmount4.getText();
+        
+        //Fetches the accessories
+        //Samma validering behövs här
+        String accessories1 = tfMaterial7.getText();
+        String amount1 = tfAmount5.getText();
+        
+        String accessories2 = tfMaterial5.getText();
+        String amount2 = tfAmount6.getText();
+        
+        String accessories3 = tfMaterial6.getText();
+        String amount3 = tfAmount7.getText();
+        
+        String accessories4 = tfMaterial8.getText();
+        String amount4 = tfAmount8.getText();
+        
+        //Här behövs en metod som först skapar en invoice och där behövs ett pris
+        
+        //Här behövs en metod som kan visa vilken anstäld som lagt ordern
+        
+        //Inserts the values into a new order
+        //lägg en metod här som finns i databasen för att lägga till en ny order
+        
     }//GEN-LAST:event_btnConfirmActionPerformed
     
     private void fillCobCustomers() {
@@ -401,7 +431,7 @@ private static InfDB idb;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JComboBox<String> cobCustomers;
     private javax.swing.JLabel lblAccessories;
-    private javax.swing.JLabel lblAdress;
+    private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAmount;
     private javax.swing.JLabel lblCustomerInfo;
     private javax.swing.JLabel lblCustomers;
@@ -413,7 +443,7 @@ private static InfDB idb;
     private javax.swing.JLabel lblOrderInfo;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblSize;
-    private javax.swing.JTextField tfAdress;
+    private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfAmount1;
     private javax.swing.JTextField tfAmount2;
     private javax.swing.JTextField tfAmount3;

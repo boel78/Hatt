@@ -34,9 +34,9 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAdress" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAddress" min="-2" max="-2" attributes="0"/>
                           <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfAdress" max="32767" attributes="0"/>
+                          <Component id="tfAddress" max="32767" attributes="0"/>
                           <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
                           <Component id="tfName" alignment="0" max="32767" attributes="0"/>
                           <Component id="tfPhone" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
@@ -61,9 +61,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="tfMaterial5" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tfMaterial6" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tfMaterial7" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfMaterial5" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tfMaterial8" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -127,9 +127,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tfName" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblAdress" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAddress" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="tfAdress" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfAddress" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -168,11 +168,11 @@
                                       <Component id="tfAmount8" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
+                                      <Component id="tfMaterial5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfMaterial6" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfMaterial7" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="tfMaterial5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                       <Component id="tfMaterial8" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -219,21 +219,18 @@
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfNameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblName">
       <Properties>
         <Property name="text" type="java.lang.String" value="Namn"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblAdress">
+    <Component class="javax.swing.JLabel" name="lblAddress">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adress"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAdress">
+    <Component class="javax.swing.JTextField" name="tfAddress">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
@@ -286,11 +283,11 @@
         <Property name="text" type="java.lang.String" value="Tyg"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JTextField" name="tfMaterial7">
+    </Component>
     <Component class="javax.swing.JTextField" name="tfMaterial5">
     </Component>
     <Component class="javax.swing.JTextField" name="tfMaterial6">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfMaterial7">
     </Component>
     <Component class="javax.swing.JTextField" name="tfMaterial8">
     </Component>
