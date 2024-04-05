@@ -45,30 +45,24 @@ public class Database {
         return customers;
     }
 
-    // Metod som hämtar en Single värde ur customer databasen. Inte en hel Table eller column. 
-    public ArrayList<String> getCustomerSingle(String columns, String condition)    {
+    // Metod som hämtar ett enskilt värde från kundtabellen 
+    public String getCustomerSingle(String columns, String condition)    {
         //String column: column namn som man vill få ut data ifrån ex. *, name eller email.
         //String condition: (column där man vill granska vilkor) = '(värdet man vill hitta)'
         
-        ArrayList<String> customers = new ArrayList<>();
+        String customerValue = "";
         String query = "Select " + columns + " From Customer;";
         
         if (columns != null && !condition.isEmpty())  {
             query += " Where" + condition + "";
         }
         try {
-            customers = idb.fetchColumn(query);
+            customerValue = idb.fetchSingle(query);
         }
         catch(InfException ex) {
             System.out.println(ex.getMessage());
         }
         
-        return customers;
-    }
-
-    
-    
-    
-    
-    
+        return customerValue;
+    }   
 }
