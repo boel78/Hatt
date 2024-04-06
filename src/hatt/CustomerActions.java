@@ -4,7 +4,7 @@
  */
 package hatt;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -61,9 +61,9 @@ public class CustomerActions {
         String tableName = "Customer";
         String columnWhere = "cid";
         String columnIdentifier = customerID; // Avgörs i gränsittet.
-        ArrayList<String> customers = new ArrayList<>();
+        HashMap<String, String> customers = new HashMap<>();
         
-        customers = Database.fetchColumn(columnName, tableName, columnWhere, columnIdentifier);
+        customers = Database.fetchRow();
         return customers;
         
     }
