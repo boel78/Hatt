@@ -55,15 +55,14 @@ public class CustomerActions {
         System.out.println("Kund bortagen"); 
     }
     
-    public ArrayList<String> getCustomer(String customerID) {
+    public HashMap<String, String> getCustomer(String customerID) {
         String test = "Test getCustomer Lyckats";
-        String columnName = "*";
         String tableName = "Customer";
         String columnWhere = "cid";
         String columnIdentifier = customerID; // Avgörs i gränsittet.
-        HashMap<String, String> customers = new HashMap<>();
+        HashMap<String, String> customers;
         
-        customers = Database.fetchRow();
+        customers = Database.fetchRow(tableName, columnWhere, columnIdentifier);
         return customers;
         
     }
