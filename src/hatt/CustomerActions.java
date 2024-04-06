@@ -55,8 +55,7 @@ public class CustomerActions {
         System.out.println("Kund bortagen"); 
     }
     
-    public HashMap<String, String> getCustomer(String customerID) {
-        String test = "Test getCustomer Lyckats";
+    public static HashMap<String, String> getCustomer(String customerID) { // Static ?
         String tableName = "Customer";
         String columnWhere = "cid";
         String columnIdentifier = customerID; // Avgörs i gränsittet.
