@@ -57,7 +57,7 @@ public class Database {
         return response;
     }
       
-        public HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
+        public static HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
         String query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
         HashMap<String, String> response = new HashMap<String, String>();
         System.out.println(query);

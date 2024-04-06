@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.HashMap;
+
 
 /**
  *
@@ -211,43 +213,33 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
     
-      String customerID = txtCustomerID.getText();
+        String customerID = txtCustomerID.getText();
 
-        ArrayList<String> customer = CustomerActions.getCustomer(customerID);
+        HashMap<String, String> customer = CustomerActions.getCustomer(customerID);
         
-
-        
-        for(String row : customer)   {
-            String[] rowData = row.split(",");
-            
-            if (rowData.length >= 5 && rowData[0].equals(customerID)) {
-            String name = rowData[1]; // Namnet är på index 1
-            String address = rowData[2]; // Adressen är på index 2
-            String phone = rowData[3]; // Telefonnumret är på index 3
-            String email = rowData[4]; // E-posten är på index 4
-            
-            
-            txtName.setText(name);
-            txtAddress.setText(address);
-            txtPhone.setText(phone);
-            txtEmail.setText(email);
-            
-            
-            break;
-            }
-        }
-      
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
+
+            if (customer != null && !customer.isEmpty()) {
+                name = customer.get("name");
+                address = customer.get("address");
+                phone = customer.get("phone");
+                email = customer.get("email");
         
-        txtName.setText(name);
-        txtAddress.setText(address);
-        txtPhone.setText(phone);
-        txtEmail.setText(email);
-        
-        
+                txtName.setText(name != null ? name : "");
+                txtAddress.setText(address != null ? address : "");
+                txtPhone.setText(phone != null ? phone : "");
+                txtEmail.setText(email != null ? email : "");
+                System.out.println("test lyckats" + name + address + phone + email);
+            } else {
+                // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
+                txtName.setText("");
+                txtAddress.setText("");
+                txtPhone.setText("");
+                txtEmail.setText("");
+            }
     }//GEN-LAST:event_btnGetActionPerformed
 
     /**
