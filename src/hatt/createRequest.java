@@ -9,7 +9,7 @@ public class createRequest extends javax.swing.JFrame {
     
     private String[] cbHatModels;
     private String description;
-    private String hattModel;
+    private String hatModel;
     private String ID;
     private boolean createOrder;
     private static InfDB idb;
@@ -127,6 +127,7 @@ public class createRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         description = txtDescription.getText();
+        hatModel = cbHatModel.getSelectedItem().toString();
         System.out.print(description);
         
         try
@@ -147,6 +148,7 @@ public class createRequest extends javax.swing.JFrame {
         
         try{
             CBAL = idb.fetchColumn("SELECT name FROM stocked_product");
+            CBAL.add("Nej");
             System.out.println();
         } catch (InfException ex) {
             ex.printStackTrace();
