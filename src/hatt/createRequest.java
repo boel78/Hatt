@@ -29,21 +29,21 @@ public class createRequest extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        lblAlreadyAModel = new javax.swing.JLabel();
         cbHatModel = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        lblDescription = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        lblRequest = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnSend = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        lblCustomer = new javax.swing.JLabel();
         cbCustomer = new javax.swing.JComboBox<>();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Baserad på redan lagerförd modell?");
+        lblAlreadyAModel.setText("Baserad på redan lagerförd modell?");
 
         cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(getCBHatModels()));
         cbHatModel.addActionListener(new java.awt.event.ActionListener() {
@@ -52,27 +52,35 @@ public class createRequest extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Beskrivning:");
+        lblDescription.setText("Beskrivning:");
 
-        txtDescription.setText("jTextField1");
+        txtDescription.setText("Klicka, sen skriv här....");
+        txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtDescriptionFocusLost(evt);
+            }
+        });
         txtDescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescriptionActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Skapa orderförfrågan");
+        lblRequest.setText("Skapa orderförfrågan");
 
         jLabel4.setText("Skapa förfrågan");
 
-        btnSend.setText("jButton1");
+        btnSend.setText("Skapa");
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSendActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Vilken kund?");
+        lblCustomer.setText("Vilken kund?");
 
         cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomer()));
         cbCustomer.addActionListener(new java.awt.event.ActionListener() {
@@ -89,17 +97,17 @@ public class createRequest extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
+                    .addComponent(lblDescription)
+                    .addComponent(lblRequest)
                     .addComponent(jLabel4)
                     .addComponent(btnSend)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(lblAlreadyAModel)
                             .addComponent(cbHatModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(lblCustomer)
                             .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
@@ -107,17 +115,17 @@ public class createRequest extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabel3)
+                .addComponent(lblRequest)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                    .addComponent(lblAlreadyAModel)
+                    .addComponent(lblCustomer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbHatModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblDescription)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -187,7 +195,6 @@ public class createRequest extends javax.swing.JFrame {
     
     private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_txtDescriptionActionPerformed
 
     private void cbHatModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHatModelActionPerformed
@@ -197,6 +204,16 @@ public class createRequest extends javax.swing.JFrame {
     private void cbCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCustomerActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCustomerActionPerformed
+
+    private void txtDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusGained
+        // TODO add your handling code here:
+        txtDescription.setText("");
+    }//GEN-LAST:event_txtDescriptionFocusGained
+
+    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
+        // TODO add your handling code here
+        txtDescription.setText("Klicka, sen skriv här....");
+    }//GEN-LAST:event_txtDescriptionFocusLost
 
     /**
      * @param args the command line arguments
@@ -243,11 +260,11 @@ public class createRequest extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbCustomer;
     private javax.swing.JComboBox<String> cbHatModel;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblAlreadyAModel;
+    private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblDescription;
+    private javax.swing.JLabel lblRequest;
     private javax.swing.JTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }
