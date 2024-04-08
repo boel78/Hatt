@@ -4,6 +4,7 @@
  */
 package hatt;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
@@ -45,12 +46,76 @@ public class Validation {
         }
         return valid;
     }
-
+    
+    public static boolean doesFabricExist(JTextField tf){
+        boolean exists = true;
+        String tfString = tf.getText();
+        
+        
+        
+        
+        return exists;
+    }
+        
     public static boolean hasValueNoError(String tf){
         boolean hasValue = true;
         if (tf.isEmpty()){
             hasValue = false;
         }                
        return hasValue;
+    }
+
+
+    public boolean validatePhone(String phone) {
+        boolean valid = false;
+        if (!phone.isEmpty()) {
+            if (phone.matches("\\d{3}-\\d{7}")) {
+                valid = true;
+            }
+            if (!valid) {
+                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
+        }
+        return valid;
+
+    }
+    
+    public static boolean txtHasValue(JTextField txt) {
+        boolean valid = true;
+        if (txt.getText().isEmpty()){
+            valid = false;
+            JOptionPane.showMessageDialog(null,"Var vänlig fyll i alla rutor!");
+            txt.requestFocus();
+        }
+        return valid;
+    }
+
+            
+    public boolean existsCustomerID(String customerID) {
+        ArrayList<String> customerIDs = Database.getAllCustomerID();
+        return customerIDs.contains(customerID);
+}
+            
+    public boolean validateCustomerID(String customerID) {
+    boolean valid = false;
+    // Check if customerID only contains digits
+    if (customerID.matches("\\d+")) {
+        
+        if (!existsCustomerID(customerID)) {
+            valid = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Customer ID already exists");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
+    }
+    return valid;
+    }
+    
+    public boolean validateAddress(String address) {
+        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
+        return valid;
     }
 }
