@@ -55,18 +55,18 @@ public class CustomerActions {
         System.out.println("Kund bortagen"); 
     }
     
-    public static HashMap<String, String> getCustomer(String customerID) { // Static ?
+    public HashMap<String, String> getCustomer(String customerID) { 
         String tableName = "Customer";
         String columnWhere = "cid";
         String columnIdentifier = customerID; // Avgörs i gränsittet.
-        HashMap<String, String> customers;
+        HashMap<String, String> customer;
         
-        customers = Database.fetchRow(tableName, columnWhere, columnIdentifier);
-        return customers;
+        customer = Database.fetchRow(tableName, columnWhere, columnIdentifier);
+        return customer;
         
     }
     
-    public static void testMethod(String test1, String test2) {
+    public void testMethod(String test1, String test2) {
         String testName = test1;
         String testEmail = test2;
         
