@@ -7,7 +7,7 @@ package hatt;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-
+import javax.swing.JTextField;
 /**
  *
  * @author lukasdenfete
@@ -45,4 +45,14 @@ public class Validation {
         return valid;
     }
 
+        public static boolean txtHasValue(JTextField txt) {
+            boolean valid = true;
+            if (txt.getText().isEmpty()){
+                valid = false;
+            JOptionPane.showMessageDialog(null,"Var vänlig fyll i alla rutor!");
+            txt.requestFocus();
+            }
+            return valid;
+        }
+       
 }

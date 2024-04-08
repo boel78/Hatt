@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
+
 public class CreateCustomer extends javax.swing.JFrame {
     private static InfDB idb;
     
@@ -123,16 +124,20 @@ public class CreateCustomer extends javax.swing.JFrame {
     
     
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        
+        try {
+        String id = idb.getAutoIncrement("customer","cid");
+        if (Validation.txtHasValue(txtName)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
+            
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        try {
-        String id = idb.getAutoIncrement("customer","cid");
         
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
         idb.insert(fraga);
         JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
+            }
         }
         catch (InfException ex){
             ex.printStackTrace();
