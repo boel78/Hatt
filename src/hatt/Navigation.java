@@ -98,11 +98,22 @@ public class Navigation extends javax.swing.JFrame {
     }
      */
     private void loadPane() {
-        /*CreateCustomer cc = new CreateCustomer();
-        tbdPane.addTab("Skapa kund", cc.getContentPane());*/
-        /*ShowMaterialInfo smi = new ShowMaterialInfo();
-        tbdPane.addTab("Visa material info", smi.getContentPane());*/
+     /* CreateCustomer cc = new CreateCustomer();
+        tbdPane.addTab("Skapa kund", cc.getContentPane());
         
+        ShowMaterialInfo smi = new ShowMaterialInfo();
+        tbdPane.addTab("Visa material info", smi.getContentPane());
+        
+        createRequest cr = new createRequest();
+        tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+        
+        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer();
+        tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+        
+        CreateOrderNewCustomer conc = new CreateOrderNewCustomer();
+        tbdPane.addTab("Skapa order för ny kund", conc.getContentPane());
+           
+        */
         
     }
 
