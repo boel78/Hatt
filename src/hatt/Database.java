@@ -74,7 +74,7 @@ public class Database {
     //withWhereStatement ska vara true om man vill ha med WHERE eller false om man inte vill
     //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
     //whereIdentifierIsString ska vara true om identifieraren är en String/varchar annars false
-    public ArrayList<String> fetchColumn(String columnName, String tableName, boolean withWhereStatement, String where, String whereIdentifier, boolean whereIdentifierIsString) {
+    public static ArrayList<String> fetchColumn(String columnName, String tableName, boolean withWhereStatement, String where, String whereIdentifier, boolean whereIdentifierIsString) {
         ArrayList<String> response = new ArrayList<String>();
 
         String whereAndStringQuery = "SELECT " + columnName + " FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";

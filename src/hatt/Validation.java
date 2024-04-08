@@ -47,16 +47,22 @@ public class Validation {
         return valid;
     }
     
-    public static boolean doesFabricExist(JTextField tf){
-        boolean exists = true;
+    //SKA IN I MAIN BRANCHEN
+    public static boolean doesMaterialExist(JTextField tf){
+        boolean exists = false;
         String tfString = tf.getText();
+        ArrayList<String> materials = Database.fetchColumn("name", "materials", false, "", "", false);
         
-        
-        
-        
+        for(String name : materials){
+            if(name.equalsIgnoreCase(tfString)){
+                exists = true;
+            }
+        }
+
         return exists;
     }
-        
+    
+    //SKA IN I MAIN BRANCHEN
     public static boolean hasValueNoError(String tf){
         boolean hasValue = true;
         if (tf.isEmpty()){
