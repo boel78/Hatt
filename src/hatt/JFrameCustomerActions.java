@@ -250,12 +250,13 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGetActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String customerID = txtCustomerID.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
         
-        
+        CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
