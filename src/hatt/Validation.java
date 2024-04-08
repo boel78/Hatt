@@ -45,4 +45,20 @@ public class Validation {
         return valid;
     }
 
+    public boolean validatePhone(String phone) {
+        boolean valid = false;
+        if (!phone.isEmpty()) {
+            if (phone.matches("\\d{3}-\\d{7}")) {
+                valid = true;
+            }
+            if (!valid) {
+                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
+        }
+        return valid;
+
+    }
+
 }
