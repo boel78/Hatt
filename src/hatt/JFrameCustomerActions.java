@@ -256,7 +256,11 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
         
+        if(Validation.txtHasValue(txtName)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
         CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
+        
+        addCustomer
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     /**
