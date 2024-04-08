@@ -8,6 +8,7 @@ import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
 import oru.inf.InfException;
+import java.util.HashMap;
 
 /**
  *
@@ -97,11 +98,18 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
         // TODO add your handling code here:
+        String txt = "";
         String cbContent = cbReviews.getSelectedItem().toString();
         int count = cbContent.length() - 1;
         cbContent = cbContent.substring(count);
-        System.out.println(cbContent);
+        try {
+            txt = idb.fetchSingle("SELECT description FROM requests WHERE rid = '" + cbContent + "'");
+        } catch (InfException ex){
+            ex.printStackTrace();
+        }
         
+        txtAreaDescription.setText("");
+        txtAreaDescription.append(txt);
     }//GEN-LAST:event_btnShowRequestActionPerformed
 
     public static String[] getCBReviews(){
