@@ -97,7 +97,6 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
         btnRemove.setForeground(new java.awt.Color(255, 51, 51));
         btnRemove.setText("Remove");
 
-        btnGet.setBackground(new java.awt.Color(102, 102, 102));
         btnGet.setForeground(new java.awt.Color(255, 255, 255));
         btnGet.setText("Get");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
