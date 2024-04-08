@@ -232,13 +232,14 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
                 txtAddress.setText(address != null ? address : "");
                 txtPhone.setText(phone != null ? phone : "");
                 txtEmail.setText(email != null ? email : "");
-                System.out.println("test lyckats" + name + address + phone + email);
+                System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email);
             } else {
                 // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
                 txtName.setText("");
                 txtAddress.setText("");
                 txtPhone.setText("");
                 txtEmail.setText("");
+                System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
             }
     }//GEN-LAST:event_btnGetActionPerformed
 
