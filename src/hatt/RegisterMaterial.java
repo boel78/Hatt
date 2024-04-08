@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -12,13 +14,25 @@ import oru.inf.InfException;
  *
  * @author danagliana
  */
-public class RegisterProduct extends javax.swing.JFrame {
-private static InfDB idb;
+public class RegisterMaterial extends javax.swing.JFrame {
+
+    private InfDB idb;
+    private String userID;
+    private Validation validation;
+    private Database db;
+
     /**
      * Creates new form RegisterProduct
      */
-    public RegisterProduct(InfDB idb) {
-          this.idb = idb;
+    public RegisterMaterial() {
+        userID = "1";
+        validation = new Validation();
+        db = new Database();
+        try {
+            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
         initComponents();
     }
 
@@ -49,25 +63,35 @@ private static InfDB idb;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        RegisterBTN.setText("Register");
+        RegisterBTN.setText("Registrera");
         RegisterBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegisterBTNActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Name");
+        PriceF.setColumns(10);
 
-        jLabel2.setText("Price");
+        SupplierF.setColumns(10);
 
-        jLabel3.setText("Supplier");
+        NameF.setColumns(10);
+
+        jLabel1.setText("Namn");
+
+        jLabel2.setText("Pris");
+
+        jLabel3.setText("Leverantör");
+
+        SupplierPhone.setColumns(10);
+
+        SupplierMail.setColumns(10);
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jLabel4.setText("Register Models");
+        jLabel4.setText("Registrera Material");
 
-        jLabel5.setText("Supplier Phonenr");
+        jLabel5.setText("Leverantör tel");
 
-        jLabel6.setText("Supplier Mail");
+        jLabel6.setText("Leverantör email");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,7 +121,7 @@ private static InfDB idb;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel4)))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,48 +157,44 @@ private static InfDB idb;
     }// </editor-fold>//GEN-END:initComponents
 
     private void RegisterBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegisterBTNActionPerformed
-  try {
+        try {
             String Name = NameF.getText();
             String Price = PriceF.getText();
-          
+            String mid = idb.getAutoIncrement("materials", "mid");
+
             String Supplier = SupplierF.getText();
             String SupplierTel = SupplierPhone.getText();
             String SupplierEmail = SupplierMail.getText();
-                  
-            
-            String QueryNamePrice = "Insert Into Materials (name, price) VALUES('" + Name + "','" + Price + "')";
-            String QuerySupplierInfo = "Insert Into Supplier (name, email, phone) VALUES('" + Supplier + "','" + SupplierEmail + "','" + SupplierTel + "')";
-         //validering ska ske här innan datan införs i databasen.
-         //konvertering 
-        double KonverteratPrice = Double.parseDouble(Price);
-      
-        
-      
-         if((Name != null) && (Name.length() <= 25) &&
-                 (KonverteratPrice != 0) && 
-                 (Supplier.length() <= 25) && 
-                 (SupplierTel != null) && 
-                 (SupplierEmail != null) && 
-                 (SupplierEmail.length() <= 25)) {
-            
-             idb.insert(QueryNamePrice);
-            idb.insert(QuerySupplierInfo);
-            
-          JOptionPane.showMessageDialog(null, "Registrering slutförd!");
-          
-            }else { JOptionPane.showMessageDialog(null, "Kontrollera inmatade uppgifter.");
+            String sid = idb.getAutoIncrement("supplier", "sid");
+
+            String QueryNamePrice = "Insert Into materials (name, price, mid, handled_by) VALUES('" + Name + "','" + Price + "'," + mid + "," + userID + ")";
+            String QuerySupplierInfo = "Insert Into supplier (name, email, phone, sid) VALUES('" + Supplier + "','" + SupplierEmail + "','" + SupplierTel + "'," + sid + ")";
+            //validering ska ske här innan datan införs i databasen.
+            //konvertering 
+
+            double KonverteratPrice = Double.parseDouble(Price);
+
+            if ((Name != null) && (Name.length() <= 25)
+                    && (KonverteratPrice > 0)
+                    && (Supplier != null && Supplier.length() <= 25)
+                    && (validation.validatePhone(SupplierTel))
+                    && (validation.validateEmailTypo(SupplierEmail))) {
+
+                idb.insert(QueryNamePrice);
+                if(!validateSupplier(Supplier)){
+                    idb.insert(QuerySupplierInfo);
+                }
+
+                JOptionPane.showMessageDialog(null, "Registrering slutförd!");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Kontrollera inmatade uppgifter.");
             }
-  
-  
-           
-            
-            
-        
 
         } catch (InfException e) {
             JOptionPane.showMessageDialog(null, "Fel inträffade");
-           
-        }        
+
+        }
     }//GEN-LAST:event_RegisterBTNActionPerformed
 
     /**
@@ -194,22 +214,41 @@ private static InfDB idb;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegisterProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegisterProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegisterProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegisterProduct.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterMaterial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegisterProduct(InfDB idb).setVisible(true);
+                new RegisterMaterial().setVisible(true);
             }
         });
+    }
+
+    private boolean validateSupplier(String supplier) {
+        boolean exists = false;
+        if (supplier.length() <= 25) {
+            ArrayList<HashMap<String, String>> suppliers = db.fetchRows(false, "supplier", "", "");
+            for (HashMap<String, String> column : suppliers) {
+                if (column.get("name").equals(supplier)) {
+                    System.out.println("Hittade kolumnen name");
+                    exists = true;
+                } else {
+
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn som är mindre än 25 bokstäver långt");
+        }
+        return exists;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
