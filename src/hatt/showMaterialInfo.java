@@ -5,6 +5,7 @@
 package hatt;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -105,26 +106,39 @@ public class showMaterialInfo extends javax.swing.JFrame {
         String id = db.fetchSingle("mid", "materials", "name", name);
         if (id != null) {
             String supplierID = db.fetchSingle("sid", "ordering_materials", "mid", id);
+            
+            
             HashMap<String, String> supplierInfo = new HashMap<>();
             supplierInfo = db.fetchRow("supplier", "sid", supplierID);
             for (String key : supplierInfo.keySet()) {
                 if (!key.equals("sid")) {
-                    txtAreaShowInfo.append(key + " = " + supplierInfo.get(key) + "\n");
+                    String input = "";
+                    switch(key){
+                        case "name": input = "Namn";
+                        break;
+                        case "email": input = "Email";
+                        break;
+                        case "phone": input = "Telefon";
+                        break;
+                    }
+                    txtAreaShowInfo.append(input + ": " + supplierInfo.get(key) + "\n");
                 }
             }
+            
+            
             HashMap<String, String> fabrics = db.fetchRow("fabric", "mid", id);
             if (fabrics.isEmpty()) {
                 HashMap<String, String> accessories = db.fetchRow("accessories", "mid", id);
-                txtAreaShowInfo.append("Type = Accessories\n");
-                txtAreaShowInfo.append("Amount = " + accessories.get("amount") + "\n");
+                txtAreaShowInfo.append("Typ: Accessoarer\n");
+                txtAreaShowInfo.append("Mängd: " + accessories.get("amount") + "\n");
             } else {
-                txtAreaShowInfo.append("Type = Fabric\n");
-                txtAreaShowInfo.append("Size = " + fabrics.get("size") + "\n");
+                txtAreaShowInfo.append("Typ: Tyg\n");
+                txtAreaShowInfo.append("Storlek(cm²): " + fabrics.get("size") + "\n");
             }
-            txtAreaShowInfo.append("Price = " + db.fetchSingle("price", "materials", "mid", id));
+            txtAreaShowInfo.append("Pris: " + db.fetchSingle("price", "materials", "mid", id));
 
         } else {
-            System.out.println("Materialet finns inte. Kolla efter stavfel.");
+            JOptionPane.showMessageDialog(null,"Materialet finns inte. Kolla efter stavfel.");
         }
     }//GEN-LAST:event_btnShowInfoMouseClicked
 
