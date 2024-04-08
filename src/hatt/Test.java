@@ -24,6 +24,7 @@ public class Test {
         catch(InfException ex){
             ex.printStackTrace();
         }
+        new CreateOrderExistingCustomer(idb).setVisible(true);
     }
     //public void hej då{
         

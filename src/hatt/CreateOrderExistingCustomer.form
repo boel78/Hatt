@@ -85,19 +85,19 @@
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="lblMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfMaterial1" max="32767" attributes="0"/>
-                          <Component id="tfMaterial2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="tfMaterial3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="tfMaterial4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="tfFabric1" max="32767" attributes="0"/>
+                          <Component id="tfFabric2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfFabric3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="tfFabric4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSize" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="tfAmount4" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfAmount3" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfAmount2" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfAmount1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="tfSize1" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="tfSize0" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -182,27 +182,27 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lblSize" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfAmount1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfSize0" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfAmount2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfSize1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfAmount3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfSize2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="tfAmount4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfSize3" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lblMaterial" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfMaterial1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfFabric1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfMaterial2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfFabric2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfMaterial3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tfFabric3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="tfMaterial4" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfFabric4" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -270,13 +270,13 @@
         <Property name="text" type="java.lang.String" value="Beskrivning"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfMaterial2">
+    <Component class="javax.swing.JTextField" name="tfFabric2">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfMaterial4">
+    <Component class="javax.swing.JTextField" name="tfFabric4">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfMaterial3">
+    <Component class="javax.swing.JTextField" name="tfFabric3">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfMaterial1">
+    <Component class="javax.swing.JTextField" name="tfFabric1">
     </Component>
     <Component class="javax.swing.JLabel" name="lblMaterial">
       <Properties>
@@ -291,9 +291,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfMaterial8">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount3">
+    <Component class="javax.swing.JTextField" name="tfSize2">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount1">
+    <Component class="javax.swing.JTextField" name="tfSize0">
     </Component>
     <Component class="javax.swing.JLabel" name="lblSize">
       <Properties>
@@ -308,9 +308,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfAmount8">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount2">
+    <Component class="javax.swing.JTextField" name="tfSize1">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount4">
+    <Component class="javax.swing.JTextField" name="tfSize3">
     </Component>
     <Component class="javax.swing.JTextField" name="tfEstimatedTime">
     </Component>

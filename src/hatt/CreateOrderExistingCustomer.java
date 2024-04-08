@@ -5,7 +5,10 @@
 package hatt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -48,24 +51,24 @@ private static InfDB idb;
         lblCustomerInfo = new javax.swing.JLabel();
         lblOrderInfo = new javax.swing.JLabel();
         lblDescription = new javax.swing.JLabel();
-        tfMaterial2 = new javax.swing.JTextField();
-        tfMaterial4 = new javax.swing.JTextField();
-        tfMaterial3 = new javax.swing.JTextField();
-        tfMaterial1 = new javax.swing.JTextField();
+        tfFabric2 = new javax.swing.JTextField();
+        tfFabric4 = new javax.swing.JTextField();
+        tfFabric3 = new javax.swing.JTextField();
+        tfFabric1 = new javax.swing.JTextField();
         lblMaterial = new javax.swing.JLabel();
         tfMaterial7 = new javax.swing.JTextField();
         tfMaterial5 = new javax.swing.JTextField();
         tfMaterial6 = new javax.swing.JTextField();
         tfMaterial8 = new javax.swing.JTextField();
-        tfAmount3 = new javax.swing.JTextField();
-        tfAmount1 = new javax.swing.JTextField();
+        tfSize2 = new javax.swing.JTextField();
+        tfSize0 = new javax.swing.JTextField();
         lblSize = new javax.swing.JLabel();
         tfAmount7 = new javax.swing.JTextField();
         tfAmount5 = new javax.swing.JTextField();
         tfAmount6 = new javax.swing.JTextField();
         tfAmount8 = new javax.swing.JTextField();
-        tfAmount2 = new javax.swing.JTextField();
-        tfAmount4 = new javax.swing.JTextField();
+        tfSize1 = new javax.swing.JTextField();
+        tfSize3 = new javax.swing.JTextField();
         tfEstimatedTime = new javax.swing.JTextField();
         lblEstimatedTime = new javax.swing.JLabel();
         lblAccessories = new javax.swing.JLabel();
@@ -178,18 +181,18 @@ private static InfDB idb;
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblMaterial)
-                            .addComponent(tfMaterial1)
-                            .addComponent(tfMaterial2)
-                            .addComponent(tfMaterial3)
-                            .addComponent(tfMaterial4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfFabric1)
+                            .addComponent(tfFabric2)
+                            .addComponent(tfFabric3)
+                            .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSize)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(tfSize0, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnConfirm)
@@ -261,24 +264,24 @@ private static InfDB idb;
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(lblSize)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfSize0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfAmount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfSize1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfSize2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(29, 29, 29))
-                                .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(lblMaterial)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfMaterial1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfFabric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfMaterial2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfFabric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfMaterial3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfFabric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(29, 29, 29))
-                                .addComponent(tfMaterial4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(tfFabric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConfirm)
                 .addContainerGap(17, Short.MAX_VALUE))
@@ -287,9 +290,13 @@ private static InfDB idb;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private String getCustomerEmail(){
+        return cobCustomers.getSelectedItem().toString();     
+    }
+            
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
 
-        String customerEmail = cobCustomers.getSelectedItem().toString();
+        String customerEmail = getCustomerEmail();
         try {
             String nameQuery = "SELECT Name FROM Customer WHERE Email = '" + customerEmail + "'";
             String addressQuery = "SELECT Address FROM Customer WHERE Email = '" + customerEmail + "'";
@@ -315,46 +322,51 @@ private static InfDB idb;
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         //Fetches the customer info based on the choice in the combobox
         //En metod som hämtar kundID för den valde kund-Eposten för att lägga en order
-                
+        //Alla querys ska läggas in i databasen
+        String customerEmail = getCustomerEmail();
+        try{
+        String queryId = "SELECT cid FROM customer WHERE Email = '" + customerEmail + "'";
+        String customerID = idb.fetchSingle(queryId);
+        
         //Fetches the textfields for ordering a hat
         String description = tfDescription.getText();
         double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
         
         //Här behövs en metod som kan visa vilken anstäld som lagt ordern 
-        //Nu i början kan det alltid vara kopplat till Otto, dvs id 1
-        //Här ska även ett increment för orderID ligga
+        //Nu i början kan det alltid vara kopplat till Otto, dvs hårdkoda id 1
+        //Här ska även ett increment för orderID ligga       
+        //Allt detta ska också in i databasen
+        String orderId = idb.getAutoIncrement("xOrder", "oid");
+        
+        //Creates the order
+        //Skapar en order idb ska in i databasklassen
+        String query = "INSERT INTO xorder VALUES (" + orderId + ",'" + description + "'," + estimatedTime + ", 1," + customerID + ")";
+        idb.insert(query);
+        
+        
         
         //Fetches the fabrics
         //Här behövs enorm validering beroende på hur många fält som är ifyllda
-       ArrayList<String> tfs = new ArrayList<>();
+      
        
        
-        tfs.add(tfMaterial1.getText());
-        tfs.add(tfMaterial2.getText());
-        tfs.add(tfMaterial3.getText());
-        tfs.add(tfMaterial4.getText());
+        
         
         //Temporära databasfrågor
         
-        try{
+        
           String nameQuery = "SELECT name FROM materials";
         ArrayList<String> names;
         names = idb.fetchColumn(nameQuery);
-        
-        
-        
-        for(String tf : tfs){
-            if (Validation.hasValueNoError(tf)){
-                for(String name : names){
-                    if(tf.equalsIgnoreCase(name)){
-                       String idQuery = "SELECT mid FROM materials WHERE name = '" + tf +" '";
-                       String id = idb.fetchSingle(idQuery);
-                      // String instertId = "INSERT INTO order_consists_of_materials VALUES ("
+ 
+        for(String name : names){
+                    if(getTfs().contains(name)){
+                       String idQuery = "SELECT mid FROM materials WHERE name = '" + name +" '";
+                       String mid = idb.fetchSingle(idQuery);
+                       String instertId = "INSERT INTO order_consists_of_materials VALUES (" + orderId + ", " + mid + ", ";
                         
                     }
                 }
-            } 
-        }  
         }
         catch(InfException ex){
             JOptionPane.showMessageDialog(null, "Database error!");
@@ -363,17 +375,18 @@ private static InfDB idb;
         
         
         
-        String fabric1 = tfMaterial1.getText();
-        String size1 = tfAmount1.getText();     
         
-        String fabric2 = tfMaterial2.getText();
-        String size2 = tfAmount2.getText();   
+        String fabric1 = tfFabric1.getText();
+        String size1 = tfSize0.getText();     
         
-        String fabric3 = tfMaterial3.getText();
-        String size3 = tfAmount3.getText();    
+        String fabric2 = tfFabric2.getText();
+        String size2 = tfSize1.getText();   
         
-        String fabric4 = tfMaterial4.getText();
-        String size4 = tfAmount4.getText();
+        String fabric3 = tfFabric3.getText();
+        String size3 = tfSize2.getText();    
+        
+        String fabric4 = tfFabric4.getText();
+        String size4 = tfSize3.getText();
         
         //Fetches the accessories
         //Samma validering behövs här
@@ -400,7 +413,34 @@ private static InfDB idb;
         //lägg en metod här som finns i databasen för att lägga till en ny order
         
     }//GEN-LAST:event_btnConfirmActionPerformed
+   
+    private ArrayList<String> getTfs(){
+        ArrayList<String> tfs = new ArrayList<>();
+        tfs.add(tfFabric1.getText());
+        tfs.add(tfFabric2.getText());
+        tfs.add(tfFabric3.getText());
+        tfs.add(tfFabric4.getText());
+        
+        for(String tf : tfs){
+            if (!Validation.hasValueNoError(tf)){
+                tfs.remove(tf);
+                
+            } 
+        } 
+        return tfs;
+    }
+    private HashMap<String, String> getFabricsWithSize(){
+                   HashMap<String, String> fabricsWithSize = new HashMap<>();
+           for(String tf : getTfs()){
+               
+               String size = "tfSize" + getTfs().indexOf(tf);
+               
+                fabricsWithSize.put(tf, size);  
+        } 
+           return fabricsWithSize;
+    }
     
+
     private void fillCobCustomers() {
         cobCustomers.addItem("");
         ArrayList<String> emails;
@@ -487,10 +527,6 @@ private static InfDB idb;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblSize;
     private javax.swing.JTextField tfAddress;
-    private javax.swing.JTextField tfAmount1;
-    private javax.swing.JTextField tfAmount2;
-    private javax.swing.JTextField tfAmount3;
-    private javax.swing.JTextField tfAmount4;
     private javax.swing.JTextField tfAmount5;
     private javax.swing.JTextField tfAmount6;
     private javax.swing.JTextField tfAmount7;
@@ -498,15 +534,19 @@ private static InfDB idb;
     private javax.swing.JTextField tfDescription;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfEstimatedTime;
-    private javax.swing.JTextField tfMaterial1;
-    private javax.swing.JTextField tfMaterial2;
-    private javax.swing.JTextField tfMaterial3;
-    private javax.swing.JTextField tfMaterial4;
+    private javax.swing.JTextField tfFabric1;
+    private javax.swing.JTextField tfFabric2;
+    private javax.swing.JTextField tfFabric3;
+    private javax.swing.JTextField tfFabric4;
     private javax.swing.JTextField tfMaterial5;
     private javax.swing.JTextField tfMaterial6;
     private javax.swing.JTextField tfMaterial7;
     private javax.swing.JTextField tfMaterial8;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPhone;
+    private javax.swing.JTextField tfSize0;
+    private javax.swing.JTextField tfSize1;
+    private javax.swing.JTextField tfSize2;
+    private javax.swing.JTextField tfSize3;
     // End of variables declaration//GEN-END:variables
 }
