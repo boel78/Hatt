@@ -21,8 +21,8 @@ public class CustomerActions {
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
-    private Database db;
     
+    private static InfDB idb;
     
     
 public CustomerActions(String customerID, String name, String address, String phone, String email) {
@@ -33,7 +33,7 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.phone = phone;
         this.email = email;
         
-        db = new Database();
+        Database db = new Database();
         
         initializeAddCustomer(customerID, name, address, phone, email);
     }
@@ -41,7 +41,7 @@ public CustomerActions(String customerID, String name, String address, String ph
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
         this.customerID = customerID;
-        db = new Database();
+        Database db = new Database();
     }
     
     private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
@@ -59,10 +59,10 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.email = email;
 
         try {
-        String id = db.getAutoIncrement("customer","cid");
+        String id = idb.getAutoIncrement("customer","cid");
         if (Validation.(customerID)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
-        db.insert(fraga);
+        idb.insert(fraga);
         
             }
         }
