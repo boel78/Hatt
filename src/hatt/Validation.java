@@ -4,6 +4,7 @@
  */
 package hatt;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
@@ -61,14 +62,36 @@ public class Validation {
         return valid;
     }
     
-            public static boolean txtHasValue(JTextField txt) {
-            boolean valid = true;
-            if (txt.getText().isEmpty()){
-                valid = false;
+    public static boolean txtHasValue(JTextField txt) {
+        boolean valid = true;
+        if (txt.getText().isEmpty()){
+            valid = false;
             JOptionPane.showMessageDialog(null,"Var vänlig fyll i alla rutor!");
             txt.requestFocus();
-            }
-            return valid;
         }
+        return valid;
+    }
 
+            
+    public boolean existsCustomerID(String customerID) {
+        ArrayList<String> customerIDs = Database.getAllCustomerID();
+        return customerIDs.contains(customerID);
+}
+            
+    public boolean validateCustomerID(String customerID) {
+    boolean valid = false;
+    // Check if customerID only contains digits
+    if (customerID.matches("\\d+")) {
+        
+        if (!existsCustomerID(customerID)) {
+            valid = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Customer ID already exists");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
+    }
+    return valid;
+    }
+           
 }
