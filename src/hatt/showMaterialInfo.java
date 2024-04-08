@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hatt;
+
 import java.util.HashMap;
 
 /**
@@ -35,10 +36,11 @@ public class showMaterialInfo extends javax.swing.JFrame {
         btnShowInfo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaShowInfo = new javax.swing.JTextArea();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblChooseMaterial.setText("Välj material att visa info om:");
+        lblChooseMaterial.setText("Sök material");
 
         txtMaterial.setColumns(10);
 
@@ -53,6 +55,8 @@ public class showMaterialInfo extends javax.swing.JFrame {
         txtAreaShowInfo.setRows(5);
         jScrollPane1.setViewportView(txtAreaShowInfo);
 
+        btnBack.setText("Tillbaka");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,19 +64,20 @@ public class showMaterialInfo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(150, 150, 150)
+                        .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
-                        .addComponent(btnShowInfo))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnBack)
+                            .addComponent(btnShowInfo)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
+                        .addGap(174, 174, 174)
                         .addComponent(lblChooseMaterial)))
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,11 +86,13 @@ public class showMaterialInfo extends javax.swing.JFrame {
                 .addComponent(lblChooseMaterial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnShowInfo)
-                .addGap(72, 72, 72))
+                .addGap(35, 35, 35)
+                .addComponent(btnBack)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -100,23 +107,21 @@ public class showMaterialInfo extends javax.swing.JFrame {
             String supplierID = db.fetchSingle("sid", "ordering_materials", "mid", id);
             HashMap<String, String> supplierInfo = new HashMap<>();
             supplierInfo = db.fetchRow("supplier", "sid", supplierID);
-            for(String key : supplierInfo.keySet()){
-                if(!key.equals("sid")){
+            for (String key : supplierInfo.keySet()) {
+                if (!key.equals("sid")) {
                     txtAreaShowInfo.append(key + " = " + supplierInfo.get(key) + "\n");
                 }
             }
             HashMap<String, String> fabrics = db.fetchRow("fabric", "mid", id);
-            if(fabrics.isEmpty()){
+            if (fabrics.isEmpty()) {
                 HashMap<String, String> accessories = db.fetchRow("accessories", "mid", id);
                 txtAreaShowInfo.append("Type = Accessories\n");
                 txtAreaShowInfo.append("Amount = " + accessories.get("amount") + "\n");
-            }
-            else{
+            } else {
                 txtAreaShowInfo.append("Type = Fabric\n");
                 txtAreaShowInfo.append("Size = " + fabrics.get("size") + "\n");
             }
             txtAreaShowInfo.append("Price = " + db.fetchSingle("price", "materials", "mid", id));
-
 
         } else {
             System.out.println("Materialet finns inte. Kolla efter stavfel.");
@@ -159,6 +164,7 @@ public class showMaterialInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnShowInfo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblChooseMaterial;
