@@ -150,7 +150,7 @@ public class createRequest extends javax.swing.JFrame {
             int workerID = 1;
             String nextID = idb.getAutoIncrement("requests", "rid");
             ID = idb.fetchSingle("SELECT cid FROM customer WHERE name LIKE '" + cbCustomer.getSelectedItem().toString() + "'");
-            idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ", " + ID + ")");
+            idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
         } 
         catch (InfException ex)
         {
