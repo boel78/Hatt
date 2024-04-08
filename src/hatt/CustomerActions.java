@@ -5,6 +5,8 @@
 package hatt;
 
 import java.util.HashMap;
+import oru.inf.InfException;
+import oru.inf.InfDB;
 
 
 /**
@@ -57,13 +59,10 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.email = email;
 
         try {
-        String id = idb.getAutoIncrement("customer","cid");
+        String id = db.getAutoIncrement("customer","cid");
         if (Validation.(customerID)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
-            
-
-        
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
-        idb.insert(fraga);
+        db.insert(fraga);
         
             }
         }
