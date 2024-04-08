@@ -72,4 +72,20 @@ public class Validation {
             return valid;
         }
 
+    public boolean validateCustomerID(String customerID) {
+    boolean valid = false;
+    // Check if customerID only contains digits
+    if (customerID.matches("\\d+")) {
+        
+        if (!db.existsCustomerID(customerID)) {
+            valid = true;
+        } else {
+            JOptionPane.showMessageDialog(null, "Customer ID already exists");
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
+    }
+    return valid;
+    }
+           
 }
