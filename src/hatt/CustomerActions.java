@@ -39,6 +39,7 @@ public CustomerActions(String customerID, String name, String address, String ph
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
         this.customerID = customerID;
+        db = new Database();
     }
     
     private void initializeAddCustomer() {
