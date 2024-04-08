@@ -46,11 +46,6 @@ public class createRequest extends javax.swing.JFrame {
         lblAlreadyAModel.setText("Baserad på redan lagerförd modell?");
 
         cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(getCBHatModels()));
-        cbHatModel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbHatModelActionPerformed(evt);
-            }
-        });
 
         lblDescription.setText("Beskrivning:");
 
@@ -61,11 +56,6 @@ public class createRequest extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 txtDescriptionFocusLost(evt);
-            }
-        });
-        txtDescription.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescriptionActionPerformed(evt);
             }
         });
 
@@ -83,11 +73,6 @@ public class createRequest extends javax.swing.JFrame {
         lblCustomer.setText("Vilken kund?");
 
         cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomer()));
-        cbCustomer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCustomerActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -193,18 +178,6 @@ public class createRequest extends javax.swing.JFrame {
         return CBCustomer;
     }
     
-    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescriptionActionPerformed
-
-    private void cbHatModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHatModelActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbHatModelActionPerformed
-
-    private void cbCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCustomerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCustomerActionPerformed
-
     private void txtDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusGained
         // TODO add your handling code here:
         txtDescription.setText("");
