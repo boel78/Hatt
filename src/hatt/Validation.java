@@ -59,7 +59,6 @@ public class Validation {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         return valid;
-
     }
     
             public static boolean txtHasValue(JTextField txt) {
