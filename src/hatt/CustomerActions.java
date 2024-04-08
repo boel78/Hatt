@@ -76,7 +76,7 @@ public CustomerActions(String customerID, String name, String address, String ph
     // Erics kod
     
     
-    }
+    
      
     public void updateCustomer(){
       System.out.println("Kund updaterad");  
