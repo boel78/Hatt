@@ -33,7 +33,7 @@ public CustomerActions(String customerID, String name, String address, String ph
         
         db = new Database();
         
-        initializeAddCustomer();
+        initializeAddCustomer(customerID, name, address, phone, email);
     }
     
     public CustomerActions(String customerID) {
@@ -42,15 +42,22 @@ public CustomerActions(String customerID, String name, String address, String ph
         db = new Database();
     }
     
-    private void initializeAddCustomer() {
+    private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
+        
+        if(Validation.txtHasValue(name)&& (Validation.txtHasValue(address)) && (Validation.txtHasValue(email)) && (Validation.txtHasValue(phone)))
+        
+        
         addCustomer(customerID, name, address, phone, email);
     }
     
     public void addCustomer(String customerID, String name, String address, String phone, String email) {
         
+        
+    
+
+    // Erics kod
     
     
-    System.out.println("Kund tillagd"); 
     }
      
     public void updateCustomer(){
