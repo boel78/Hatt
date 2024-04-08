@@ -11,12 +11,14 @@ package hatt;
 public class Navigation extends javax.swing.JFrame {
 
     private String user;
+    private String uid;
 
     /**
      * Creates new form navigation
      */
-    public Navigation(String user) {
+    public Navigation(String user, String uid) {
         this.user = user;
+        this.uid = uid;
         initComponents();
         lblUser.setText(user);
         loadPane();
@@ -97,6 +99,8 @@ public class Navigation extends javax.swing.JFrame {
         });
     }
      */
+    
+    //Fyller tabbedPane med alla JFrames
     private void loadPane() {
      /* CreateCustomer cc = new CreateCustomer();
         tbdPane.addTab("Skapa kund", cc.getContentPane());

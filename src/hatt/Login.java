@@ -10,11 +10,20 @@ package hatt;
  */
 public class Login extends javax.swing.JFrame {
 
+    private Database db;
+
     /**
      * Creates new form login
      */
     public Login() {
         initComponents();
+        db = new Database();
+    }
+
+    //Metod för att hämta id från namn
+    private String getID(String name) {
+        String userID = db.fetchSingle("uid", "user", "name", name);
+        return userID;
     }
 
     /**
@@ -40,8 +49,18 @@ public class Login extends javax.swing.JFrame {
         });
 
         btnAccountant.setText("Revisor");
+        btnAccountant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAccountantActionPerformed(evt);
+            }
+        });
 
         btnJudith.setText("Judith");
+        btnJudith.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJudithActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,9 +91,24 @@ public class Login extends javax.swing.JFrame {
 
     private void btnOttoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOttoActionPerformed
         this.hide();
-        Navigation n = new Navigation("Otto");
-        n.setVisible(true); 
+        String name = btnOtto.getText();
+        Navigation n = new Navigation(name, getID(name));
+        n.setVisible(true);
     }//GEN-LAST:event_btnOttoActionPerformed
+
+    private void btnJudithActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJudithActionPerformed
+        this.hide();
+        String name = btnJudith.getText();
+        Navigation n = new Navigation(name, getID(name));
+        n.setVisible(true);
+    }//GEN-LAST:event_btnJudithActionPerformed
+
+    private void btnAccountantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountantActionPerformed
+        this.hide();
+        //String name = btnAccountant.getText();
+        Navigation n = new Navigation("Joakim", getID("Joakim"));
+        n.setVisible(true);
+    }//GEN-LAST:event_btnAccountantActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,7 +145,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccountant;
