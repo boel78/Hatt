@@ -140,7 +140,6 @@ create table accessories
 (
     amount int null,
     mid    int not null,
-    stock  int null,
     constraint accessories_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
@@ -149,7 +148,6 @@ create table fabric
 (
     mid   int    not null,
     size  double null,
-    stock double null,
     constraint fabric_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
@@ -255,16 +253,17 @@ INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (2, 'Fea
 INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (3, 'Silk', 569.4, 1);
 INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (4, 'Ribbon', 45.6, 2);
 INSERT INTO hattmakardb.materials (mid, name, price, handled_by) VALUES (5, 'Manchester', 543.2, 2);
-INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (1, 23, 40);
-INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (3, 12, 15);
-INSERT INTO hattmakardb.fabric (mid, size, stock) VALUES (5, 8, 9);
-INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (42, 2, 50);
-INSERT INTO hattmakardb.accessories (amount, mid, stock) VALUES (3, 4, 5);
+INSERT INTO hattmakardb.fabric (mid, size) VALUES (1, 23);
+INSERT INTO hattmakardb.fabric (mid, size) VALUES (3, 12);
+INSERT INTO hattmakardb.fabric (mid, size) VALUES (5, 5);
+INSERT INTO hattmakardb.accessories (amount, mid) VALUES (42, 2);
+INSERT INTO hattmakardb.accessories (amount, mid) VALUES (3, 4);
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (1, 'Jeanshat', 4, 1, 1);
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (2, 'Doctorateshat', 2, 1, 1);
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (3, 'Silkbonnet', 3, 2, 2);
-INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1, 1);
+INSERT INTO hattmakardb.order_consists_of_materials (oid, mid, amount) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
+INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
 INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
