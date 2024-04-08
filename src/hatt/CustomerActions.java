@@ -60,7 +60,7 @@ public CustomerActions(String customerID, String name, String address, String ph
 
         try {
         String id = idb.getAutoIncrement("customer","cid");
-        if (Validation.(customerID) && Validation.validateName(name) && (Validation.txtHasValue(txtAddress)) && (Validation.validateEmailTypo(email)) && (Validation.validatePhone(phone))){
+        if (Validation.validateCustomerID(customerID) && Validation.validateName(name) && (Validation.txtHasValue(txtAddress)) && (Validation.validateEmailTypo(email)) && (Validation.validatePhone(phone))){
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
         idb.insert(fraga);
         
