@@ -74,6 +74,13 @@ public class createRequest extends javax.swing.JFrame {
 
         jLabel5.setText("Vilken kund?");
 
+        cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomer()));
+        cbCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCustomerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,8 +99,8 @@ public class createRequest extends javax.swing.JFrame {
                             .addComponent(cbHatModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))))
+                            .addComponent(jLabel5)
+                            .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,9 +140,9 @@ public class createRequest extends javax.swing.JFrame {
         try
         {
             int workerID = 1;
-            int customerID = 1;
             String nextID = idb.getAutoIncrement("requests", "rid");
-            idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ", " + customerID + ")");
+            ID = idb.fetchSingle("SELECT cid FROM customer WHERE name LIKE '" + cbCustomer.getSelectedItem().toString() + "'");
+            idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ", " + ID + ")");
         } 
         catch (InfException ex)
         {
@@ -158,8 +165,24 @@ public class createRequest extends javax.swing.JFrame {
         CBAL.toArray(CBHatModelsx);
         
         
-        System.out.println(CBHatModelsx);
         return CBHatModelsx;
+    }
+    
+    public static String[] getCBCustomer(){
+        ArrayList<String> CBAL = new ArrayList<>();
+        
+        try{
+            CBAL = idb.fetchColumn("SELECT name FROM customer");
+            System.out.println();
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+        
+        String[] CBCustomer = new String[CBAL.size()];
+        CBAL.toArray(CBCustomer);
+        
+        
+        return CBCustomer;
     }
     
     private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
@@ -170,6 +193,10 @@ public class createRequest extends javax.swing.JFrame {
     private void cbHatModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbHatModelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbHatModelActionPerformed
+
+    private void cbCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCustomerActionPerformed
 
     /**
      * @param args the command line arguments
