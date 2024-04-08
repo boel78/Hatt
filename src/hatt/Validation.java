@@ -72,6 +72,9 @@ public class Validation {
             return valid;
         }
 
+            
+            
+            
     public boolean validateCustomerID(String customerID) {
     boolean valid = false;
     // Check if customerID only contains digits
