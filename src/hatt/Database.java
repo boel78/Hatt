@@ -5,6 +5,7 @@
 package hatt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -41,6 +42,31 @@ public class Database {
     
     public static void main(String[] args){
         new Database();
+    }
+    
+      public String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier){
+        String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
+        String response = "";
+        try{
+            response = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+            
+        }
+        return response;
+    }
+      
+        public HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
+        String query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
+        HashMap<String, String> response = new HashMap<String, String>();
+        System.out.println(query);
+        try {
+            response = idb.fetchRow(query);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+        return response;
     }
     
 }

@@ -265,6 +265,7 @@ INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, cu
 INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (3, 'Silkbonnet', 3, 2, 2);
 INSERT INTO hattmakardb.order_consists_of_materials (oid, mid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
+INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
 INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
