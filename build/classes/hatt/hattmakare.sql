@@ -213,6 +213,7 @@ create table requests
         primary key,
     description varchar(100) null,
     reviewed_by int         not null,
+    reviewed    varchar(5)  null,
     customer    int         not null,
     constraint requests_customer_cid_fk
         foreign key (customer) references customer (cid),
