@@ -19,14 +19,19 @@ public class CustomerActions {
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
+    private Database db;
     
-    public CustomerActions(String customerID, String name, String address, String phone, String email) {
+    
+    
+public CustomerActions(String customerID, String name, String address, String phone, String email) {
         //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
         this.customerID = customerID;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
+        
+        db = new Database();
         
         initializeAddCustomer();
     }
@@ -61,7 +66,7 @@ public class CustomerActions {
         String columnIdentifier = customerID; // Avgörs i gränsittet.
         HashMap<String, String> customer;
         
-        customer = Database.fetchRow(tableName, columnWhere, columnIdentifier);
+        customer = db.fetchRow(tableName, columnWhere, columnIdentifier);
         return customer;
         
     }
