@@ -140,7 +140,6 @@ create table accessories
 (
     amount int null,
     mid    int not null,
-    stock  int null,
     constraint accessories_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
@@ -149,7 +148,6 @@ create table fabric
 (
     mid   int    not null,
     size  double null,
-    stock double null,
     constraint fabric_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
