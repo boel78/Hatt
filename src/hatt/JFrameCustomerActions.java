@@ -5,6 +5,7 @@
 package hatt;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -256,10 +257,11 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
         
-        if(Validation.txtHasValue(txtName)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
+        if(Validation.txtHasValue(txtCustomerID) && Validation.txtHasValue(txtName)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
         CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
         
-        addCustomer
+        actions.addCustomer(customerID, name, address, phone, email);
+        JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
