@@ -5,6 +5,7 @@
 package hatt;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -240,7 +241,8 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
                 txtAddress.setText("");
                 txtPhone.setText("");
                 txtEmail.setText("");
-                System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
+                
+                JOptionPane.showMessageDialog(null, "Kunde inte hämta information, Felaktigt ID inskrivet.");
             }
     }//GEN-LAST:event_btnGetActionPerformed
 
