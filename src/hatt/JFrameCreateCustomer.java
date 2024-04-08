@@ -213,9 +213,11 @@ public class JFrameCreateCustomer extends javax.swing.JFrame {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
     
-        String customerID = txtCustomerID.getText();
+           String customerID = txtCustomerID.getText();
+        
+           CustomerActions actions = new CustomerActions(customerID);
 
-        HashMap<String, String> customer = CustomerActions.getCustomer(customerID);
+        HashMap<String, String> customer = actions.getCustomer(customerID);
         
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
