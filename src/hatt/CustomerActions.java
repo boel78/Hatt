@@ -44,15 +44,33 @@ public CustomerActions(String customerID, String name, String address, String ph
     
     private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
         
-        if(Validation.txtHasValue(name)&& (Validation.txtHasValue(address)) && (Validation.txtHasValue(email)) && (Validation.txtHasValue(phone)))
         
         
         addCustomer(customerID, name, address, phone, email);
     }
     
     public void addCustomer(String customerID, String name, String address, String phone, String email) {
+        this.customerID = customerID;
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
+
+        try {
+        String id = idb.getAutoIncrement("customer","cid");
+        if (Validation.(customerID)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
+            
+
         
+        String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
+        idb.insert(fraga);
         
+            }
+        }
+        catch (InfException ex){
+            ex.printStackTrace();
+        }
+    }
     
 
     // Erics kod
