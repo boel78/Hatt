@@ -52,6 +52,7 @@ public CustomerActions(String customerID, String name, String address, String ph
     }
     
     public void addCustomer(String customerID, String name, String address, String phone, String email) {
+        Validation validation = new Validation();
         this.customerID = customerID;
         this.name = name;
         this.address = address;
@@ -60,7 +61,7 @@ public CustomerActions(String customerID, String name, String address, String ph
 
         try {
         String id = idb.getAutoIncrement("customer","cid");
-        if (Validation.validateCustomerID(customerID) && Validation.validateName(name) && (Validation.txtHasValue(txtAddress)) && (Validation.validateEmailTypo(email)) && (Validation.validatePhone(phone))){
+        if (validation.validateCustomerID(customerID) && (validation.validateName(name)) && (validation.txtHasValue(txtAddress)) && (validation.validateEmailTypo(email)) && (validation.validatePhone(phone))){
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
         idb.insert(fraga);
         
