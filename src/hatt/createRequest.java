@@ -130,6 +130,7 @@ public class createRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Database db = new Database();
+        if(Validation.txtHasValue(txtDescription)){
         description = txtDescription.getText();
         hatModel = cbHatModel.getSelectedItem().toString();
         System.out.print(description);
@@ -139,7 +140,7 @@ public class createRequest extends javax.swing.JFrame {
         int workerID = 1;
         
         db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
-        
+        }
     }//GEN-LAST:event_btnSendActionPerformed
     
     public static String[] getCBHatModels(){
