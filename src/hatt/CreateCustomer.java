@@ -127,7 +127,7 @@ public class CreateCustomer extends javax.swing.JFrame {
         
         try {
         String id = idb.getAutoIncrement("customer","cid");
-        if (Validation.txtHasValue(txtName)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
+        if (Validation.validateName(txtName.getText())&& (Validation.txtHasValue(txtAddress)) && (Validation.validateEmailTypo(txtEmail.getText())) && (Validation.validatePhone(txtPhone.getText()))){
             
         String name = txtName.getText();
         String address = txtAddress.getText();
