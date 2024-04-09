@@ -76,9 +76,20 @@ public CustomerActions(String customerID, String name, String address, String ph
       System.out.println("Kund updaterad");  
     }
     
-    public void deleteCustomer() {
-        System.out.println("Kund bortagen"); 
+    
+    public void removeCustomer(String customerID) {
+        try {
+        String query = "DELETE FROM customer WHERE cid = '" + customerID + "'";
+        idb.delete(query);
+        
+        System.out.println("Kund borttagen");
+        } 
+        catch (InfException ex) {
+            ex.printStackTrace();
+        
+        }
     }
+        
     
     public HashMap<String, String> getCustomer(String customerID) { 
         String tableName = "Customer";
