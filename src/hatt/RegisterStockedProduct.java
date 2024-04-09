@@ -138,16 +138,18 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
         String name = txtName.getText();
         String description = txtDescription.getText();
         String startingPrice = txtStartingprice.getText();
-        if (!validation.checkExistingCell("stocked_product", "name", name)) {
-            if (validation.isDouble(startingPrice)) {
-                db.insert("stocked_product", "(sid,name,description,starting_price)", "(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")");
-                JOptionPane.showMessageDialog(null, "Produkten har lagts till.");
+        if (validation.txtHasValue(txtName)) {
+            if (!validation.checkExistingCell("stocked_product", "name", name)) {
+                if (validation.isDouble(startingPrice)) {
+                    db.insert("stocked_product", "(sid,name,description,starting_price)", "(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")");
+                    JOptionPane.showMessageDialog(null, "Produkten har lagts till.");
 
+                } else {
+                    JOptionPane.showMessageDialog(null, "Priset får bara bestå av siffror.");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Priset får bara bestå av siffror.");
+                JOptionPane.showMessageDialog(null, "Produkten finns redan i systemet.");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Produkten finns redan i systemet.");
         }
     }//GEN-LAST:event_btnStockActionPerformed
 
