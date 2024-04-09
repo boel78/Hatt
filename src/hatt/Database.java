@@ -86,4 +86,17 @@ public class Database {
         return list;
     }
 
+    // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
+    public void insert(String tableName, String columns, String values) {
+        String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+        try {
+            idb.insert(query);
+            System.out.println("Insert succesful");
+
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
 }

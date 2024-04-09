@@ -16,6 +16,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
 
     private InfDB idb;
     private Validation validation;
+    private Database db;
 
     /**
      * Creates new form LagerforaModell
@@ -23,6 +24,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
     public RegisterStockedProduct() {
         initComponents();
         validation = new Validation();
+        db = new Database();
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -78,13 +80,16 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(133, 133, 133)
-                        .addComponent(lblTitle))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(lblDescription)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(btnStock))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblName)
@@ -93,11 +98,8 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtStartingprice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(btnStock)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                            .addComponent(lblTitle))))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,14 +140,9 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
         String startingPrice = txtStartingprice.getText();
         if (!validation.checkExistingCell("stocked_product", "name", name)) {
             if (validation.isDouble(startingPrice)) {
-                String query = "INSERT INTO stocked_product(sid, name, description, starting_price) VALUES(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")";
-                try {
-                    idb.insert(query);
-                    JOptionPane.showMessageDialog(null, "Produkten har lagts till.");
+                db.insert("stocked_product", "(sid,name,description,starting_price)", "(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")");
+                JOptionPane.showMessageDialog(null, "Produkten har lagts till.");
 
-                } catch (InfException ex) {
-                    ex.printStackTrace();
-                }
             } else {
                 JOptionPane.showMessageDialog(null, "Priset får bara bestå av siffror.");
             }
