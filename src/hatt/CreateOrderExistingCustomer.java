@@ -21,11 +21,13 @@ import oru.inf.InfException;
 public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
 private static InfDB idb;
+private Database db;
 
     public CreateOrderExistingCustomer(InfDB idb) {
         this.idb = idb;
         initComponents();
         fillCobCustomers();
+        db = new Database();
         
       
     }
@@ -76,7 +78,6 @@ private static InfDB idb;
         lblCustomers = new javax.swing.JLabel();
         tfDescription = new javax.swing.JTextField();
         btnConfirm = new javax.swing.JButton();
-        btnTEST = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,13 +128,6 @@ private static InfDB idb;
             }
         });
 
-        btnTEST.setText("TEST");
-        btnTEST.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTESTActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,10 +157,7 @@ private static InfDB idb;
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescription)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblOrderInfo)
-                        .addGap(135, 135, 135)
-                        .addComponent(btnTEST))
+                    .addComponent(lblOrderInfo)
                     .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEstimatedTime)
                     .addGroup(layout.createSequentialGroup()
@@ -237,12 +228,8 @@ private static InfDB idb;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblOrderInfo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(btnTEST)))
-                        .addGap(22, 22, 22)
+                        .addComponent(lblOrderInfo)
+                        .addGap(40, 40, 40)
                         .addComponent(lblDescription)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -304,13 +291,20 @@ private static InfDB idb;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Returns the value in the combobox and makes it into a string
     private String getCustomerEmail(){
         return cobCustomers.getSelectedItem().toString();     
     }
             
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
 
+        //Fills the textfields with information about the chosen customer
         String customerEmail = getCustomerEmail();
+        
+       // String name = Database.fetchSingle("name", "customer", "Email", customerEmail);
+        //String address = Database.fetchSingle("address", "customer", "Email", customerEmail);
+        //String phone = Database.fetchSingle("phone", "customer", "Email", customerEmail);
+        //String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
         try {
             String nameQuery = "SELECT Name FROM Customer WHERE Email = '" + customerEmail + "'";
             String addressQuery = "SELECT Address FROM Customer WHERE Email = '" + customerEmail + "'";
@@ -334,148 +328,59 @@ private static InfDB idb;
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        //Fetches the customer info based on the choice in the combobox
-        //En metod som hämtar kundID för den valde kund-Eposten för att lägga en order
-        //Alla querys ska läggas in i databasen
-        String customerEmail = getCustomerEmail();
         try{
-        String queryId = "SELECT cid FROM customer WHERE Email = '" + customerEmail + "'";
-        String customerID = idb.fetchSingle(queryId);
+        //Fetches the customer info based on the choice in the combobox
+        String customerEmail = getCustomerEmail();
+        String customerID = db.fetchSingle("cid", "customer", "Email", customerEmail);
         
-        //Fetches the textfields for ordering a hat
+        //Fetches the description and time for ordering a hat
         String description = tfDescription.getText();
         double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
         
-        //Här behövs en metod som kan visa vilken anstäld som lagt ordern 
-        //Nu i början kan det alltid vara kopplat till Otto, dvs hårdkoda id 1
-        //Här ska även ett increment för orderID ligga       
-        //Allt detta ska också in i databasen
+        //Creates a new orderID
+        //Ska in i databasen
         String orderId = idb.getAutoIncrement("xOrder", "oid");
-        
+       
         //Creates the order
-        //Skapar en order idb ska in i databasklassen
+        //Ska in i databasen
         String query = "INSERT INTO xorder VALUES (" + orderId + ",'" + description + "'," + estimatedTime + ", 1," + customerID + ")";
         idb.insert(query);
         
+        //Fetches the fabrics and accessories 
+        HashMap <String, String> accessoriesAmounts = getAccessoriesWithAmount();
+        HashMap <String, String> fabricSizes = getFabricsWithSize();
         
-        
-        //Fetches the fabrics
-        
-        ArrayList <String> fabrics = getFabrics();
-        ArrayList <String> accessories = getAccessories();
-        HashMap <String, String> amounts = getAccessoriesWithAmount();
-        HashMap <String, String> sizes = getFabricsWithSize();
-       
-    
-       
-       
-        
-        
-        //Temporära databasfrågor
-        
-        
-          String nameQuery = "SELECT name FROM materials";
-        ArrayList<String> names;
-        names = idb.fetchColumn(nameQuery);
- 
-        for(String name : names){
-                    if(getFabrics().contains(name)){
-                       String idQuery = "SELECT mid FROM materials WHERE name = '" + name +" '";
-                       String mid = idb.fetchSingle(idQuery);
-                       String instertId = "INSERT INTO order_consists_of_materials VALUES (" + orderId + ", " + mid + ", ";
-                        
-                    }
-                }
+        //Loops trough the fabrics
+        for (String fabricMaterials : fabricSizes.keySet()) {
+            String fabricMid = db.fetchSingle("mid", "materials", "name", fabricMaterials);
+            String fabricAmount = fabricSizes.get(fabricMaterials);
+
+            //Adds the orderID, materialID and the amount to "order_consists_of_materials"
+            //Ska in i databasen
+            String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + fabricMid + "," + fabricAmount + ")";
+            idb.insert(query3);
         }
-        catch(InfException ex){
+
+        //Loops trough the accessories
+        for (String accessoriesMaterials : accessoriesAmounts.keySet()) {
+            String accessoriesMid = db.fetchSingle("mid", "materials", "name", accessoriesMaterials);
+            String accessoriesAmount = accessoriesAmounts.get(accessoriesMaterials);
+
+            //Adds the orderID, materialID and the amount to "order_consists_of_materials"
+            //Ska in i databasen
+            String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + accessoriesMid + "," + accessoriesAmount + ")";
+            idb.insert(query3);
+        }
+        }                     
+     
+       catch(InfException ex){
             JOptionPane.showMessageDialog(null, "Database error!");
             System.out.println("Internal error message!" + ex.getMessage());
-        }
-        
-        
-        
-        
-        String fabric1 = tfFabric1.getText();
-        String size1 = tfSize0.getText();     
-        
-        String fabric2 = tfFabric2.getText();
-        String size2 = tfSize1.getText();   
-        
-        String fabric3 = tfFabric3.getText();
-        String size3 = tfSize2.getText();    
-        
-        String fabric4 = tfFabric4.getText();
-        String size4 = tfSize3.getText();
-        
-        //Fetches the accessories
-        //Samma validering behövs här
-        String accessories1 = tfAccessories2.getText();
-        String amount1 = tfAmount0.getText();
-        
-        String accessories2 = tfAccessories0.getText();
-        String amount2 = tfAmount1.getText();
-        
-        String accessories3 = tfAccessories1.getText();
-        String amount3 = tfAmount2.getText();
-        
-        String accessories4 = tfAccessories3.getText();
-        String amount4 = tfAmount3.getText();
-        
-        //Här behövs en metod som kontrollerar om materialen finns i systemet annars felmeddelande.
-        //Såsmåningom ska det leda till en pop-up av att lägga till nytt material
-        
-        //Även en metod som kontrollerar om matieralet har saldo, annars pop-up med att beställa nytt
-        
-        
-        
-        //Inserts the values into a new order
-        //lägg en metod här som finns i databasen för att lägga till en ny order
-        
-        
-        
+        }   
+           
     }//GEN-LAST:event_btnConfirmActionPerformed
-
-    private void btnTESTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTESTActionPerformed
-        // TODO add your handling code here:
-        HashMap <String,String> lista = getFabricsWithSize();
-        for (HashMap.Entry<String, String> entry : lista.entrySet()) {
-        String fabric = entry.getKey();
-        String size = entry.getValue();
-        System.out.println("Fabric: " + fabric + ", Size: " + size);
-    }      
-    }//GEN-LAST:event_btnTESTActionPerformed
-   
     
-    private ArrayList<String> getAccessories(){
-        ArrayList<String> tfAccessories = new ArrayList<>();
-        tfAccessories.add(tfAccessories0.getText());
-        tfAccessories.add(tfAccessories1.getText());
-        tfAccessories.add(tfAccessories2.getText());
-        tfAccessories.add(tfAccessories3.getText());
-        
-        for(String tf : tfAccessories){
-            if (!Validation.hasValueNoError(tf)){
-                tfAccessories.remove(tf);
-            } 
-        } 
-        return tfAccessories;
-    }       
-            
-    private ArrayList<String> getFabrics(){
-        ArrayList<String> tfFabrics = new ArrayList<>();
-        tfFabrics.add(tfFabric1.getText());
-        tfFabrics.add(tfFabric2.getText());
-        tfFabrics.add(tfFabric3.getText());
-        tfFabrics.add(tfFabric4.getText());
-        
-        for(String tf : tfFabrics){
-            if (!Validation.hasValueNoError(tf)){
-                tfFabrics.remove(tf);
-            } 
-        } 
-        return tfFabrics;
-    }
-    
+    //Method that fetches the accessories fields and connects them with an amount in a hashMap
     private HashMap<String, String> getAccessoriesWithAmount() {
         ArrayList<JTextField> tfAccessories = new ArrayList<>();
         tfAccessories.add(tfAccessories0);
@@ -502,7 +407,8 @@ private static InfDB idb;
         }
         return accessoriesWithAmount;
     }
-
+    
+    //Method that fetches the fabric fields and connects them with an amount in a hashMap
     private HashMap<String, String> getFabricsWithSize() {
         ArrayList<JTextField> tfFabrics = new ArrayList<>();
         tfFabrics.add(tfFabric1);
@@ -530,6 +436,7 @@ private static InfDB idb;
         return fabricsWithSize;
     }
 
+    //Fills the comboBox with the existing customers
     private void fillCobCustomers() {
         cobCustomers.addItem("");
         ArrayList<String> emails;
@@ -601,7 +508,6 @@ private static InfDB idb;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirm;
-    private javax.swing.JButton btnTEST;
     private javax.swing.JComboBox<String> cobCustomers;
     private javax.swing.JLabel lblAccessories;
     private javax.swing.JLabel lblAddress;
