@@ -86,5 +86,19 @@ public class Database {
 
         return list;
     }
+    
+    //Ganska självförklarlig, tableName är tabellnamnet och columnName är kolumnnamnet
+    //som du vill ha inkrement-id ifrån. 
+    public String getAutoIncrement(String tableName, String columnName){
+        String id = "0";
+        
+        try{
+            id = idb.getAutoIncrement(tableName, columnName);
+        } catch (InfException ex){
+            ex.printStackTrace();
+        }
+        
+        return id;
+    }
 
 }
