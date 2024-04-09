@@ -95,7 +95,7 @@ public class Validation {
     }
 }
 
-    public boolean validateCustomerID(String customerID) {
+    /*public boolean validateCustomerID(String customerID) {
     boolean valid = false;
     // Check if customerID only contains digits
     if (customerID.matches("\\d+")) {
@@ -115,4 +115,4 @@ public class Validation {
         boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
         return valid;
     }
-}
+}*/
