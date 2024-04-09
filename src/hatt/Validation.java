@@ -23,7 +23,7 @@ public class Validation {
         db = new Database();
     }
 
-    public boolean validateName(String name) {
+    public static boolean validateName(String name) {
         boolean valid = false;
         if (name.matches("[a-zA-Z ]+")) {
             valid = true;
@@ -31,7 +31,7 @@ public class Validation {
         return valid;
     }
 
-    public boolean validateEmailTypo(String email) {
+    public static boolean validateEmailTypo(String email) {
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
         if (!email.isEmpty()) {
@@ -48,7 +48,7 @@ public class Validation {
         return valid;
     }
 
-    public boolean validatePhone(String phone) {
+    public static boolean validatePhone(String phone) {
         boolean valid = false;
         if (!phone.isEmpty()) {
             if (phone.matches("\\d{3}-\\d{7}")) {
@@ -74,12 +74,12 @@ public class Validation {
         return valid;
     }
 
-    public boolean existsCustomerID(String customerID) {
+    public static boolean existsCustomerID(String customerID) {
         ArrayList<String> customerIDs = Database.getAllCustomerID();
         return customerIDs.contains(customerID);
     }
 
-    public boolean validateCustomerID(String customerID) {
+    public static boolean validateCustomerID(String customerID) {
         boolean valid = false;
         // Check if customerID only contains digits
         if (customerID.matches("\\d+")) {
@@ -95,7 +95,7 @@ public class Validation {
         return valid;
     }
 
-    public boolean validateAddress(String address) {
+    public static boolean validateAddress(String address) {
         boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
         return valid;
     }
