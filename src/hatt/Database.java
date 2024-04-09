@@ -6,6 +6,7 @@ package hatt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -130,6 +131,7 @@ public class Database {
             id = idb.getAutoIncrement(tableName, columnName);
         } catch (InfException ex) {
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att lägga till en ny kund.");
         }
 
         return id;
