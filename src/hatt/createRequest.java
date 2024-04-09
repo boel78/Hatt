@@ -7,6 +7,8 @@ import oru.inf.InfException;
 
 public class createRequest extends javax.swing.JFrame {
     
+    private int i = 0;
+    private int j = 0;
     private String[] cbHatModels;
     private String description;
     private String hatModel;
@@ -53,8 +55,10 @@ public class createRequest extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDescriptionFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtDescriptionFocusLost(evt);
+        });
+        txtDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescriptionActionPerformed(evt);
             }
         });
 
@@ -131,11 +135,11 @@ public class createRequest extends javax.swing.JFrame {
         System.out.print(description);
         
         ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
+        String nextID = db.getAutoIncrement("requests", "rid");
+        int workerID = 1;
         
         try
         {
-            int workerID = 1;
-            String nextID = idb.getAutoIncrement("requests", "rid");
             idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
         } 
         catch (InfException ex)
@@ -182,13 +186,17 @@ public class createRequest extends javax.swing.JFrame {
     
     private void txtDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusGained
         // TODO add your handling code here:
+        
+        if (j == 0){
         txtDescription.setText("");
+        }
+        System.out.println(j);
+        j++;
     }//GEN-LAST:event_txtDescriptionFocusGained
 
-    private void txtDescriptionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusLost
-        // TODO add your handling code here
-        txtDescription.setText("Klicka, sen skriv här....");
-    }//GEN-LAST:event_txtDescriptionFocusLost
+    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescriptionActionPerformed
 
     /**
      * @param args the command line arguments
