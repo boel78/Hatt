@@ -7,7 +7,6 @@ package hatt;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author calletegerup
@@ -217,37 +216,38 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailActionPerformed
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
-    
-           String customerID = txtCustomerID.getText();
-        
-           CustomerActions actions = new CustomerActions(customerID);
 
-        HashMap<String, String> customer = actions.getCustomer(customerID);
-        
+        String customerID = txtCustomerID.getText();
+
+        CustomerActions actions = new CustomerActions(customerID);
+
+        HashMap<String, String> customer = actions.getCustomer(txtCustomerID);
+
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
 
-            if (customer != null && !customer.isEmpty()) {
-                name = customer.get("name");
-                address = customer.get("address");
-                phone = customer.get("phone");
-                email = customer.get("email");
-        
-                txtName.setText(name != null ? name : "");
-                txtAddress.setText(address != null ? address : "");
-                txtPhone.setText(phone != null ? phone : "");
-                txtEmail.setText(email != null ? email : "");
-                System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email);
-            } else {
-                // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
-                txtName.setText("");
-                txtAddress.setText("");
-                txtPhone.setText("");
-                txtEmail.setText("");
-                System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
-            }
+        if (customer != null && !customer.isEmpty()) {
+            name = customer.get("name");
+            address = customer.get("address");
+            phone = customer.get("phone");
+            email = customer.get("email");
+
+            txtName.setText(name != null ? name : "");
+            txtAddress.setText(address != null ? address : "");
+            txtPhone.setText(phone != null ? phone : "");
+            txtEmail.setText(email != null ? email : "");
+            System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email);
+        } else {
+            // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
+            txtName.setText("");
+            txtAddress.setText("");
+            txtPhone.setText("");
+            txtEmail.setText("");
+            System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
+            JOptionPane.showMessageDialog(null, "Det gick inte att hitta kunden. Kontrollera uppgifterna.");
+        }
     }//GEN-LAST:event_btnGetActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -256,12 +256,12 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        
-        if(Validation.txtHasValue(txtCustomerID) && Validation.txtHasValue(txtName)&& (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))){
-        CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
-        
-        actions.addCustomer(customerID, name, address, phone, email);
-        JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
+
+        if (Validation.txtHasValue(txtCustomerID) && Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
+            CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
+
+            actions.addCustomer(customerID, name, address, phone, email);
+            JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
         }
     }//GEN-LAST:event_btnAddActionPerformed
 

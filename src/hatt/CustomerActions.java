@@ -1,56 +1,57 @@
-    /*
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package hatt;
 
 import java.util.HashMap;
+import javax.swing.JTextField;
 import oru.inf.InfException;
 import oru.inf.InfDB;
-
 
 /**
  *
  * @author Alexander & Carl
  */
 public class CustomerActions {
-    
+
     private String customerID = ""; //Database: customer/cid
     private String name = ""; //Database: customer/name
     private String address = ""; //Database: customer/address
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
-    
+
     private static InfDB idb;
-    
-    
-public CustomerActions(String customerID, String name, String address, String phone, String email) {
+    private Database db;
+    private Validation validation;
+
+    public CustomerActions(String customerID, String name, String address, String phone, String email) {
         //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
         this.customerID = customerID;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
-        
-        Database db = new Database();
-        
+
+        db = new Database();
+        validation = new Validation();
+
         initializeAddCustomer(customerID, name, address, phone, email);
     }
-    
+
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
         this.customerID = customerID;
-        Database db = new Database();
+        db = new Database();
+        validation = new Validation();
     }
-    
+
     private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
-        
-        
-        
+
         addCustomer(customerID, name, address, phone, email);
     }
-    
+
     public void addCustomer(String customerID, String name, String address, String phone, String email) {
         Validation validation = new Validation();
         this.customerID = customerID;
@@ -60,41 +61,42 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.email = email;
 
         try {
-        String id = idb.getAutoIncrement("customer","cid");
-        if (validation.validateCustomerID(customerID) && (validation.validateName(name)) && (validation.validateAddress(address)) && (validation.validateEmailTypo(email)) && (validation.validatePhone(phone))){
-        String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
-        idb.insert(fraga);
-        
+            String id = idb.getAutoIncrement("customer", "cid");
+            if (validation.validateCustomerID(customerID) && (validation.validateName(name)) && (validation.validateAddress(address)) && (validation.validateEmailTypo(email)) && (validation.validatePhone(phone))) {
+                String fraga = "Insert into customer values (" + id + ",'" + name + "','" + address + "','" + phone + "','" + email + "')";
+                idb.insert(fraga);
+
             }
-        }
-        catch (InfException ex){
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
     }
-        
-    public void updateCustomer(){
-      System.out.println("Kund updaterad");  
+
+    public void updateCustomer() {
+        System.out.println("Kund updaterad");
     }
-    
+
     public void deleteCustomer() {
-        System.out.println("Kund bortagen"); 
+        System.out.println("Kund bortagen");
     }
-    
-    public HashMap<String, String> getCustomer(String customerID) { 
-        String tableName = "Customer";
-        String columnWhere = "cid";
-        String columnIdentifier = customerID; // Avgörs i gränsittet.
-        HashMap<String, String> customer;
-        
-        customer = db.fetchRow(tableName, columnWhere, columnIdentifier);
+
+    public HashMap<String, String> getCustomer(JTextField txt) {
+        HashMap<String, String> customer = new HashMap<>();
+        if (validation.txtHasValue(txt)) {
+            String tableName = "Customer";
+            String columnWhere = "cid";
+            String columnIdentifier = customerID; // Avgörs i gränsittet.
+
+            customer = db.fetchRow(tableName, columnWhere, columnIdentifier);
+        }
         return customer;
-        
+
     }
-    
+
     public void testMethod(String test1, String test2) {
         String testName = test1;
         String testEmail = test2;
-        
+
         System.out.println(testName + " " + testEmail);
     }
 }
