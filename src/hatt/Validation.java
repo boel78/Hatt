@@ -136,12 +136,6 @@ public class Validation {
     public static boolean doesMaterialExist(ArrayList<String> list) {
         boolean exists = false;
 
-       /* for (String tf : list) {
-            if (tf.isEmpty()) {
-                list.remove(tf);
-            }
-        }
-*/
         ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "", "");
         for (String tf : list) {
             for (String name : materials) {
