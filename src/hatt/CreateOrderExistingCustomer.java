@@ -28,8 +28,7 @@ private Database db;
         initComponents();
         fillCobCustomers();
         db = new Database();
-        
-      
+
     }
 
     /**
@@ -113,6 +112,7 @@ private Database db;
 
         lblAmount.setText("Antal (st)");
 
+        cobCustomers.setEditable(true);
         cobCustomers.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cobCustomersActionPerformed(evt);
@@ -295,17 +295,40 @@ private Database db;
     private String getCustomerEmail(){
         return cobCustomers.getSelectedItem().toString();     
     }
+    
+    private void fillCustomerInfo(){
+                
+        String customerEmail = getCustomerEmail();
+        
+      /*String name = db.fetchSingle("name", "customer", "Email", customerEmail);
+        String address = db.fetchSingle("address", "customer", "Email", customerEmail);
+        String phone = db.fetchSingle("phone", "customer", "Email", customerEmail);
+                
+            tfName.setText(name);
+            tfAddress.setText(address);
+            tfPhone.setText(phone);
+            tfEmail.setText(customerEmail);
+        */
+    }
             
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
 
+        fillCustomerInfo();
         //Fills the textfields with information about the chosen customer
         String customerEmail = getCustomerEmail();
-        
-       // String name = Database.fetchSingle("name", "customer", "Email", customerEmail);
-        //String address = Database.fetchSingle("address", "customer", "Email", customerEmail);
-        //String phone = Database.fetchSingle("phone", "customer", "Email", customerEmail);
-        //String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
-        try {
+       
+     /*  String name = db.fetchSingle("name", "customer", "Email", customerEmail);
+        String address = db.fetchSingle("address", "customer", "Email", customerEmail);
+        String phone = db.fetchSingle("phone", "customer", "Email", customerEmail);
+                
+            tfName.setText(name);
+            tfAddress.setText(address);
+            tfPhone.setText(phone);
+            tfEmail.setText(customerEmail);
+        */
+     
+     //GÅR INTE ATT ANVÄNDA DATABASKLASSENS FETCHSINGLE!!!!!!
+       try {
             String nameQuery = "SELECT Name FROM Customer WHERE Email = '" + customerEmail + "'";
             String addressQuery = "SELECT Address FROM Customer WHERE Email = '" + customerEmail + "'";
             String phoneQuery = "SELECT Phone FROM Customer WHERE Email = '" + customerEmail + "'";
