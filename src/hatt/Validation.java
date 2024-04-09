@@ -5,6 +5,7 @@
 package hatt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
@@ -22,7 +23,7 @@ public class Validation {
         db = new Database();
     }
 
-    public boolean validateName(String name) {
+    public static boolean validateName(String name) {
         boolean valid = false;
         if (name.matches("[a-zA-Z ]+")) {
             valid = true;
@@ -30,7 +31,7 @@ public class Validation {
         return valid;
     }
 
-    public boolean validateEmailTypo(String email) {
+    public static boolean validateEmailTypo(String email) {
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
         if (!email.isEmpty()) {
@@ -47,7 +48,7 @@ public class Validation {
         return valid;
     }
 
-    public boolean validatePhone(String phone) {
+    public static boolean validatePhone(String phone) {
         boolean valid = false;
         if (!phone.isEmpty()) {
             if (phone.matches("\\d{3}-\\d{7}")) {
@@ -60,42 +61,73 @@ public class Validation {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         return valid;
+
     }
-    
+
     public static boolean txtHasValue(JTextField txt) {
         boolean valid = true;
-        if (txt.getText().isEmpty()){
+        if (txt.getText().isEmpty()) {
             valid = false;
-            JOptionPane.showMessageDialog(null,"Var vänlig fyll i alla rutor!");
+            JOptionPane.showMessageDialog(null, "Var vänlig fyll i alla rutor!");
             txt.requestFocus();
         }
         return valid;
     }
 
-            
-    public boolean existsCustomerID(String customerID) {
+    public static boolean existsCustomerID(String customerID) {
         ArrayList<String> customerIDs = Database.getAllCustomerID();
         return customerIDs.contains(customerID);
-}
-            
-    public boolean validateCustomerID(String customerID) {
-    boolean valid = false;
-    // Check if customerID only contains digits
-    if (customerID.matches("\\d+")) {
-        
-        if (!existsCustomerID(customerID)) {
-            valid = true;
+    }
+
+    public static boolean validateCustomerID(String customerID) {
+        boolean valid = false;
+        // Check if customerID only contains digits
+        if (customerID.matches("\\d+")) {
+
+            if (!existsCustomerID(customerID)) {
+                valid = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Customer ID already exists");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Customer ID already exists");
+            JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
         }
-    } else {
-        JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
+        return valid;
     }
-    return valid;
-    }
-    
-    public boolean validateAddress(String address) {
+
+    public static boolean validateAddress(String address) {
         boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
         return valid;
+    }
+
+    public boolean checkExistingCell(String tableName, String columnName, String keyWord) {
+        boolean exists = false;
+        String query = "SELECT * FROM " + tableName;
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+
+        list = db.fetchRows(false, tableName, columnName, keyWord);
+
+        for (HashMap<String, String> column : list) {
+            for (String key : column.keySet()) {
+                if (key.equals(columnName)) {
+                    if (column.get(key).equals(keyWord)) {
+                        exists = true;
+                    }
+                }
+            }
+        }
+        return exists;
+    }
+
+    public boolean isDouble(String input) {
+        boolean b = false;
+        try {
+            Double.parseDouble(input);
+            b = true;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+
+        }
+        return b;
     }
 }
