@@ -31,24 +31,27 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAddress" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfAddress" max="32767" attributes="0"/>
-                          <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
-                          <Component id="tfName" alignment="0" max="32767" attributes="0"/>
-                          <Component id="tfPhone" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="lblCustomers" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cobCustomers" min="-2" pref="170" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblMandatory" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblAddress" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblName" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfAddress" max="32767" attributes="0"/>
+                              <Component id="tfEmail" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tfName" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tfPhone" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
@@ -61,10 +64,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfAccessories0" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tfAccessories1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="tfAccessories2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfAccessories3" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="tfAccessories3" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="tfAccessories4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           </Group>
@@ -76,10 +79,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblAmount" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="tfAmount3" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="tfAmount2" alignment="0" pref="0" max="32767" attributes="0"/>
                               <Component id="tfAmount1" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfAmount0" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfAmount3" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="tfAmount4" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -93,18 +96,22 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblSize" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfSize1" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="tfSize0" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tfSize4" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="tfSize1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblStar" min="-2" pref="22" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
                   <Component id="tfEstimatedTime" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="80" max="32767" attributes="0"/>
@@ -150,7 +157,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="tfEstimatedTime" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lblAccessories" min="-2" max="-2" attributes="0"/>
@@ -159,22 +166,22 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="tfAmount0" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfAmount1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfAmount2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfAmount3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Component id="tfAmount4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="tfAccessories0" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfAccessories1" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfAccessories2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
                                       <Component id="tfAccessories3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+                                      <Component id="tfAccessories4" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -182,14 +189,17 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="lblSize" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfSize0" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="tfSize1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="tfSize1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblStar" max="32767" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="tfSize2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="tfSize3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="tfSize3" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfSize4" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
@@ -208,7 +218,10 @@
                   </Group>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMandatory" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -267,7 +280,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblDescription">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Beskrivning"/>
+        <Property name="text" type="java.lang.String" value="Beskrivning*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfFabric2">
@@ -283,40 +296,40 @@
         <Property name="text" type="java.lang.String" value="Tyg"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAccessories2">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfAccessories0">
+    <Component class="javax.swing.JTextField" name="tfAccessories3">
     </Component>
     <Component class="javax.swing.JTextField" name="tfAccessories1">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAccessories3">
+    <Component class="javax.swing.JTextField" name="tfAccessories2">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfSize2">
+    <Component class="javax.swing.JTextField" name="tfAccessories4">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfSize0">
+    <Component class="javax.swing.JTextField" name="tfSize3">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfSize1">
     </Component>
     <Component class="javax.swing.JLabel" name="lblSize">
       <Properties>
         <Property name="text" type="java.lang.String" value="Storlek (cm2)"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount2">
-    </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount0">
+    <Component class="javax.swing.JTextField" name="tfAmount3">
     </Component>
     <Component class="javax.swing.JTextField" name="tfAmount1">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfAmount3">
+    <Component class="javax.swing.JTextField" name="tfAmount2">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfSize1">
+    <Component class="javax.swing.JTextField" name="tfAmount4">
     </Component>
-    <Component class="javax.swing.JTextField" name="tfSize3">
+    <Component class="javax.swing.JTextField" name="tfSize2">
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfSize4">
     </Component>
     <Component class="javax.swing.JTextField" name="tfEstimatedTime">
     </Component>
     <Component class="javax.swing.JLabel" name="lblEstimatedTime">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Estimerad tid"/>
+        <Property name="text" type="java.lang.String" value="Estimerad tid*"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAccessories">
@@ -357,6 +370,16 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblStar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="*"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblMandatory">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="* &#xe4;r obligatoriska f&#xe4;lt"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

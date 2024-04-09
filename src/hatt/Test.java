@@ -25,6 +25,7 @@ public class Test {
             ex.printStackTrace();
         }
         new CreateOrderExistingCustomer(idb).setVisible(true);
+        new Database();
     }
     //public void hej då{
         

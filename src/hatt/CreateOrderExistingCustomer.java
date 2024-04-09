@@ -21,14 +21,12 @@ import oru.inf.InfException;
 public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
 private static InfDB idb;
-private Database db;
+
 
     public CreateOrderExistingCustomer(InfDB idb) {
         this.idb = idb;
         initComponents();
         fillCobCustomers();
-        db = new Database();
-
     }
 
     /**
@@ -56,19 +54,19 @@ private Database db;
         tfFabric3 = new javax.swing.JTextField();
         tfFabric1 = new javax.swing.JTextField();
         lblMaterial = new javax.swing.JLabel();
-        tfAccessories2 = new javax.swing.JTextField();
-        tfAccessories0 = new javax.swing.JTextField();
-        tfAccessories1 = new javax.swing.JTextField();
         tfAccessories3 = new javax.swing.JTextField();
-        tfSize2 = new javax.swing.JTextField();
-        tfSize0 = new javax.swing.JTextField();
-        lblSize = new javax.swing.JLabel();
-        tfAmount2 = new javax.swing.JTextField();
-        tfAmount0 = new javax.swing.JTextField();
-        tfAmount1 = new javax.swing.JTextField();
-        tfAmount3 = new javax.swing.JTextField();
-        tfSize1 = new javax.swing.JTextField();
+        tfAccessories1 = new javax.swing.JTextField();
+        tfAccessories2 = new javax.swing.JTextField();
+        tfAccessories4 = new javax.swing.JTextField();
         tfSize3 = new javax.swing.JTextField();
+        tfSize1 = new javax.swing.JTextField();
+        lblSize = new javax.swing.JLabel();
+        tfAmount3 = new javax.swing.JTextField();
+        tfAmount1 = new javax.swing.JTextField();
+        tfAmount2 = new javax.swing.JTextField();
+        tfAmount4 = new javax.swing.JTextField();
+        tfSize2 = new javax.swing.JTextField();
+        tfSize4 = new javax.swing.JTextField();
         tfEstimatedTime = new javax.swing.JTextField();
         lblEstimatedTime = new javax.swing.JLabel();
         lblAccessories = new javax.swing.JLabel();
@@ -77,6 +75,8 @@ private Database db;
         lblCustomers = new javax.swing.JLabel();
         tfDescription = new javax.swing.JTextField();
         btnConfirm = new javax.swing.JButton();
+        lblStar = new javax.swing.JLabel();
+        lblMandatory = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,13 +100,13 @@ private Database db;
 
         lblOrderInfo.setText("Beställningsinfo");
 
-        lblDescription.setText("Beskrivning");
+        lblDescription.setText("Beskrivning*");
 
         lblMaterial.setText("Tyg");
 
         lblSize.setText("Storlek (cm2)");
 
-        lblEstimatedTime.setText("Estimerad tid");
+        lblEstimatedTime.setText("Estimerad tid*");
 
         lblAccessories.setText("Accessoarer");
 
@@ -128,6 +128,10 @@ private Database db;
             }
         });
 
+        lblStar.setText("*");
+
+        lblMandatory.setText("* är obligatoriska fält");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,21 +143,23 @@ private Database db;
                         .addComponent(lblCustomerInfo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPhone)
-                            .addComponent(lblEmail)
-                            .addComponent(lblAddress)
-                            .addComponent(lblName)
-                            .addComponent(tfAddress)
-                            .addComponent(tfEmail)
-                            .addComponent(tfName)
-                            .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
                         .addComponent(lblCustomers))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(cobCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cobCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMandatory)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblPhone)
+                                .addComponent(lblEmail)
+                                .addComponent(lblAddress)
+                                .addComponent(lblName)
+                                .addComponent(tfAddress)
+                                .addComponent(tfEmail)
+                                .addComponent(tfName)
+                                .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblDescription)
@@ -164,10 +170,10 @@ private Database db;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfAccessories0)
                                     .addComponent(tfAccessories1)
                                     .addComponent(tfAccessories2)
-                                    .addComponent(tfAccessories3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tfAccessories3)
+                                    .addComponent(tfAccessories4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblAccessories)
@@ -175,10 +181,10 @@ private Database db;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblAmount)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tfAmount3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addComponent(tfAmount2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                 .addComponent(tfAmount1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount0, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lblMaterial)
@@ -189,15 +195,18 @@ private Database db;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSize)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfSize0, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnConfirm)
-                        .addGap(30, 30, 30)))
+                        .addGap(42, 42, 42)))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -238,7 +247,7 @@ private Database db;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblAccessories)
@@ -246,32 +255,34 @@ private Database db;
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfAmount0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfAmount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(5, 5, 5)
-                                        .addComponent(tfAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(tfAccessories0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(tfAmount4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(tfAccessories1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(tfAccessories2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfAccessories3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(5, 5, 5)
-                                        .addComponent(tfAccessories3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(tfAccessories4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(lblSize)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfSize0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfSize1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tfSize1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblStar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(tfSize2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfSize3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(29, 29, 29))
-                                .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(lblMaterial)
@@ -284,7 +295,9 @@ private Database db;
                                     .addGap(29, 29, 29))
                                 .addComponent(tfFabric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnConfirm)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnConfirm)
+                    .addComponent(lblMandatory))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -336,10 +349,15 @@ private Database db;
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        try{
+        ArrayList<String> fabrics = getFabricsTf();   
+        ArrayList<String> accessories = getAccessoriesTf();  
+        if(Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4) && Validation.doesMaterialExist(fabrics) && Validation.doesMaterialExist(accessories)){
+           
+            try{
+ 
         //Fetches the customer info based on the choice in the combobox
         String customerEmail = getCustomerEmail();
-        String customerID = db.fetchSingle("cid", "customer", "Email", customerEmail);
+        String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
         
         //Fetches the description and time for ordering a hat
         String description = tfDescription.getText();
@@ -360,7 +378,7 @@ private Database db;
         
         //Loops trough the fabrics
         for (String fabricMaterials : fabricSizes.keySet()) {
-            String fabricMid = db.fetchSingle("mid", "materials", "name", fabricMaterials);
+            String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
             String fabricAmount = fabricSizes.get(fabricMaterials);
 
             //Adds the orderID, materialID and the amount to "order_consists_of_materials"
@@ -371,7 +389,7 @@ private Database db;
 
         //Loops trough the accessories
         for (String accessoriesMaterials : accessoriesAmounts.keySet()) {
-            String accessoriesMid = db.fetchSingle("mid", "materials", "name", accessoriesMaterials);
+            String accessoriesMid = Database.fetchSingle("mid", "materials", "name", accessoriesMaterials);
             String accessoriesAmount = accessoriesAmounts.get(accessoriesMaterials);
 
             //Adds the orderID, materialID and the amount to "order_consists_of_materials"
@@ -385,22 +403,22 @@ private Database db;
             JOptionPane.showMessageDialog(null, "Database error!");
             System.out.println("Internal error message!" + ex.getMessage());
         }   
-           
+        }    
     }//GEN-LAST:event_btnConfirmActionPerformed
     
     //Method that fetches the accessories fields and connects them with an amount in a hashMap
     private HashMap<String, String> getAccessoriesWithAmount() {
         ArrayList<JTextField> tfAccessories = new ArrayList<>();
-        tfAccessories.add(tfAccessories0);
         tfAccessories.add(tfAccessories1);
         tfAccessories.add(tfAccessories2);
         tfAccessories.add(tfAccessories3);
+        tfAccessories.add(tfAccessories4);
         
         ArrayList<JTextField> tfAmounts = new ArrayList<>();
-        tfAmounts.add(tfAmount0);
         tfAmounts.add(tfAmount1);
         tfAmounts.add(tfAmount2);
         tfAmounts.add(tfAmount3);
+        tfAmounts.add(tfAmount4);
         
         HashMap<String, String> accessoriesWithAmount = new HashMap<>();
         
@@ -425,10 +443,10 @@ private Database db;
         tfFabrics.add(tfFabric4);
         
         ArrayList<JTextField> tfSizes = new ArrayList<>();
-        tfSizes.add(tfSize0);
         tfSizes.add(tfSize1);
         tfSizes.add(tfSize2);
         tfSizes.add(tfSize3);
+        tfSizes.add(tfSize4);
         
         HashMap<String, String> fabricsWithSize = new HashMap<>();
         
@@ -462,6 +480,41 @@ private Database db;
         }
         
     }
+    
+    private ArrayList<String> getFabricsTf(){
+        ArrayList<String> allFabrics = new ArrayList<>();
+        ArrayList<String> fabricsWithValue = new ArrayList<>();
+        allFabrics.add(tfFabric1.getText());
+        allFabrics.add(tfFabric2.getText());
+        allFabrics.add(tfFabric3.getText());
+        allFabrics.add(tfFabric4.getText());
+        
+        for(String fabric : allFabrics){
+            if(!fabric.isEmpty()){
+                fabricsWithValue.add(fabric);
+            }
+        }
+        
+        return fabricsWithValue;
+    }
+    
+    private ArrayList<String> getAccessoriesTf(){
+        ArrayList<String> accessories = new ArrayList<>();
+        ArrayList<String> accessoriesWithValue = new ArrayList<>();
+        accessories.add(tfAccessories1.getText());
+        accessories.add(tfAccessories2.getText());
+        accessories.add(tfAccessories3.getText());
+        accessories.add(tfAccessories4.getText());
+        
+        for(String accessory : accessories){
+            if(!accessory.isEmpty()){
+                accessoriesWithValue.add(accessory);
+            }
+        }
+        
+        return accessoriesWithValue;
+    }
+            
     
 
     /**
@@ -525,20 +578,22 @@ private Database db;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEstimatedTime;
+    private javax.swing.JLabel lblMandatory;
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderInfo;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JLabel lblSize;
-    private javax.swing.JTextField tfAccessories0;
+    private javax.swing.JLabel lblStar;
     private javax.swing.JTextField tfAccessories1;
     private javax.swing.JTextField tfAccessories2;
     private javax.swing.JTextField tfAccessories3;
+    private javax.swing.JTextField tfAccessories4;
     private javax.swing.JTextField tfAddress;
-    private javax.swing.JTextField tfAmount0;
     private javax.swing.JTextField tfAmount1;
     private javax.swing.JTextField tfAmount2;
     private javax.swing.JTextField tfAmount3;
+    private javax.swing.JTextField tfAmount4;
     private javax.swing.JTextField tfDescription;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfEstimatedTime;
@@ -548,9 +603,9 @@ private Database db;
     private javax.swing.JTextField tfFabric4;
     private javax.swing.JTextField tfName;
     private javax.swing.JTextField tfPhone;
-    private javax.swing.JTextField tfSize0;
     private javax.swing.JTextField tfSize1;
     private javax.swing.JTextField tfSize2;
     private javax.swing.JTextField tfSize3;
+    private javax.swing.JTextField tfSize4;
     // End of variables declaration//GEN-END:variables
 }
