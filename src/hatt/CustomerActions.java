@@ -69,7 +69,7 @@ public void addCustomer(String name, String address, String phone, String email)
                 String values = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
 
                 // Utför infogningen i databasen
-                db.insert("customer" + "(cid, name, address, phone, email)" + values);
+                db.insert("customer", "(cid, name, address, phone, email)", values);
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
                 System.out.println(id + " " + values);
