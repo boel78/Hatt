@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
@@ -61,15 +63,34 @@ public class Validation {
         return valid;
 
     }
-    
-            public static boolean txtHasValue(JTextField txt) {
-            boolean valid = true;
-            if (txt.getText().isEmpty()){
-                valid = false;
-            JOptionPane.showMessageDialog(null,"Var vänlig fyll i alla rutor!");
-            txt.requestFocus();
-            }
-            return valid;
-        }
 
+    public static boolean txtHasValue(JTextField txt) {
+        boolean valid = true;
+        if (txt.getText().isEmpty()) {
+            valid = false;
+            JOptionPane.showMessageDialog(null, "Var vänlig fyll i alla rutor!");
+            txt.requestFocus();
+        }
+        return valid;
+    }
+
+    public boolean checkExistingCell(String tableName, String columnName, String keyWord) {
+        boolean exists = false;
+        String query = "SELECT * FROM " + tableName;
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+
+        for (HashMap<String, String> column : list) {
+            for (String key : column.keySet()) {
+                System.out.println(key);
+                if (key.equals(columnName)) {
+                    System.out.println("Hittade kolumnnamn");
+                    if (column.get(key).equals(keyWord)) {
+                        exists = true;
+                    }
+                }
+            }
+        }
+        System.out.println("Return " + exists);
+        return exists;
+    }
 }
