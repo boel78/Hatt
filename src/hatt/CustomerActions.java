@@ -22,7 +22,7 @@ public class CustomerActions {
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
-    private Database db;
+    private static Database db;
     private static InfDB idb;
     
     
@@ -33,8 +33,8 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.address = address;
         this.phone = phone;
         this.email = email;
+            db = new Database();
         
-        db = new Database();
         
         initializeAddCustomer(customerID, name, address, phone, email);
     }
@@ -42,7 +42,7 @@ public CustomerActions(String customerID, String name, String address, String ph
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
         this.customerID = customerID;
-        db = new Database();
+            db = new Database();
     }
     
     private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
@@ -61,18 +61,21 @@ public void addCustomer(String name, String address, String phone, String email)
 
             // Generera nytt customerID
             String id = db.getAutoIncrement("customer", "cid");
+            System.out.println("id innan inser " + id);
 
             // Kontrollera om id är null innan det används
             if (id != null) {
                 // Förbered värden för infogning i databasen
-                String values = "'" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "'";
+                String values = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
 
                 // Utför infogningen i databasen
-                db.insert("customer", "cid, name, address, phone, email", values);
+                db.insert("customer" + "(cid, name, address, phone, email)" + values);
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
+                System.out.println(id + " " + values);
             } else {
                 JOptionPane.showMessageDialog(null, "Misslyckades att generera CustomerID.");
+                System.out.println(id);
             }
         }
 }
@@ -98,7 +101,8 @@ public void addCustomer(String name, String address, String phone, String email)
         
     
     public HashMap<String, String> getCustomer(String customerID) { 
-        String tableName = "Customer";
+        
+        String tableName = "customer";
         String columnWhere = "cid";
         String columnIdentifier = customerID; // Avgörs i gränsittet.
         HashMap<String, String> customer;
