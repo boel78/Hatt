@@ -102,6 +102,9 @@ public class Navigation extends javax.swing.JFrame {
     
     //Fyller tabbedPane med alla JFrames
     private void loadPane() {
+        
+        RegisterStockedProduct rsp = new RegisterStockedProduct();
+        tbdPane.addTab("Hantera kunder", rsp.getContentPane());
      /* JFrameCustomerActions ca = new JFrameCustomerActions();
         tbdPane.addTab("Hantera kunder", ca.getContentPane());
         
