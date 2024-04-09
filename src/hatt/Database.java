@@ -85,6 +85,23 @@ public class Database {
 
         return list;
     }
+    
+    public static ArrayList<String> fetchColumn(boolean whereBool, String columnName, String tableName, String where, String whereIdentifier) {
+        ArrayList<String> response = new ArrayList<>();
+        String query = "";
+        if (whereBool) {
+                query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
+            } else{
+                query = "SELECT " + columnName + " FROM " + tableName;
+            }
+        try {
+          response = idb.fetchColumn(query);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+        return response;
+    }
 
     // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
     public void insert(String tableName, String columns, String values) {
