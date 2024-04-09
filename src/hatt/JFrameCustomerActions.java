@@ -222,7 +222,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         CustomerActions actions = new CustomerActions(customerID);
 
-        HashMap<String, String> customer = actions.getCustomer(txtCustomerID);
+        HashMap<String, String> customer = actions.getCustomer(customerID);
 
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
