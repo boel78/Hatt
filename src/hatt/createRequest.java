@@ -138,14 +138,8 @@ public class createRequest extends javax.swing.JFrame {
         String nextID = db.getAutoIncrement("requests", "rid");
         int workerID = 1;
         
-        try
-        {
-            idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
-        } 
-        catch (InfException ex)
-        {
-            ex.printStackTrace();
-        }
+        db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
+        
     }//GEN-LAST:event_btnSendActionPerformed
     
     public static String[] getCBHatModels(){
