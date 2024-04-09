@@ -133,7 +133,6 @@ public class createRequest extends javax.swing.JFrame {
         if(Validation.txtHasValue(txtDescription)){
         description = txtDescription.getText();
         hatModel = cbHatModel.getSelectedItem().toString();
-        System.out.print(description);
         
         ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
         String nextID = db.getAutoIncrement("requests", "rid");
@@ -185,7 +184,6 @@ public class createRequest extends javax.swing.JFrame {
         if (j == 0){
         txtDescription.setText("");
         }
-        System.out.println(j);
         j++;
     }//GEN-LAST:event_txtDescriptionFocusGained
 
