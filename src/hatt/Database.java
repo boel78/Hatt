@@ -69,25 +69,22 @@ public class Database {
         return response;    
     }
     
+    //whereBool ska vara true om man vill ha med WHERE eller false om man inte vill
     //columnName är kolumnnamnet på kolumnen du vill hämta ifrån
     //tableName är tabellnamnet
-    //withWhereStatement ska vara true om man vill ha med WHERE eller false om man inte vill
     //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
-    //whereIdentifierIsString ska vara true om identifieraren är en String/varchar annars false
-    public static ArrayList<String> fetchColumn(String columnName, String tableName, boolean withWhereStatement, String where, String whereIdentifier, boolean whereIdentifierIsString) {
+    //Om whereIdentifier är varchar skriv med ' ' i parametern
+    public static ArrayList<String> fetchColumn(boolean whereBool, String columnName, String tableName, String where, String whereIdentifier) {
         ArrayList<String> response = new ArrayList<String>();
 
-        String whereAndStringQuery = "SELECT " + columnName + " FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
-        String whereNotStringQuery = "SELECT " + columnName + " FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
-        String noWhereQuery = "SELECT " + columnName + " FROM " + tableName;
-        try {
-            if (withWhereStatement && whereIdentifierIsString) {
-                response = idb.fetchColumn(whereAndStringQuery);
-            } else if (withWhereStatement && !whereIdentifierIsString) {
-                response = idb.fetchColumn(whereNotStringQuery);
-            } else {
-                response = idb.fetchColumn(noWhereQuery);
+        String query = "";
+        if (whereBool) {
+                query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
+            } else{
+                query = "SELECT " + columnName + " FROM " + tableName;
             }
+        try {
+          response = idb.fetchColumn(query);
 
         } catch (InfException ex) {
             ex.printStackTrace();
@@ -95,4 +92,5 @@ public class Database {
 
         return response;
     }
+    
 }

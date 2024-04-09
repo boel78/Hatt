@@ -51,7 +51,7 @@ public class Validation {
     public static boolean doesMaterialExist(JTextField tf){
         boolean exists = false;
         String tfString = tf.getText();
-        ArrayList<String> materials = Database.fetchColumn("name", "materials", false, "", "", false);
+        ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "","");
         
         for(String name : materials){
             if(name.equalsIgnoreCase(tfString)){
