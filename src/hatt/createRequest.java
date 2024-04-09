@@ -16,7 +16,6 @@ public class createRequest extends javax.swing.JFrame {
     
     public createRequest() {
         initComponents();
-        
     }
 
     /**
@@ -126,15 +125,17 @@ public class createRequest extends javax.swing.JFrame {
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         // TODO add your handling code here:
         
+        Database db = new Database();
         description = txtDescription.getText();
         hatModel = cbHatModel.getSelectedItem().toString();
         System.out.print(description);
+        
+        ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
         
         try
         {
             int workerID = 1;
             String nextID = idb.getAutoIncrement("requests", "rid");
-            ID = idb.fetchSingle("SELECT cid FROM customer WHERE name LIKE '" + cbCustomer.getSelectedItem().toString() + "'");
             idb.insert("INSERT INTO requests VALUES (" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
         } 
         catch (InfException ex)
@@ -163,6 +164,7 @@ public class createRequest extends javax.swing.JFrame {
     
     public static String[] getCBCustomer(){
         ArrayList<String> CBAL = new ArrayList<>();
+        
         
         try{
             CBAL = idb.fetchColumn("SELECT name FROM customer");
