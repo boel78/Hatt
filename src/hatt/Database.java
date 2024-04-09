@@ -86,6 +86,11 @@ public class Database {
         return list;
     }
     
+    //whereBool ska vara true om man vill ha med WHERE eller false om man inte vill
+    //columnName är kolumnnamnet på kolumnen du vill hämta ifrån
+    //tableName är tabellnamnet
+    //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
+    //Om whereIdentifier är varchar skriv med ' ' i parametern
     public static ArrayList<String> fetchColumn(boolean whereBool, String columnName, String tableName, String where, String whereIdentifier) {
         ArrayList<String> response = new ArrayList<>();
         String query = "";
