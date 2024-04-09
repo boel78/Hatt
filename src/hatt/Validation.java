@@ -133,9 +133,8 @@ public class Validation {
     
      //SKA IN I MAIN BRANCHEN
     //Kollar om material finns 
-    public static boolean doesMaterialExist(ArrayList<String> list) {
+    public static boolean doesMaterialExist(ArrayList<String> list) {    
         boolean exists = false;
-
         ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "", "");
         for (String tf : list) {
             for (String name : materials) {
@@ -150,6 +149,35 @@ public class Validation {
         }
         return exists;
     }
+    
+    //Kollar om accessoar arraylisten är tom och då söker den inte mot databasens material då en hatt inte måste ha en accessoar
+        public static boolean doesAccessoriesExist(ArrayList<String> accessories) {
+        boolean accessoriesNotEmpty = false;
+        boolean accessoryExists = true;
+        for (String accessory : accessories) {
+            if (!accessory.isEmpty()) {
+                accessoriesNotEmpty = true;
+                break; 
+            }
+        }
+        if (accessoriesNotEmpty) {
+            if(!doesMaterialExist(accessories)){
+                accessoryExists = false;       
+        }
+    }
+        return accessoryExists;
+    }
+    
+     //Kollar om fabric finns i databasen med hjälp av doesMaterialExist
+    public static boolean doesFabricsExist(ArrayList<String> fabrics) {
+       boolean exists = false;
+       if(doesMaterialExist(fabrics)){
+           exists = true;
+       }
+       return exists;
+    }
+    
+    
     
     //SKA IN I MAIN BRANCHEN
     //Validerar två fält och om någon utav de är tomma så kommer errormeddelande för createOrder

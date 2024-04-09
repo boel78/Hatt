@@ -162,52 +162,56 @@ private static InfDB idb;
                                 .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblDescription)
-                    .addComponent(lblOrderInfo)
-                    .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEstimatedTime)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(lblOrderInfo)
+                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblEstimatedTime)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(tfAccessories1)
+                                            .addComponent(tfAccessories2)
+                                            .addComponent(tfAccessories3)
+                                            .addComponent(tfAccessories4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblAccessories)
+                                        .addGap(60, 60, 60)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAmount)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(tfAmount3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(tfAmount2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(tfAmount1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tfAccessories1)
-                                    .addComponent(tfAccessories2)
-                                    .addComponent(tfAccessories3)
-                                    .addComponent(tfAccessories4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAccessories)
-                                .addGap(60, 60, 60)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAmount)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(tfAmount3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblMaterial)
-                            .addComponent(tfFabric1)
-                            .addComponent(tfFabric2)
-                            .addComponent(tfFabric3)
-                            .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSize)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                    .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnConfirm)
-                        .addGap(42, 42, 42)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                                    .addComponent(lblMaterial)
+                                    .addComponent(tfFabric1)
+                                    .addComponent(tfFabric2)
+                                    .addComponent(tfFabric3)
+                                    .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblSize)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                            .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                            .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                            .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnConfirm)
+                                .addGap(42, 42, 42)))
+                        .addContainerGap(80, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDescription)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,58 +355,60 @@ private static InfDB idb;
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         ArrayList<String> fabrics = getFabricsTf();   
         ArrayList<String> accessories = getAccessoriesTf();  
-        if(Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4) && Validation.doesMaterialExist(fabrics) && Validation.doesMaterialExist(accessories)){
+        if(Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)){
            
+        if (Validation.doesFabricsExist(fabrics) && Validation.doesAccessoriesExist(accessories)) {
             try{
- 
-        //Fetches the customer info based on the choice in the combobox
-        String customerEmail = getCustomerEmail();
-        String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
-        
-        //Fetches the description and time for ordering a hat
-        String description = tfDescription.getText();
-        double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
-        
-        //Creates a new orderID
-        //Ska in i databasen
-        String orderId = idb.getAutoIncrement("xOrder", "oid");
-       
-        //Creates the order
-        //Ska in i databasen
-        String query = "INSERT INTO xorder VALUES (" + orderId + ",'" + description + "'," + estimatedTime + ", 1," + customerID + ")";
-        idb.insert(query);
-        
-        //Fetches the fabrics and accessories 
-        HashMap <String, String> accessoriesAmounts = getAccessoriesWithAmount();
-        HashMap <String, String> fabricSizes = getFabricsWithSize();
-        
-        //Loops trough the fabrics
-        for (String fabricMaterials : fabricSizes.keySet()) {
-            String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
-            String fabricAmount = fabricSizes.get(fabricMaterials);
-
-            //Adds the orderID, materialID and the amount to "order_consists_of_materials"
-            //Ska in i databasen
-            String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + fabricMid + "," + fabricAmount + ")";
-            idb.insert(query3);
+                
+                //Fetches the customer info based on the choice in the combobox
+                String customerEmail = getCustomerEmail();
+                String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
+                
+                //Fetches the description and time for ordering a hat
+                String description = tfDescription.getText();
+                double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
+                
+                //Creates a new orderID
+                //Ska in i databasen
+                String orderId = idb.getAutoIncrement("xOrder", "oid");
+                
+                //Creates the order
+                //Ska in i databasen
+                String query = "INSERT INTO xorder VALUES (" + orderId + ",'" + description + "'," + estimatedTime + ", 1," + customerID + ")";
+                idb.insert(query);
+                
+                //Fetches the fabrics and accessories
+                HashMap <String, String> accessoriesAmounts = getAccessoriesWithAmount();
+                HashMap <String, String> fabricSizes = getFabricsWithSize();
+                
+                //Loops trough the fabrics
+                for (String fabricMaterials : fabricSizes.keySet()) {
+                    String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
+                    String fabricAmount = fabricSizes.get(fabricMaterials);
+                    
+                    //Adds the orderID, materialID and the amount to "order_consists_of_materials"
+                    //Ska in i databasen
+                    String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + fabricMid + "," + fabricAmount + ")";
+                    idb.insert(query3);
+                }
+                
+                //Loops trough the accessories
+                for (String accessoriesMaterials : accessoriesAmounts.keySet()) {
+                    String accessoriesMid = Database.fetchSingle("mid", "materials", "name", accessoriesMaterials);
+                    String accessoriesAmount = accessoriesAmounts.get(accessoriesMaterials);
+                    
+                    //Adds the orderID, materialID and the amount to "order_consists_of_materials"
+                    //Ska in i databasen
+                    String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + accessoriesMid + "," + accessoriesAmount + ")";
+                    idb.insert(query3);
+                }
+            }
+            
+            catch(InfException ex){
+                JOptionPane.showMessageDialog(null, "Database error!");
+                System.out.println("Internal error message!" + ex.getMessage());
+            }
         }
-
-        //Loops trough the accessories
-        for (String accessoriesMaterials : accessoriesAmounts.keySet()) {
-            String accessoriesMid = Database.fetchSingle("mid", "materials", "name", accessoriesMaterials);
-            String accessoriesAmount = accessoriesAmounts.get(accessoriesMaterials);
-
-            //Adds the orderID, materialID and the amount to "order_consists_of_materials"
-            //Ska in i databasen
-            String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + accessoriesMid + "," + accessoriesAmount + ")";
-            idb.insert(query3);
-        }
-        }                     
-     
-       catch(InfException ex){
-            JOptionPane.showMessageDialog(null, "Database error!");
-            System.out.println("Internal error message!" + ex.getMessage());
-        }   
         }    
     }//GEN-LAST:event_btnConfirmActionPerformed
     
@@ -480,6 +486,7 @@ private static InfDB idb;
         }
         
     }
+    
     
     private ArrayList<String> getFabricsTf(){
         ArrayList<String> allFabrics = new ArrayList<>();
