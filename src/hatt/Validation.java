@@ -132,26 +132,113 @@ public class Validation {
     }
     
      //SKA IN I MAIN BRANCHEN
-    public static boolean doesMaterialExist(JTextField tf){
+    //Kollar om material finns 
+    public static boolean doesMaterialExist(ArrayList<String> list) {
         boolean exists = false;
-        String tfString = tf.getText();
-        ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "","");
-        
-        for(String name : materials){
-            if(name.equalsIgnoreCase(tfString)){
-                exists = true;
+
+       /* for (String tf : list) {
+            if (tf.isEmpty()) {
+                list.remove(tf);
             }
         }
-
+*/
+        ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "", "");
+        for (String tf : list) {
+            for (String name : materials) {
+                if (name.equalsIgnoreCase(tf)) {
+                    exists = true;
+                    break;
+                }
+            }
+        }
+        if (!exists) {
+            JOptionPane.showMessageDialog(null, "Vänligen skriv in ett existerande material!");
+        }
         return exists;
     }
     
     //SKA IN I MAIN BRANCHEN
-    public static boolean hasValueNoError(String tf){
+    //Validerar två fält och om någon utav de är tomma så kommer errormeddelande för createOrder
+    public static boolean hasValueTwoFields(JTextField tf1, JTextField tf2) {
+
         boolean hasValue = true;
-        if (tf.isEmpty()){
+        if (!tf1.getText().isEmpty() && tf2.getText().isEmpty()) {
             hasValue = false;
-        }                
-       return hasValue;
+            JOptionPane.showMessageDialog(null, "OBS alla inskrivna accessoarer/tyger måste ha antal/storlek!");
+        } else if (tf1.getText().isEmpty() && !tf2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "OBS alla inskrivna accessoarer/tyger måste ha antal/storlek!");
+            hasValue = false;
+        }
+        return hasValue;
     }
+    
+    //Validerar fält i createOrder då vissa fält kan vara tomma
+    public static boolean hasValueMandatory(JTextField tf){
+        boolean hasValue = true;
+        if(tf.getText().isEmpty()){
+            hasValue = false;
+            JOptionPane.showMessageDialog(null, "Vänligen fyll i obligatoriska rutor!");
+        }
+               
+        return hasValue;
+    }
+    
+    //Validerar fältet för description i createOrder
+    public static boolean validateDescription(JTextField tf){
+        boolean correctLength = true;
+        if(tf.getText().length()>50){
+            correctLength = false;
+            JOptionPane.showMessageDialog(null, "Vänligen ange max 50 tecken!");
+        }
+        return correctLength;
+    }
+    
+    //Validerar fältet för estimated time i createOrder
+    public static boolean validateEstimatedTime(JTextField tf){
+        boolean b = false;
+        try {
+            Double.parseDouble(tf.getText());
+            b = true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Vänligen ange ett tal. Vid decimaler använd . för att skilja");
+
+        }
+        return b;
+    }
+    //Kollar om det man skriver in är ett tyg
+    //Kan gå att göra till en gemensam med isMaterialAccessories
+    public static boolean isMaterialFabric(JTextField tf){
+        
+        boolean isFabric = false;
+        ArrayList<String> fabrics = Database.fetchColumn(true, "name", "materials", "mid","IN (SELECT mid FROM fabric)");
+        for(String name : fabrics){
+            if(name.equalsIgnoreCase(tf.getText())){
+                isFabric = true;
+                break;
+            }
+        }
+        if(!isFabric){
+                JOptionPane.showMessageDialog(null, "Vänligen skriv in ett tyg");
+            }
+        return isFabric;
+    }
+    
+    //Kollar om det man skriver in är en accessoar
+    //Kan gå att göra till en gemensam med isMaterialFabric
+    public static boolean isMaterialAccesories(JTextField tf){
+        
+        boolean isAccessory = false;
+        ArrayList<String> accessories = Database.fetchColumn(true, "name", "materials", "mid","IN (SELECT mid FROM accessories)");
+        for(String name : accessories){
+            if(name.equalsIgnoreCase(tf.getText())){
+                isAccessory = true;
+                break;
+            }
+        }
+        if(!isAccessory){
+            JOptionPane.showMessageDialog(null, "Vänligen skriv in en accessoar");
+        }
+        return isAccessory;
+    }
+
 }
