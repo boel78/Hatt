@@ -79,23 +79,34 @@ public class Validation {
         String query = "SELECT * FROM " + tableName;
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
 
+        list = db.fetchRows(false, tableName, columnName, keyWord);
+
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
-                System.out.println(key);
                 if (key.equals(columnName)) {
-                    System.out.println("Hittade kolumnnamn");
                     if (column.get(key).equals(keyWord)) {
                         exists = true;
                     }
                 }
             }
         }
-        System.out.println("Return " + exists);
         return exists;
+    }
+    
+    public boolean isDouble(String input){
+        boolean b = false; 
+        try{
+            Double.parseDouble(input);
+            b = true;
+        } catch(NumberFormatException e) {
+            e.printStackTrace();
+            
+        }
+        return b;
     }
 }
 
-    /*public boolean validateCustomerID(String customerID) {
+/*public boolean validateCustomerID(String customerID) {
     boolean valid = false;
     // Check if customerID only contains digits
     if (customerID.matches("\\d+")) {

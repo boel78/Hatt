@@ -4,6 +4,7 @@
  */
 package hatt;
 
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -14,12 +15,14 @@ import oru.inf.InfException;
 public class RegisterStockedProduct extends javax.swing.JFrame {
 
     private InfDB idb;
+    private Validation validation;
 
     /**
      * Creates new form LagerforaModell
      */
     public RegisterStockedProduct() {
         initComponents();
+        validation = new Validation();
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -47,9 +50,9 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtName.setText("jTextField1");
+        txtName.setColumns(10);
 
-        txtStartingprice.setText("jTextField3");
+        txtStartingprice.setColumns(10);
 
         btnStock.setText("Lagerför");
         btnStock.addActionListener(new java.awt.event.ActionListener() {
@@ -58,7 +61,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
             }
         });
 
-        txtDescription.setText("jTextField3");
+        txtDescription.setColumns(10);
 
         lblTitle.setText("Lagerför en ny modell");
 
@@ -94,7 +97,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(btnStock)))
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,12 +136,21 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
         String name = txtName.getText();
         String description = txtDescription.getText();
         String startingPrice = txtStartingprice.getText();
-        String query = "INSERT INTO stocked_product(sid, name, description, starting_price) VALUES(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")";
-        try{
-        idb.insert(query);
-        }
-        catch(InfException ex){
-            ex.printStackTrace();
+        if (!validation.checkExistingCell("stocked_product", "name", name)) {
+            if (validation.isDouble(startingPrice)) {
+                String query = "INSERT INTO stocked_product(sid, name, description, starting_price) VALUES(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")";
+                try {
+                    idb.insert(query);
+                    JOptionPane.showMessageDialog(null, "Produkten har lagts till.");
+
+                } catch (InfException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Priset får bara bestå av siffror.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Produkten finns redan i systemet.");
         }
     }//GEN-LAST:event_btnStockActionPerformed
 
