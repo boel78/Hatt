@@ -112,6 +112,7 @@ public class Database {
     // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
     public static void insert(String tableName, String columns, String values) {
         String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+        System.out.println("query: " + query);
         try {
             idb.insert(query);
             System.out.println("Insert succesful");

@@ -257,12 +257,12 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
+        
 
         if (Validation.txtHasValue(txtCustomerID) && Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
             CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
 
-            actions.addCustomer(customerID, name, address, phone, email);
-            JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
+            actions.addCustomer(name, address, phone, email);
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
