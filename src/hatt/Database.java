@@ -69,4 +69,34 @@ public class Database {
         return response;
     }
 
+    public ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+        String query = "";
+        if (whereBool) {
+            query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
+        } else {
+            query = "SELECT * FROM " + tableName;
+        }
+        try {
+            list = idb.fetchRows(query);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+        return list;
+    }
+
+    // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
+    public void insert(String tableName, String columns, String values) {
+        String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+        try {
+            idb.insert(query);
+            System.out.println("Insert succesful");
+
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
 }
