@@ -104,7 +104,7 @@ public class Navigation extends javax.swing.JFrame {
     private void loadPane() {
         
         RegisterStockedProduct rsp = new RegisterStockedProduct();
-        tbdPane.addTab("Hantera kunder", rsp.getContentPane());
+        tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
      /* JFrameCustomerActions ca = new JFrameCustomerActions();
         tbdPane.addTab("Hantera kunder", ca.getContentPane());
         
