@@ -69,4 +69,21 @@ public class Database {
         return response;
     }
 
+    public ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+        String query = "";
+        if (whereBool) {
+            query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
+        } else {
+            query = "SELECT * FROM " + tableName;
+        }
+        try {
+            list = idb.fetchRows(query);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+        return list;
+    }
+
 }
