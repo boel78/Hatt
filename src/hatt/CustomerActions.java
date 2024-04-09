@@ -21,7 +21,7 @@ public class CustomerActions {
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
-    
+    private Database db;
     private static InfDB idb;
     
     
@@ -33,7 +33,7 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.phone = phone;
         this.email = email;
         
-        Database db = new Database();
+        db = new Database();
         
         initializeAddCustomer(customerID, name, address, phone, email);
     }
@@ -41,7 +41,7 @@ public CustomerActions(String customerID, String name, String address, String ph
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
         this.customerID = customerID;
-        Database db = new Database();
+        db = new Database();
     }
     
     private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
