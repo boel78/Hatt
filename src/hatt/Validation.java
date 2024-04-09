@@ -47,31 +47,6 @@ public class Validation {
         }
         return valid;
     }
-    
-    //SKA IN I MAIN BRANCHEN
-    public static boolean doesMaterialExist(JTextField tf){
-        boolean exists = false;
-        String tfString = tf.getText();
-        ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "","");
-        
-        for(String name : materials){
-            if(name.equalsIgnoreCase(tfString)){
-                exists = true;
-            }
-        }
-
-        return exists;
-    }
-    
-    //SKA IN I MAIN BRANCHEN
-    public static boolean hasValueNoError(String tf){
-        boolean hasValue = true;
-        if (tf.isEmpty()){
-            hasValue = false;
-        }                
-       return hasValue;
-    }
-
 
     public static boolean validatePhone(String phone) {
         boolean valid = false;
@@ -154,5 +129,29 @@ public class Validation {
 
         }
         return b;
+    }
+    
+     //SKA IN I MAIN BRANCHEN
+    public static boolean doesMaterialExist(JTextField tf){
+        boolean exists = false;
+        String tfString = tf.getText();
+        ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "","");
+        
+        for(String name : materials){
+            if(name.equalsIgnoreCase(tfString)){
+                exists = true;
+            }
+        }
+
+        return exists;
+    }
+    
+    //SKA IN I MAIN BRANCHEN
+    public static boolean hasValueNoError(String tf){
+        boolean hasValue = true;
+        if (tf.isEmpty()){
+            hasValue = false;
+        }                
+       return hasValue;
     }
 }

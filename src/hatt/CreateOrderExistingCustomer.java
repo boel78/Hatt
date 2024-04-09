@@ -295,29 +295,14 @@ private Database db;
     private String getCustomerEmail(){
         return cobCustomers.getSelectedItem().toString();     
     }
-    
-    private void fillCustomerInfo(){
-                
-        String customerEmail = getCustomerEmail();
-        
-      /*String name = db.fetchSingle("name", "customer", "Email", customerEmail);
-        String address = db.fetchSingle("address", "customer", "Email", customerEmail);
-        String phone = db.fetchSingle("phone", "customer", "Email", customerEmail);
-                
-            tfName.setText(name);
-            tfAddress.setText(address);
-            tfPhone.setText(phone);
-            tfEmail.setText(customerEmail);
-        */
-    }
             
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
 
-        fillCustomerInfo();
+   
         //Fills the textfields with information about the chosen customer
         String customerEmail = getCustomerEmail();
        
-     /*  String name = db.fetchSingle("name", "customer", "Email", customerEmail);
+       /* String name = db.fetchSingle("name", "customer", "Email", customerEmail);
         String address = db.fetchSingle("address", "customer", "Email", customerEmail);
         String phone = db.fetchSingle("phone", "customer", "Email", customerEmail);
                 
@@ -325,7 +310,7 @@ private Database db;
             tfAddress.setText(address);
             tfPhone.setText(phone);
             tfEmail.setText(customerEmail);
-        */
+      */  
      
      //GÅR INTE ATT ANVÄNDA DATABASKLASSENS FETCHSINGLE!!!!!!
        try {
