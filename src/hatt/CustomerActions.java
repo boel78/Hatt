@@ -5,6 +5,7 @@
 package hatt;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfException;
 import oru.inf.InfDB;
 
@@ -48,29 +49,34 @@ public CustomerActions(String customerID, String name, String address, String ph
         
         
         
-        addCustomer(customerID, name, address, phone, email);
+        addCustomer(name, address, phone, email);
     }
     
-    public void addCustomer(String customerID, String name, String address, String phone, String email) {
-        Validation validation = new Validation();
-        this.customerID = customerID;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
+public void addCustomer(String name, String address, String phone, String email) {
+    Validation validation = new Validation();
 
-        try {
-        String id = idb.getAutoIncrement("customer","cid");
-        if (validation.validateCustomerID(customerID) && (validation.validateName(name)) && (validation.validateAddress(address)) && (validation.validateEmailTypo(email)) && (validation.validatePhone(phone))){
-        String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
-        idb.insert(fraga);
-        
+
+        if (validation.validateName(name) && validation.validateAddress(address) &&
+            validation.validateEmailTypo(email) && validation.validatePhone(phone)) {
+
+            // Generera nytt customerID
+            String id = db.getAutoIncrement("customer", "cid");
+
+            // Kontrollera om id är null innan det används
+            if (id != null) {
+                // Förbered värden för infogning i databasen
+                String values = "'" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "'";
+
+                // Utför infogningen i databasen
+                db.insert("customer", "cid, name, address, phone, email", values);
+
+                JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Misslyckades att generera CustomerID.");
             }
         }
-        catch (InfException ex){
-            ex.printStackTrace();
-        }
-    }
+}
+
         
     public void updateCustomer(){
       System.out.println("Kund updaterad");  
