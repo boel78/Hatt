@@ -210,13 +210,14 @@ public class Validation {
         boolean correctLength = true;
         if(tf.getText().length()>50){
             correctLength = false;
-            JOptionPane.showMessageDialog(null, "Vänligen ange max 50 tecken!");
+            JOptionPane.showMessageDialog(null, "Beskrivning kan max ha 50 tecken!");
         }
         return correctLength;
     }
     
     //Validerar fältet för estimated time i createOrder
-    public static boolean validateEstimatedTime(JTextField tf){
+    //Kan ersättas av isDouble metoden men då måste det komma upp ett felmeddelande som här
+    public static boolean isDoubleErrorMessage(JTextField tf){
         boolean b = false;
         try {
             Double.parseDouble(tf.getText());
@@ -226,6 +227,17 @@ public class Validation {
 
         }
         return b;
+    }
+    
+    public static boolean isDoubleIfNotEmpty(JTextField tf){
+        boolean isEmpty = false;
+        
+        if(tf.getText().isEmpty()){
+            isEmpty = true;
+        }else if (isDoubleErrorMessage(tf)) {
+            isEmpty = true;
+        }
+            return isEmpty;
     }
     //Kollar om det man skriver in är ett tyg
     //Kan gå att göra till en gemensam med isMaterialAccessories

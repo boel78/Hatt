@@ -356,8 +356,7 @@ private static InfDB idb;
         ArrayList<String> fabrics = getFabricsTf();   
         ArrayList<String> accessories = getAccessoriesTf();  
         if(Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)){
-           
-        if (Validation.doesFabricsExist(fabrics) && Validation.doesAccessoriesExist(accessories)) {
+        if (Validation.doesFabricsExist(fabrics) && Validation.doesAccessoriesExist(accessories) && Validation.isDoubleErrorMessage(tfEstimatedTime) && Validation.validateDescription(tfDescription) && Validation.isDoubleIfNotEmpty(tfAmount1) && Validation.isDoubleIfNotEmpty(tfAmount2) && Validation.isDoubleIfNotEmpty(tfAmount3) && Validation.isDoubleIfNotEmpty(tfAmount4) && Validation.isDoubleIfNotEmpty(tfSize1) && Validation.isDoubleIfNotEmpty(tfSize2) && Validation.isDoubleIfNotEmpty(tfSize3) && Validation.isDoubleIfNotEmpty(tfSize4)) {
             try{
                 
                 //Fetches the customer info based on the choice in the combobox
@@ -408,6 +407,7 @@ private static InfDB idb;
                 JOptionPane.showMessageDialog(null, "Database error!");
                 System.out.println("Internal error message!" + ex.getMessage());
             }
+            JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
         }
         }    
     }//GEN-LAST:event_btnConfirmActionPerformed

@@ -56,72 +56,67 @@
               </Group>
               <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblOrderInfo" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfDescription" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                          <Component id="lblEstimatedTime" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tfAccessories1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfAccessories2" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfAccessories3" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="tfAccessories4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                      <Component id="lblOrderInfo" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfDescription" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
+                      <Component id="lblEstimatedTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="tfAccessories1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfAccessories2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfAccessories3" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="tfAccessories4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblAccessories" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                  </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblAmount" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="tfAmount3" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="tfAmount2" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="tfAmount1" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="tfAmount4" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfFabric1" max="32767" attributes="0"/>
-                                  <Component id="tfFabric2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfFabric3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfFabric4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblSize" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="tfSize4" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfSize1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblStar" min="-2" pref="22" max="-2" attributes="0"/>
-                                  </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lblAccessories" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="tfEstimatedTime" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblAmount" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="tfAmount3" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="tfAmount2" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="tfAmount1" alignment="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="tfAmount4" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lblMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfFabric1" max="32767" attributes="0"/>
+                              <Component id="tfFabric2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tfFabric3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="tfFabric4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lblSize" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="tfSize4" alignment="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="tfSize1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="lblStar" min="-2" pref="22" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="80" max="32767" attributes="0"/>
+                      <Component id="tfEstimatedTime" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="btnConfirm" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="lblDescription" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
