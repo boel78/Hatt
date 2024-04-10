@@ -147,4 +147,13 @@ public class Database {
             
         }
     }
+    
+    public void updatePreparedQuery(String preparedQuery){
+        try {
+            idb.update(preparedQuery);
+            System.out.println("Update lyckad");
+        }   catch(InfException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
