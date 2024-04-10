@@ -1,12 +1,12 @@
 package hatt;
+
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-
-
 public class createRequest extends javax.swing.JFrame {
-    
+
     private int i = 0;
     private int j = 0;
     private String[] cbHatModels;
@@ -15,7 +15,7 @@ public class createRequest extends javax.swing.JFrame {
     private String ID;
     private boolean createOrder;
     private static InfDB idb;
-    
+
     public createRequest() {
         initComponents();
     }
@@ -128,55 +128,54 @@ public class createRequest extends javax.swing.JFrame {
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         // TODO add your handling code here:
-        
+
         Database db = new Database();
-        if(Validation.txtHasValue(txtDescription)){
-        description = txtDescription.getText();
-        hatModel = cbHatModel.getSelectedItem().toString();
-        
-        ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
-        String nextID = db.getAutoIncrement("requests", "rid");
-        int workerID = 1;
-        
-        db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', "+ workerID + ",  'N', 'N'," + ID + ")");
+        if (Validation.txtHasValue(txtDescription)) {
+            description = txtDescription.getText();
+            hatModel = cbHatModel.getSelectedItem().toString();
+
+            ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
+            String nextID = db.getAutoIncrement("requests", "rid");
+            int workerID = 1;
+
+            if (description.length() <= 100) {
+                db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + workerID + ",  'N', 'N'," + ID + ")");
+                JOptionPane.showMessageDialog(null, "Förfrågningen är inlagd i systemet.");
+            } else {
+                JOptionPane.showMessageDialog(null, "Var god och fyll i en beskrivning som är kortare än 100 bokstäver.");
+            }
         }
     }//GEN-LAST:event_btnSendActionPerformed
-    
-    public static String[] getCBHatModels(){
+
+    public static String[] getCBHatModels() {
         Database db = new Database();
         ArrayList<String> CBAL = new ArrayList<>();
         CBAL = db.fetchColumn(false, "Name", "stocked_product", "", "");
         CBAL.add("Nej");
-        
-        
-        
+
         String[] CBHatModelsx = new String[CBAL.size()];
         CBAL.toArray(CBHatModelsx);
-        
-        
+
         return CBHatModelsx;
     }
-    
-    public static String[] getCBCustomer(){
+
+    public static String[] getCBCustomer() {
         Database db = new Database();
         ArrayList<String> CBAL = new ArrayList<>();
-        
+
         CBAL = db.fetchColumn(false, "name", "customer", "", "");
-        
-        
-        
+
         String[] CBCustomer = new String[CBAL.size()];
         CBAL.toArray(CBCustomer);
-        
-        
+
         return CBCustomer;
     }
-    
+
     private void txtDescriptionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDescriptionFocusGained
         // TODO add your handling code here:
-        
-        if (j == 0){
-        txtDescription.setText("");
+
+        if (j == 0) {
+            txtDescription.setText("");
         }
         j++;
     }//GEN-LAST:event_txtDescriptionFocusGained
@@ -213,8 +212,7 @@ public class createRequest extends javax.swing.JFrame {
         //</editor-fold>
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        }
-        catch(InfException ex){
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
         /* Create and display the form */
