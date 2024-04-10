@@ -131,10 +131,20 @@ public class Database {
             id = idb.getAutoIncrement(tableName, columnName);
         } catch (InfException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att lägga till en ny kund.");
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att generera nytt id.");
         }
 
         return id;
     }
-
+    
+    public void deleteRow(String tableName, String where, String whereIdentifier) {
+        try {
+            String query = "DELETE FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
+            idb.delete(query);
+            System.out.println("Row deleted successfully");
+        } catch (InfException ex) {
+            ex.printStackTrace();
+            // felmeddelande
+        }
+    }
 }
