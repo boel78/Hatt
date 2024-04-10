@@ -271,17 +271,18 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     
     CustomerActions actions = new CustomerActions(customerID);
     
-    if(actions.removeCustomer(customerID))  {
+    if(Validation.txtHasValue(txtCustomerID) && Validation.existsCustomerID(customerID))    {
+        if(actions.removeCustomer(customerID))  {
     
-        txtCustomerID.setText("");
-        txtName.setText("");
-        txtAddress.setText("");
-        txtPhone.setText("");
-        txtEmail.setText("");
-        } else {
-        JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
+            txtCustomerID.setText("");
+            txtName.setText("");
+            txtAddress.setText("");
+            txtPhone.setText("");
+            txtEmail.setText("");
+            } else {
+            JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
+            }
         }
-    
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     /**
