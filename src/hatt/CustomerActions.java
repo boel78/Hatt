@@ -70,8 +70,8 @@ public void addCustomer(String name, String address, String phone, String email)
 }
 
         
-    public void updateCustomer(){
-      System.out.println("Kund updaterad");  
+    public void updateCustomer(String customerID, String name, String address, String phone, String email){
+      
     }
     
     
