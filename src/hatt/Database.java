@@ -47,6 +47,7 @@ public class Database {
     public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
+        System.out.println(query);
         try {
             response = idb.fetchSingle(query);
         } catch (InfException ex) {
@@ -112,6 +113,7 @@ public class Database {
     // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
     public static void insert(String tableName, String columns, String values) {
         String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+        System.out.println("query: " + query);
         try {
             idb.insert(query);
             System.out.println("Insert succesful");
@@ -131,10 +133,29 @@ public class Database {
             id = idb.getAutoIncrement(tableName, columnName);
         } catch (InfException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att lägga till en ny kund.");
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att generera nytt id.");
         }
 
         return id;
     }
-
+    
+    public void deleteRow(String tableName, String where, String whereIdentifier) {
+        try {
+            String query = "DELETE FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
+            idb.delete(query);
+            System.out.println("Row deleted successfully");
+        } catch (InfException ex) {
+            ex.printStackTrace();
+            
+        }
+    }
+    
+    public void updatePreparedQuery(String preparedQuery){
+        try {
+            idb.update(preparedQuery);
+            System.out.println("Update lyckad");
+        }   catch(InfException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

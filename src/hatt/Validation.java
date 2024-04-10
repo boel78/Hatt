@@ -24,7 +24,8 @@ public class Validation {
 
     public boolean validateName(String name) {
         boolean valid = false;
-        if (name.matches("[a-zA-Z ]+")) {
+        if (name.matches("[a-zA-ZåäöÅÄÖ]+ \\s?+[a-zA-ZåäöÅÄÖ]+")) {
+            System.out.println("NAMN OK");
             valid = true;
         }
         return valid;
@@ -47,6 +48,7 @@ public class Validation {
         return valid;
     }
 
+
     public boolean validatePhone(String phone) {
         boolean valid = false;
         if (!phone.isEmpty()) {
@@ -54,7 +56,7 @@ public class Validation {
                 valid = true;
             }
             if (!valid) {
-                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer");
+                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer\nTelefonnummer skrivs såhär:\nXXX-XXXXXXX");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
@@ -73,7 +75,34 @@ public class Validation {
         return valid;
     }
 
-    public boolean checkExistingCell(String tableName, String columnName, String keyWord) {
+
+    public static boolean existsCustomerID(String customerID) {
+        ArrayList<String> customerIDs = Database.getAllCustomerID();
+        return customerIDs.contains(customerID);
+    }
+
+    public static boolean validateCustomerID(String customerID) {
+        boolean valid = false;
+        // Check if customerID only contains digits
+        if (customerID.matches("\\d+")) {
+
+            if (!existsCustomerID(customerID)) {
+                valid = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Customer ID already exists");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
+        }
+        return valid;
+    }
+
+    public static boolean validateAddress(String address) {
+        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-ZåäöÅÄÖ].*");
+        return valid;
+    }
+
+    public static boolean checkExistingCell(String tableName, String columnName, String keyWord) {
         boolean exists = false;
         String query = "SELECT * FROM " + tableName;
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
@@ -90,6 +119,10 @@ public class Validation {
             }
         }
         return exists;
+    }
+
+        public static void main(String[] args) {
+        new Validation();
     }
 
     public boolean isDouble(String input) {
