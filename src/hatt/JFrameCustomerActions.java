@@ -293,21 +293,32 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        
+
         String customerID = txtCustomerID.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
         String phone = txtPhone.getText();
         String email = txtEmail.getText();
-        
-
-        
-        if(Validation.existsCustomerID(customerID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
-            CustomerActions actions = new CustomerActions(customerID);
-            
-            actions.updateCustomer(customerID, name, address, phone, email);
+        Database db = new Database();
+        boolean valid = false;
+        String whereIdentifier = "(select cid from Customer WHERE " + ;
+                
+        if (customerID == db.fetchSingle("cid", "customer", "cid", whereIdentifier))   {
+            valid = true;
         }
         
+        if (valid) {
+            if(Validation.existsCustomerID(customerID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
+                CustomerActions actions = new CustomerActions(customerID);
+                
+                actions.updateCustomer(customerID, name, address, phone, email);
+                System.out.println("if i btnUpdate");
+            }   else {
+            
+                System.out.println("else i btnUpdate");
+                JOptionPane.showMessageDialog(null, "");
+            }
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
