@@ -81,9 +81,10 @@ public void addCustomer(String name, String address, String phone, String email)
             db.deleteRow("customer", "cid", customerID);
             System.out.println("Kund borttagen");
             valid = true;
+            JOptionPane.showMessageDialog(null, "Kunden med kundID " + customerID + " har tagits bort.");
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Hantera undantaget på lämpligt sätt, t.ex. skriva ut felmeddelanden
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att ta bort kund.");
         }
         return valid;
     }
