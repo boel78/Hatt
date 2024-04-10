@@ -14,10 +14,17 @@ public class createRequest extends javax.swing.JFrame {
     private String hatModel;
     private String ID;
     private boolean createOrder;
-    private static InfDB idb;
+    private InfDB idb;
+    private Database db;
 
     public createRequest() {
         initComponents();
+        try {
+            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+        db = new Database();
     }
 
     /**
@@ -129,7 +136,6 @@ public class createRequest extends javax.swing.JFrame {
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
         // TODO add your handling code here:
 
-        Database db = new Database();
         if (Validation.txtHasValue(txtDescription)) {
             description = txtDescription.getText();
             hatModel = cbHatModel.getSelectedItem().toString();
@@ -147,8 +153,7 @@ public class createRequest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSendActionPerformed
 
-    public static String[] getCBHatModels() {
-        Database db = new Database();
+    public String[] getCBHatModels() {
         ArrayList<String> CBAL = new ArrayList<>();
         CBAL = db.fetchColumn(false, "Name", "stocked_product", "", "");
         CBAL.add("Nej");
@@ -159,8 +164,7 @@ public class createRequest extends javax.swing.JFrame {
         return CBHatModelsx;
     }
 
-    public static String[] getCBCustomer() {
-        Database db = new Database();
+    public String[] getCBCustomer() {
         ArrayList<String> CBAL = new ArrayList<>();
 
         CBAL = db.fetchColumn(false, "name", "customer", "", "");
@@ -187,41 +191,7 @@ public class createRequest extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        try {
-            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        } catch (InfException ex) {
-            ex.printStackTrace();
-        }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new createRequest().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;

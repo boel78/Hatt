@@ -108,13 +108,18 @@ public class Navigation extends javax.swing.JFrame {
         ShowMaterialInfo smi = new ShowMaterialInfo();
         tbdPane.addTab("Visa material info", smi.getContentPane());
 
+        createRequest cr = new createRequest();
+        tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+
+        reviewRequest rr = new reviewRequest();
+        tbdPane.addTab("Granska förfrågning", rr.getContentPane());
+
         /* JFrameCustomerActions ca = new JFrameCustomerActions();
         tbdPane.addTab("Hantera kunder", ca.getContentPane());
         
  
         
-        createRequest cr = new createRequest();
-        tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+
         
         CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer();
         tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());

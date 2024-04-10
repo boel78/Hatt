@@ -10,21 +10,26 @@ import java.util.ArrayList;
 import oru.inf.InfException;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author erikr
  */
 public class reviewRequest extends javax.swing.JFrame {
 
-    private static InfDB idb;
-    private static String rID;
+    private InfDB idb;
+    private String rID;
+    private Database db;
     /**
      * Creates new form reviewRequest
      */
-    public reviewRequest(InfDB idb) {
+    public reviewRequest() {
         initComponents();
-        this.idb = idb;
+        try {
+            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+        db = new Database();
     }
 
     /**
@@ -131,7 +136,6 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
         // TODO add your handling code here:
-        Database db = new Database();
         String txt = "";
         String cbContent = cbReviews.getSelectedItem().toString();
         String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
@@ -165,10 +169,9 @@ public class reviewRequest extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCompleteDenyAcceptActionPerformed
 
-    public static String[] getCBReviews(){
+    public String[] getCBReviews(){
         ArrayList<String> CBAL = new ArrayList<>();
         ArrayList<String> rid = new ArrayList<>();
-        Database db = new Database();
         rid = db.fetchColumn(false, "rid", "requests", "", "");
         
         
@@ -190,41 +193,7 @@ public class reviewRequest extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     
-public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(createRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        try {
-            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        } catch (InfException ex) {
-            ex.printStackTrace();
-        }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new reviewRequest(idb).setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompleteDenyAccept;

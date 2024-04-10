@@ -48,8 +48,6 @@ public class Validation {
         return valid;
     }
 
-
-
     public static boolean validatePhone(String phone) {
         boolean valid = false;
         if (!phone.isEmpty()) {
@@ -95,57 +93,6 @@ public class Validation {
         return exists;
     }
 
-    public boolean isDouble(String input){
-        boolean b = false;
-        try{
-            Double.parseDouble(input);
-            b = true;
-        } catch(NumberFormatException e) {
-            e.printStackTrace();
-
-        }
-        return b;
-    }
-
-}
-
-/*public boolean validateCustomerID(String customerID) {
-    boolean valid = false;
-    // Check if customerID only contains digits
-    if (customerID.matches("\\d+")) {
-
-        if (!existsCustomerID(customerID)) {
-            valid = true;
-        } else {
-            JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
-        }
-        return valid;
-    }
-
-    public static boolean validateAddress(String address) {
-        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
-        return valid;
-    }
-
-    public boolean checkExistingCell(String tableName, String columnName, String keyWord) {
-        boolean exists = false;
-        String query = "SELECT * FROM " + tableName;
-        ArrayList<HashMap<String, String>> list = new ArrayList<>();
-
-        list = db.fetchRows(false, tableName, columnName, keyWord);
-
-        for (HashMap<String, String> column : list) {
-            for (String key : column.keySet()) {
-                if (key.equals(columnName)) {
-                    if (column.get(key).equals(keyWord)) {
-                        exists = true;
-                    }
-                }
-            }
-        }
-        return exists;
-    }
-
     public boolean isDouble(String input) {
         boolean b = false;
         try {
@@ -157,4 +104,31 @@ public class Validation {
         }
         return b;
     }
+
+    public boolean existsCustomerID(String customerID) {
+        ArrayList<String> customerIDs = db.getAllCustomerID();
+        return customerIDs.contains(customerID);
+    }
+
+    public boolean validateCustomerID(String customerID) {
+        boolean valid = false;
+        // Check if customerID only contains digits
+        if (customerID.matches("\\d+")) {
+
+            if (!existsCustomerID(customerID)) {
+                valid = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
+            }
+
+        }
+        return valid;
+
+    }
+
+    public static boolean validateAddress(String address) {
+        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
+        return valid;
+    }
+
 }
