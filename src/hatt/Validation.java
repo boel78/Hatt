@@ -162,7 +162,7 @@ public class Validation {
             }
         }
         if (accessoriesNotEmpty) {
-            if(!doesMaterialExist(accessories)){
+            if(!isMaterialAccessory(accessories)){
                 accessoryExists = false;       
         }
     }
@@ -172,7 +172,7 @@ public class Validation {
      //Kollar om fabric finns i databasen med hjälp av doesMaterialExist
     public static boolean doesFabricsExist(ArrayList<String> fabrics) {
        boolean exists = false;
-       if(doesMaterialExist(fabrics)){
+       if(isMaterialFabric(fabrics)){
            exists = true;
        }
        return exists;
@@ -242,38 +242,42 @@ public class Validation {
     }
     //Kollar om det man skriver in är ett tyg
     //Kan gå att göra till en gemensam med isMaterialAccessories
-    public static boolean isMaterialFabric(JTextField tf){
-        
-        boolean isFabric = false;
-        ArrayList<String> fabrics = Database.fetchColumn(true, "name", "materials", "mid","IN (SELECT mid FROM fabric)");
-        for(String name : fabrics){
-            if(name.equalsIgnoreCase(tf.getText())){
-                isFabric = true;
-                break;
+    public static boolean isMaterialFabric(ArrayList<String> fabrics) {
+        boolean exists = false;
+        ArrayList<String> fabricsDb = Database.fetchColumn(false, "name", "materials WHERE mid IN (SELECT mid FROM fabric)", "", "");
+        for (String tf : fabrics) {
+            exists = false;
+            for (String name : fabricsDb) {
+                if (name.equalsIgnoreCase(tf)) {
+                    exists = true;
+                }
+            }
+            if (!exists) {
+                JOptionPane.showMessageDialog(null, "Vänligen skriv in ett existerande tyg!");
             }
         }
-        if(!isFabric){
-                JOptionPane.showMessageDialog(null, "Vänligen skriv in ett tyg");
-            }
-        return isFabric;
+        return exists;
     }
     
     //Kollar om det man skriver in är en accessoar
     //Kan gå att göra till en gemensam med isMaterialFabric
-    public static boolean isMaterialAccesories(JTextField tf){
-        
-        boolean isAccessory = false;
-        ArrayList<String> accessories = Database.fetchColumn(true, "name", "materials", "mid","IN (SELECT mid FROM accessories)");
-        for(String name : accessories){
-            if(name.equalsIgnoreCase(tf.getText())){
-                isAccessory = true;
-                break;
+    public static boolean isMaterialAccessory(ArrayList<String> accessories) {
+        boolean exists = false;
+        ArrayList<String> accessoriesDb = Database.fetchColumn(false, "name", "materials WHERE mid IN (SELECT mid FROM accessories)", "", "");
+        for (String tf : accessories) {
+            exists = false;
+            for (String name : accessoriesDb) {
+                if (name.equalsIgnoreCase(tf)) {
+                    exists = true;
+                }
+            }
+            if (!exists) {
+                JOptionPane.showMessageDialog(null, "Vänligen skriv in en existerande accessoar!");
             }
         }
-        if(!isAccessory){
-            JOptionPane.showMessageDialog(null, "Vänligen skriv in en accessoar");
-        }
-        return isAccessory;
-    }
+        return exists;
+    }  
+    
+
 
 }
