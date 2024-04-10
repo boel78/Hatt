@@ -114,7 +114,7 @@ public class Navigation extends javax.swing.JFrame {
         reviewRequest rr = new reviewRequest();
         tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
-        createRequest cr = new createRequest();
+        createRequest cr = new createRequest(uid);
         tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
 
 

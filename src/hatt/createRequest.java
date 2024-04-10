@@ -16,8 +16,10 @@ public class createRequest extends javax.swing.JFrame {
     private boolean createOrder;
     private InfDB idb;
     private Database db;
+    private String uid;
 
-    public createRequest() {
+    public createRequest(String uid) {
+        this.uid = uid;
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -143,10 +145,9 @@ public class createRequest extends javax.swing.JFrame {
 
             ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
             String nextID = db.getAutoIncrement("requests", "rid");
-            int workerID = 1;
 
             if (description.length() <= 100) {
-                db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + workerID + ",  'N', 'N'," + ID + ")");
+                db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + uid + ",  'N', 'N'," + ID + ")");
                 JOptionPane.showMessageDialog(null, "Förfrågningen är inlagd i systemet.");
             } else {
                 JOptionPane.showMessageDialog(null, "Var god och fyll i en beskrivning som är kortare än 100 bokstäver.");
@@ -189,38 +190,7 @@ public class createRequest extends javax.swing.JFrame {
         // TODO add your handling code here:
     }
     
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new createRequest().setVisible(true);
-            }
-        });
-    }
+   
 
     /**
      * @param args the command line arguments
