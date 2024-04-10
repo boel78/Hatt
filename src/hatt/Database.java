@@ -47,6 +47,7 @@ public class Database {
     public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
+        System.out.println(query);
         try {
             response = idb.fetchSingle(query);
         } catch (InfException ex) {

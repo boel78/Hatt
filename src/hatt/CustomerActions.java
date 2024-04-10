@@ -72,7 +72,7 @@ public void addCustomer(String name, String address, String phone, String email)
         
     public void updateCustomer(String customerID, String name, String address, String phone, String email){
         
-        String preparedQuery = ("UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = '" + customerID + "';");
+        String preparedQuery = ("UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = '" + customerID);
         
         try{
             db.updatePreparedQuery(preparedQuery);
