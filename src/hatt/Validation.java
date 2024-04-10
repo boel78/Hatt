@@ -133,19 +133,20 @@ public class Validation {
     
      //SKA IN I MAIN BRANCHEN
     //Kollar om material finns 
-    public static boolean doesMaterialExist(ArrayList<String> list) {    
+    public static boolean doesMaterialExist(ArrayList<String> list) {
         boolean exists = false;
         ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "", "");
         for (String tf : list) {
+            exists = false;
             for (String name : materials) {
                 if (name.equalsIgnoreCase(tf)) {
                     exists = true;
-                    break;
                 }
             }
-        }
-        if (!exists) {
-            JOptionPane.showMessageDialog(null, "Vänligen skriv in ett existerande material!");
+            if (!exists) {
+                JOptionPane.showMessageDialog(null, "Vänligen skriv in ett existerande material!");
+                break;
+            }
         }
         return exists;
     }
