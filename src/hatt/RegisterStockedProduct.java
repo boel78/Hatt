@@ -51,6 +51,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
         lblDescription = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 700));
 
         txtName.setColumns(10);
 
@@ -116,7 +117,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
                     .addComponent(lblStartingPrice))
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDescription)
                         .addGap(0, 0, Short.MAX_VALUE)))

@@ -5,11 +5,10 @@
 package hatt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,7 +24,6 @@ public class Database {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
-
     }
 
     public ArrayList<String> getAllCustomerID() {
@@ -138,6 +136,5 @@ public class Database {
 
         return id;
     }
-
 
 }

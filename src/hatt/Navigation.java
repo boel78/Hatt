@@ -37,6 +37,7 @@ public class Navigation extends javax.swing.JFrame {
         tbdPane = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(700, 700));
 
         lblUser.setText("jLabel1");
 
@@ -47,8 +48,10 @@ public class Navigation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblUser)
-                .addContainerGap(352, Short.MAX_VALUE))
-            .addComponent(tbdPane)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tbdPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -56,7 +59,7 @@ public class Navigation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tbdPane, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(tbdPane, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -108,11 +111,12 @@ public class Navigation extends javax.swing.JFrame {
         ShowMaterialInfo smi = new ShowMaterialInfo();
         tbdPane.addTab("Visa material info", smi.getContentPane());
 
+        reviewRequest rr = new reviewRequest();
+        tbdPane.addTab("Granska förfrågning", rr.getContentPane());
+
         createRequest cr = new createRequest();
         tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
 
-        reviewRequest rr = new reviewRequest();
-        tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
         /* JFrameCustomerActions ca = new JFrameCustomerActions();
         tbdPane.addTab("Hantera kunder", ca.getContentPane());

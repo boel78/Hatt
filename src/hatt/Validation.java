@@ -23,7 +23,7 @@ public class Validation {
         db = new Database();
     }
 
-    public static boolean validateName(String name) {
+    public boolean validateName(String name) {
         boolean valid = false;
         if (name.matches("[a-zA-Z ]+")) {
             valid = true;
@@ -31,7 +31,7 @@ public class Validation {
         return valid;
     }
 
-    public static boolean validateEmailTypo(String email) {
+    public boolean validateEmailTypo(String email) {
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
         if (!email.isEmpty()) {
@@ -48,7 +48,7 @@ public class Validation {
         return valid;
     }
 
-    public static boolean validatePhone(String phone) {
+    public boolean validatePhone(String phone) {
         boolean valid = false;
         if (!phone.isEmpty()) {
             if (phone.matches("\\d{3}-\\d{7}")) {
