@@ -70,17 +70,17 @@ public void addCustomer(String name, String address, String phone, String email)
 }
 
         
-    public boolean updateCustomer(String customerID, String name, String address, String phone, String email){
+    public void updateCustomer(String customerID, String name, String address, String phone, String email){
+        
         String preparedQuery = ("UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = '" + customerID + "';");
-        boolean valid = true;
         
         try{
-            db.update(preparedQuery);
+            db.updatePreparedQuery(preparedQuery);
+            JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
         }  catch(Exception ex) {
             ex.printStackTrace();
-            valid = false;
+            JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
         }
-        return valid;
     }
     
     
