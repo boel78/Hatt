@@ -99,17 +99,19 @@ public class Navigation extends javax.swing.JFrame {
         });
     }
      */
-    
     //Fyller tabbedPane med alla JFrames
     private void loadPane() {
-        
+
         RegisterStockedProduct rsp = new RegisterStockedProduct();
         tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
-     /* JFrameCustomerActions ca = new JFrameCustomerActions();
-        tbdPane.addTab("Hantera kunder", ca.getContentPane());
-        
+
         ShowMaterialInfo smi = new ShowMaterialInfo();
         tbdPane.addTab("Visa material info", smi.getContentPane());
+
+        /* JFrameCustomerActions ca = new JFrameCustomerActions();
+        tbdPane.addTab("Hantera kunder", ca.getContentPane());
+        
+ 
         
         createRequest cr = new createRequest();
         tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
@@ -120,8 +122,7 @@ public class Navigation extends javax.swing.JFrame {
         CreateOrderNewCustomer conc = new CreateOrderNewCustomer();
         tbdPane.addTab("Skapa order för ny kund", conc.getContentPane());
            
-        */
-        
+         */
     }
 
 

@@ -17,7 +17,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        new Database();
+        db = new Database();
         new Validation();
     }
 
