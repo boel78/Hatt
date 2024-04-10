@@ -98,6 +98,11 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnRemove.setForeground(new java.awt.Color(255, 51, 51));
         btnRemove.setText("Remove");
@@ -176,15 +181,15 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblAddress)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE))
+                    .addComponent(txtAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblPhone)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE))
+                    .addComponent(txtPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
@@ -286,6 +291,24 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        
+        String customerID = txtCustomerID.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String phone = txtPhone.getText();
+        String email = txtEmail.getText();
+        
+
+        
+        if(Validation.existsCustomerID(customerID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
+            CustomerActions actions = new CustomerActions(customerID);
+            
+            actions.updateCustomer(customerID, name, address, phone, email);
+        }
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
