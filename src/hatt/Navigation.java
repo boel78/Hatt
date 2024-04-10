@@ -108,7 +108,7 @@ public class Navigation extends javax.swing.JFrame {
         RegisterStockedProduct rsp = new RegisterStockedProduct();
         tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
 
-        ShowMaterialInfo smi = new ShowMaterialInfo();
+        showMaterialInfo smi = new showMaterialInfo();
         tbdPane.addTab("Visa material info", smi.getContentPane());
 
         reviewRequest rr = new reviewRequest();

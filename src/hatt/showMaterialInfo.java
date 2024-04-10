@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  *
  * @author lukasdenfete
  */
-public class ShowMaterialInfo extends javax.swing.JFrame {
+public class showMaterialInfo extends javax.swing.JFrame {
 
     private Database db;
 
     /**
      * Creates new form showMaterialInfo
      */
-    public ShowMaterialInfo() {
+    public showMaterialInfo() {
         db = new Database();
         initComponents();
     }
@@ -160,13 +160,13 @@ public class ShowMaterialInfo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(showMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(showMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(showMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ShowMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(showMaterialInfo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -174,7 +174,7 @@ public class ShowMaterialInfo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShowMaterialInfo().setVisible(true);
+                new showMaterialInfo().setVisible(true);
             }
         });
     }

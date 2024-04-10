@@ -50,7 +50,7 @@ public class createRequest extends javax.swing.JFrame {
 
         jLabel2.setText("Baserad på redan lagerförd modell?");
 
-        cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(getCBHatModels()));
 
         jLabel3.setText("Beskrivning:");
 
@@ -65,9 +65,9 @@ public class createRequest extends javax.swing.JFrame {
 
         jLabel5.setText("Vilken kund?");
 
-        cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomer()));
 
-        txtDescription.setText("jTextField1");
+        txtDescription.setText("Tryck här för att skriva");
         txtDescription.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtDescriptionFocusGained(evt);
