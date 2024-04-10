@@ -16,7 +16,6 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
 
     private InfDB idb;
     private Validation validation;
-    private Database db;
 
     /**
      * Creates new form LagerforaModell
@@ -24,7 +23,6 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
     public RegisterStockedProduct() {
         initComponents();
         validation = new Validation();
-        db = new Database();
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -141,7 +139,7 @@ public class RegisterStockedProduct extends javax.swing.JFrame {
         String startingPrice = txtStartingprice.getText();
         if (!validation.checkExistingCell("stocked_product", "name", name)) {
             if (validation.isDouble(startingPrice)) {
-                db.insert("stocked_product", "(sid,name,description,starting_price)", "(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")");
+                Database.insert("stocked_product", "(sid,name,description,starting_price)", "(" + sid + ",'" + name + "','" + description + "'," + startingPrice + ")");
                 JOptionPane.showMessageDialog(null, "Produkten har lagts till.");
 
             } else {

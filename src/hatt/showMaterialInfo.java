@@ -13,13 +13,11 @@ import javax.swing.JOptionPane;
  */
 public class showMaterialInfo extends javax.swing.JFrame {
 
-    private Database db;
 
     /**
      * Creates new form showMaterialInfo
      */
     public showMaterialInfo() {
-        db = new Database();
         initComponents();
     }
 
@@ -104,13 +102,13 @@ public class showMaterialInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
         String name = txtMaterial.getText();
         txtAreaShowInfo.setText("");
-        String id = db.fetchSingle("mid", "materials", "name", name);
+        String id = Database.fetchSingle("mid", "materials", "name", name);
         if (id != null) {
-            String supplierID = db.fetchSingle("sid", "ordering_materials", "mid", id);
+            String supplierID = Database.fetchSingle("sid", "ordering_materials", "mid", id);
             
             
             HashMap<String, String> supplierInfo = new HashMap<>();
-            supplierInfo = db.fetchRow("supplier", "sid", supplierID);
+            supplierInfo = Database.fetchRow("supplier", "sid", supplierID);
             for (String key : supplierInfo.keySet()) {
                 if (!key.equals("sid")) {
                     String input = "";
@@ -127,16 +125,16 @@ public class showMaterialInfo extends javax.swing.JFrame {
             }
             
             
-            HashMap<String, String> fabrics = db.fetchRow("fabric", "mid", id);
+            HashMap<String, String> fabrics = Database.fetchRow("fabric", "mid", id);
             if (fabrics.isEmpty()) {
-                HashMap<String, String> accessories = db.fetchRow("accessories", "mid", id);
+                HashMap<String, String> accessories = Database.fetchRow("accessories", "mid", id);
                 txtAreaShowInfo.append("Typ: Accessoarer\n");
                 txtAreaShowInfo.append("Mängd: " + accessories.get("amount") + "\n");
             } else {
                 txtAreaShowInfo.append("Typ: Tyg\n");
                 txtAreaShowInfo.append("Storlek(cm²): " + fabrics.get("size") + "\n");
             }
-            txtAreaShowInfo.append("Pris: " + db.fetchSingle("price", "materials", "mid", id));
+            txtAreaShowInfo.append("Pris: " + Database.fetchSingle("price", "materials", "mid", id));
 
         } else {
             JOptionPane.showMessageDialog(null,"Materialet finns inte. Kolla efter stavfel.");

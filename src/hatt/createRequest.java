@@ -15,7 +15,6 @@ public class createRequest extends javax.swing.JFrame {
     private String ID;
     private boolean createOrder;
     private InfDB idb;
-    private Database db;
     private String uid;
 
     public createRequest(String uid) {
@@ -25,7 +24,6 @@ public class createRequest extends javax.swing.JFrame {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
-        db = new Database();
         initComponents();
     }
 
@@ -135,11 +133,11 @@ public class createRequest extends javax.swing.JFrame {
             description = txtDescription.getText();
             hatModel = cbHatModel.getSelectedItem().toString();
 
-            ID = db.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
-            String nextID = db.getAutoIncrement("requests", "rid");
+            ID = Database.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
+            String nextID = Database.getAutoIncrement("requests", "rid");
 
             if (description.length() <= 100) {
-                db.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + uid + ",  'N', 'N'," + ID + ")");
+                Database.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + uid + ",  'N', 'N'," + ID + ")");
                 JOptionPane.showMessageDialog(null, "Förfrågningen är inlagd i systemet.");
             } else {
                 JOptionPane.showMessageDialog(null, "Var god och fyll i en beskrivning som är kortare än 100 bokstäver.");
@@ -156,7 +154,7 @@ public class createRequest extends javax.swing.JFrame {
 
     public String[] getCBHatModels() {
         ArrayList<String> CBAL = new ArrayList<>();
-        CBAL = db.fetchColumn(false, "Name", "stocked_product", "", "");
+        CBAL = Database.fetchColumn(false, "Name", "stocked_product", "", "");
         CBAL.add("Nej");
 
         String[] CBHatModelsx = new String[CBAL.size()];
@@ -168,7 +166,7 @@ public class createRequest extends javax.swing.JFrame {
     public String[] getCBCustomer() {
         ArrayList<String> CBAL = new ArrayList<>();
 
-        CBAL = db.fetchColumn(false, "name", "customer", "", "");
+        CBAL = Database.fetchColumn(false, "name", "customer", "", "");
 
         String[] CBCustomer = new String[CBAL.size()];
         CBAL.toArray(CBCustomer);

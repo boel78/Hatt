@@ -16,14 +16,15 @@ public class Login extends javax.swing.JFrame {
      * Creates new form login
      */
     public Login() {
+        new Database();
         initComponents();
-        db = new Database();
+
         new Validation();
     }
 
     //Metod för att hämta id från namn
     private String getID(String name) {
-        String userID = db.fetchSingle("uid", "user", "name", name);
+        String userID = Database.fetchSingle("uid", "user", "name", name);
         return userID;
     }
 

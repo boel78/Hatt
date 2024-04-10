@@ -17,10 +17,9 @@ import oru.inf.InfException;
  */
 public class Validation {
 
-    private Database db;
 
     public Validation() {
-        db = new Database();
+        
     }
 
     public boolean validateName(String name) {
@@ -79,7 +78,7 @@ public class Validation {
         String query = "SELECT * FROM " + tableName;
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
 
-        list = db.fetchRows(false, tableName, columnName, keyWord);
+        list = Database.fetchRows(false, tableName, columnName, keyWord);
 
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
@@ -106,7 +105,7 @@ public class Validation {
     }
 
     public boolean existsCustomerID(String customerID) {
-        ArrayList<String> customerIDs = db.getAllCustomerID();
+        ArrayList<String> customerIDs = Database.getAllCustomerID();
         return customerIDs.contains(customerID);
     }
 

@@ -20,13 +20,11 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private InfDB idb;
     private String rID;
-    private Database db;
 
     /**
      * Creates new form reviewREquestt
      */
     public reviewRequest() {
-        db = new Database();
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -143,7 +141,7 @@ public class reviewRequest extends javax.swing.JFrame {
         String cbContent = cbReviews.getSelectedItem().toString();
         String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
         rID = numbers;
-        txt = db.fetchSingle("description", "requests", "rid", numbers);
+        txt = Database.fetchSingle("description", "requests", "rid", numbers);
 
         txtAreaDescription.setText("");
         txtAreaDescription.append(txt);
@@ -174,7 +172,7 @@ public class reviewRequest extends javax.swing.JFrame {
     public String[] getCBReviews() {
         ArrayList<String> CBAL = new ArrayList<>();
         ArrayList<String> rid = new ArrayList<>();
-        rid = db.fetchColumn(false, "rid", "requests", "", "");
+        rid = Database.fetchColumn(false, "rid", "requests", "", "");
 
         try {
             for (String s : rid) {

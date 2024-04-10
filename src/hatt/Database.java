@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Database {
 
-    private InfDB idb;
+    private static InfDB idb;
 
     public Database() {
         try {
@@ -26,7 +26,7 @@ public class Database {
         }
     }
 
-    public ArrayList<String> getAllCustomerID() {
+    public static ArrayList<String> getAllCustomerID() {
         ArrayList<String> customerIDList = new ArrayList<>();
 
         try {
@@ -38,13 +38,13 @@ public class Database {
         return customerIDList;
     }
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
         new Database();
     }
 
     //columnName är kolumnnamnet på kolumnen du vill hämta ifrån, tableName är tabellnamnet, columnWhere är vilken kolumn ni har som "sökning" 
     //columnIdentifier är eran identifierare på sökningen, t.ex WHERE columnWhere = columnIdentifier
-    public String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
+    public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
         try {
@@ -58,7 +58,7 @@ public class Database {
 
     //tableName är tabellnamnet
     //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
-    public HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
+    public static HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
         String query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
         HashMap<String, String> response = new HashMap<String, String>();
         System.out.println(query);
@@ -70,7 +70,7 @@ public class Database {
         return response;
     }
 
-    public ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
+    public static ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
         String query = "";
         if (whereBool) {
@@ -92,7 +92,7 @@ public class Database {
     //tableName är tabellnamnet
     //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
     //Om whereIdentifier är varchar skriv med ' ' i parametern
-    public ArrayList<String> fetchColumn(boolean whereBool, String columnName, String tableName, String where, String whereIdentifier) {
+    public static ArrayList<String> fetchColumn(boolean whereBool, String columnName, String tableName, String where, String whereIdentifier) {
         ArrayList<String> response = new ArrayList<>();
         String query = "";
         if (whereBool) {
@@ -110,7 +110,7 @@ public class Database {
     }
 
     // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
-    public void insert(String tableName, String columns, String values) {
+    public static void insert(String tableName, String columns, String values) {
         String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
         try {
             idb.insert(query);
@@ -124,7 +124,7 @@ public class Database {
 
     //Ganska självförklarlig, tableName är tabellnamnet och columnName är kolumnnamnet
     //som du vill ha inkrement-id ifrån. 
-    public String getAutoIncrement(String tableName, String columnName) {
+    public static String getAutoIncrement(String tableName, String columnName) {
         String id = "0";
 
         try {
