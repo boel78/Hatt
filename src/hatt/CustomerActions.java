@@ -77,7 +77,8 @@ public void addCustomer(String name, String address, String phone, String email)
     }
     
     
-    public void removeCustomer(String customerID) {
+    public boolean removeCustomer(String customerID) {
+        boolean valid = false;
         try {
         String query = "DELETE FROM customer WHERE cid = '" + customerID + "'";
         idb.delete(query);
@@ -87,6 +88,7 @@ public void addCustomer(String name, String address, String phone, String email)
         catch (InfException ex) {
             ex.printStackTrace();
         
+            return valid
         }
     }
         
