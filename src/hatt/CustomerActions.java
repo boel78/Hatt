@@ -33,23 +33,14 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.address = address;
         this.phone = phone;
         this.email = email;
-            db = new Database();
+        db = new Database();
         
-        
-        initializeAddCustomer(customerID, name, address, phone, email);
     }
     
     public CustomerActions(String customerID) {
         //Koppling till databsen sker i konstruktorn med en kund som readan finns 
         this.customerID = customerID;
             db = new Database();
-    }
-    
-    private void initializeAddCustomer(String customerID, String name, String address, String phone, String email) {
-        
-        
-        
-        addCustomer(name, address, phone, email);
     }
     
 public void addCustomer(String name, String address, String phone, String email) {
