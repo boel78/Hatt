@@ -162,9 +162,6 @@ public class Validation {
        return exists;
     }
     
-    
-    
-    //SKA IN I MAIN BRANCHEN
     //Validerar två fält och om någon utav de är tomma så kommer errormeddelande för createOrder
     public static boolean hasValueTwoFields(JTextField tf1, JTextField tf2) {
 
