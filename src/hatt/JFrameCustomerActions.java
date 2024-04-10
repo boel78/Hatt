@@ -282,6 +282,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             } else {
             JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
             }
+        }   else {
+            JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
