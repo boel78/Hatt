@@ -13,9 +13,10 @@ import javax.swing.JOptionPane;
  */
 public class JFrameCustomerActions extends javax.swing.JFrame {
 
-        private String fetchedID;
-        
+    private String fetchedID;
+
     public JFrameCustomerActions() {
+        new Validation();
         initComponents();
     }
 
@@ -221,7 +222,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         CustomerActions actions = new CustomerActions(customerID);
 
         HashMap<String, String> customer = actions.getCustomer(customerID);
-        
+
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
@@ -255,32 +256,33 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        
 
-        if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtAddress)) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
-            CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
+        if (Validation.txtHasValue(txtAddress) && Validation.validateAddress(address)) {
+            if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
+                CustomerActions actions = new CustomerActions(customerID, name, address, phone, email);
 
-            actions.addCustomer(name, address, phone, email);
+                actions.addCustomer(name, address, phone, email);
+            }
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         String customerID = txtCustomerID.getText();
-    
-    CustomerActions actions = new CustomerActions(customerID);
-    
-    if(Validation.txtHasValue(txtCustomerID) && Validation.existsCustomerID(customerID))    {
-        if(actions.removeCustomer(customerID))  {
-    
-            txtCustomerID.setText("");
-            txtName.setText("");
-            txtAddress.setText("");
-            txtPhone.setText("");
-            txtEmail.setText("");
+
+        CustomerActions actions = new CustomerActions(customerID);
+
+        if (Validation.txtHasValue(txtCustomerID) && Validation.existsCustomerID(customerID)) {
+            if (actions.removeCustomer(customerID)) {
+
+                txtCustomerID.setText("");
+                txtName.setText("");
+                txtAddress.setText("");
+                txtPhone.setText("");
+                txtEmail.setText("");
             } else {
-            JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
+                JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
             }
-        }   else {
+        } else {
             JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
@@ -294,21 +296,18 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String email = txtEmail.getText();
         Database db = new Database();
 
-        
-                
-
         if (!fetchedID.isEmpty()) {
-            if(Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
+            if (Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
                 CustomerActions actions = new CustomerActions(customerID);
-                
+
                 actions.updateCustomer(fetchedID, name, address, phone, email);
                 System.out.println("if i btnUpdate");
-            }   else {
-            
+            } else {
+
                 System.out.println("else i btnUpdate");
                 JOptionPane.showMessageDialog(null, "Något gick fel.");
             }
-        }   else {
+        } else {
             JOptionPane.showMessageDialog(null, "Hämta kunden du vill ändra först.");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed

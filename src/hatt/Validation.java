@@ -25,7 +25,8 @@ public class Validation {
 
     public static boolean validateName(String name) {
         boolean valid = false;
-        if (name.matches("[a-zA-Z ]+")) {
+        if (name.matches("[a-zA-ZåäöÅÄÖ]+ \\s?+[a-zA-ZåäöÅÄÖ]+")) {
+            System.out.println("NAMN OK");
             valid = true;
         }
         return valid;
@@ -47,6 +48,7 @@ public class Validation {
         }
         return valid;
     }
+   
 
     public static boolean validatePhone(String phone) {
         boolean valid = false;
@@ -96,16 +98,16 @@ public class Validation {
     }
 
     public static boolean validateAddress(String address) {
-        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
+        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-ZåäöÅÄÖ].*");
         return valid;
     }
 
-    public boolean checkExistingCell(String tableName, String columnName, String keyWord) {
+    public static boolean checkExistingCell(String tableName, String columnName, String keyWord) {
         boolean exists = false;
         String query = "SELECT * FROM " + tableName;
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
 
-        list = db.fetchRows(false, tableName, columnName, keyWord);
+        list = Database.fetchRows(false, tableName, columnName, keyWord);
 
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
@@ -117,6 +119,10 @@ public class Validation {
             }
         }
         return exists;
+    }
+    
+        public static void main(String[] args) {
+        new Validation();
     }
 
     public boolean isDouble(String input) {
