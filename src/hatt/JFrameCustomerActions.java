@@ -316,7 +316,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }   else {
             
                 System.out.println("else i btnUpdate");
-                JOptionPane.showMessageDialog(null, "");
+                JOptionPane.showMessageDialog(null, "Något gick fel.");
             }
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
