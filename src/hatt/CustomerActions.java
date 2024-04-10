@@ -23,7 +23,6 @@ public class CustomerActions {
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
     private static Database db;
-    private static InfDB idb;
     
     
 public CustomerActions(String customerID, String name, String address, String phone, String email) {
@@ -34,7 +33,6 @@ public CustomerActions(String customerID, String name, String address, String ph
         this.phone = phone;
         this.email = email;
         db = new Database();
-        
     }
     
     public CustomerActions(String customerID) {
@@ -80,17 +78,16 @@ public void addCustomer(String name, String address, String phone, String email)
     public boolean removeCustomer(String customerID) {
         boolean valid = false;
         try {
-        String query = "DELETE FROM customer WHERE cid = '" + customerID + "'";
-        idb.delete(query);
-        
-        System.out.println("Kund borttagen");
-        } 
-        catch (InfException ex) {
+            db.deleteRow("customer", "cid", customerID);
+            System.out.println("Kund borttagen");
+            valid = true;
+        } catch (Exception ex) {
             ex.printStackTrace();
-        
-            return valid
+            // Hantera undantaget på lämpligt sätt, t.ex. skriva ut felmeddelanden
         }
+        return valid;
     }
+
         
     
     public HashMap<String, String> getCustomer(String customerID) { 
