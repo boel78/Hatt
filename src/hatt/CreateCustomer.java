@@ -127,16 +127,22 @@ public class CreateCustomer extends javax.swing.JFrame {
         
         try {
         String id = idb.getAutoIncrement("customer","cid");
-        if (Validation.validateName(txtName.getText())&& (Validation.txtHasValue(txtAddress)) && (Validation.validateEmailTypo(txtEmail.getText())) && (Validation.validatePhone(txtPhone.getText()))){
+        if (Validation.validateName(txtName.getText())&& (Validation.txtHasValue(txtAddress)) && (Validation.validateEmailTypo(txtEmail.getText())) && (Validation.validatePhone(txtPhone.getText())) && txtName.getText().length() < 25){
             
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
-        
+        System.out.println(txtAddress.getText());
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
         idb.insert(fraga);
         JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
+            } else if (txtName.getText().length() > 25){
+                JOptionPane.showMessageDialog(null, "Namnet kan högst vara 25 tecken.");
+            } else if (txtAddress.getText().length() > 50){
+                JOptionPane.showMessageDialog(null, "Adressen kan inte vara längre än 50 tecken.");
+            } else if (txtEmail.getText().length() > 50){
+                JOptionPane.showMessageDialog(null, "Eposten kan inte vara längre än 50 tecken.");
             }
         }
         catch (InfException ex){
