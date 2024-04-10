@@ -67,7 +67,7 @@ public class Database {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
-        return response;
+        return response;    
     }
 
     public static ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
