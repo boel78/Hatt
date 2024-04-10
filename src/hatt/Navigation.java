@@ -105,6 +105,8 @@ public class Navigation extends javax.swing.JFrame {
     //Fyller tabbedPane med alla JFrames
     private void loadPane() {
 
+        //Om det är Judith eller Otto
+        if(uid != "3"){
         RegisterStockedProduct rsp = new RegisterStockedProduct();
         tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
 
@@ -119,6 +121,25 @@ public class Navigation extends javax.swing.JFrame {
 
         CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
         tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+        }
+        
+        //Revisorn
+        else{
+        RegisterStockedProduct rsp = new RegisterStockedProduct();
+        tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
+
+        showMaterialInfo smi = new showMaterialInfo();
+        tbdPane.addTab("Visa material info", smi.getContentPane());
+
+        reviewRequest rr = new reviewRequest();
+        tbdPane.addTab("Granska förfrågning", rr.getContentPane());
+
+        createRequest cr = new createRequest(uid);
+        tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+
+        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
+        tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+        }
 
 
         /* JFrameCustomerActions ca = new JFrameCustomerActions();
