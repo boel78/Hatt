@@ -32,26 +32,26 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblCustomerID" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAddress" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                               <Component id="txtName" min="-2" pref="144" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblCustomerID" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="txtPhone" min="-2" pref="144" max="-2" attributes="0"/>
                                   <Component id="txtAddress" min="-2" pref="144" max="-2" attributes="0"/>
                                   <Component id="txtEmail" alignment="0" min="-2" pref="144" max="-2" attributes="0"/>
                                   <Component id="txtCustomerID" min="-2" pref="144" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="39" pref="24" max="32767" attributes="0"/>
+                              <EmptySpace min="39" pref="47" max="32767" attributes="0"/>
                               <Component id="btnGet" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -129,7 +129,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Customer ID:"/>
+        <Property name="text" type="java.lang.String" value="Kund ID:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblName">
@@ -137,7 +137,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Name:"/>
+        <Property name="text" type="java.lang.String" value="Namn:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblAddress">
@@ -145,7 +145,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Address:"/>
+        <Property name="text" type="java.lang.String" value="Adress:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPhone">
@@ -153,7 +153,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Phone:"/>
+        <Property name="text" type="java.lang.String" value="Tel. Nr:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblEmail">
@@ -161,7 +161,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Email:"/>
+        <Property name="text" type="java.lang.String" value="Epost:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtCustomerID">
@@ -191,7 +191,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Add"/>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg Till"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
@@ -202,7 +202,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Update"/>
+        <Property name="text" type="java.lang.String" value="Uppdatera"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
@@ -213,7 +213,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Remove"/>
+        <Property name="text" type="java.lang.String" value="Ta Bort"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveActionPerformed"/>
@@ -224,7 +224,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Get"/>
+        <Property name="text" type="java.lang.String" value="H&#xe4;mta"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGetActionPerformed"/>

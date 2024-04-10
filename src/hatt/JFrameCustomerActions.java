@@ -49,19 +49,19 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblCustomerID.setForeground(new java.awt.Color(255, 255, 255));
-        lblCustomerID.setText("Customer ID:");
+        lblCustomerID.setText("Kund ID:");
 
         lblName.setForeground(new java.awt.Color(255, 255, 255));
-        lblName.setText("Name:");
+        lblName.setText("Namn:");
 
         lblAddress.setForeground(new java.awt.Color(255, 255, 255));
-        lblAddress.setText("Address:");
+        lblAddress.setText("Adress:");
 
         lblPhone.setForeground(new java.awt.Color(255, 255, 255));
-        lblPhone.setText("Phone:");
+        lblPhone.setText("Tel. Nr:");
 
         lblEmail.setForeground(new java.awt.Color(255, 255, 255));
-        lblEmail.setText("Email:");
+        lblEmail.setText("Epost:");
 
         txtCustomerID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +88,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         });
 
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
-        btnAdd.setText("Add");
+        btnAdd.setText("Lägg Till");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -96,7 +96,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         });
 
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdate.setText("Update");
+        btnUpdate.setText("Uppdatera");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
@@ -104,7 +104,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         });
 
         btnRemove.setForeground(new java.awt.Color(255, 51, 51));
-        btnRemove.setText("Remove");
+        btnRemove.setText("Ta Bort");
         btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoveActionPerformed(evt);
@@ -112,7 +112,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         });
 
         btnGet.setForeground(new java.awt.Color(255, 255, 255));
-        btnGet.setText("Get");
+        btnGet.setText("Hämta");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGetActionPerformed(evt);
@@ -131,23 +131,23 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCustomerID)
+                            .addComponent(lblAddress)
+                            .addComponent(lblPhone)
+                            .addComponent(lblEmail)
+                            .addComponent(lblName))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblName)
-                                .addGap(60, 60, 60)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCustomerID)
-                                    .addComponent(lblAddress)
-                                    .addComponent(lblPhone)
-                                    .addComponent(lblEmail))
-                                .addGap(22, 22, 22)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, Short.MAX_VALUE)
+                                .addGap(39, 47, Short.MAX_VALUE)
                                 .addComponent(btnGet))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
