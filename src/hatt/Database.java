@@ -144,7 +144,7 @@ public class Database {
             System.out.println("Row deleted successfully");
         } catch (InfException ex) {
             ex.printStackTrace();
-            // felmeddelande
+            
         }
     }
 }
