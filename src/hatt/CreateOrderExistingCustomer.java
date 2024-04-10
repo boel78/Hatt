@@ -8,11 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import oru.inf.InfDB;
-import oru.inf.InfException;
-
-
-
 
 /**
  *
@@ -20,11 +15,7 @@ import oru.inf.InfException;
  */
 public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
-private static InfDB idb;
-
-
-    public CreateOrderExistingCustomer(InfDB idb) {
-        this.idb = idb;
+    public CreateOrderExistingCustomer() {
         initComponents();
         fillCobCustomers();
     }
@@ -309,109 +300,77 @@ private static InfDB idb;
     }// </editor-fold>//GEN-END:initComponents
 
     //Returns the value in the combobox and makes it into a string
-    private String getCustomerEmail(){
-        return cobCustomers.getSelectedItem().toString();     
+    private String getCustomerEmail() {
+        return cobCustomers.getSelectedItem().toString();
     }
-            
+
     private void cobCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cobCustomersActionPerformed
 
-   
         //Fills the textfields with information about the chosen customer
         String customerEmail = getCustomerEmail();
-       
-       /* String name = db.fetchSingle("name", "customer", "Email", customerEmail);
-        String address = db.fetchSingle("address", "customer", "Email", customerEmail);
-        String phone = db.fetchSingle("phone", "customer", "Email", customerEmail);
-                
-            tfName.setText(name);
-            tfAddress.setText(address);
-            tfPhone.setText(phone);
-            tfEmail.setText(customerEmail);
-      */  
-     
-     //GÅR INTE ATT ANVÄNDA DATABASKLASSENS FETCHSINGLE!!!!!!
-       try {
-            String nameQuery = "SELECT Name FROM Customer WHERE Email = '" + customerEmail + "'";
-            String addressQuery = "SELECT Address FROM Customer WHERE Email = '" + customerEmail + "'";
-            String phoneQuery = "SELECT Phone FROM Customer WHERE Email = '" + customerEmail + "'";
 
-            String name = idb.fetchSingle(nameQuery);
-            String address = idb.fetchSingle(addressQuery);
-            String phone = idb.fetchSingle(phoneQuery);
+        String name = Database.fetchSingle("name", "customer", "Email", customerEmail);
+        String address = Database.fetchSingle("address", "customer", "Email", customerEmail);
+        String phone = Database.fetchSingle("phone", "customer", "Email", customerEmail);
 
-            tfName.setText(name);
-            tfAddress.setText(address);
-            tfPhone.setText(phone);
-            tfEmail.setText(customerEmail);
-
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Database error!");
-            System.out.println("Internal error message!" + e.getMessage());
-        }
-
-
+        tfName.setText(name);
+        tfAddress.setText(address);
+        tfPhone.setText(phone);
+        tfEmail.setText(customerEmail);
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
-        ArrayList<String> fabrics = getFabricsTf();   
-        ArrayList<String> accessories = getAccessoriesTf();  
-        if(Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)){
-        if (Validation.doesFabricsExist(fabrics) && Validation.doesAccessoriesExist(accessories) && Validation.isDoubleErrorMessage(tfEstimatedTime) && Validation.validateDescription(tfDescription) && Validation.isDoubleIfNotEmpty(tfAmount1) && Validation.isDoubleIfNotEmpty(tfAmount2) && Validation.isDoubleIfNotEmpty(tfAmount3) && Validation.isDoubleIfNotEmpty(tfAmount4) && Validation.isDoubleIfNotEmpty(tfSize1) && Validation.isDoubleIfNotEmpty(tfSize2) && Validation.isDoubleIfNotEmpty(tfSize3) && Validation.isDoubleIfNotEmpty(tfSize4)) {
-            try{
-                
+        ArrayList<String> fabrics = getFabricsTf();
+        ArrayList<String> accessories = getAccessoriesTf();
+        if (Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)) {
+            if (Validation.doesFabricsExist(fabrics) && Validation.doesAccessoriesExist(accessories) && Validation.isDoubleErrorMessage(tfEstimatedTime) && Validation.validateDescription(tfDescription) && Validation.isDoubleIfNotEmpty(tfAmount1) && Validation.isDoubleIfNotEmpty(tfAmount2) && Validation.isDoubleIfNotEmpty(tfAmount3) && Validation.isDoubleIfNotEmpty(tfAmount4) && Validation.isDoubleIfNotEmpty(tfSize1) && Validation.isDoubleIfNotEmpty(tfSize2) && Validation.isDoubleIfNotEmpty(tfSize3) && Validation.isDoubleIfNotEmpty(tfSize4)) {
+
                 //Fetches the customer info based on the choice in the combobox
                 String customerEmail = getCustomerEmail();
                 String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
-                
+
                 //Fetches the description and time for ordering a hat
                 String description = tfDescription.getText();
                 double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
-                
+
                 //Creates a new orderID
-                //Ska in i databasen
-                String orderId = idb.getAutoIncrement("xOrder", "oid");
-                
+                String orderID = Database.getAutoIncrement("xOrder", "oid");
+
                 //Creates the order
-                //Ska in i databasen
-                String query = "INSERT INTO xorder VALUES (" + orderId + ",'" + description + "'," + estimatedTime + ", 1," + customerID + ")";
-                idb.insert(query);
-                
+                String orderColumns = "(oid, description, estimated_time, created_by, customer)";
+                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + ",1," + customerID + ")";
+                Database.insert("xorder", orderColumns, ordeValues);
+
                 //Fetches the fabrics and accessories
-                HashMap <String, String> accessoriesAmounts = getAccessoriesWithAmount();
-                HashMap <String, String> fabricSizes = getFabricsWithSize();
-                
+                HashMap<String, String> accessoriesAmounts = getAccessoriesWithAmount();
+                HashMap<String, String> fabricSizes = getFabricsWithSize();
+
                 //Loops trough the fabrics
                 for (String fabricMaterials : fabricSizes.keySet()) {
                     String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
                     String fabricAmount = fabricSizes.get(fabricMaterials);
-                    
+
                     //Adds the orderID, materialID and the amount to "order_consists_of_materials"
-                    //Ska in i databasen
-                    String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + fabricMid + "," + fabricAmount + ")";
-                    idb.insert(query3);
+                    String consistsOfColumns = "(oid, mid, amount)";
+                    String cosistsOfValues = "(" + orderID + "," + fabricMid + "," + fabricAmount + ")";
+                    Database.insert("order_consists_of_materials", consistsOfColumns, cosistsOfValues);
                 }
-                
+
                 //Loops trough the accessories
                 for (String accessoriesMaterials : accessoriesAmounts.keySet()) {
                     String accessoriesMid = Database.fetchSingle("mid", "materials", "name", accessoriesMaterials);
                     String accessoriesAmount = accessoriesAmounts.get(accessoriesMaterials);
-                    
+
                     //Adds the orderID, materialID and the amount to "order_consists_of_materials"
-                    //Ska in i databasen
-                    String query3 = "INSERT INTO order_consists_of_materials VALUES (" + orderId + "," + accessoriesMid + "," + accessoriesAmount + ")";
-                    idb.insert(query3);
+                    String consistsOfColumns = "(oid, mid, amount)";
+                    String cosistsOfValues = "(" + orderID + "," + accessoriesMid + "," + accessoriesAmount + ")";
+                    Database.insert("order_consists_of_materials", consistsOfColumns, cosistsOfValues);
                 }
+                JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
             }
-            
-            catch(InfException ex){
-                JOptionPane.showMessageDialog(null, "Database error!");
-                System.out.println("Internal error message!" + ex.getMessage());
-            }
-            JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
         }
-        }    
     }//GEN-LAST:event_btnConfirmActionPerformed
-    
+
     //Method that fetches the accessories fields and connects them with an amount in a hashMap
     private HashMap<String, String> getAccessoriesWithAmount() {
         ArrayList<JTextField> tfAccessories = new ArrayList<>();
@@ -419,27 +378,27 @@ private static InfDB idb;
         tfAccessories.add(tfAccessories2);
         tfAccessories.add(tfAccessories3);
         tfAccessories.add(tfAccessories4);
-        
+
         ArrayList<JTextField> tfAmounts = new ArrayList<>();
         tfAmounts.add(tfAmount1);
         tfAmounts.add(tfAmount2);
         tfAmounts.add(tfAmount3);
         tfAmounts.add(tfAmount4);
-        
+
         HashMap<String, String> accessoriesWithAmount = new HashMap<>();
-        
+
         for (int i = 0; i < tfAccessories.size(); i++) {
 
-            String fabric = tfAccessories.get(i).getText();      
+            String fabric = tfAccessories.get(i).getText();
             String size = tfAmounts.get(i).getText();
-            
+
             if (!fabric.isEmpty() && !size.isEmpty()) {
-            accessoriesWithAmount.put(fabric, size);
-        }
+                accessoriesWithAmount.put(fabric, size);
+            }
         }
         return accessoriesWithAmount;
     }
-    
+
     //Method that fetches the fabric fields and connects them with an amount in a hashMap
     private HashMap<String, String> getFabricsWithSize() {
         ArrayList<JTextField> tfFabrics = new ArrayList<>();
@@ -447,23 +406,23 @@ private static InfDB idb;
         tfFabrics.add(tfFabric2);
         tfFabrics.add(tfFabric3);
         tfFabrics.add(tfFabric4);
-        
+
         ArrayList<JTextField> tfSizes = new ArrayList<>();
         tfSizes.add(tfSize1);
         tfSizes.add(tfSize2);
         tfSizes.add(tfSize3);
         tfSizes.add(tfSize4);
-        
+
         HashMap<String, String> fabricsWithSize = new HashMap<>();
-        
+
         for (int i = 0; i < tfFabrics.size(); i++) {
 
-            String fabric = tfFabrics.get(i).getText();      
+            String fabric = tfFabrics.get(i).getText();
             String size = tfSizes.get(i).getText();
-            
+
             if (!fabric.isEmpty() && !size.isEmpty()) {
-            fabricsWithSize.put(fabric, size);
-        }
+                fabricsWithSize.put(fabric, size);
+            }
         }
         return fabricsWithSize;
     }
@@ -472,57 +431,45 @@ private static InfDB idb;
     private void fillCobCustomers() {
         cobCustomers.addItem("");
         ArrayList<String> emails;
-        try {
-            String query = "SELECT email FROM customer";
-            emails = idb.fetchColumn(query);
-
-            for (String email : emails) {
-                cobCustomers.addItem(email);
-
-            }
-
-        } catch (InfException e) {
-            System.out.println("Databasfel");
+        emails = Database.fetchColumn(false, "email", "customer", "", "");
+        for (String email : emails) {
+            cobCustomers.addItem(email);
         }
-        
     }
-    
-    
-    private ArrayList<String> getFabricsTf(){
+
+    private ArrayList<String> getFabricsTf() {
         ArrayList<String> allFabrics = new ArrayList<>();
         ArrayList<String> fabricsWithValue = new ArrayList<>();
         allFabrics.add(tfFabric1.getText());
         allFabrics.add(tfFabric2.getText());
         allFabrics.add(tfFabric3.getText());
         allFabrics.add(tfFabric4.getText());
-        
-        for(String fabric : allFabrics){
-            if(!fabric.isEmpty()){
+
+        for (String fabric : allFabrics) {
+            if (!fabric.isEmpty()) {
                 fabricsWithValue.add(fabric);
             }
         }
-        
+
         return fabricsWithValue;
     }
-    
-    private ArrayList<String> getAccessoriesTf(){
+
+    private ArrayList<String> getAccessoriesTf() {
         ArrayList<String> accessories = new ArrayList<>();
         ArrayList<String> accessoriesWithValue = new ArrayList<>();
         accessories.add(tfAccessories1.getText());
         accessories.add(tfAccessories2.getText());
         accessories.add(tfAccessories3.getText());
         accessories.add(tfAccessories4.getText());
-        
-        for(String accessory : accessories){
-            if(!accessory.isEmpty()){
+
+        for (String accessory : accessories) {
+            if (!accessory.isEmpty()) {
                 accessoriesWithValue.add(accessory);
             }
         }
-        
+
         return accessoriesWithValue;
     }
-            
-    
 
     /**
      * @param args the command line arguments
@@ -569,7 +516,7 @@ private static InfDB idb;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateOrderExistingCustomer(idb).setVisible(true);
+                new CreateOrderExistingCustomer().setVisible(true);
             }
         });
     }
