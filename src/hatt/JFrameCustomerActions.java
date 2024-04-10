@@ -301,7 +301,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String email = txtEmail.getText();
         Database db = new Database();
 
-        String whereIdentifier = "SELECT cid FROM customer WHERE name = '" + name + "' AND address = '" + address + "' AND phone = '" + phone + "' AND email = '" + email + "';";
+        String whereIdentifier = "(SELECT cid FROM customer WHERE name = '" + name + "' AND address = '" + address + "' AND phone = '" + phone + "' AND email = '" + email + "';)";
                 
 
         if (customerID.equals(db.fetchSingle("cid", "customer", "cid", whereIdentifier))) {
