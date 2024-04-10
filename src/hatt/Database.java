@@ -6,6 +6,7 @@ package hatt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class Database {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
+
     }
 
     public static ArrayList<String> getAllCustomerID() {
@@ -58,7 +60,7 @@ public class Database {
 
     //tableName är tabellnamnet
     //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
-    public HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
+    public static HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
         String query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
         HashMap<String, String> response = new HashMap<String, String>();
         System.out.println(query);
@@ -70,7 +72,7 @@ public class Database {
         return response;
     }
 
-    public ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
+    public static ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
         String query = "";
         if (whereBool) {
@@ -85,6 +87,56 @@ public class Database {
         }
 
         return list;
+    }
+    
+    //whereBool ska vara true om man vill ha med WHERE eller false om man inte vill
+    //columnName är kolumnnamnet på kolumnen du vill hämta ifrån
+    //tableName är tabellnamnet
+    //whereIdentifier är eran identifierare på sökningen, t.ex WHERE where = whereIdentifier
+    //Om whereIdentifier är varchar skriv med ' ' i parametern
+    public static ArrayList<String> fetchColumn(boolean whereBool, String columnName, String tableName, String where, String whereIdentifier) {
+        ArrayList<String> response = new ArrayList<>();
+        String query = "";
+        if (whereBool) {
+                query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
+            } else{
+                query = "SELECT " + columnName + " FROM " + tableName;
+            }
+        try {
+          response = idb.fetchColumn(query);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+        return response;
+    }
+
+    // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
+    public static void insert(String tableName, String columns, String values) {
+        String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+        try {
+            idb.insert(query);
+            System.out.println("Insert succesful");
+
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    //Ganska självförklarlig, tableName är tabellnamnet och columnName är kolumnnamnet
+    //som du vill ha inkrement-id ifrån. 
+    public static String getAutoIncrement(String tableName, String columnName) {
+        String id = "0";
+
+        try {
+            id = idb.getAutoIncrement(tableName, columnName);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Ett fel uppstod med att lägga till en ny kund.");
+        }
+
+        return id;
     }
 
     // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
