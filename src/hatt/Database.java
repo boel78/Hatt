@@ -139,7 +139,7 @@ public class Database {
         return id;
     }
     
-    public void deleteRow(String tableName, String where, String whereIdentifier) {
+    public static void deleteRow(String tableName, String where, String whereIdentifier) {
         try {
             String query = "DELETE FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
             idb.delete(query);
@@ -150,7 +150,7 @@ public class Database {
         }
     }
     
-    public void updatePreparedQuery(String preparedQuery){
+    public static void updatePreparedQuery(String preparedQuery){
         try {
             idb.update(preparedQuery);
             System.out.println("Update lyckad");

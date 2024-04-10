@@ -22,7 +22,7 @@ public class Validation {
 
     }
 
-    public boolean validateName(String name) {
+    public static boolean validateName(String name) {
         boolean valid = false;
         if (name.matches("[a-zA-ZåäöÅÄÖ]+ \\s?+[a-zA-ZåäöÅÄÖ]+")) {
             System.out.println("NAMN OK");
@@ -31,7 +31,7 @@ public class Validation {
         return valid;
     }
 
-    public boolean validateEmailTypo(String email) {
+    public static boolean validateEmailTypo(String email) {
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
         if (!email.isEmpty()) {
@@ -49,7 +49,7 @@ public class Validation {
     }
 
 
-    public boolean validatePhone(String phone) {
+    public static boolean validatePhone(String phone) {
         boolean valid = false;
         if (!phone.isEmpty()) {
             if (phone.matches("\\d{3}-\\d{7}")) {
@@ -125,7 +125,7 @@ public class Validation {
         new Validation();
     }
 
-    public boolean isDouble(String input) {
+    public static boolean isDouble(String input) {
         boolean b = false;
         try {
             Double.parseDouble(input);
@@ -266,32 +266,6 @@ public class Validation {
             }
         }
         return exists;
-    }
-
-    public boolean existsCustomerID(String customerID) {
-        ArrayList<String> customerIDs = Database.getAllCustomerID();
-        return customerIDs.contains(customerID);
-    }
-
-    public boolean validateCustomerID(String customerID) {
-        boolean valid = false;
-        // Check if customerID only contains digits
-        if (customerID.matches("\\d+")) {
-
-            if (!existsCustomerID(customerID)) {
-                valid = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Customer ID must be a numeric value");
-            }
-
-        }
-        return valid;
-
-    }
-
-    public static boolean validateAddress(String address) {
-        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*");
-        return valid;
     }
 
 
