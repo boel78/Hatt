@@ -55,7 +55,7 @@ public class Validation {
                 valid = true;
             }
             if (!valid) {
-                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer");
+                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer\n Telefonnummer skrivs såhär: XXX-XXXXXXX");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
