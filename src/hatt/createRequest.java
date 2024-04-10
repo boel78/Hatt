@@ -143,15 +143,12 @@ public class createRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSendActionPerformed
     
     public static String[] getCBHatModels(){
+        Database db = new Database();
         ArrayList<String> CBAL = new ArrayList<>();
+        CBAL = db.fetchColumn(false, "Name", "stocked_product", "", "");
+        CBAL.add("Nej");
         
-        try{
-            CBAL = idb.fetchColumn("SELECT name FROM stocked_product");
-            CBAL.add("Nej");
-            System.out.println();
-        } catch (InfException ex) {
-            ex.printStackTrace();
-        }
+        
         
         String[] CBHatModelsx = new String[CBAL.size()];
         CBAL.toArray(CBHatModelsx);
@@ -161,15 +158,12 @@ public class createRequest extends javax.swing.JFrame {
     }
     
     public static String[] getCBCustomer(){
+        Database db = new Database();
         ArrayList<String> CBAL = new ArrayList<>();
         
+        CBAL = db.fetchColumn(false, "name", "customer", "", "");
         
-        try{
-            CBAL = idb.fetchColumn("SELECT name FROM customer");
-            System.out.println();
-        } catch (InfException ex) {
-            ex.printStackTrace();
-        }
+        
         
         String[] CBCustomer = new String[CBAL.size()];
         CBAL.toArray(CBCustomer);
