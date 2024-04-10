@@ -14,8 +14,11 @@ import javax.swing.JTextField;
  * @author joelnorling
  */
 public class CreateOrderExistingCustomer extends javax.swing.JFrame {
+    
+    private String uid;
 
-    public CreateOrderExistingCustomer() {
+    public CreateOrderExistingCustomer(String uid) {
+        this.uid = uid;
         initComponents();
         fillCobCustomers();
     }
@@ -335,7 +338,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
                 //Creates the order
                 String orderColumns = "(oid, description, estimated_time, created_by, customer)";
-                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + ",1," + customerID + ")";
+                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + ")";
                 Database.insert("xorder", orderColumns, ordeValues);
 
                 //Fetches the fabrics and accessories
@@ -510,12 +513,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateOrderExistingCustomer().setVisible(true);
-            }
-        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

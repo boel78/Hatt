@@ -117,6 +117,9 @@ public class Navigation extends javax.swing.JFrame {
         createRequest cr = new createRequest(uid);
         tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
 
+        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
+        tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+
 
         /* JFrameCustomerActions ca = new JFrameCustomerActions();
         tbdPane.addTab("Hantera kunder", ca.getContentPane());
@@ -125,8 +128,7 @@ public class Navigation extends javax.swing.JFrame {
         
 
         
-        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer();
-        tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+
         
         CreateOrderNewCustomer conc = new CreateOrderNewCustomer();
         tbdPane.addTab("Skapa order för ny kund", conc.getContentPane());
