@@ -303,11 +303,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         boolean valid = false;
         String whereIdentifier = "SELECT cid FROM customer WHERE name = '" + name + "' AND address = '" + address + "' AND phone = '" + phone + "' AND email = '" + email + "';";
                 
-        if (customerID == db.fetchSingle("cid", "customer", "cid", whereIdentifier))   {
-            valid = true;
-        }
-        
-        if (valid) {
+
+        if (customerID == db.fetchSingle("cid", "customer", "cid", whereIdentifier)) {
             if(Validation.existsCustomerID(customerID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
                 CustomerActions actions = new CustomerActions(customerID);
                 
@@ -318,6 +315,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 System.out.println("else i btnUpdate");
                 JOptionPane.showMessageDialog(null, "Något gick fel.");
             }
+        }   else {
+            JOptionPane.showMessageDialog(null, "Kunden Finns inte i systemet.");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
