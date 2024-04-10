@@ -13,9 +13,8 @@ import javax.swing.JOptionPane;
  */
 public class JFrameCustomerActions extends javax.swing.JFrame {
 
-    /**
-     * Creates new form JFrameCreateCustomer
-     */
+        private String fetchedID;
+        
     public JFrameCustomerActions() {
         initComponents();
     }
@@ -224,11 +223,12 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
 
         String customerID = txtCustomerID.getText();
+        fetchedID = txtCustomerID.getText();
 
         CustomerActions actions = new CustomerActions(customerID);
 
         HashMap<String, String> customer = actions.getCustomer(customerID);
-
+        
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
@@ -301,14 +301,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String email = txtEmail.getText();
         Database db = new Database();
 
-        String whereIdentifier = "(SELECT cid FROM customer WHERE name = '" + name + "' AND address = '" + address + "' AND phone = '" + phone + "' AND email = '" + email + "';)";
+        
                 
 
-        if (customerID.equals(db.fetchSingle("cid", "customer", "cid", whereIdentifier))) {
-            if(Validation.existsCustomerID(customerID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
+        if (!fetchedID.isEmpty()) {
+            if(Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
                 CustomerActions actions = new CustomerActions(customerID);
                 
-                actions.updateCustomer(customerID, name, address, phone, email);
+                actions.updateCustomer(fetchedID, name, address, phone, email);
                 System.out.println("if i btnUpdate");
             }   else {
             
@@ -316,7 +316,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Något gick fel.");
             }
         }   else {
-            JOptionPane.showMessageDialog(null, "Kunden Finns inte i systemet.");
+            JOptionPane.showMessageDialog(null, "Hämta kunden du vill ändra först.");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
