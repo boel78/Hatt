@@ -300,11 +300,11 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String email = txtEmail.getText();
         Database db = new Database();
-        boolean valid = false;
+
         String whereIdentifier = "SELECT cid FROM customer WHERE name = '" + name + "' AND address = '" + address + "' AND phone = '" + phone + "' AND email = '" + email + "';";
                 
 
-        if (customerID == db.fetchSingle("cid", "customer", "cid", whereIdentifier)) {
+        if (customerID.equals(db.fetchSingle("cid", "customer", "cid", whereIdentifier))) {
             if(Validation.existsCustomerID(customerID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone))    {
                 CustomerActions actions = new CustomerActions(customerID);
                 
