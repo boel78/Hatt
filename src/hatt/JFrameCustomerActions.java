@@ -43,24 +43,23 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         btnGet = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         JOptionPane = new javax.swing.JOptionPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblCustomerID.setForeground(new java.awt.Color(255, 255, 255));
+        lblCustomerID.setForeground(new java.awt.Color(0, 0, 0));
         lblCustomerID.setText("Kund ID:");
 
-        lblName.setForeground(new java.awt.Color(255, 255, 255));
+        lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setText("Namn:");
 
-        lblAddress.setForeground(new java.awt.Color(255, 255, 255));
+        lblAddress.setForeground(new java.awt.Color(0, 0, 0));
         lblAddress.setText("Adress:");
 
-        lblPhone.setForeground(new java.awt.Color(255, 255, 255));
+        lblPhone.setForeground(new java.awt.Color(0, 0, 0));
         lblPhone.setText("Tel. Nr:");
 
-        lblEmail.setForeground(new java.awt.Color(255, 255, 255));
+        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("Epost:");
 
         txtCustomerID.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +86,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         });
 
-        btnAdd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
         btnAdd.setText("Lägg Till");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +94,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
         btnUpdate.setText("Uppdatera");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,16 +110,13 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         });
 
-        btnGet.setForeground(new java.awt.Color(255, 255, 255));
+        btnGet.setForeground(new java.awt.Color(0, 0, 0));
         btnGet.setText("Hämta");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGetActionPerformed(evt);
             }
         });
-
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("TestKnapp");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -150,9 +146,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                                 .addGap(39, 47, Short.MAX_VALUE)
                                 .addComponent(btnGet))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(22, 194, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnRemove)
                             .addGroup(layout.createSequentialGroup()
@@ -192,8 +186,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(btnUpdate)
-                    .addComponent(jButton1))
+                    .addComponent(btnUpdate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRemove)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -362,7 +355,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private javax.swing.JButton btnGet;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblCustomerID;
