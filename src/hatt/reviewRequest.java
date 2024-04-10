@@ -21,8 +21,9 @@ public class reviewRequest extends javax.swing.JFrame {
     /**
      * Creates new form reviewRequest
      */
-    public reviewRequest() {
+    public reviewRequest(InfDB idb) {
         initComponents();
+        this.idb = idb;
     }
 
     /**
@@ -129,15 +130,13 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
         // TODO add your handling code here:
+        Database db = new Database();
         String txt = "";
         String cbContent = cbReviews.getSelectedItem().toString();
         String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
         rID = numbers;
-        try {
-            txt = idb.fetchSingle("SELECT description FROM requests WHERE rid = '" + numbers + "'");
-        } catch (InfException ex){
-            ex.printStackTrace();
-        }
+        txt = db.fetchSingle("description", "requests", "rid", "'" + numbers + "'");
+        
         
         txtAreaDescription.setText("");
         txtAreaDescription.append(txt);
@@ -167,9 +166,11 @@ public class reviewRequest extends javax.swing.JFrame {
     public static String[] getCBReviews(){
         ArrayList<String> CBAL = new ArrayList<>();
         ArrayList<String> rid = new ArrayList<>();
+        Database db = new Database();
+        rid = db.fetchColumn(false, "rid", "requests", "", "");
         
-        try {
-            rid = idb.fetchColumn("SELECT rid FROM requests");
+        
+        try{
             for(String s : rid){
                 CBAL.add(idb.fetchSingle("SELECT name FROM customer WHERE cid IN (SELECT customer FROM requests WHERE rid = '" + s + "')") + " " + s);
             }
@@ -186,42 +187,7 @@ public class reviewRequest extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        try {
-            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        }
-        catch(InfException ex){
-            ex.printStackTrace();
-        }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new reviewRequest().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompleteDenyAccept;
