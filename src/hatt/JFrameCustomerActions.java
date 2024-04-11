@@ -242,8 +242,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String orgNumber = txtOrgNumber.getText();
 
-        if (Validation.txtHasValue(txtAddress) && Validation.validateAddress(address)) {
-            if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
+            if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone) && Validation.txtHasValue(txtAddress) && Validation.validateAddress(address))) {
                 actions = new CustomerActions(customerID, name, address, phone, email);
 
                 actions.addCustomer(name, address, phone, email);
@@ -256,7 +255,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                     }
                 }
             }
-        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
