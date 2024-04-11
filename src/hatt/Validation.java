@@ -24,7 +24,7 @@ public class Validation {
 
     public static boolean validateName(String name) {
         boolean valid = false;
-        if (name.matches("[a-zA-ZåäöÅÄÖ]+ \\s?+[a-zA-ZåäöÅÄÖ]+")) {
+        if (name.matches("[a-zA-ZåäöÅÄÖ]+\\s?+[a-zA-ZåäöÅÄÖ]+")) {
             System.out.println("NAMN OK");
             valid = true;
         }
@@ -272,7 +272,22 @@ public class Validation {
         }
         return exists;
     }
-
+public static boolean doesEmailExist(String Email) {
+    
+    boolean doesntExists = true;
+     ArrayList<String> existingEmails = new ArrayList<>();
+    existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
+    
+    for (String oneEmail : existingEmails) {
+        if (Email.equals(oneEmail)) {
+            doesntExists = false;
+            
+        }
+    }
+     
+     return doesntExists;
+    
+}
 
 
 }

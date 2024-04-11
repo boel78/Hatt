@@ -128,12 +128,14 @@ public class CreateCustomer extends javax.swing.JFrame {
         try {
         String id = idb.getAutoIncrement("customer","cid");
         
-        if (Validation.txtHasValue(txtAddress)&& Validation.txtHasValue(txtName) && Validation.validateName(txtName.getText())&& (Validation.validateAddress(txtAddress.getText())) && (Validation.validateEmailTypo(txtEmail.getText())) && (Validation.validatePhone(txtPhone.getText())) && txtName.getText().length() < 25){
-           
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
+        
+        if (Validation.doesEmailExist(email) && Validation.txtHasValue(txtAddress) && Validation.txtHasValue(txtName) && Validation.validateName(txtName.getText()) && Validation.validateAddress(txtAddress.getText()) && Validation.validateEmailTypo(txtEmail.getText()) && Validation.validatePhone(txtPhone.getText()) && txtName.getText().length() < 25){
+           
+        
         
         String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
         idb.insert(fraga);
