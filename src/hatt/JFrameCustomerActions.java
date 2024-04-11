@@ -242,7 +242,11 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String orgNumber = txtOrgNumber.getText();
 
-            if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone) && Validation.txtHasValue(txtAddress) && Validation.validateAddress(address))) {
+            if ((((Validation.txtHasValue(txtOrgNumber) && Validation.validateOrgNumber(orgNumber)) || !txtOrgNumber.getText().isEmpty()) &&
+                    Validation.txtHasValue(txtName) && 
+                    Validation.txtHasValue(txtEmail)) && 
+                    Validation.txtHasValue(txtPhone) && 
+                    Validation.txtHasValue(txtAddress)) {
                 actions = new CustomerActions(customerID, name, address, phone, email);
 
                 actions.addCustomer(name, address, phone, email);

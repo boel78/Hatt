@@ -298,6 +298,7 @@ public class Validation {
         }
 
         // Om alla kontroller passerar, returnera true
+        System.out.println("Return true i validateOrgNumber()");
         return true;
     }
 }
