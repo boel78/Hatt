@@ -248,9 +248,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
                 actions.addCustomer(name, address, phone, email);
                 
-                if(txtOrgNumber.getText() != null) {
+                if(!txtOrgNumber.getText().equals("")) {
                     if(Validation.validateOrgNumber(orgNumber)){
-                        
+                        System.out.println("lägg till org nr");
                     }   else {
                         JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
                     }
