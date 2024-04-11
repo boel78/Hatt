@@ -300,4 +300,21 @@ public class Validation {
         // Om alla kontroller passerar, returnera true
         return true;
     }
+    
+    //Kollar om en Email redan finns i databasen
+    public static boolean doesEmailExist(String Email) {
+    
+    boolean doesntExists = true;
+     ArrayList<String> existingEmails = new ArrayList<>();
+    existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
+    
+    for (String oneEmail : existingEmails) {
+        if (Email.equals(oneEmail)) {
+            doesntExists = false;
+            
+        }
+    }
+     
+     return doesntExists;
+    }
 }
