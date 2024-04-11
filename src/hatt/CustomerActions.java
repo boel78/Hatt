@@ -92,7 +92,7 @@ public class CustomerActions {
             boolean orderHittade = false;
             while (!orderHittade) {
                 if (Validation.checkExistingCell("xOrder", "customer", customerID)) {
-                    db.updatePreparedQuery("UPDATE xOrder SET customer=null where customer= " + customerID);
+                    Database.updatePreparedQuery("UPDATE xOrder SET customer=null where customer= " + customerID);
 
                 } else {
                     orderHittade = true;
