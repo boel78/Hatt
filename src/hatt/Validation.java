@@ -48,7 +48,7 @@ public class Validation {
         return valid;
     }
     
-    public boolean validatePhone(String phone){
+    public static boolean validatePhone(String phone){
         boolean valid = false;
         if(!phone.isEmpty()){
             if(phone.matches("\\d{3}-\\d{7}")){
@@ -66,21 +66,7 @@ public class Validation {
     }
 
 
-    public static boolean validatePhone(String phone) {
-        boolean valid = false;
-        if (!phone.isEmpty()) {
-            if (phone.matches("\\d{3}-\\d{7}")) {
-                valid = true;
-            }
-            if (!valid) {
-                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer\nTelefonnummer skrivs såhär:\nXXX-XXXXXXX");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
-        }
-        return valid;
-
-    }
+    
 
     public static boolean txtHasValue(JTextField txt) {
         boolean valid = true;
