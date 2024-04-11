@@ -24,7 +24,7 @@ public class Validation {
 
     public static boolean validateName(String name) {
         boolean valid = false;
-        if (name.matches("[a-zA-ZåäöÅÄÖ]+ \\s?+[a-zA-ZåäöÅÄÖ]+")) {
+        if (name.matches("[a-zA-ZåäöÅÄÖ]+\\s?+[a-zA-ZåäöÅÄÖ]+")) {
             System.out.println("NAMN OK");
             valid = true;
         }

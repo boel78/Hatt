@@ -60,6 +60,8 @@ public class CustomerActions {
                 JOptionPane.showMessageDialog(null, "Misslyckades att generera CustomerID.");
                 System.out.println(id);
             }
+        } else {
+            System.out.println("validering i addCustomer misslyckad");
         }
     }
 
