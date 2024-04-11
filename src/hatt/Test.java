@@ -18,12 +18,14 @@ public class Test {
             ex.printStackTrace();
         }
         try{
-        System.out.println(idb.fetchRow("SELECT * FROM Kund"));
+        System.out.println(idb.fetchRow("SELECT * FROM customer"));
         System.out.println("Test lyckades!");
         }
         catch(InfException ex){
             ex.printStackTrace();
         }
+        new Database();
+        
     }
     //public void hej då{
         

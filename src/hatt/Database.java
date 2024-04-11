@@ -5,10 +5,10 @@
 package hatt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -68,7 +68,7 @@ public class Database {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
-        return response;
+        return response;    
     }
 
     public static ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
@@ -139,7 +139,7 @@ public class Database {
         return id;
     }
     
-    public void deleteRow(String tableName, String where, String whereIdentifier) {
+    public static void deleteRow(String tableName, String where, String whereIdentifier) {
         try {
             String query = "DELETE FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
             idb.delete(query);
@@ -150,7 +150,7 @@ public class Database {
         }
     }
     
-    public void updatePreparedQuery(String preparedQuery){
+    public static void updatePreparedQuery(String preparedQuery){
         try {
             idb.update(preparedQuery);
             System.out.println("Update lyckad");

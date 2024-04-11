@@ -21,8 +21,6 @@ public class CustomerActions {
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
     // private String orgNumber = ""; //Database: business/org_number
-    private static Database db;
-    private Validation validation;
 
     public CustomerActions(String customerID, String name, String address, String phone, String email) {
         //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
@@ -31,24 +29,21 @@ public class CustomerActions {
         this.address = address;
         this.phone = phone;
         this.email = email;
-        validation = new Validation();
-        db = new Database();
+
     }
 
     public CustomerActions(String customerID) {
-        //Koppling till databsen sker i konstruktorn med en kund som readan finns 
+        //Koppling till databsen sker i konstruktorn med en kund som readan finns
         this.customerID = customerID;
-        db = new Database();
     }
 
     public void addCustomer(String name, String address, String phone, String email) {
-        Validation validation = new Validation();
 
-        if (validation.validateName(name) && validation.validateAddress(address)
-                && validation.validateEmailTypo(email) && validation.validatePhone(phone)) {
+        if (Validation.validateName(name) && Validation.validateAddress(address)
+                && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
 
             // Generera nytt customerID
-            String id = db.getAutoIncrement("customer", "cid");
+            String id = Database.getAutoIncrement("customer", "cid");
             System.out.println("id innan inser " + id);
 
             // Kontrollera om id är null innan det används
@@ -57,7 +52,7 @@ public class CustomerActions {
                 String values = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
 
                 // Utför infogningen i databasen
-                db.insert("customer", "(cid, name, address, phone, email)", values);
+                Database.insert("customer", "(cid, name, address, phone, email)", values);
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
                 System.out.println(id + " " + values);
@@ -73,7 +68,7 @@ public class CustomerActions {
         String preparedQuery = ("UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID);
         System.out.println(preparedQuery);
         try {
-            db.updatePreparedQuery(preparedQuery);
+            Database.updatePreparedQuery(preparedQuery);
             JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -87,11 +82,13 @@ public class CustomerActions {
         try {
             //Om kunden är privatkund
             if (Validation.checkExistingCell("private_customer", "cid", customerID)) {
-                db.deleteRow("private_customer", "cid", customerID);
+                Database.deleteRow("private_customer", "cid", customerID);
             } else if (Validation.checkExistingCell("business_customer", "cid", customerID)) {
-                db.deleteRow("business_customer", "cid", customerID);
+                Database.deleteRow("business_customer", "cid", customerID);
             }
 
+
+            //Loopar igenom ordrar tills alla är borta
             boolean orderHittade = false;
             while (!orderHittade) {
                 if (Validation.checkExistingCell("xOrder", "customer", customerID)) {
@@ -102,17 +99,19 @@ public class CustomerActions {
                 }
             }
 
+            //Loopar igenom alla requests
             boolean requestsHittade = false;
             while (!requestsHittade) {
                 if (Validation.checkExistingCell("requests", "customer", customerID)) {
-                    db.deleteRow("requests", "customer", customerID);
-                } else {
+                    Database.deleteRow("requests", "customer", customerID);
+                }
+                else{
                     requestsHittade = true;
                 }
 
             }
 
-            db.deleteRow("customer", "cid", customerID);
+            Database.deleteRow("customer", "cid", customerID);
             System.out.println("Kund borttagen");
             valid = true;
             JOptionPane.showMessageDialog(null, "Kunden med kundID " + customerID + " har tagits bort.");
@@ -130,7 +129,7 @@ public class CustomerActions {
         String columnIdentifier = customerID; // Avgörs i gränsittet.
         HashMap<String, String> customer;
 
-        customer = db.fetchRow(tableName, columnWhere, columnIdentifier);
+        customer = Database.fetchRow(tableName, columnWhere, columnIdentifier);
         return customer;
 
     }
