@@ -240,6 +240,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
+        String orgNumber = txtOrgNumber.getText();
 
         if (Validation.txtHasValue(txtAddress) && Validation.validateAddress(address)) {
             if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
@@ -248,10 +249,10 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 actions.addCustomer(name, address, phone, email);
                 
                 if(txtOrgNumber.getText() != null) {
-                    if(){
+                    if(Validation.validateOrgNumber(orgNumber)){
                         
                     }   else {
-                        
+                        JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
                     }
                 }
             }
