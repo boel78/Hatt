@@ -112,7 +112,10 @@ public class Validation {
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
                 if (key.equals(columnName)) {
-                    if (column.get(key).equals(keyWord)) {
+                    if(column.get(key) == null){
+
+                    }
+                    else if (column.get(key).equals(keyWord)) {
                         exists = true;
                     }
                 }
