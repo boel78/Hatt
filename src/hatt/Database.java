@@ -5,10 +5,10 @@
 package hatt;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,6 +47,7 @@ public class Database {
     public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
+        System.out.println(query);
         try {
             response = idb.fetchSingle(query);
         } catch (InfException ex) {
@@ -67,7 +68,7 @@ public class Database {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
-        return response;
+        return response;    
     }
 
     public static ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
@@ -112,6 +113,7 @@ public class Database {
     // columns is "(column1, column2 etc)", values is "(value1, value2, etc)"
     public static void insert(String tableName, String columns, String values) {
         String query = "INSERT INTO " + tableName + " " + columns + " VALUES " + values;
+        System.out.println("query: " + query);
         try {
             idb.insert(query);
             System.out.println("Insert succesful");
@@ -137,14 +139,23 @@ public class Database {
         return id;
     }
     
-    public void deleteRow(String tableName, String where, String whereIdentifier) {
+    public static void deleteRow(String tableName, String where, String whereIdentifier) {
         try {
             String query = "DELETE FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
             idb.delete(query);
             System.out.println("Row deleted successfully");
         } catch (InfException ex) {
             ex.printStackTrace();
-            // felmeddelande
+            
+        }
+    }
+    
+    public static void updatePreparedQuery(String preparedQuery){
+        try {
+            idb.update(preparedQuery);
+            System.out.println("Update lyckad");
+        }   catch(InfException ex) {
+            ex.printStackTrace();
         }
     }
 }
