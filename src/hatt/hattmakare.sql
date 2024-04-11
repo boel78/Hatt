@@ -160,8 +160,8 @@ create table `order`
     estimated_time double      null,
     created_by     int         not null,
     invoice        int         null,
-    customer       int         not null,
-    constraint order_customer_cid_fk
+    customer       int         null,
+    constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint order_employee_uid_fk
         foreign key (created_by) references employee (uid),
@@ -215,6 +215,8 @@ create table requests
         primary key,
     description varchar(25) null,
     reviewed_by int         not null,
+    reviewed    varchar(1)  not null,
+    review_status varchar(1) not null,
     customer    int         not null,
     constraint requests_customer_cid_fk
         foreign key (customer) references customer (cid),
@@ -237,3 +239,21 @@ create table waybill
 
 INSERT INTO hattmakardb.accessories (amount, mid) VALUES (42, 2);
 INSERT INTO hattmakardb.accessories (amount, mid) VALUES (3, 4);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (1, 'Jeanshat', 4, 1, 1);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (2, 'Doctorateshat', 2, 1, 1);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (3, 'Silkbonnet', 3, 2, 2);
+INSERT INTO hattmakardb.order_consists_of_materials (oid, mid, amount) VALUES (1, 1, 1);
+INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
+INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
+INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
+INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
+INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
+INSERT INTO hattmakardb.requests (rid, description, reviewed_by, reviewed, review_status, customer) VALUES (1, 'En jeanshatt', 1, 'N', 'N', 1);
+INSERT INTO hattmakardb.stocked_product (sid, name, description, starting_price) VALUES (1, 'Doctorateshat', 'A Doctorates hat', 1200);
+INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (1, 'Lollos Jeans', 'lollo.jeans@gmail.com', '070-0000000');
+INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (2, 'Alis Accessories', 'aliexpress@gmail.com', '073-0200472');
+INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (3, 'Silvias Silk', 'silkysmooth@hotmail.com', '042-0739282');
+INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (1, 'Otto', 'ottohatt@gmail.com', 'partner', '070-5551231');
+INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (2, 'Judith', 'judithhatt@gmail.com', 'partner', '070-1234565');
+INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (3, 'Joakim', 'joakimrevisor@gmail.com', 'accountant', '073-9876543');
+INSERT INTO hattmakardb.waybill (wid, oid, volume, weight, content, package_count) VALUES (1, 1, 1, 5, 'Jeanshat', '1');
