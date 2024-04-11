@@ -165,6 +165,10 @@ public class CustomerActions {
 
     }
 
+    public void addOrgNrToCustomer()    {
+        
+    }
+    
     public void testMethod(String test1, String test2) {
         String testName = test1;
         String testEmail = test2;
