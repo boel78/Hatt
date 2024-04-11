@@ -159,7 +159,7 @@ create table xOrder
     description    varchar(50) null,
     estimated_time double      null,
     created_by     int         not null,
-    customer       int         not null,
+    customer       int         null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint xOrder_employee_uid_fk

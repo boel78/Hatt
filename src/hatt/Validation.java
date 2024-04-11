@@ -48,7 +48,6 @@ public class Validation {
         }
         return valid;
     }
-   
 
     public static boolean validatePhone(String phone) {
         boolean valid = false;
@@ -112,7 +111,10 @@ public class Validation {
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
                 if (key.equals(columnName)) {
-                    if (column.get(key).equals(keyWord)) {
+                    if(column.get(key) == null){
+                    
+                    }
+                    else if (column.get(key).equals(keyWord)) {
                         exists = true;
                     }
                 }
@@ -120,8 +122,8 @@ public class Validation {
         }
         return exists;
     }
-    
-        public static void main(String[] args) {
+
+    public static void main(String[] args) {
         new Validation();
     }
 

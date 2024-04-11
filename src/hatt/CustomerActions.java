@@ -82,6 +82,7 @@ public class CustomerActions {
     }
 
     public boolean removeCustomer(String customerID) {
+
         boolean valid = false;
         try {
             //Om kunden är privatkund
@@ -94,54 +95,21 @@ public class CustomerActions {
             boolean orderHittade = false;
             while (!orderHittade) {
                 if (Validation.checkExistingCell("xOrder", "customer", customerID)) {
+                    db.updatePreparedQuery("UPDATE xOrder SET customer=null where customer= " + customerID);
 
-                    String oid = db.fetchSingle("oid", "xOrder", "customer", customerID);
-                    System.out.println(oid);
-
-                    if (Validation.checkExistingCell("order_consists_of_materials", "oid", oid)) {
-                        System.out.println("BAJS");
-                        db.deleteRow("order_consists_of_materials", "oid", oid);
-                    }
-
-                    if (Validation.checkExistingCell("waybill", "oid", oid)) {
-                        System.out.println("BAJS");
-                        db.deleteRow("waybill", "oid", oid);
-                    }
-
-                    boolean invoiceHittade = false;
-                    while (!invoiceHittade) {
-                        if (Validation.checkExistingCell("invoice", "oid", oid)) {
-                            System.out.println("HITTAR INVOICE");
-                            String inid = db.fetchSingle("inid", "invoice", "oid", oid);
-
-                            if (Validation.checkExistingCell("accountant_access", "inid", inid)) {
-                                db.deleteRow("accountant_access", "inid", inid);
-                            }
-
-                            if (Validation.checkExistingCell("ordering_materials", "inid", inid)) {
-                                db.deleteRow("ordering_materials", "inid", inid);
-                            }
-                            db.deleteRow("invoice", "oid", oid);
-
-                        } else {
-                            invoiceHittade = true;
-                        }
-                    }
-
-                    db.deleteRow("xOrder", "customer", customerID);
                 } else {
                     orderHittade = true;
                 }
             }
+
             boolean requestsHittade = false;
             while (!requestsHittade) {
                 if (Validation.checkExistingCell("requests", "customer", customerID)) {
                     db.deleteRow("requests", "customer", customerID);
-                }
-                else{
+                } else {
                     requestsHittade = true;
                 }
-                
+
             }
 
             db.deleteRow("customer", "cid", customerID);
