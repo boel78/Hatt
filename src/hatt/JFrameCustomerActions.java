@@ -246,6 +246,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 actions = new CustomerActions(customerID, name, address, phone, email);
 
                 actions.addCustomer(name, address, phone, email);
+                
+                if(txtOrgNumber.getText() != null) {
+                    if(){
+                        
+                    }   else {
+                        
+                    }
+                }
             }
         }
     }//GEN-LAST:event_btnAddActionPerformed
