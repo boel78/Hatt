@@ -49,18 +49,20 @@ public class CustomerActions {
             // Kontrollera om id är null innan det används
             if (id != null) {
                 // Förbered värden för infogning i databasen
-                String values = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
-
+                String values1 = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
+                String values2 = "";
                 // Utför infogningen i databasen
-                Database.insert("customer", "(cid, name, address, phone, email)", values);
+                Database.insert("customer", "(cid, name, address, phone, email)", values1);
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
-                System.out.println(id + " " + values);
+                System.out.println(id + " " + values1);
                 
                 if(!orgNumber.equals(""))   {
                     
-                    //Database.insert(name, values, values);
+                    Database.insert(name, values2, values2);
+                    
                     System.out.print("Added as a business customer");
+                    System.out.println(id + " " + values2);
                 }   else    {
                     System.out.println("Added as a private customer");
                 }  
