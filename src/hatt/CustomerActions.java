@@ -180,10 +180,6 @@ public class CustomerActions {
         return customer;
 
     }
-
-    public void addOrgNrToCustomer()    {
-        
-    }
     
     public void testMethod(String test1, String test2) {
         String testName = test1;
