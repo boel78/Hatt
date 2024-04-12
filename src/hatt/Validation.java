@@ -284,7 +284,7 @@ public class Validation {
         String[] parts = orgNumber.split("-");
         if (parts.length != 2) {
             System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
-            
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
             return valid; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
