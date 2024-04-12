@@ -58,16 +58,15 @@ public class CustomerActions {
                 System.out.println(id + " " + values1);
                 
                 if(!orgNumber.equals(""))   {
-                    if(){
+                    if(Validation.existsCustomerID(id)){
                         
                         Database.insert("business_customer", "(cid, org_number)", values2);
-                    
+                        
                         System.out.print("Added as a business customer");
                         System.out.println(id + " " + values2);
                     }   else    {
                         System.out.println("Finns inget cid att placera org_number mot");
                     }
-                    
                 }   else    {
                     System.out.println("Added as a private customer");
                 }  
