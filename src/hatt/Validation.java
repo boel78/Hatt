@@ -272,15 +272,18 @@ public class Validation {
     }
 
     public static boolean validateOrgNumber(String orgNumber) {
+        boolean valid = false;
         // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
         if (orgNumber == null || orgNumber.length() != 11) {
-            return false;
+            JOptionPane.showMessageDialog(null, "Invalid org number: Length must be 11 characters", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
         }
 
         // Dela upp organisationsnumret med bindestrecket som skiljetecken
         String[] parts = orgNumber.split("-");
         if (parts.length != 2) {
-            return false; // Felaktigt format om det inte finns exakt ett bindestreck
+            JOptionPane.showMessageDialog(null, "Invalid org number: Format must be xxxxxx-xxxx", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
         String firstPart = parts[0];
@@ -288,16 +291,20 @@ public class Validation {
 
         // Kontrollera att första delen består av sex siffror
         if (!firstPart.matches("\\d{6}")) {
-            return false;
+            JOptionPane.showMessageDialog(null, "Invalid org number: First part must consist of 6 digits", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
         }
 
         // Kontrollera att andra delen består av fyra siffror
         if (!secondPart.matches("\\d{4}")) {
-            return false;
+            JOptionPane.showMessageDialog(null, "Invalid org number: Second part must consist of 4 digits", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
         }
 
         // Om alla kontroller passerar, returnera true
-        return true;
+        valid = true;
+        JOptionPane.showMessageDialog(null, "Valid org number", "Validation Success", JOptionPane.INFORMATION_MESSAGE);
+        return valid;
     }
 
 }
