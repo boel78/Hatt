@@ -275,14 +275,16 @@ public class Validation {
         boolean valid = false;
         // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
         if (orgNumber == null || orgNumber.length() != 11) {
-            JOptionPane.showMessageDialog(null, "Invalid org number: Length must be 11 characters", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Invalid org number: Length must be 11 characters");
+            JOptionPane.showMessageDialog(null, "Ogiltigt organisations number");
             return valid;
         }
 
         // Dela upp organisationsnumret med bindestrecket som skiljetecken
         String[] parts = orgNumber.split("-");
         if (parts.length != 2) {
-            JOptionPane.showMessageDialog(null, "Invalid org number: Format must be xxxxxx-xxxx", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
+            
             return valid; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
