@@ -279,7 +279,6 @@ public class Validation {
         // Kontrollera om strängen är null eller tom
         if (orgNumber == null || orgNumber.isEmpty()) {
             System.out.println("Empty org number");
-            JOptionPane.showMessageDialog(null, "Organisationsnummer får inte vara tomt.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return valid;
         }
 
