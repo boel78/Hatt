@@ -29,6 +29,8 @@ public class RegisterMaterial extends javax.swing.JFrame {
         new Validation();
         new Database();
         initComponents();
+        fillMaterials();
+
     }
 
     /**
@@ -91,8 +93,6 @@ public class RegisterMaterial extends javax.swing.JFrame {
         jLabel4.setText("Registrera Material");
 
         jLabel5.setText("Pris");
-
-        cbExistingMaterials.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Uppdatera Material");
 
@@ -225,9 +225,15 @@ public class RegisterMaterial extends javax.swing.JFrame {
         String name = txtNewName.getText();
         String price = txtNewPrice.getText();
         String materialText = txtNewMaterial.getText();
-        String mid = Database.getAutoIncrement("materials", "mid");
         String materialType = cbNewMaterialType.getSelectedItem().toString();
+        createMaterial(name, price, materialText, materialType);
+
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    public void createMaterial(String name, String price, String materialText, String materialType) {
+
         boolean materialTextValid = false;
+        String mid = Database.getAutoIncrement("materials", "mid");
 
         //validering ska ske här innan datan införs i databasen.
         //konvertering 
@@ -267,8 +273,20 @@ public class RegisterMaterial extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Kontrollera inmatade uppgifter.");
         }
+    }
 
-    }//GEN-LAST:event_btnRegisterActionPerformed
+    private void fillMaterials() {
+        ArrayList<String> cbValues = new ArrayList<>();
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "materials", "", "");
+        for (HashMap<String, String> row : list) {
+            for (String key : row.keySet()) {
+                if (key.equals("name")) {
+                    cbExistingMaterials.addItem(row.get(key));
+                }
+            }
+        }
+
+    }
 
     /**
      * @param args the command line arguments
