@@ -242,22 +242,16 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String orgNumber = txtOrgNumber.getText();
 
-            if ((((Validation.txtHasValue(txtOrgNumber) && Validation.validateOrgNumber(orgNumber)) || !txtOrgNumber.getText().isEmpty()) &&
+            if ((Validation.validateOrgNumber(orgNumber) || !Validation.txtHasValue(txtOrgNumber)) &&
                     Validation.txtHasValue(txtName) && 
-                    Validation.txtHasValue(txtEmail)) && 
+                    Validation.txtHasValue(txtEmail) && 
                     Validation.txtHasValue(txtPhone) && 
                     Validation.txtHasValue(txtAddress)) {
                 actions = new CustomerActions(customerID, name, address, phone, email);
 
                 actions.addCustomer(name, address, phone, email);
                 
-                if(!txtOrgNumber.getText().equals("")) {
-                    if(Validation.validateOrgNumber(orgNumber)){
-                        System.out.println("lägg till org nr");
-                    }   else {
-                        JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
-                    }
-                }
+
             }
     }//GEN-LAST:event_btnAddActionPerformed
 
