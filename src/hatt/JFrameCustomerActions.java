@@ -247,9 +247,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                     Validation.txtHasValue(txtEmail) && 
                     Validation.txtHasValue(txtPhone) && 
                     Validation.txtHasValue(txtAddress)) {
-                actions = new CustomerActions(customerID, name, address, phone, email);
+                actions = new CustomerActions(customerID, name, address, phone, email, orgNumber);
 
-                actions.addCustomer(name, address, phone, email);
+                actions.addCustomer(name, address, phone, email, orgNumber);
                 
 
             }
