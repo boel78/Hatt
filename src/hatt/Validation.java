@@ -272,15 +272,20 @@ public class Validation {
     }
 
     public static boolean validateOrgNumber(String orgNumber) {
+        boolean valid = false;
         // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
         if (orgNumber == null || orgNumber.length() != 11) {
-            return false;
+            System.out.println("Invalid org number: Length must be 11 characters");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
+            return valid;
         }
 
         // Dela upp organisationsnumret med bindestrecket som skiljetecken
         String[] parts = orgNumber.split("-");
         if (parts.length != 2) {
-            return false; // Felaktigt format om det inte finns exakt ett bindestreck
+            System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
+            
+            return valid; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
         String firstPart = parts[0];
@@ -288,17 +293,22 @@ public class Validation {
 
         // Kontrollera att första delen består av sex siffror
         if (!firstPart.matches("\\d{6}")) {
-            return false;
+            System.out.println("Invalid org number: First part must consist of 6 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
+            return valid;
         }
 
         // Kontrollera att andra delen består av fyra siffror
         if (!secondPart.matches("\\d{4}")) {
-            return false;
+            System.out.println("Invalid org number: Second part must consist of 4 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
+            return valid;
         }
 
         // Om alla kontroller passerar, returnera true
-        System.out.println("Return true i validateOrgNumber()");
-        return true;
+        valid = true;
+        System.out.println("Org number validations success.");
+        return valid;
     }
 
 }
