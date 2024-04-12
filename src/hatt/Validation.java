@@ -205,6 +205,16 @@ public class Validation {
         }
         return correctLength;
     }
+    
+    //Validerar fältet för description i createOrder
+    public static boolean validateDescription200(JTextField tf){
+        boolean correctLength = true;
+        if(tf.getText().length()>200){
+            correctLength = false;
+            JOptionPane.showMessageDialog(null, "Beskrivning kan max ha 200 tecken!");
+        }
+        return correctLength;
+    }
 
     //Validerar fältet för estimated time i createOrder
     //Kan ersättas av isDouble metoden men då måste det komma upp ett felmeddelande som här

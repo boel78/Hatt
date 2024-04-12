@@ -51,6 +51,7 @@ public class reviewRequest extends javax.swing.JFrame {
         cbDenyAccept = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnCompleteDenyAccept = new javax.swing.JButton();
+        KommenterarOmKund = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 400));
@@ -83,6 +84,13 @@ public class reviewRequest extends javax.swing.JFrame {
             }
         });
 
+        KommenterarOmKund.setText("Kommentera kund");
+        KommenterarOmKund.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KommenterarOmKundActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,11 +100,6 @@ public class reviewRequest extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnCompleteDenyAccept))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
                         .addGap(0, 116, Short.MAX_VALUE))
@@ -110,6 +113,17 @@ public class reviewRequest extends javax.swing.JFrame {
                                 .addGap(57, 57, 57)
                                 .addComponent(jLabel1)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnCompleteDenyAccept)
+                        .addGap(18, 18, 18)
+                        .addComponent(KommenterarOmKund)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,13 +138,14 @@ public class reviewRequest extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCompleteDenyAccept))
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(btnCompleteDenyAccept)
+                    .addComponent(KommenterarOmKund))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,6 +183,11 @@ public class reviewRequest extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnCompleteDenyAcceptActionPerformed
+
+    private void KommenterarOmKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KommenterarOmKundActionPerformed
+     new Comment().setVisible(true);
+     
+    }//GEN-LAST:event_KommenterarOmKundActionPerformed
 
     public String[] getCBReviews() {
         ArrayList<String> CBAL = new ArrayList<>();
@@ -227,6 +247,7 @@ public class reviewRequest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton KommenterarOmKund;
     private javax.swing.JButton btnCompleteDenyAccept;
     private javax.swing.JButton btnShowRequest;
     private javax.swing.JComboBox<String> cbDenyAccept;

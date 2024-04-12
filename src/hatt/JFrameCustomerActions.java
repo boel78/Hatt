@@ -49,22 +49,16 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(500, 500));
         setResizable(false);
 
-        lblCustomerID.setForeground(new java.awt.Color(0, 0, 0));
         lblCustomerID.setText("Kund ID:");
 
-        lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setText("Namn:");
 
-        lblAddress.setForeground(new java.awt.Color(0, 0, 0));
         lblAddress.setText("Adress:");
 
-        lblPhone.setForeground(new java.awt.Color(0, 0, 0));
         lblPhone.setText("Tel. Nr:");
 
-        lblEmail.setForeground(new java.awt.Color(0, 0, 0));
         lblEmail.setText("Epost:");
 
-        btnAdd.setForeground(new java.awt.Color(0, 0, 0));
         btnAdd.setText("Lägg Till");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +66,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setForeground(new java.awt.Color(0, 0, 0));
         btnUpdate.setText("Uppdatera");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,7 +81,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         });
 
-        btnGet.setForeground(new java.awt.Color(0, 0, 0));
         btnGet.setText("Hämta");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
