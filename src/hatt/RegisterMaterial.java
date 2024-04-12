@@ -26,13 +26,8 @@ public class RegisterMaterial extends javax.swing.JFrame {
      */
     public RegisterMaterial() {
         userID = "1";
-        validation = new Validation();
-        db = new Database();
-        try {
-            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        } catch (InfException ex) {
-            ex.printStackTrace();
-        }
+        new Validation();
+        new Database();
         initComponents();
     }
 
@@ -101,7 +96,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
 
         jLabel7.setText("Uppdatera Material");
 
-        cbNewMaterialType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbNewMaterialType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesoar", "Tyg" }));
 
         jLabel8.setText("Material typ:");
 
@@ -111,7 +106,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
 
         lblExistingMaterial.setText("MaterialRubrik");
 
-        lblNewMaterial.setText("MaterialRubrik");
+        lblNewMaterial.setText("Mängd");
 
         txtNewMaterial.setColumns(9);
 
@@ -136,7 +131,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(btnUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,33 +221,53 @@ public class RegisterMaterial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        try {
-            String Name = txtNewName.getText();
-            String Price = txtNewPrice.getText();
-            String mid = idb.getAutoIncrement("materials", "mid");
 
-            String QueryNamePrice = "Insert Into materials (name, price, mid, handled_by) VALUES('" + Name + "','" + Price + "'," + mid + "," + userID + ")";
-            //validering ska ske här innan datan införs i databasen.
-            //konvertering 
+        String name = txtNewName.getText();
+        String price = txtNewPrice.getText();
+        String materialText = txtNewMaterial.getText();
+        String mid = Database.getAutoIncrement("materials", "mid");
+        String materialType = cbNewMaterialType.getSelectedItem().toString();
+        boolean materialTextValid = false;
 
-            double KonverteratPrice = Double.parseDouble(Price);
+        //validering ska ske här innan datan införs i databasen.
+        //konvertering 
+        double konverteratPrice = Double.parseDouble(price);
 
-            if ((Name != null) && (Name.length() <= 25)
-                    && (KonverteratPrice > 0)
-                    ) {
-
-                idb.insert(QueryNamePrice);
-
-                JOptionPane.showMessageDialog(null, "Registrering slutförd!");
-
+        if (materialType.equals("Tyg")) {
+            if (materialText != null) {
+                if (Validation.isDouble(materialText)) {
+                    double materialDouble = Double.parseDouble(materialText);
+                    materialTextValid = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Var god skriv in en siffra/decimaltal");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Kontrollera inmatade uppgifter.");
+                if (validateInt(materialText)) {
+                    int materialInt = Integer.parseInt(materialText);
+                    materialTextValid = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Var god skriv in en siffra");
+                }
             }
-
-        } catch (InfException e) {
-            JOptionPane.showMessageDialog(null, "Fel inträffade");
-
         }
+
+        if ((name != null) && (name.length() <= 25)
+                && (konverteratPrice > 0)
+                && (materialText != null)
+                && (materialText.length() <= 25)
+                && materialTextValid) {
+            if (materialType.equals("Tyg")) {
+                Database.insert("materials", "(mid, name, price, handled_by)", "(" + mid + ",'" + name + "'," + konverteratPrice + "," + userID + ")");
+                Database.insert("fabric", "(mid, size)", "(" + mid + "," + materialText + ")");
+            } else {
+                Database.insert("materials", "(mid, name, price, handled_by)", "(" + mid + ",'" + name + "'," + konverteratPrice + "," + userID + ")");
+                Database.insert("accessories", "(mid, amount)", "(" + mid + "," + materialText + ")");
+            }
+            JOptionPane.showMessageDialog(null, "Registrering slutförd!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Kontrollera inmatade uppgifter.");
+        }
+
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
@@ -289,6 +304,19 @@ public class RegisterMaterial extends javax.swing.JFrame {
                 new RegisterMaterial().setVisible(true);
             }
         });
+    }
+
+    private boolean validateInt(String input) {
+        boolean valid = false;
+
+        try {
+            Integer.parseInt(input);
+            valid = true;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+
+        }
+        return valid;
     }
 
     private boolean validateSupplier(String supplier) {
