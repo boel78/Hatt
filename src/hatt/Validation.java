@@ -279,7 +279,6 @@ public class Validation {
         // Kontrollera om strängen är null eller tom
         if (orgNumber == null || orgNumber.isEmpty()) {
             System.out.println("Empty org number");
-            JOptionPane.showMessageDialog(null, "Organisationsnummer får inte vara tomt.", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return valid;
         }
 
@@ -294,7 +293,6 @@ public class Validation {
         String[] parts = orgNumber.split("-");
         if (parts.length != 2) {
             System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
-            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
             return valid; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
