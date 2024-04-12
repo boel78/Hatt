@@ -94,6 +94,12 @@ public class RegisterMaterial extends javax.swing.JFrame {
 
         jLabel5.setText("Pris");
 
+        cbExistingMaterials.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbExistingMaterialsItemStateChanged(evt);
+            }
+        });
+
         jLabel7.setText("Uppdatera Material");
 
         cbNewMaterialType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesoar", "Tyg" }));
@@ -101,10 +107,15 @@ public class RegisterMaterial extends javax.swing.JFrame {
         jLabel8.setText("Material typ:");
 
         btnUpdate.setText("Uppdatera");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         txtExistingMaterial.setColumns(9);
 
-        lblExistingMaterial.setText("MaterialRubrik");
+        lblExistingMaterial.setText("Mängd");
 
         lblNewMaterial.setText("Mängd");
 
@@ -131,7 +142,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(btnUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,14 +241,45 @@ public class RegisterMaterial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void cbExistingMaterialsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbExistingMaterialsItemStateChanged
+        String mid = Database.fetchSingle("mid", "materials", "name", cbExistingMaterials.getSelectedItem().toString());
+        txtExistingName.setText(cbExistingMaterials.getSelectedItem().toString());
+        txtExistingPrice.setText(Database.fetchSingle("price", "materials", "name", cbExistingMaterials.getSelectedItem().toString()));
+        if (Validation.checkExistingCell("fabric", "mid", mid)) {
+            String materialInfo = Database.fetchSingle("size", "fabric", "mid", mid);
+            txtExistingMaterial.setText(materialInfo);
+        } else {
+            String materialInfo = Database.fetchSingle("amount", "accessories", "mid", mid);
+            txtExistingMaterial.setText(materialInfo);
+        }
+
+
+    }//GEN-LAST:event_cbExistingMaterialsItemStateChanged
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String mid = Database.fetchSingle("mid", "materials", "name", cbExistingMaterials.getSelectedItem().toString());
+        String price = txtExistingPrice.getText();
+        String name = txtExistingName.getText();
+        String materialText = txtExistingMaterial.getText();
+
+        updateMaterial(mid, price, name, materialText);
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     public void createMaterial(String name, String price, String materialText, String materialType) {
 
         boolean materialTextValid = false;
         String mid = Database.getAutoIncrement("materials", "mid");
 
+        double konverteratPrice = 0;
+
         //validering ska ske här innan datan införs i databasen.
         //konvertering 
-        double konverteratPrice = Double.parseDouble(price);
+        if (Validation.isDouble(price)) {
+            konverteratPrice = Double.parseDouble(price);
+        } else {
+            JOptionPane.showMessageDialog(null, "Var god och skriv in ett giltigt pris.");
+        }
 
         if (materialType.equals("Tyg")) {
             if (materialText != null) {
@@ -275,6 +317,44 @@ public class RegisterMaterial extends javax.swing.JFrame {
         }
     }
 
+    public void updateMaterial(String mid, String price, String name, String materialText){
+    //ÄR ETT FABRIC
+        if (Validation.checkExistingCell("fabric", "mid", mid)) {
+            if (Validation.isDouble(price)) {
+                if (Validation.validateName(name)) {
+                    if (Validation.isDouble(materialText)) {
+                        Database.updatePreparedQuery("UPDATE fabric SET size= " + materialText + " WHERE mid= " + mid);
+                        Database.updatePreparedQuery("UPDATE materials SET name = '" + name + "', price = " + price + ", handled_by= " + userID + " WHERE mid = " + mid);
+                        JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Var god och fyll i en giltig mängd");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt namn.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt pris.");
+            }
+        //ÄR EN ACCESSOAR
+        } else {
+            if (Validation.isDouble(price)) {
+                if (Validation.validateName(name)) {
+                    if (validateInt(materialText)) {
+                        Database.updatePreparedQuery("UPDATE accessories SET amount= " + materialText + " WHERE mid= " + mid);
+                        Database.updatePreparedQuery("UPDATE materials SET name = '" + name + "', price = " + price + ", handled_by= " + userID + " WHERE mid = " + mid);
+                        JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Var god och fyll i en giltig mängd");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt namn.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt pris.");
+            }
+        }
+    }
+    
     private void fillMaterials() {
         ArrayList<String> cbValues = new ArrayList<>();
         ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "materials", "", "");
