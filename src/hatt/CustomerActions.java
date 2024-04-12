@@ -44,13 +44,13 @@ public class CustomerActions {
 
             // Generera nytt customerID
             String id = Database.getAutoIncrement("customer", "cid");
-            System.out.println("id innan inser " + id);
+            System.out.println("id innan insert " + id);
 
             // Kontrollera om id är null innan det används
             if (id != null) {
                 // Förbered värden för infogning i databasen
                 String values1 = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
-                String values2 = "";
+                String values2 = "('" + id + "', '" + orgNumber + "')";
                 // Utför infogningen i databasen
                 Database.insert("customer", "(cid, name, address, phone, email)", values1);
 
@@ -60,7 +60,7 @@ public class CustomerActions {
                 if(!orgNumber.equals(""))   {
                     if(){
                         
-                        Database.insert(name, values2, values2);
+                        Database.insert("business_customer", "(cid, org_number)", values2);
                     
                         System.out.print("Added as a business customer");
                         System.out.println(id + " " + values2);
