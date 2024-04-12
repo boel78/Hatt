@@ -56,6 +56,14 @@ public class CustomerActions {
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
                 System.out.println(id + " " + values);
+                
+                if(!orgNumber.equals(""))   {
+                    
+                    //Database.insert(name, values, values);
+                    System.out.print("Added as a business customer");
+                }   else    {
+                    System.out.println("Added as a private customer");
+                }  
             } else {
                 JOptionPane.showMessageDialog(null, "Misslyckades att generera CustomerID.");
                 System.out.println(id);
