@@ -281,33 +281,53 @@ public class Validation {
         return exists;
     }
 
-        // Valideringsmetod för organisationsnummer
+
+
     public static boolean validateOrgNumber(String orgNumber) {
-        // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
-        if (orgNumber == null || orgNumber.length() != 11) {
-            return false;
+        boolean valid = false;
+
+        // Kontrollera om strängen är null eller tom
+        if (orgNumber == null || orgNumber.isEmpty()) {
+            System.out.println("Empty org number");
+            return valid;
         }
 
-        // Kontrollera om de första sex tecknen är siffror
-        for (int i = 0; i < 6; i++) {
-            if (!Character.isDigit(orgNumber.charAt(i))) {
-                return false;
-            }
+        // Kontrollera om längden är felaktig
+        if (orgNumber.length() != 11) {
+            System.out.println("Invalid org number: Length must be 11 characters");
+            JOptionPane.showMessageDialog(null, "Fel längd på organisationsnummer.\nOrganisationsnummer måste vara 11 tecken långt.\nFormat: XXXXXX-XXXX", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
         }
 
-        // Kontrollera om det sjunde tecknet är ett bindestreck
-        if (orgNumber.charAt(6) != '-') {
-            return false;
+        // Dela upp organisationsnumret med bindestrecket som skiljetecken
+        String[] parts = orgNumber.split("-");
+        if (parts.length != 2) {
+            System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
+            return valid; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
-        // Kontrollera om de sista fyra tecknen är siffror
-        for (int i = 7; i < 11; i++) {
-            if (!Character.isDigit(orgNumber.charAt(i))) {
-                return false;
-            }
+        String firstPart = parts[0];
+        String secondPart = parts[1];
+
+        // Kontrollera att första delen består av sex siffror
+        if (!firstPart.matches("\\d{6}")) {
+            System.out.println("Invalid org number: First part must consist of 6 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Kontrollera att andra delen består av fyra siffror
+        if (!secondPart.matches("\\d{4}")) {
+            System.out.println("Invalid org number: Second part must consist of 4 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
         }
 
         // Om alla kontroller passerar, returnera true
-        return true;
+        valid = true;
+        System.out.println("Org number validations success.");
+        return valid;
     }
+
+
 }
