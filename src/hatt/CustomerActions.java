@@ -20,16 +20,16 @@ public class CustomerActions {
     private String address = ""; //Database: customer/address
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
-    // private String orgNumber = ""; //Database: business/org_number
+    private String orgNumber = ""; //Database: business/org_number
 
-    public CustomerActions(String customerID, String name, String address, String phone, String email) {
+    public CustomerActions(String customerID, String name, String address, String phone, String email, String orgNumber) {
         //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
         this.customerID = customerID;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
-
+        this.orgNumber = orgNumber;
     }
 
     public CustomerActions(String customerID) {
@@ -37,7 +37,7 @@ public class CustomerActions {
         this.customerID = customerID;
     }
 
-    public void addCustomer(String name, String address, String phone, String email) {
+    public void addCustomer(String name, String address, String phone, String email, String orgNumber) {
 
         if (Validation.validateName(name) && Validation.validateAddress(address)
                 && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
