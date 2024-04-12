@@ -87,8 +87,10 @@ public class CustomerActions {
         System.out.println(preparedQuery);
         
         try {
+            if(orgNumber.equals(empty) && Validation.checkExistingCell("org_number", "business_customer", "cid", "org_number").equals(null))    {
             Database.updatePreparedQuery(preparedQuery);
             JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
