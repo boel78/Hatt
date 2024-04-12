@@ -62,7 +62,7 @@ public class CustomerActions {
                         
                         Database.insert("business_customer", "(cid, org_number)", values2);
                         
-                        System.out.print("Added as a business customer");
+                        System.out.print("Added as a business customer ");
                         System.out.println(id + " " + values2);
                     }   else    {
                         System.out.println("Finns inget cid att placera org_number mot");
