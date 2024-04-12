@@ -276,7 +276,7 @@ public class Validation {
         // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
         if (orgNumber == null || orgNumber.length() != 11) {
             System.out.println("Invalid org number: Length must be 11 characters");
-            JOptionPane.showMessageDialog(null, "Ogiltigt organisations number");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
             return valid;
         }
 
@@ -293,19 +293,21 @@ public class Validation {
 
         // Kontrollera att första delen består av sex siffror
         if (!firstPart.matches("\\d{6}")) {
-            JOptionPane.showMessageDialog(null, "Invalid org number: First part must consist of 6 digits", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Invalid org number: First part must consist of 6 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
             return valid;
         }
 
         // Kontrollera att andra delen består av fyra siffror
         if (!secondPart.matches("\\d{4}")) {
-            JOptionPane.showMessageDialog(null, "Invalid org number: Second part must consist of 4 digits", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Invalid org number: Second part must consist of 4 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
             return valid;
         }
 
         // Om alla kontroller passerar, returnera true
         valid = true;
-        JOptionPane.showMessageDialog(null, "Valid org number", "Validation Success", JOptionPane.INFORMATION_MESSAGE);
+        System.out.println("Org number validations success.");
         return valid;
     }
 
