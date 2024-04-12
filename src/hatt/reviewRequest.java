@@ -4,13 +4,25 @@
  */
 package hatt;
 
-import hatt.Database;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 import java.util.ArrayList;
 import oru.inf.InfException;
-import java.util.HashMap;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 /**
  *
@@ -187,10 +199,53 @@ public class reviewRequest extends javax.swing.JFrame {
 
         return CBReviewsx;
     }
-    
-    /**
-     * @param args the command line arguments
-     */
+
+    public static void sendEmail(String recieverMail, String subject, String body) {
+        Properties smtpconfig = new Properties();
+
+        smtpconfig.put("mail.smtp.auth", "true");
+        smtpconfig.put("mail.smtp.starttls.enable", "true");
+        smtpconfig.put("mail.smtp.host", "smtp.gmail.com");
+        smtpconfig.put("mail.smtp.port", "587");
+        smtpconfig.put("mail.smtp.user", "Ottoshattmakeri@gmail.com");
+        smtpconfig.put("mail.smtp.password", "Ottodenallsmaktige");
+
+        Session session = Session.getInstance(smtpconfig);
+        
+        
+            MimeMessage msg = new MimeMessage(session);
+
+            
+                try{
+                msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+                msg.addHeader("format", "flowed");
+                msg.addHeader("Content-Transfer-Encoding", "8bit");
+
+                msg.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com", "Hattmakarna"));
+
+                msg.setReplyTo(InternetAddress.parse("Ottoshattmakeri@gmail.com", false));
+
+                msg.setSubject("HEJHEJ", "UTF-8");
+
+                msg.setText("HEJHEJ", "UTF-8");
+
+                msg.setSentDate(new Date());
+
+                msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("erik.regner4@gmail.com", false));
+                System.out.println("REDO!!!!!!!!");
+
+                Transport.send(msg);
+
+                System.out.println("SKICKAR HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH!");
+            }
+            catch (Exception ex){
+            ex.printStackTrace();
+            }
+        }
+        /**
+         * @param args the command line arguments
+         */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -217,8 +272,9 @@ public class reviewRequest extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
 
-        /* Create and display the form */
+        //sendEmail("erik.regner4@gmail.com", "EHFEFUHSFIU", "AA STENAMENA"); /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new reviewRequest().setVisible(true);
