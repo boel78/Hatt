@@ -79,11 +79,13 @@ public class CustomerActions {
         }
     }
 
-    public void updateCustomer(String customerID, String name, String address, String phone, String email String orgNumber) {
+    public void updateCustomer(String customerID, String name, String address, String phone, String email) {
 
-        String preparedQuery = ("UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID);
+        
+        String empty = "";
+        String preparedQuery = "UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID;
         System.out.println(preparedQuery);
-        if(Database.fetchSingle(name, name, customerID, customerID).equals(orgNumber)) {
+        
         try {
             Database.updatePreparedQuery(preparedQuery);
             JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
@@ -91,6 +93,8 @@ public class CustomerActions {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
         }
+        if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
+            preparedQuery = "";
         }
     }
 
