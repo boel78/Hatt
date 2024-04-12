@@ -271,33 +271,33 @@ public class Validation {
         return exists;
     }
 
-        // Valideringsmetod för organisationsnummer
     public static boolean validateOrgNumber(String orgNumber) {
         // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
         if (orgNumber == null || orgNumber.length() != 11) {
             return false;
         }
 
-        // Kontrollera om de första sex tecknen är siffror
-        for (int i = 0; i < 6; i++) {
-            if (!Character.isDigit(orgNumber.charAt(i))) {
-                return false;
-            }
+        // Dela upp organisationsnumret med bindestrecket som skiljetecken
+        String[] parts = orgNumber.split("-");
+        if (parts.length != 2) {
+            return false; // Felaktigt format om det inte finns exakt ett bindestreck
         }
 
-        // Kontrollera om det sjunde tecknet är ett bindestreck
-        if (orgNumber.charAt(6) != '-') {
+        String firstPart = parts[0];
+        String secondPart = parts[1];
+
+        // Kontrollera att första delen består av sex siffror
+        if (!firstPart.matches("\\d{6}")) {
             return false;
         }
 
-        // Kontrollera om de sista fyra tecknen är siffror
-        for (int i = 7; i < 11; i++) {
-            if (!Character.isDigit(orgNumber.charAt(i))) {
-                return false;
-            }
+        // Kontrollera att andra delen består av fyra siffror
+        if (!secondPart.matches("\\d{4}")) {
+            return false;
         }
 
         // Om alla kontroller passerar, returnera true
         return true;
     }
+
 }
