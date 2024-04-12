@@ -273,11 +273,18 @@ public class Validation {
 
     public static boolean validateOrgNumber(String orgNumber) {
         boolean valid = false;
+        
+        //kontrollerar om orgNumber är tom ger inget felmeddelande
+        if(orgNumber == null || orgNumber.isEmpty()) {
+        System.out.println("Empty org number");
+        return valid;
+        }
+        
         // Kontrollera om strängen är null eller om den inte har rätt längd för ett organisationsnummer
-        if (orgNumber == null || orgNumber.length() != 11) {
-            System.out.println("Invalid org number: Length must be 11 characters");
-            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
-            return valid;
+        if (orgNumber.length() != 11) {
+        System.out.println("Invalid org number: Length must be 11 characters");
+        JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)");
+        return valid;
         }
 
         // Dela upp organisationsnumret med bindestrecket som skiljetecken
