@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
@@ -13,17 +15,15 @@ import oru.inf.InfException;
  * @author danagliana
  */
 public class Comment extends javax.swing.JFrame {
- private InfDB idb;
-  
-    
+
+    private InfDB idb;
+
     public Comment() {
+        new Database();
+        new Validation();
         initComponents();
-          try {
-            idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        } catch (InfException ex) {
-        
-        }
-        
+        fillCustomers();
+
     }
 
     /**
@@ -35,77 +35,134 @@ public class Comment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnSaveComment = new javax.swing.JButton();
         CommentField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        cbCustomer = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Spara kommentar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveComment.setText("Spara kommentar");
+        btnSaveComment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSaveCommentActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel1.setText("Lämna kommentar nedan");
 
+        jLabel2.setText("Kund");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(CommentField, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
             .addGroup(layout.createSequentialGroup()
-                .addGap(93, 93, 93)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel2)
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(CommentField, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(btnSaveComment, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(CommentField, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addComponent(btnSaveComment)
+                .addGap(51, 51, 51))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   try {
-         String Comment = CommentField.getText();
-    String CommentQuery = "INSERT INTO requests VALUES ('" + Comment + "')";
-    if (Validation.txtHasValue(CommentField) && Validation.validateDescription200(CommentField)) {
-     idb.insert(Comment); 
-    }else{ 
-        JOptionPane.showMessageDialog(null, "Vänligen skriv en kommentar med max 200 tecken"); 
+    private void btnSaveCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveCommentActionPerformed
+        String cid = Database.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
+
+        String comment = CommentField.getText();
+        if (Validation.txtHasValue(CommentField) && Validation.validateDescription200(CommentField)) {
+            updateComment(comment, cid);
+            JOptionPane.showMessageDialog(null, "Kommentaren har sparats.");
+
+        }
+        CommentField.setText("");
+
+
+    }//GEN-LAST:event_btnSaveCommentActionPerformed
+
+    public void updateComment(String comment, String cid) {
+        Database.updatePreparedQuery("UPDATE customer SET comment = '" + comment + "' WHERE cid = " + cid);
     }
-     
-    
-        } catch (InfException ex) {
-             ex.printStackTrace();
-    
-    
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-   
+    private void fillCustomers() {
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "customer", "", "");
+        for (HashMap<String, String> row : list) {
+            for (String key : row.keySet()) {
+                if (key.equals("name")) {
+                    cbCustomer.addItem(row.get(key));
+                }
+            }
+        }
+    }
 
-        
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Comment().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CommentField;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSaveComment;
+    private javax.swing.JComboBox<String> cbCustomer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
