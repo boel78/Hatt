@@ -98,7 +98,7 @@ public class Validation {
     }
 
     public static boolean validateAddress(String address) {
-        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-ZåäöÅÄÖ].*");
+        boolean valid = address.matches(".*\\d*");
         return valid;
     }
 
