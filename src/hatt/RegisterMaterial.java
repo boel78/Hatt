@@ -263,7 +263,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
         String materialText = txtExistingMaterial.getText();
 
         updateMaterial(mid, price, name, materialText);
-        
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     public void createMaterial(String name, String price, String materialText, String materialType) {
@@ -289,13 +289,18 @@ public class RegisterMaterial extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "Var god skriv in en siffra/decimaltal");
                 }
-            } else {
+
+            }
+        } else {
+            if (materialText != null) {
                 if (validateInt(materialText)) {
                     int materialInt = Integer.parseInt(materialText);
                     materialTextValid = true;
                 } else {
                     JOptionPane.showMessageDialog(null, "Var god skriv in en siffra");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Var god skriv in en siffra/decimaltal");
             }
         }
 
@@ -317,8 +322,8 @@ public class RegisterMaterial extends javax.swing.JFrame {
         }
     }
 
-    public void updateMaterial(String mid, String price, String name, String materialText){
-    //ÄR ETT FABRIC
+    public void updateMaterial(String mid, String price, String name, String materialText) {
+        //ÄR ETT FABRIC
         if (Validation.checkExistingCell("fabric", "mid", mid)) {
             if (Validation.isDouble(price)) {
                 if (Validation.validateName(name)) {
@@ -335,7 +340,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt pris.");
             }
-        //ÄR EN ACCESSOAR
+            //ÄR EN ACCESSOAR
         } else {
             if (Validation.isDouble(price)) {
                 if (Validation.validateName(name)) {
@@ -354,7 +359,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void fillMaterials() {
         ArrayList<String> cbValues = new ArrayList<>();
         ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "materials", "", "");
