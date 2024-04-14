@@ -35,7 +35,8 @@ create table customer
     name    varchar(25) null,
     address varchar(50) null,
     phone   varchar(25) null,
-    email   varchar(50) null
+    email   varchar(50) null,
+    comment varchar(200) null
 );
 
 create table business_customer
@@ -241,8 +242,8 @@ INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 1);
 INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 2);
 INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 3);
 INSERT INTO hattmakardb.business_customer (cid, org_number) VALUES (3, '12345');
-INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (1, 'Billy', 'Skogen 3', '073-0675981', 'billy@svt.se');
-INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (2, 'Leif', 'Skogen 3', '073-0758691', 'leif@svt.se');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email, comment) VALUES (1, 'Billy', 'Skogen 3', '073-0675981', 'billy@svt.se', 'En bra kund');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email, comment) VALUES (2, 'Leif', 'Skogen 3', '073-0758691', 'leif@svt.se', 'En kund som betalar sent');
 INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (3, 'Ulf Kristersson', 'Riksgatan 1', '070-1234785', 'ulf@kort.se');
 INSERT INTO hattmakardb.employee (uid) VALUES (1);
 INSERT INTO hattmakardb.employee (uid) VALUES (2);
