@@ -79,7 +79,7 @@ public class CustomerActions {
         }
     }
 
-    public void updateCustomer(String customerID, String name, String address, String phone, String email) {
+    public void updateCustomer(String customerID, String name, String address, String phone, String email, String orgNumber) {
 
         
         String empty = "";
@@ -93,9 +93,10 @@ public class CustomerActions {
             
             if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
             preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
+            Database.updatePreparedQuery(preparedQuery);
             }
             } else  {
-                // en if Else sats för olika felmeddelande för fel i org fältet
+                System.out.println("Could not update Organization Number");
             }
             
         } catch (Exception ex) {

@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 public class JFrameCustomerActions extends javax.swing.JFrame {
 
     private String fetchedID;
+    private String fetchedOrgNr;
     private CustomerActions actions;
 
     public JFrameCustomerActions() {
@@ -202,6 +203,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         String customerID = txtCustomerID.getText();
         fetchedID = txtCustomerID.getText();
+        if(Validation.txtHasValue(txtOrgNumber)) {
+            fetchedOrgNr = txtOrgNumber.getText();
+        }
 
         actions = new CustomerActions(customerID);
 
@@ -288,7 +292,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             if (Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
                 actions = new CustomerActions(customerID);
 
-                actions.updateCustomer(fetchedID, name, address, phone, email);
+                actions.updateCustomer(fetchedID, name, address, phone, email, fetchedOrgNr);
                 System.out.println("if i btnUpdate");
             } else {
 
