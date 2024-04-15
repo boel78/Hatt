@@ -4,11 +4,18 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lukasdenfete
  */
 public class Supplier extends javax.swing.JFrame {
+
+    private String sid;
+    private String selectedMaterial;
 
     /**
      * Creates new form Supplier
@@ -16,6 +23,9 @@ public class Supplier extends javax.swing.JFrame {
     public Supplier() {
         initComponents();
         new Database();
+        fillSupplier();
+        fillMaterials();
+
     }
 
     /**
@@ -28,7 +38,7 @@ public class Supplier extends javax.swing.JFrame {
     private void initComponents() {
 
         lblHeader = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbSuppliers = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
@@ -42,18 +52,26 @@ public class Supplier extends javax.swing.JFrame {
         cbMaterial = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
+        btnCreate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblHeader.setText("Leverantörssida");
 
+        cbSuppliers.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ny leverantör" }));
+        cbSuppliers.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSuppliersItemStateChanged(evt);
+            }
+        });
+
         jLabel1.setText("Välj leverantör");
 
-        txtName.setText("jTextField1");
+        txtName.setColumns(7);
 
-        txtEmail.setText("jTextField2");
+        txtEmail.setColumns(7);
 
-        txtPhone.setText("jTextField3");
+        txtPhone.setColumns(7);
 
         lblName.setText("Namn:");
 
@@ -67,7 +85,11 @@ public class Supplier extends javax.swing.JFrame {
 
         jLabel2.setText("Leverantörens material:");
 
-        cbMaterial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMaterial.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMaterialItemStateChanged(evt);
+            }
+        });
 
         jLabel3.setText("Lägg till material:");
 
@@ -78,92 +100,103 @@ public class Supplier extends javax.swing.JFrame {
             }
         });
 
+        btnCreate.setText("Skapa");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addGap(56, 56, 56)
+                .addComponent(lblHeader)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(lblName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(lblPhone)))
-                        .addGap(31, 31, 31))
+                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(lblName))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(lblEmail)))
-                        .addGap(21, 21, 21)))
+                        .addGap(43, 43, 43)
+                        .addComponent(lblEmail))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lblPhone)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHeader)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(15, 15, 15))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(30, 30, 30))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(38, 38, 38))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAdd)
-                                    .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(52, 52, 52))))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(38, 38, 38))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCreate)
+                .addGap(111, 111, 111)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdd)
+                    .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblHeader)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCreate)
+                .addGap(22, 22, 22))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHeader)
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(lblName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(lblEmail))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPhone)
-                    .addComponent(cbMaterial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAdd))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lblPhone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,11 +204,95 @@ public class Supplier extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        String mid = Database.fetchSingle("mid", "materials", "name", selectedMaterial);
+        Database.insert("supplier_has_material", "(sid, mid)", "(" + sid + "," + mid + ")");
+        fillMaterialBox(sid);
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void fillSupplier(){
-        
+    private void cbSuppliersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSuppliersItemStateChanged
+        // TODO add your handling code here:
+        if (cbSuppliers.getSelectedItem().toString().equals("Ny leverantör")) {
+            btnCreate.setText("Skapa");
+
+        } else {
+            btnCreate.setText("Uppdatera");
+            sid = Database.fetchSingle("sid", "supplier", "name", cbSuppliers.getSelectedItem().toString());
+            txtName.setText(cbSuppliers.getSelectedItem().toString());
+            txtEmail.setText(Database.fetchSingle("email", "supplier", "sid", sid));
+            txtPhone.setText(Database.fetchSingle("phone", "supplier", "sid", sid));
+            fillMaterialBox(sid);
+        }
+    }//GEN-LAST:event_cbSuppliersItemStateChanged
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        if (Validation.validateName(txtName.getText())) {
+            if (Validation.validateEmailTypo(txtEmail.getText())) {
+                if (Validation.validatePhone(txtPhone.getText())) {
+                    if (btnCreate.getText().equals("Ny leverantör")) {
+                    } else {
+                        Database.updatePreparedQuery("UPDATE supplier SET name = '" + txtName.getText() + "', email = '" + txtEmail.getText() + "', phone = '" + txtPhone.getText() + "' WHERE sid = " + sid);
+                        System.out.println("UPDATE supplier SET name = '" + txtName.getText() + "', email = '" + txtEmail.getText() + "', phone = '" + txtPhone.getText() + " WHERE sid = " + sid);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Fyll i ett giltigt namn");
+
+            }
+        }
+
+
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void cbMaterialItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialItemStateChanged
+        // TODO add your handling code here:
+        selectedMaterial = cbMaterial.getSelectedItem().toString();
+    }//GEN-LAST:event_cbMaterialItemStateChanged
+
+    private void fillSupplier() {
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "supplier", "", "");
+
+        for (HashMap<String, String> row : list) {
+            for (String key : row.keySet()) {
+                if (key.equals("name")) {
+                    cbSuppliers.addItem(row.get(key));
+                }
+            }
+        }
     }
+
+    private void updateSupplierInfo() {
+
+    }
+
+    private void fillMaterialBox(String sid) {
+        txtArea.setText("");
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(true, "supplier_has_material", "sid", sid);
+
+        for (HashMap<String, String> row : list) {
+            for (String key : row.keySet()) {
+                if (key.equals("mid")) {
+                    txtArea.append(Database.fetchSingle("name", "materials", "mid", row.get(key)) + "\n");
+                }
+            }
+        }
+
+    }
+
+    private void fillMaterials() {
+
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "materials", "", "");
+
+        for (HashMap<String, String> row : list) {
+            for (String key : row.keySet()) {
+                if (key.equals("name")) {
+                    cbMaterial.addItem(row.get(key));
+                }
+            }
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -213,8 +330,9 @@ public class Supplier extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnCreate;
     private javax.swing.JComboBox<String> cbMaterial;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbSuppliers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
