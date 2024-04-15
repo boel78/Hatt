@@ -181,13 +181,12 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
 
-       
         String cbContent = cbCustomers.getSelectedItem().toString();
         String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
-        
+
         String customerID = numbers;
         System.out.println(numbers);
-        
+
         fetchedID = numbers;
 
         actions = new CustomerActions(customerID);
@@ -233,6 +232,18 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 actions = new CustomerActions(customerID, name, address, phone, email);
 
                 actions.addCustomer(name, address, phone, email);
+
+                //Resettar combobox
+                cbCustomers.removeAllItems();
+                String[] customers = getCBCustomers();
+                for (String customer : customers) {
+                    cbCustomers.addItem(customer);
+                }
+                
+                txtName.setText("");
+                txtAddress.setText("");
+                txtPhone.setText("");
+                txtEmail.setText("");
             }
         }
     }//GEN-LAST:event_btnAddActionPerformed
@@ -242,14 +253,20 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         actions = new CustomerActions(customerID);
 
-        if ( Validation.existsCustomerID(customerID)) {
+        if (Validation.existsCustomerID(customerID)) {
             if (actions.removeCustomer(customerID)) {
 
-                
                 txtName.setText("");
                 txtAddress.setText("");
                 txtPhone.setText("");
                 txtEmail.setText("");
+
+                //Resettar combobox
+                cbCustomers.removeAllItems();
+                String[] customers = getCBCustomers();
+                for (String customer : customers) {
+                    cbCustomers.addItem(customer);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
             }
@@ -272,6 +289,16 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
                 actions.updateCustomer(fetchedID, name, address, phone, email);
                 System.out.println("if i btnUpdate");
+                //Resettar combobox
+                cbCustomers.removeAllItems();
+                String[] customers = getCBCustomers();
+                for (String customer : customers) {
+                    cbCustomers.addItem(customer);
+                }
+                txtName.setText("");
+                txtAddress.setText("");
+                txtPhone.setText("");
+                txtEmail.setText("");
             } else {
 
                 System.out.println("else i btnUpdate");
@@ -279,27 +306,26 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Hämta kunden du vill ändra först.");
-            }
+        }
+
     }
 
-        public String[] getCBCustomers() {
+    public String[] getCBCustomers() {
         ArrayList<String> CBAL = new ArrayList<>();
         ArrayList<String> cid = new ArrayList<>();
         cid = Database.fetchColumn(false, "cid", "customer", "", "");
 
-       
-            for (String s : cid) {
-                CBAL.add(Database.fetchSingle("name","customer","cid",s)+ " " + s);
-                
-            }
+        for (String s : cid) {
+            CBAL.add(Database.fetchSingle("name", "customer", "cid", s) + " " + s);
+
+        }
         System.out.println(CBAL);
-        
 
         String[] CBCustomersx = new String[CBAL.size()];
         CBAL.toArray(CBCustomersx);
 
         return CBCustomersx;
-    
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
