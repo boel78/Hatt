@@ -117,7 +117,10 @@ public class Validation {
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
                 if (key.equals(columnName)) {
-                    if (column.get(key).equals(keyWord)) {
+                    if(column.get(key) == null){
+
+                    }
+                    else if (column.get(key).equals(keyWord)) {
                         exists = true;
                     }
                 }
@@ -290,4 +293,67 @@ public static boolean doesEmailExist(String Email) {
 }
 
 
+    public static boolean validateOrgNumber(String orgNumber) {
+        boolean valid = false;
+
+        // Kontrollera om strängen är null eller tom
+        if (orgNumber == null || orgNumber.isEmpty()) {
+            System.out.println("Empty org number");
+            return valid;
+        }
+
+        // Kontrollera om längden är felaktig
+        if (orgNumber.length() != 11) {
+            System.out.println("Invalid org number: Length must be 11 characters");
+            JOptionPane.showMessageDialog(null, "Fel längd på organisationsnummer.\nOrganisationsnummer måste vara 11 tecken långt.\nFormat: XXXXXX-XXXX", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Dela upp organisationsnumret med bindestrecket som skiljetecken
+        String[] parts = orgNumber.split("-");
+        if (parts.length != 2) {
+            System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid; // Felaktigt format om det inte finns exakt ett bindestreck
+        }
+
+        String firstPart = parts[0];
+        String secondPart = parts[1];
+
+        // Kontrollera att första delen består av sex siffror
+        if (!firstPart.matches("\\d{6}")) {
+            System.out.println("Invalid org number: First part must consist of 6 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Kontrollera att andra delen består av fyra siffror
+        if (!secondPart.matches("\\d{4}")) {
+            System.out.println("Invalid org number: Second part must consist of 4 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Om alla kontroller passerar, returnera true
+        valid = true;
+        System.out.println("Org number validations success.");
+        return valid;
+    }
+    
+    //Kollar om en Email redan finns i databasen
+    public static boolean doesEmailExist(String Email) {
+    
+    boolean doesntExists = true;
+     ArrayList<String> existingEmails = new ArrayList<>();
+    existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
+    
+    for (String oneEmail : existingEmails) {
+        if (Email.equals(oneEmail)) {
+            doesntExists = false;
+            
+        }
+    }
+     
+     return doesntExists;
+    }
 }
