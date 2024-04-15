@@ -39,11 +39,11 @@ public class Validation {
                 if (email.matches(emailRegex)) {
                     valid = true;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Email cannot be longer than 50 characters");
+                    JOptionPane.showMessageDialog(null, "Email kan inte vara längre än 50 bokstäver");
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Email cannot be empty");
+            JOptionPane.showMessageDialog(null, "Email kan inte vara tomt.");
         }
         return valid;
     }
