@@ -87,16 +87,17 @@ public class CustomerActions {
         System.out.println(preparedQuery);
         
         try {
-            if(orgNumber.equals(empty) && !Validation.checkExistingCell("business_csutomer", "orgNumber", orgNumber))    {
+            if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
             Database.updatePreparedQuery(preparedQuery);
             JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
-            } else  {
-                // en if Else sats för olika felmeddelande för fel i org fältet
-            }
             
             if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
             preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
             }
+            } else  {
+                // en if Else sats för olika felmeddelande för fel i org fältet
+            }
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
