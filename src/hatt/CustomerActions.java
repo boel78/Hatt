@@ -87,6 +87,8 @@ public class CustomerActions {
         System.out.println(preparedQuery);
         
         try {
+            int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
+            if (confirmUpdate == JOptionPane.YES_OPTION) {
             if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
             Database.updatePreparedQuery(preparedQuery);
             JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
@@ -98,7 +100,7 @@ public class CustomerActions {
             } else  {
                 System.out.println("Could not update Organization Number");
             }
-            
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
@@ -108,6 +110,8 @@ public class CustomerActions {
     public boolean removeCustomer(String customerID) {
         boolean valid = false;
         try {
+            int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill ta bort kund", "Bekräfta.", JOptionPane.YES_NO_OPTION);
+            if (confirmUpdate == JOptionPane.YES_OPTION) {
             //Om kunden är privatkund
             if (Validation.checkExistingCell("private_customer", "cid", customerID)) {
                 Database.deleteRow("private_customer", "cid", customerID);
@@ -175,6 +179,7 @@ public class CustomerActions {
             System.out.println("Kund borttagen");
             valid = true;
             JOptionPane.showMessageDialog(null, "Kunden med kundID " + customerID + " har tagits bort.");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel uppstod med att ta bort kund.");
