@@ -53,6 +53,12 @@ public class Comment extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel1.setText("Lämna kommentar nedan");
 
+        cbCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCustomerActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Kund");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,6 +115,10 @@ public class Comment extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnSaveCommentActionPerformed
+
+    private void cbCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCustomerActionPerformed
 
     public void updateComment(String comment, String cid) {
         Database.updatePreparedQuery("UPDATE customer SET comment = '" + comment + "' WHERE cid = " + cid);
