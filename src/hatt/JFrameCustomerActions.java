@@ -217,14 +217,13 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
-        String orgNumber = "";
+
 
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
             address = customer.get("address");
             phone = customer.get("phone");
             email = customer.get("email");
-            orgNumber = fetchedOrgNumber;
 
             txtName.setText(name != null ? name : "");
             txtAddress.setText(address != null ? address : "");
