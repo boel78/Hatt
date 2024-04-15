@@ -199,13 +199,15 @@ public class CustomerActions {
 
     }
 
-    public String getOrgNumber(String columnIdentifier) {
+    public String getOrgNumber(String customerID) {
         String columnName = "org_number";
         String tableName = "business_customer";
         String columnWhere = "cid";
         
-        String customerOrgNumber = Database.fetchSingle(columnName, tableName, columnWhere, columnIdentifier);
+        String customerOrgNumber = Database.fetchSingle(columnName, tableName, columnWhere, customerID);
 
+        
+        System.out.println(customerOrgNumber);
         return customerOrgNumber;
     }
     
