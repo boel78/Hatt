@@ -231,7 +231,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtPhone.setText(phone != null ? phone : "");
             txtEmail.setText(email != null ? email : "");
             txtOrgNumber.setText(fetchedOrgNumber);
-            System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email + " " + orgNumber);
+            System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email + " " + fetchedOrgNumber);
         } else {
             // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
             txtName.setText("");
