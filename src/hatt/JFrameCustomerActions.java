@@ -279,6 +279,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 txtAddress.setText("");
                 txtPhone.setText("");
                 txtEmail.setText("");
+                txtOrgNumber.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
             }
