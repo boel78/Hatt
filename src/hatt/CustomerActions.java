@@ -198,6 +198,16 @@ public class CustomerActions {
         return customer;
 
     }
+
+    public String getOrgNumber(String columnIdentifier) {
+        String columnName = "org_number";
+        String tableName = "business_customer";
+        String columnWhere = "cid";
+        
+        String customerOrgNumber = Database.fetchSingle(columnName, tableName, columnWhere, columnIdentifier);
+
+        return customerOrgNumber;
+    }
     
     public void testMethod(String test1, String test2) {
         String testName = test1;
