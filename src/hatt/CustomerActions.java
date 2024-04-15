@@ -101,7 +101,6 @@ public class CustomerActions {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
         }
-
     }
 
     public boolean removeCustomer(String customerID) {
