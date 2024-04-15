@@ -202,10 +202,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
 
         String customerID = txtCustomerID.getText();
-        fetchedID = txtCustomerID.getText();
-        fetchedOrgNr = txtOrgNumber.getText();
-        
-
         actions = new CustomerActions(customerID);
 
         HashMap<String, String> customer = actions.getCustomer(customerID);
@@ -216,8 +212,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
 
-        System.out.println("fetchedOrgNr: " + fetchedOrgNr);
-        System.out.println("fetchedID: " + fetchedID);
+
         
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
@@ -231,6 +226,10 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtEmail.setText(email != null ? email : "");
             txtOrgNumber.setText(fetchedOrgNumber);
             System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email + " " + fetchedOrgNumber);
+            fetchedID = txtCustomerID.getText();
+            fetchedOrgNr = txtOrgNumber.getText();
+            System.out.println("fetchedOrgNr: " + fetchedOrgNr);
+            System.out.println("fetchedID: " + fetchedID);
         } else {
             // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
             txtName.setText("");
@@ -260,8 +259,12 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 actions = new CustomerActions(customerID, name, address, phone, email, orgNumber);
 
                 actions.addCustomer(name, address, phone, email, orgNumber);
+                txtOrgNumber
+                fetchedID = ;
+                fetchedOrgNr = txtOrgNumber.getText();
+                System.out.println("fetchedOrgNr: " + fetchedOrgNr);
+                System.out.println("fetchedID: " + fetchedID);
                 
-
             }
     }//GEN-LAST:event_btnAddActionPerformed
 
