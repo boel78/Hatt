@@ -275,6 +275,7 @@ public class Validation {
         }
         return exists;
     }
+    //Kollar om en Email redan finns i databasen
 public static boolean doesEmailExist(String Email) {
     
     boolean doesntExists = true;
@@ -284,7 +285,7 @@ public static boolean doesEmailExist(String Email) {
     for (String oneEmail : existingEmails) {
         if (Email.equals(oneEmail)) {
             doesntExists = false;
-            
+            JOptionPane.showMessageDialog(null, "Denna email finns redan!");
         }
     }
      
@@ -338,22 +339,5 @@ public static boolean doesEmailExist(String Email) {
         valid = true;
         System.out.println("Org number validations success.");
         return valid;
-    }
-    
-    //Kollar om en Email redan finns i databasen
-    public static boolean doesEmailExist(String Email) {
-    
-    boolean doesntExists = true;
-     ArrayList<String> existingEmails = new ArrayList<>();
-    existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
-    
-    for (String oneEmail : existingEmails) {
-        if (Email.equals(oneEmail)) {
-            doesntExists = false;
-            
-        }
-    }
-     
-     return doesntExists;
-    }
+    }  
 }

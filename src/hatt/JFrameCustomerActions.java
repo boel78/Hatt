@@ -4,8 +4,11 @@
  */
 package hatt;
 
+import hatt.Database;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+import oru.inf.InfException;
 
 /**
  *
@@ -30,12 +33,10 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private void initComponents() {
 
         jOptionPane1 = new javax.swing.JOptionPane();
-        lblCustomerID = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
         lblPhone = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
-        txtCustomerID = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         txtPhone = new javax.swing.JTextField();
@@ -44,13 +45,11 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         btnUpdate = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
         btnGet = new javax.swing.JButton();
+        cbCustomers = new javax.swing.JComboBox<>();
+        txtCustomer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 500));
         setResizable(false);
-
-        lblCustomerID.setForeground(new java.awt.Color(0, 0, 0));
-        lblCustomerID.setText("Kund ID:");
 
         lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setText("Namn:");
@@ -96,73 +95,80 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         });
 
+        cbCustomers.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomers()));
+
+        txtCustomer.setForeground(new java.awt.Color(0, 0, 0));
+        txtCustomer.setText("Kund:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblCustomerID)
-                .addGap(19, 19, 19)
-                .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56)
-                .addComponent(btnGet))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblName)
-                .addGap(32, 32, 32)
-                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblAddress)
-                .addGap(25, 25, 25)
-                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblPhone)
+                .addGap(98, 98, 98)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName)
+                    .addComponent(lblAddress)
+                    .addComponent(lblPhone)
+                    .addComponent(lblEmail)
+                    .addComponent(txtCustomer))
                 .addGap(28, 28, 28)
-                .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                        .addComponent(btnGet))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(lblEmail)
-                .addGap(32, 32, 32)
-                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(btnAdd)
-                .addGap(78, 78, 78)
-                .addComponent(btnUpdate))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(btnRemove))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(btnAdd)
+                        .addGap(78, 78, 78)
+                        .addComponent(btnUpdate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(btnRemove)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lblCustomerID))
-                    .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGet))
-                .addGap(73, 73, 73)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(20, 20, 20)
+                        .addComponent(btnGet)
+                        .addGap(76, 76, 76))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCustomer))
+                        .addGap(83, 83, 83)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(lblAddress)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPhone)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAdd)
                     .addComponent(btnUpdate))
@@ -175,8 +181,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
 
-        String customerID = txtCustomerID.getText();
-        fetchedID = txtCustomerID.getText();
+       
+        String cbContent = cbCustomers.getSelectedItem().toString();
+        String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
+        
+        String customerID = numbers;
+        System.out.println(numbers);
+        
+        fetchedID = numbers;
 
         actions = new CustomerActions(customerID);
 
@@ -210,13 +222,13 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGetActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String customerID = txtCustomerID.getText();
+        String customerID = fetchedID;
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
 
-        if (Validation.txtHasValue(txtAddress) && Validation.validateAddress(address)) {
+        if (Validation.doesEmailExist(email) && Validation.txtHasValue(txtAddress) && Validation.validateAddress(address)) {
             if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
                 actions = new CustomerActions(customerID, name, address, phone, email);
 
@@ -226,14 +238,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        String customerID = txtCustomerID.getText();
+        String customerID = fetchedID;
 
         actions = new CustomerActions(customerID);
 
-        if (Validation.txtHasValue(txtCustomerID) && Validation.existsCustomerID(customerID)) {
+        if ( Validation.existsCustomerID(customerID)) {
             if (actions.removeCustomer(customerID)) {
 
-                txtCustomerID.setText("");
+                
                 txtName.setText("");
                 txtAddress.setText("");
                 txtPhone.setText("");
@@ -248,7 +260,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
 
-        String customerID = txtCustomerID.getText();
+        String customerID = fetchedID;
         String name = txtName.getText();
         String address = txtAddress.getText();
         String phone = txtPhone.getText();
@@ -267,7 +279,27 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Hämta kunden du vill ändra först.");
-        }
+            }
+    }
+
+        public String[] getCBCustomers() {
+        ArrayList<String> CBAL = new ArrayList<>();
+        ArrayList<String> cid = new ArrayList<>();
+        cid = Database.fetchColumn(false, "cid", "customer", "", "");
+
+       
+            for (String s : cid) {
+                CBAL.add(Database.fetchSingle("name","customer","cid",s)+ " " + s);
+                
+            }
+        System.out.println(CBAL);
+        
+
+        String[] CBCustomersx = new String[CBAL.size()];
+        CBAL.toArray(CBCustomersx);
+
+        return CBCustomersx;
+    
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
@@ -276,14 +308,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private javax.swing.JButton btnGet;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cbCustomers;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel lblAddress;
-    private javax.swing.JLabel lblCustomerID;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JTextField txtAddress;
-    private javax.swing.JTextField txtCustomerID;
+    private javax.swing.JLabel txtCustomer;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPhone;
