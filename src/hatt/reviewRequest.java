@@ -212,32 +212,31 @@ public class reviewRequest extends javax.swing.JFrame {
     public static void sendEmail(String recieverMail, String subject, String body) {
         Properties smtpconfig = new Properties();
 
-        smtpconfig.put("mail.smtp.host", "smtp.gmail.com");
-        smtpconfig.put("mail.smtp.port", "587");
         smtpconfig.put("mail.smtp.auth", "true");
-        smtpconfig.put("mail.smtp.starttls.enable", "true");
+        smtpconfig.put("mail.smtp.host", "smtp.gmail.com");
+        smtpconfig.put("mail.smtp.socketFactory.port", "465");  
+        smtpconfig.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");  
+        smtpconfig.put("mail.smtp.socketFactory.fallback", "false");  
         
         Session session = Session.getDefaultInstance(smtpconfig, new javax.mail.Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new javax.mail.PasswordAuthentication("Ottoshattmakeri@gmail.com", "hict jjmv bsnl lqls");
+                return new javax.mail.PasswordAuthentication("Ottoshattmakeri@gmail.com", "hictjjmvbsnllqls");
             }
         });
-
-        MimeMessage msg = new MimeMessage(session);
-
+        
         try {
 
-            Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com"));
-            message.setRecipients(
+            Message automatedMail = new MimeMessage(session);
+            automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com"));
+            automatedMail.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse("erik.regner4@gmail.com", false)
             );
-            message.setSubject("Ang: Fastnat i butiken!");
-            message.setText("Hej Erik, jag, Otto har fastnat i butiken,"
-                    + "\n\n Snälla kom och hjälp stackars mig!");
+            automatedMail.setSubject("Ang: Fastnat i butiken!");
+            automatedMail.setText("Hej Adam, jag, Otto har fastnat i butiken,"
+                    + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
 
-            Transport.send(message);
+            Transport.send(automatedMail);
 
             System.out.println("Done");
 
