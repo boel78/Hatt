@@ -232,6 +232,7 @@ public class Supplier extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Material har tagits bort från leverantören.");
                 btnAdd.setText("Lägg till");
                 btnAdd.setForeground(Color.black);
+                fillMaterialBox(sid);
             }
         }
     }//GEN-LAST:event_btnAddActionPerformed
@@ -257,6 +258,9 @@ public class Supplier extends javax.swing.JFrame {
                 if (Validation.validatePhone(txtPhone.getText())) {
                     if (btnCreate.getText().equals("Skapa")) {
                         String newSid = Database.getAutoIncrement("supplier", "sid");
+                        if(newSid == null){
+                            newSid = "1";
+                        }
                         Database.insert("supplier", "(sid, name, email, phone)", "(" + newSid + ",'" + txtName.getText() + "','" + txtEmail.getText() + "','" + txtPhone.getText() + "')");
                         JOptionPane.showMessageDialog(null, "Leverantören är nu tillagd");
                     } else {
@@ -305,8 +309,8 @@ public class Supplier extends javax.swing.JFrame {
             
             boolean orderingEmpty = false;
             while (!orderingEmpty) {
-                if (Validation.checkExistingCell("ordering_material", "sid", sid)) {
-                    Database.deleteRow("ordering_material", "sid", sid);
+                if (Validation.checkExistingCell("ordering_materials", "sid", sid)) {
+                    Database.deleteRow("ordering_materials", "sid", sid);
                 }
                 else{
                     orderingEmpty = true;
@@ -314,6 +318,8 @@ public class Supplier extends javax.swing.JFrame {
             } 
             if(orderingEmpty && hasMaterialEmpty){
                 Database.deleteRow("supplier", "sid", sid);
+                JOptionPane.showMessageDialog(null, "Leverantören är nu bortagen ur systemet.");
+                fillSupplier();
             }
         }
     }//GEN-LAST:event_btnRemoveSupplierActionPerformed
@@ -328,6 +334,9 @@ public class Supplier extends javax.swing.JFrame {
                 cbSuppliers.removeItemAt(i);
             }
         }
+        txtName.setText("");
+        txtEmail.setText("");
+        txtPhone.setText("");
 
         ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "supplier", "", "");
         for (HashMap<String, String> row : list) {
