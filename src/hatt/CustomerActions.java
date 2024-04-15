@@ -93,14 +93,15 @@ public class CustomerActions {
             } else  {
                 // en if Else sats för olika felmeddelande för fel i org fältet
             }
-            //if(!orgNumber.equals(empty) && Validation.checkExistingCell("business_csutomer", "orgNumber", orgNumber))
+            
+            if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
+            preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
         }
-        /*if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
-            preparedQuery = "";
-        }*/
+
     }
 
     public boolean removeCustomer(String customerID) {
