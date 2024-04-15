@@ -172,7 +172,7 @@ public class reviewRequest extends javax.swing.JFrame {
     public String[] getCBReviews() {
         ArrayList<String> CBAL = new ArrayList<>();
         ArrayList<String> rid = new ArrayList<>();
-        rid = Database.fetchColumn(false, "rid", "requests", "", "");
+        rid = Database.fetchColumn(false, "rid", "requests", "reviewed", "'N");
 
         try {
             for (String s : rid) {
