@@ -203,10 +203,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         String customerID = txtCustomerID.getText();
         fetchedID = txtCustomerID.getText();
+        fetchedOrgNr = txtOrgNumber.getText();
         
-        if(!txtOrgNumber.getText().isBlank()) {
-            fetchedOrgNr = txtOrgNumber.getText();
-        }
 
         actions = new CustomerActions(customerID);
 
@@ -218,7 +216,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
 
-        System.out.println("fetchedOrgID: " + fetchedOrgNr);
+        System.out.println("fetchedOrgNr: " + fetchedOrgNr);
+        System.out.println("fetchedID: " + fetchedID);
         
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
