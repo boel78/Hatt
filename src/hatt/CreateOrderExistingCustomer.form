@@ -92,45 +92,49 @@
                           <Component id="lblOrderInfo" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="lblMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tfFabric1" max="32767" attributes="0"/>
-                                  <Component id="tfFabric2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfFabric3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="tfFabric4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblSize" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="tfSize4" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="tfSize1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lblStar" min="-2" pref="22" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblRequestOrder" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                                          <Component id="lblRequestName" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="cobRequestsNames" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="btnGetRequestInfo" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                                      <Component id="lblRequests" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="cobRequestsForCustomer" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="lblRequestsForCustomer" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnGetRequestInfo" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="lblMaterial" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="tfFabric1" max="32767" attributes="0"/>
+                                          <Component id="tfFabric2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tfFabric3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="tfFabric4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="lblSize" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="tfSize4" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="tfSize3" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="tfSize2" alignment="0" pref="0" max="32767" attributes="0"/>
+                                                  <Component id="tfSize1" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="lblStar" min="-2" pref="22" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -170,7 +174,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblOrderInfo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblRequestOrder" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRequestsForCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -186,8 +190,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cobRequestsNames" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblRequestName" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cobRequestsForCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblRequests" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnGetRequestInfo" min="-2" max="-2" attributes="0"/>
@@ -426,17 +430,17 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGetRequestInfoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblRequestOrder">
+    <Component class="javax.swing.JLabel" name="lblRequestsForCustomer">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Skapa order fr&#xe5;n f&#xf6;rfr&#xe5;gning"/>
+        <Property name="text" type="java.lang.String" value="F&#xf6;rfr&#xe5;gningar tillh&#xf6;rande kund"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblRequestName">
+    <Component class="javax.swing.JLabel" name="lblRequests">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Namn:"/>
+        <Property name="text" type="java.lang.String" value="F&#xf6;rfr&#xe5;gningar:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cobRequestsNames">
+    <Component class="javax.swing.JComboBox" name="cobRequestsForCustomer">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="0"/>

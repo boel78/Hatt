@@ -73,9 +73,9 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         lblStar = new javax.swing.JLabel();
         lblMandatory = new javax.swing.JLabel();
         btnGetRequestInfo = new javax.swing.JButton();
-        lblRequestOrder = new javax.swing.JLabel();
-        lblRequestName = new javax.swing.JLabel();
-        cobRequestsNames = new javax.swing.JComboBox<>();
+        lblRequestsForCustomer = new javax.swing.JLabel();
+        lblRequests = new javax.swing.JLabel();
+        cobRequestsForCustomer = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,9 +138,9 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             }
         });
 
-        lblRequestOrder.setText("Skapa order från förfrågning");
+        lblRequestsForCustomer.setText("Förfrågningar tillhörande kund");
 
-        lblRequestName.setText("Namn:");
+        lblRequests.setText("Förfrågningar:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -200,37 +200,39 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                         .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(lblOrderInfo))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addComponent(lblRequests)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblRequestsForCustomer)))
+                                .addGap(62, 62, 62))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lblMaterial)
-                                    .addComponent(tfFabric1)
-                                    .addComponent(tfFabric2)
-                                    .addComponent(tfFabric3)
-                                    .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblSize)
+                                    .addComponent(btnGetRequestInfo)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                            .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                            .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                            .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblRequestOrder)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(6, 6, 6)
-                                            .addComponent(lblRequestName)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(cobRequestsNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(btnGetRequestInfo)))
-                                .addGap(62, 62, 62)))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lblMaterial)
+                                            .addComponent(tfFabric1)
+                                            .addComponent(tfFabric2)
+                                            .addComponent(tfFabric3)
+                                            .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblSize)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                    .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                    .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                    .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -263,7 +265,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblOrderInfo)
-                            .addComponent(lblRequestOrder))
+                            .addComponent(lblRequestsForCustomer))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
@@ -277,8 +279,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cobRequestsNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblRequestName))
+                                    .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblRequests))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnGetRequestInfo)))
                         .addGap(19, 19, 19)
@@ -357,6 +359,9 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         tfAddress.setText(address);
         tfPhone.setText(phone);
         tfEmail.setText(customerEmail);
+        
+        //Fills the requestcombobox depending on the chosen customer
+        fillCobRequestNames();
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
@@ -406,25 +411,27 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                     String cosistsOfValues = "(" + orderID + "," + accessoriesMid + "," + accessoriesAmount + ")";
                     Database.insert("order_consists_of_materials", consistsOfColumns, cosistsOfValues);
                 }
+                
+                //Fetches the request (if one is chosen) and deletes it from "requests"
+                String selectedRequest = cobRequestsForCustomer.getSelectedItem().toString();
+                if (!selectedRequest.isEmpty()){
+                    Database.deleteRow("requests", "rid", selectedRequest);
+                }                       
                 JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
             }
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
 
     private void btnGetRequestInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetRequestInfoActionPerformed
-        // Fetches the customer name from the requestcombobox
-        String requestCustomerName = cobRequestsNames.getSelectedItem().toString();
-  
-        //Fetches the email from the customer and the request description
-        String customerEmail = Database.fetchSingle("email", "customer", "name", requestCustomerName);
-        String customerID = Database.fetchSingle("cid", "customer", "name", requestCustomerName);
-        String requestDescription = Database.fetchSingle("description", "requests", "customer", customerID);
-        
-        //Selects the customer in the customercombobox and fills the description textfield
-        cobCustomers.setSelectedItem(customerEmail);
-        tfDescription.setText(requestDescription);
-        
-        
+        //Fetches the description for the selected request item
+        String requestID = cobRequestsForCustomer.getSelectedItem().toString();
+        if (!requestID.isEmpty()) {
+            String requestDescription = Database.fetchSingle("description", "requests", "rid", requestID);
+            tfDescription.setText(requestDescription);
+        }
+        else {
+            tfDescription.setText("");
+        }
     }//GEN-LAST:event_btnGetRequestInfoActionPerformed
 
     //Method that fetches the accessories fields and connects them with an amount in a hashMap
@@ -494,17 +501,26 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     }
     
     //Fills the comboBox with customers that have an existing request
-    private void fillCobRequestNames() {
-        cobRequestsNames.addItem("");       
+    private void fillCobRequestNames() { 
+        //Empties the description text field and the combobox
+        tfDescription.setText("");
+        cobRequestsForCustomer.removeAllItems();
         
-        ArrayList<String> requestsCustomers;
-        requestsCustomers = Database.fetchColumn(false, "customer", "requests", "", "");
-        for (String requestCid : requestsCustomers) {
-            String requestName = Database.fetchSingle("name", "customer", "cid", requestCid);
-            cobRequestsNames.addItem(requestName);
+        //Fetches the selected customer
+        String selectedCustomerEmail = getCustomerEmail();
+        ArrayList<String> requests;
+        //If a customer is selected the requestbox will be filled with the customer requests that has been approved
+        if (!selectedCustomerEmail.isEmpty()) {
+            cobRequestsForCustomer.addItem("");
+            String customerID = Database.fetchSingle("cid", "customer", "email", selectedCustomerEmail);
+            requests = Database.fetchColumn(true, "rid", "requests", "customer", customerID + " and review_status = 'J'");
+        for (String requestsID : requests) {          
+            cobRequestsForCustomer.addItem(requestsID);
+        }
         }
     }
-
+    
+    
     private ArrayList<String> getFabricsTf() {
         ArrayList<String> allFabrics = new ArrayList<>();
         ArrayList<String> fabricsWithValue = new ArrayList<>();
@@ -588,7 +604,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnGetRequestInfo;
     private javax.swing.JComboBox<String> cobCustomers;
-    private javax.swing.JComboBox<String> cobRequestsNames;
+    private javax.swing.JComboBox<String> cobRequestsForCustomer;
     private javax.swing.JLabel lblAccessories;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAmount;
@@ -602,8 +618,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderInfo;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblRequestName;
-    private javax.swing.JLabel lblRequestOrder;
+    private javax.swing.JLabel lblRequests;
+    private javax.swing.JLabel lblRequestsForCustomer;
     private javax.swing.JLabel lblSize;
     private javax.swing.JLabel lblStar;
     private javax.swing.JTextField tfAccessories1;
