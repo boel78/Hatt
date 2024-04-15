@@ -218,7 +218,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
 
-
+        System.out.println("fetchedOrgID: " + fetchedOrgNr);
+        
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
             address = customer.get("address");
