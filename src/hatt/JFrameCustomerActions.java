@@ -259,9 +259,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 actions = new CustomerActions(customerID, name, address, phone, email, orgNumber);
 
                 actions.addCustomer(name, address, phone, email, orgNumber);
-                txtOrgNumber
-                fetchedID = ;
-                fetchedOrgNr = txtOrgNumber.getText();
+                String fetchedOrgNumber = actions.getOrgNumber(customerID);
+                txtOrgNumber.setText(fetchedOrgNumber);
                 System.out.println("fetchedOrgNr: " + fetchedOrgNr);
                 System.out.println("fetchedID: " + fetchedID);
                 
