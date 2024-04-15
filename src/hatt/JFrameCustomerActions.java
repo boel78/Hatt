@@ -203,7 +203,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         String customerID = txtCustomerID.getText();
         fetchedID = txtCustomerID.getText();
-        if(Validation.txtHasValue(txtOrgNumber)) {
+        
+        if(!txtOrgNumber.getText().isBlank()) {
             fetchedOrgNr = txtOrgNumber.getText();
         }
 
