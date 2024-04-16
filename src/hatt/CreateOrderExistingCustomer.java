@@ -229,7 +229,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(37, 37, 37)
+                                        .addGap(43, 43, 43)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -258,7 +258,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                         .addComponent(lblRequestsForCustomer)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                                         .addComponent(lblStartingPrice)))
                                 .addGap(74, 74, 74))
                             .addGroup(layout.createSequentialGroup()
@@ -266,7 +266,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                 .addComponent(lblRequests)
                                 .addGap(18, 18, 18)
                                 .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel1)
                                 .addGap(58, 58, 58))))
                     .addGroup(layout.createSequentialGroup()
@@ -512,11 +512,14 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 valuesCalc.add(Database.fetchSingle("price", "materials", "name", fabrics));
             }
         }
-        
+
         for (String fabrics : accessories.keySet()) {
             for (int i = 0; i < Integer.parseInt(accessories.get(fabrics)); i++) {
                 valuesCalc.add(Database.fetchSingle("price", "materials", "name", fabrics));
             }
+        }
+        if (!txtStartingPrice.getText().isEmpty()) {
+            valuesCalc.add(txtStartingPrice.getText());
         }
         System.out.println(valuesCalc);
         Calculate c = new Calculate();
@@ -528,7 +531,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         // TODO add your handling code here:
         String price = Database.fetchSingle("starting_price", "stocked_product", "name", cbStockedProducts.getSelectedItem().toString());
         txtStartingPrice.setText(price);
-        String description = Database.fetchSingle("description", "stocked_product", "name",cbStockedProducts.getSelectedItem().toString());
+        String description = Database.fetchSingle("description", "stocked_product", "name", cbStockedProducts.getSelectedItem().toString());
         tfDescription.setText(description);
     }//GEN-LAST:event_cbStockedProductsItemStateChanged
 
@@ -621,8 +624,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             }
         }
     }
-    
-        private void fillCobStockedProducts() {
+
+    private void fillCobStockedProducts() {
         cbStockedProducts.addItem("");
         ArrayList<String> products;
         products = Database.fetchColumn(false, "name", "stocked_product", "", "");
