@@ -9,19 +9,28 @@ package hatt;
  * @author joakimfockstedt
  */
 public class Calculate {
-    
-    public Calculate(){
-    
+
+    public Calculate() {
+
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        // TODO code application logic here
+
+
     }
-    
-    
-    
-    
+
+    public int addNumbers(String[] numbers) {
+        int result = 0;
+
+        for (String i : numbers) {
+            int j = Integer.valueOf(i);
+            result += j;
+        }
+
+        return result;
+    }
+
 }
