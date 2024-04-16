@@ -30,7 +30,6 @@ public class reviewRequest extends javax.swing.JFrame {
      */
     public reviewRequest() {
         new Validation();
-        sendEmail("Erik Regnér", "erik.regner4@gmail.com", "1", true);
         /* Create and display the form */
 
         try {
@@ -167,11 +166,13 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
         String cbContent = cbDenyAccept.getSelectedItem().toString();
+        
         if (cbContent == "Neka") {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
                 JOptionPane.showMessageDialog(null, "Förfågan har nekats.");
+                sendEmail("Erik Regnér", "erik.regner4@gmail.com", "1", false);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -180,6 +181,7 @@ public class reviewRequest extends javax.swing.JFrame {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'J' WHERE rid = " + rID);
                 JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
+                sendEmail("Erik Regnér", "erik.regner4@gmail.com", "1", true);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -206,7 +208,7 @@ public class reviewRequest extends javax.swing.JFrame {
         return CBReviewsx;
     }
 
-    public static void sendEmail(String customerName, String recieverMail, String requestID, boolean requestAnswer) {
+    public void sendEmail(String customerName, String recieverMail, String requestID, boolean requestAnswer) {
         Properties smtpconfig = new Properties();
 
         smtpconfig.put("mail.smtp.auth", "true");
@@ -231,6 +233,8 @@ public class reviewRequest extends javax.swing.JFrame {
         
         if(Validation.txtHasValue(txtDeniedRequest)){
             
+        } else {
+            
         }
         
         try {
@@ -247,10 +251,19 @@ public class reviewRequest extends javax.swing.JFrame {
                     Message.RecipientType.TO,
                     InternetAddress.parse("erik.regner4@gmail.com", false)
             );
+            
             automatedMail.setSubject("Svar på kundförfrågan.");
+            
+            if(requestAnswer == false){
             automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
+                    + "\n\n med anledning: " + txtDeniedRequest.getText()
                     + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
-
+            } else if (requestAnswer == true){
+                automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
+                    + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
+            }
+            
+            
             Transport.send(automatedMail);
 
             System.out.println("Done");
@@ -259,10 +272,11 @@ public class reviewRequest extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }
-
+    
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
