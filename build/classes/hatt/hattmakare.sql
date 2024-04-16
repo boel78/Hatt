@@ -212,6 +212,7 @@ create table product_materials
 (
     sid int not null,
     mid int not null,
+    amount double not null,
     primary key (mid, sid),
     constraint product_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
@@ -281,7 +282,7 @@ INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
-INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
+INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3, 2);
 INSERT INTO hattmakardb.requests (rid, description, reviewed_by, reviewed, review_status, customer, feedback) VALUES (1, 'En jeanshatt', 1, 'N', 'N', 1, 'Går ej att fixa');
 INSERT INTO hattmakardb.stocked_product (sid, name, description, starting_price) VALUES (1, 'Doctorateshat', 'A Doctorates hat', 1200);
 INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (1, 'Lollos Jeans', 'lollo.jeans@gmail.com', '070-0000000');
