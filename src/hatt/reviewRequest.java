@@ -182,7 +182,7 @@ public class reviewRequest extends javax.swing.JFrame {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
-                sendEmail(customerName, "erik.regner4@gmail.com", rID, false);
+                sendEmail(customerName, mail, rID, false);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -190,7 +190,7 @@ public class reviewRequest extends javax.swing.JFrame {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'J' WHERE rid = " + rID);
-                sendEmail(customerName, "erik.regner4@gmail.com", rID, true);
+                sendEmail(customerName, mail, rID, true);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
