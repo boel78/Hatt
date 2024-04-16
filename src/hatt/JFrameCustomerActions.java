@@ -211,15 +211,15 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
-
-
+        String orgNumber = ""; //Database: customer/orgNumber
         
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
             address = customer.get("address");
             phone = customer.get("phone");
             email = customer.get("email");
-
+            orgNumber = customer.get("otgNumber");
+            
             txtName.setText(name != null ? name : "");
             txtAddress.setText(address != null ? address : "");
             txtPhone.setText(phone != null ? phone : "");
@@ -236,8 +236,8 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtAddress.setText("");
             txtPhone.setText("");
             txtEmail.setText("");
-            
             txtOrgNumber.setText("");
+           
             System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
             JOptionPane.showMessageDialog(null, "Det gick inte att hitta kunden. Kontrollera uppgifterna.");
         }
