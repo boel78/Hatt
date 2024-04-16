@@ -16,9 +16,11 @@ import javax.swing.JTextField;
 public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
     private String uid;
+    private String hourlyRate;
 
     public CreateOrderExistingCustomer(String uid) {
         this.uid = uid;
+        hourlyRate = "200";
         initComponents();
         fillCobCustomers();
         fillCobRequestNames();
@@ -521,8 +523,14 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         if (!txtStartingPrice.getText().isEmpty()) {
             valuesCalc.add(txtStartingPrice.getText());
         }
+
+        Integer timeTaken = Integer.parseInt(tfEstimatedTime.getText().toString());
+        Integer workSum = timeTaken * Integer.parseInt(hourlyRate);
+        valuesCalc.add(workSum.toString());
+        
         System.out.println(valuesCalc);
         Calculate c = new Calculate();
+
         Double finalPrice = c.addNumbers(valuesCalc);
         txtEstimatedPrice.setText(finalPrice.toString());
     }//GEN-LAST:event_btnCalculateActionPerformed
