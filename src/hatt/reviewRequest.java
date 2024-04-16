@@ -30,8 +30,8 @@ public class reviewRequest extends javax.swing.JFrame {
      */
     public reviewRequest() {
         new Validation();
-        /* Create and display the form */
 
+        /* Create and display the form */
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -166,13 +166,21 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
         String cbContent = cbDenyAccept.getSelectedItem().toString();
+        String customerName = "";
         
+        try {
+            customerName = idb.fetchSingle("SELECT name FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
+        } catch (InfException ex){
+            ex.printStackTrace();
+        }
+        
+        System.out.println(customerName);
+
         if (cbContent == "Neka") {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
-                JOptionPane.showMessageDialog(null, "Förfågan har nekats.");
-                sendEmail("Erik Regnér", "erik.regner4@gmail.com", "1", false);
+                sendEmail(customerName, "erik.regner4@gmail.com", rID, false);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -180,8 +188,7 @@ public class reviewRequest extends javax.swing.JFrame {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'J' WHERE rid = " + rID);
-                JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
-                sendEmail("Erik Regnér", "erik.regner4@gmail.com", "1", true);
+                sendEmail(customerName, "erik.regner4@gmail.com", rID, true);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -230,53 +237,52 @@ public class reviewRequest extends javax.swing.JFrame {
         } else if (requestAnswer == true) {
             requestStatus = "godkänd";
         }
-        
-        if(Validation.txtHasValue(txtDeniedRequest)){
-            
-        } else {
-            
-        }
-        
+
         try {
             if (requestStatus == null || requestStatus.isEmpty()) {
+                // Om detta någonsin händer så kommer mitt program att vara helt 
+                // förstört
                 System.out.println("Något gick allvarligt fel!");
-                throw new MessagingException("Strängen saknar värde");
+                throw new MessagingException("du är fucked");
             }
-            
-            
-            
+
             Message automatedMail = new MimeMessage(session);
             automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com"));
             automatedMail.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse("erik.regner4@gmail.com", false)
             );
-            
+
             automatedMail.setSubject("Svar på kundförfrågan.");
-            
-            if(requestAnswer == false){
-            automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
-                    + "\n\n med anledning: " + txtDeniedRequest.getText()
-                    + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
-            } else if (requestAnswer == true){
+
+            if (requestAnswer == false) {
+                if (Validation.txtHasValue(txtDeniedRequest)) {
+                    automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
+                            + "\n\n med anledning: " + txtDeniedRequest.getText()
+                            + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
+                    JOptionPane.showMessageDialog(null, "Förfågan har nekats.");
+                } else {
+                    throw new MessagingException("Error");
+                }
+            } else if (requestAnswer == true) {
                 automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
-                    + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
+                        + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
+                JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
             }
-            
-            
+
             Transport.send(automatedMail);
 
-            System.out.println("Done");
+            System.out.println("Klar");
 
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+
     }
-    
+
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
