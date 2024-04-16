@@ -22,6 +22,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         initComponents();
         fillCobCustomers();
         fillCobRequestNames();
+        fillCobStockedProducts();
     }
 
     /**
@@ -79,6 +80,10 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         btnCalculate = new javax.swing.JButton();
         txtEstimatedPrice = new javax.swing.JTextField();
         lblPrice = new javax.swing.JLabel();
+        cbStockedProducts = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtStartingPrice = new javax.swing.JTextField();
+        lblStartingPrice = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,6 +161,18 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
         lblPrice.setText("Pris");
 
+        cbStockedProducts.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbStockedProductsItemStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("Lagerförda modeller");
+
+        txtStartingPrice.setColumns(7);
+
+        lblStartingPrice.setText("Utgångspris:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -186,10 +203,6 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                 .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(90, 90, 90)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEstimatedTime)
-                    .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescription)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -212,47 +225,70 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                         .addComponent(tfAmount1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(lblOrderInfo))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(37, 37, 37)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(lblMaterial)
+                                                    .addComponent(tfFabric1)
+                                                    .addComponent(tfFabric2)
+                                                    .addComponent(tfFabric3)
+                                                    .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(lblSize)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                            .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                            .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                            .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                                            .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                        .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(btnGetRequestInfo)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(cbStockedProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(lblRequestsForCustomer)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblStartingPrice)))
+                                .addGap(74, 74, 74))
+                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblRequests)
                                 .addGap(18, 18, 18)
                                 .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(149, 149, 149))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnGetRequestInfo)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(lblMaterial)
-                                            .addComponent(tfFabric1)
-                                            .addComponent(tfFabric2)
-                                            .addComponent(tfFabric3)
-                                            .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblSize)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                    .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                    .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                    .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(lblRequestsForCustomer))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(58, 58, 58))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnConfirm)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnCalculate)
-                        .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPrice)
-                            .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(116, Short.MAX_VALUE))
+                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblDescription)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnConfirm)
+                                .addGap(29, 29, 29)
+                                .addComponent(btnCalculate)
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPrice)
+                                    .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEstimatedTime)
+                            .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtStartingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +304,9 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(lblName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblStartingPrice))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblAddress)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,9 +337,14 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblRequests))
+                                    .addComponent(lblRequests)
+                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGetRequestInfo)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnGetRequestInfo)
+                                    .addComponent(cbStockedProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(69, 69, 69)
+                                .addComponent(txtStartingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -353,7 +396,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                 .addComponent(tfFabric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
                 .addComponent(lblPrice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnConfirm)
@@ -361,7 +404,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCalculate)
                         .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
@@ -481,6 +524,14 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         txtEstimatedPrice.setText(finalPrice.toString());
     }//GEN-LAST:event_btnCalculateActionPerformed
 
+    private void cbStockedProductsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStockedProductsItemStateChanged
+        // TODO add your handling code here:
+        String price = Database.fetchSingle("starting_price", "stocked_product", "name", cbStockedProducts.getSelectedItem().toString());
+        txtStartingPrice.setText(price);
+        String description = Database.fetchSingle("description", "stocked_product", "name",cbStockedProducts.getSelectedItem().toString());
+        tfDescription.setText(description);
+    }//GEN-LAST:event_cbStockedProductsItemStateChanged
+
     //Method that fetches the accessories fields and connects them with an amount in a hashMap
     private HashMap<String, String> getAccessoriesWithAmount() {
         ArrayList<JTextField> tfAccessories = new ArrayList<>();
@@ -570,6 +621,16 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             }
         }
     }
+    
+        private void fillCobStockedProducts() {
+        cbStockedProducts.addItem("");
+        ArrayList<String> products;
+        products = Database.fetchColumn(false, "name", "stocked_product", "", "");
+        for (String list : products) {
+            cbStockedProducts.addItem(list);
+        }
+        System.out.println(products);
+    }
 
     private ArrayList<String> getFabricsTf() {
         ArrayList<String> allFabrics = new ArrayList<>();
@@ -653,8 +714,10 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JButton btnCalculate;
     private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnGetRequestInfo;
+    private javax.swing.JComboBox<String> cbStockedProducts;
     private javax.swing.JComboBox<String> cobCustomers;
     private javax.swing.JComboBox<String> cobRequestsForCustomer;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAccessories;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAmount;
@@ -673,6 +736,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel lblRequestsForCustomer;
     private javax.swing.JLabel lblSize;
     private javax.swing.JLabel lblStar;
+    private javax.swing.JLabel lblStartingPrice;
     private javax.swing.JTextField tfAccessories1;
     private javax.swing.JTextField tfAccessories2;
     private javax.swing.JTextField tfAccessories3;
@@ -696,5 +760,6 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField tfSize3;
     private javax.swing.JTextField tfSize4;
     private javax.swing.JTextField txtEstimatedPrice;
+    private javax.swing.JTextField txtStartingPrice;
     // End of variables declaration//GEN-END:variables
 }
