@@ -56,20 +56,20 @@ public class CustomerActions {
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
                 System.out.println(id + " " + values1);
-                
-                if(!orgNumber.equals(""))   {
-                    if(Validation.existsCustomerID(id)){
-                        
+
+                if (!orgNumber.equals("")) {
+                    if (Validation.existsCustomerID(id)) {
+
                         Database.insert("business_customer", "(cid, org_number)", values2);
-                        
+
                         System.out.print("Added as a business customer ");
                         System.out.println(id + " " + values2);
-                    }   else    {
+                    } else {
                         System.out.println("Finns inget cid att placera org_number mot");
                     }
-                }   else    {
+                } else {
                     System.out.println("Added as a private customer");
-                }  
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Misslyckades att generera CustomerID.");
                 System.out.println(id);
@@ -81,25 +81,24 @@ public class CustomerActions {
 
     public void updateCustomer(String customerID, String name, String address, String phone, String email, String orgNumber) {
 
-        
         String empty = "";
         String preparedQuery = "UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID;
         System.out.println(preparedQuery);
-        
+
         try {
             int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
             if (confirmUpdate == JOptionPane.YES_OPTION) {
-            if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
-            Database.updatePreparedQuery(preparedQuery);
-            JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
-            
-            if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
-            preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
-            Database.updatePreparedQuery(preparedQuery);
-            }
-            } else  {
-                System.out.println("Could not update Organization Number");
-            }
+                if (!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank()) {
+                    Database.updatePreparedQuery(preparedQuery);
+                    JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
+
+                    if (Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)) {
+                        preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = " + customerID;
+                        Database.updatePreparedQuery(preparedQuery);
+                    }
+                } else {
+                    System.out.println("Could not update Organization Number");
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -112,73 +111,70 @@ public class CustomerActions {
         try {
             int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill ta bort kund", "Bekräfta.", JOptionPane.YES_NO_OPTION);
             if (confirmUpdate == JOptionPane.YES_OPTION) {
-            //Om kunden är privatkund
-            if (Validation.checkExistingCell("private_customer", "cid", customerID)) {
-                Database.deleteRow("private_customer", "cid", customerID);
-            } else if (Validation.checkExistingCell("business_customer", "cid", customerID)) {
-                Database.deleteRow("business_customer", "cid", customerID);
-            }
+                //Om kunden är privatkund
+                if (Validation.checkExistingCell("private_customer", "cid", customerID)) {
+                    Database.deleteRow("private_customer", "cid", customerID);
+                } else if (Validation.checkExistingCell("business_customer", "cid", customerID)) {
+                    Database.deleteRow("business_customer", "cid", customerID);
+                }
 
-            
-            //Loopar igenom ordrar tills alla är borta
-            boolean orderHittade = false;
-            while (!orderHittade) {
-                if (Validation.checkExistingCell("xOrder", "customer", customerID)) {
+                //Loopar igenom ordrar tills alla är borta
+                boolean orderHittade = false;
+                while (!orderHittade) {
+                    if (Validation.checkExistingCell("xOrder", "customer", customerID)) {
 
-                    String oid = Database.fetchSingle("oid", "xOrder", "customer", customerID);
-                    System.out.println(oid);
+                        String oid = Database.fetchSingle("oid", "xOrder", "customer", customerID);
+                        System.out.println(oid);
 
-                    if (Validation.checkExistingCell("order_consists_of_materials", "oid", oid)) {
-                        Database.deleteRow("order_consists_of_materials", "oid", oid);
-                    }
-
-                    if (Validation.checkExistingCell("waybill", "oid", oid)) {
-                        Database.deleteRow("waybill", "oid", oid);
-                    }
-
-                    
-                    //Loopar igenom alla invoice
-                    boolean invoiceHittade = false;
-                    while (!invoiceHittade) {
-                        if (Validation.checkExistingCell("invoice", "oid", oid)) {
-                            String inid = Database.fetchSingle("inid", "invoice", "oid", oid);
-
-                            if (Validation.checkExistingCell("accountant_access", "inid", inid)) {
-                                Database.deleteRow("accountant_access", "inid", inid);
-                            }
-
-                            if (Validation.checkExistingCell("ordering_materials", "inid", inid)) {
-                                Database.deleteRow("ordering_materials", "inid", inid);
-                            }
-                            Database.deleteRow("invoice", "oid", oid);
-
-                        } else {
-                            invoiceHittade = true;
+                        if (Validation.checkExistingCell("order_consists_of_materials", "oid", oid)) {
+                            Database.deleteRow("order_consists_of_materials", "oid", oid);
                         }
+
+                        if (Validation.checkExistingCell("waybill", "oid", oid)) {
+                            Database.deleteRow("waybill", "oid", oid);
+                        }
+
+                        //Loopar igenom alla invoice
+                        boolean invoiceHittade = false;
+                        while (!invoiceHittade) {
+                            if (Validation.checkExistingCell("invoice", "oid", oid)) {
+                                String inid = Database.fetchSingle("inid", "invoice", "oid", oid);
+
+                                if (Validation.checkExistingCell("accountant_access", "inid", inid)) {
+                                    Database.deleteRow("accountant_access", "inid", inid);
+                                }
+
+                                if (Validation.checkExistingCell("ordering_materials", "inid", inid)) {
+                                    Database.deleteRow("ordering_materials", "inid", inid);
+                                }
+                                Database.deleteRow("invoice", "oid", oid);
+
+                            } else {
+                                invoiceHittade = true;
+                            }
+                        }
+
+                        Database.deleteRow("xOrder", "customer", customerID);
+                    } else {
+                        orderHittade = true;
+                    }
+                }
+
+                //Loopar igenom alla requests
+                boolean requestsHittade = false;
+                while (!requestsHittade) {
+                    if (Validation.checkExistingCell("requests", "customer", customerID)) {
+                        Database.deleteRow("requests", "customer", customerID);
+                    } else {
+                        requestsHittade = true;
                     }
 
-                    Database.deleteRow("xOrder", "customer", customerID);
-                } else {
-                    orderHittade = true;
                 }
-            }
-            
-            //Loopar igenom alla requests
-            boolean requestsHittade = false;
-            while (!requestsHittade) {
-                if (Validation.checkExistingCell("requests", "customer", customerID)) {
-                    Database.deleteRow("requests", "customer", customerID);
-                }
-                else{
-                    requestsHittade = true;
-                }
-                
-            }
 
-            Database.deleteRow("customer", "cid", customerID);
-            System.out.println("Kund borttagen");
-            valid = true;
-            JOptionPane.showMessageDialog(null, "Kunden med kundID " + customerID + " har tagits bort.");
+                Database.deleteRow("customer", "cid", customerID);
+                System.out.println("Kund borttagen");
+                valid = true;
+                JOptionPane.showMessageDialog(null, "Kunden med kundID " + customerID + " har tagits bort.");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -203,14 +199,13 @@ public class CustomerActions {
         String columnName = "org_number";
         String tableName = "business_customer";
         String columnWhere = "cid";
-        
+
         String customerOrgNumber = Database.fetchSingle(columnName, tableName, columnWhere, customerID);
 
-        
         System.out.println(customerOrgNumber);
         return customerOrgNumber;
     }
-    
+
     public void testMethod(String test1, String test2) {
         String testName = test1;
         String testEmail = test2;
