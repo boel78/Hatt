@@ -7,22 +7,9 @@ package hatt;
 import oru.inf.InfDB;
 import java.util.ArrayList;
 import oru.inf.InfException;
-import java.util.Date;
 import javax.swing.JOptionPane;
-import java.util.Properties;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import java.util.Properties;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -42,7 +29,7 @@ public class reviewRequest extends javax.swing.JFrame {
      * Creates new form reviewREquestt
      */
     public reviewRequest() {
-        sendEmail("erik.regner4@gmail.com", "EHFEFUHSFIU", "AA STENAMENA");
+        sendEmail("Erik Regnér", "erik.regner4@gmail.com", "1", true);
         /* Create and display the form */
 
         try {
@@ -209,31 +196,42 @@ public class reviewRequest extends javax.swing.JFrame {
         return CBReviewsx;
     }
 
-    public static void sendEmail(String recieverMail, String subject, String body) {
+    public static void sendEmail(String customerName, String recieverMail, String requestID, boolean requestAnswer) {
         Properties smtpconfig = new Properties();
 
         smtpconfig.put("mail.smtp.auth", "true");
         smtpconfig.put("mail.smtp.host", "smtp.gmail.com");
-        smtpconfig.put("mail.smtp.socketFactory.port", "465");  
-        smtpconfig.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");  
-        smtpconfig.put("mail.smtp.socketFactory.fallback", "false");  
-        
+        smtpconfig.put("mail.smtp.socketFactory.port", "465");
+        smtpconfig.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        smtpconfig.put("mail.smtp.socketFactory.fallback", "false");
+
         Session session = Session.getDefaultInstance(smtpconfig, new javax.mail.Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                 return new javax.mail.PasswordAuthentication("Ottoshattmakeri@gmail.com", "hictjjmvbsnllqls");
             }
         });
-        
-        try {
 
+        String requestStatus = null;
+
+        if (requestAnswer == false) {
+            requestStatus = "nekad";
+        } else if (requestAnswer == true) {
+            requestStatus = "godkänd";
+        }
+
+        try {
+            if (requestStatus == null || requestStatus.isEmpty()) {
+                System.out.println("Något gick allvarligt fel!");
+                throw new MessagingException("Strängen saknar värde");
+            }
             Message automatedMail = new MimeMessage(session);
             automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com"));
             automatedMail.setRecipients(
                     Message.RecipientType.TO,
                     InternetAddress.parse("erik.regner4@gmail.com", false)
             );
-            automatedMail.setSubject("Ang: Fastnat i butiken!");
-            automatedMail.setText("Hej Adam, jag, Otto har fastnat i butiken,"
+            automatedMail.setSubject("Svar på kundförfrågan.");
+            automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
                     + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
 
             Transport.send(automatedMail);
@@ -248,7 +246,6 @@ public class reviewRequest extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
