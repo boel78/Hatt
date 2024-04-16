@@ -172,20 +172,20 @@ public class Feedback1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
-       
+
     }//GEN-LAST:event_btnShowRequestActionPerformed
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
-       
+
     }//GEN-LAST:event_btnCompleteDenyAcceptActionPerformed
 
     private void KommenterarOmKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KommenterarOmKundActionPerformed
-    
-     
+
+
     }//GEN-LAST:event_KommenterarOmKundActionPerformed
 
     private void cbDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDenyAcceptActionPerformed
- 
+
     }//GEN-LAST:event_cbDenyAcceptActionPerformed
 
     private void cbReviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReviewsActionPerformed
@@ -193,34 +193,34 @@ public class Feedback1 extends javax.swing.JFrame {
     }//GEN-LAST:event_cbReviewsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   
+
         String feedback = TFFeedb.getText();
         String rid = cbReviews.getSelectedItem().toString();
-        
+
         if (Validation.validateDescription200(TFFeedb) && Validation.txtHasValue(TFFeedb)){
         Database.updatePreparedQuery("UPDATE requests SET feedback = '" + feedback + "' WHERE rid = " + rid);
         JOptionPane.showMessageDialog(null, "Feedback skickat!");
         TFFeedb.setText(" ");
-        
-       
-        }else{ 
+
+
+        }else{
         JOptionPane.showMessageDialog(null, "Vänligen skriv något (max 200 tecken)");}
-       
-     
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          String feedback = TFFeedb.getText();
         String rid = cbReviews.getSelectedItem().toString();
         String query1 = "SELECT feedback FROM requests, customer WHERE customer.cid = requests.rid AND rid = '" + rid + "'";
-       
+
         try {
            String oldFeed = idb.fetchSingle(query1);
             TFFeedb.setText(oldFeed);
         } catch (InfException ex) {
             Logger.getLogger(Feedback1.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public String[] getCBReviews() {
@@ -242,7 +242,7 @@ public class Feedback1 extends javax.swing.JFrame {
 
         return CBReviewsx;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -250,7 +250,7 @@ public class Feedback1 extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -281,7 +281,7 @@ public class Feedback1 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Feedback1().setVisible(true);
-                
+
             }
         });
     }
