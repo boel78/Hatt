@@ -524,8 +524,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             valuesCalc.add(txtStartingPrice.getText());
         }
 
-        Integer timeTaken = Integer.parseInt(tfEstimatedTime.getText().toString());
-        Integer workSum = timeTaken * Integer.parseInt(hourlyRate);
+        Double timeTaken = Double.parseDouble(tfEstimatedTime.getText().toString());
+        Double workSum = timeTaken * Integer.parseInt(hourlyRate);
         valuesCalc.add(workSum.toString());
         
         System.out.println(valuesCalc);
