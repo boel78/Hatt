@@ -209,6 +209,7 @@ public class reviewRequest extends javax.swing.JFrame {
                 //idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
               //  idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
                 new Feedback1().setVisible(true);
+                
               
               
                 

@@ -11,6 +11,8 @@ import oru.inf.InfException;
 import java.util.ArrayList;
 import oru.inf.InfException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +22,6 @@ import javax.swing.JOptionPane;
 public class Feedback1 extends javax.swing.JFrame {
 
     private InfDB idb;
-    private String rID;
 
     /**
      * Creates new form reviewREquestt
@@ -56,6 +57,7 @@ public class Feedback1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         TFFeedb = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         txtAreaDescription.setColumns(20);
         txtAreaDescription.setRows(5);
@@ -114,6 +116,13 @@ public class Feedback1 extends javax.swing.JFrame {
 
         jLabel4.setText("Välj kund:");
 
+        jButton2.setText("Visa ev tidigare feedback");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,10 +134,12 @@ public class Feedback1 extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbReviews, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 105, Short.MAX_VALUE))
+                        .addGap(0, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -148,8 +159,11 @@ public class Feedback1 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -166,7 +180,7 @@ public class Feedback1 extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCompleteDenyAcceptActionPerformed
 
     private void KommenterarOmKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KommenterarOmKundActionPerformed
-     new Comment().setVisible(true);
+    
      
     }//GEN-LAST:event_KommenterarOmKundActionPerformed
 
@@ -179,22 +193,35 @@ public class Feedback1 extends javax.swing.JFrame {
     }//GEN-LAST:event_cbReviewsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     try {
-             String feedback = TFFeedb.getText();
-
-            String query = "INSERT INTO Costumer (feedback) Values('" + feedback + "') WHERE customer.cid = requests.rid AND customer.name = '" + cbReviews.getSelectedItem().toString() + "'";    
-            if (Validation.validateDescription200(TFFeedb) && Validation.txtHasValue(TFFeedb)){
-             idb.insert(query);   
-          
-            }else{ 
-             JOptionPane.showMessageDialog(null, "Vänligen skriv något (max 200 tecken)");
-            }
-        } catch (InfException ex) {
-            ex.printStackTrace();
-        }
+   
+        String feedback = TFFeedb.getText();
+        String rid = cbReviews.getSelectedItem().toString();
         
-           
+        if (Validation.validateDescription200(TFFeedb) && Validation.txtHasValue(TFFeedb)){
+        Database.updatePreparedQuery("UPDATE requests SET feedback = '" + feedback + "' WHERE rid = " + rid);
+        JOptionPane.showMessageDialog(null, "Feedback skickat!");
+        TFFeedb.setText(" ");
+        
+       
+        }else{ 
+        JOptionPane.showMessageDialog(null, "Vänligen skriv något (max 200 tecken)");}
+       
+     
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         String feedback = TFFeedb.getText();
+        String rid = cbReviews.getSelectedItem().toString();
+        String query1 = "SELECT feedback FROM requests, customer WHERE customer.cid = requests.rid AND rid = '" + rid + "'";
+       
+        try {
+           String oldFeed = idb.fetchSingle(query1);
+            TFFeedb.setText(oldFeed);
+        } catch (InfException ex) {
+            Logger.getLogger(Feedback1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public String[] getCBReviews() {
         ArrayList<String> CBAL = new ArrayList<>();
@@ -203,7 +230,8 @@ public class Feedback1 extends javax.swing.JFrame {
 
         try {
             for (String s : rid) {
-                CBAL.add(idb.fetchSingle("SELECT name FROM customer WHERE cid IN (SELECT customer FROM requests WHERE rid = '" + s + "')") + " " + s);
+                String query = "SELECT rid FROM requests, customer WHERE customer.cid = requests.rid AND rid = '" + s + "'";
+                CBAL.add(idb.fetchSingle(query));
             }
         } catch (InfException ex) {
             ex.printStackTrace();
@@ -253,6 +281,7 @@ public class Feedback1 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Feedback1().setVisible(true);
+                
             }
         });
     }
@@ -265,6 +294,7 @@ public class Feedback1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbDenyAccept;
     private javax.swing.JComboBox<String> cbReviews;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

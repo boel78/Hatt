@@ -279,3 +279,8 @@ INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (1, 'Ott
 INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (2, 'Judith', 'judithhatt@gmail.com', 'partner', '070-1234565');
 INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (3, 'Joakim', 'joakimrevisor@gmail.com', 'accountant', '073-9876543');
 INSERT INTO hattmakardb.waybill (wid, oid, volume, weight, content, package_count) VALUES (1, 1, 1, 5, 'Jeanshat', '1');
+
+
+SELECT rid FROM requests, customer WHERE customer.cid = requests.rid AND rid = 1;
+
+SELECT feedback FROM requests, customer WHERE customer.cid = requests.rid AND rid = '1';
