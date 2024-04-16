@@ -38,12 +38,16 @@ public class Validation {
             if (email.length() <= 50) {
                 if (email.matches(emailRegex)) {
                     valid = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Email cannot be longer than 50 characters");
+                } 
+                else {
+                    JOptionPane.showMessageDialog(null, "Var vänlig skriv en giltlig epost.");
                 }
             }
+            else {
+                    JOptionPane.showMessageDialog(null, "Email kan inte vara större än 50 tecken");
+                }
         } else {
-            JOptionPane.showMessageDialog(null, "Email cannot be empty");
+            JOptionPane.showMessageDialog(null, "Email kan inte vara tom");
         }
         return valid;
     }
