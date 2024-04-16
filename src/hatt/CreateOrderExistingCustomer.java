@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  * @author joelnorling
  */
 public class CreateOrderExistingCustomer extends javax.swing.JFrame {
-    
+
     private String uid;
 
     public CreateOrderExistingCustomer(String uid) {
@@ -201,16 +201,11 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                             .addComponent(lblOrderInfo))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addComponent(lblRequests)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblRequestsForCustomer)))
-                                .addGap(62, 62, 62))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblRequests)
+                                .addGap(18, 18, 18)
+                                .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(149, 149, 149))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -232,7 +227,10 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                                     .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                                     .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))))))))
+                                                .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(lblRequestsForCustomer)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -359,7 +357,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         tfAddress.setText(address);
         tfPhone.setText(phone);
         tfEmail.setText(customerEmail);
-        
+
         //Fills the requestcombobox depending on the chosen customer
         fillCobRequestNames();
     }//GEN-LAST:event_cobCustomersActionPerformed
@@ -411,12 +409,12 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                     String cosistsOfValues = "(" + orderID + "," + accessoriesMid + "," + accessoriesAmount + ")";
                     Database.insert("order_consists_of_materials", consistsOfColumns, cosistsOfValues);
                 }
-                
+
                 //Fetches the request (if one is chosen) and deletes it from "requests"
                 String selectedRequest = cobRequestsForCustomer.getSelectedItem().toString();
-                if (!selectedRequest.isEmpty()){
+                if (!selectedRequest.isEmpty()) {
                     Database.deleteRow("requests", "rid", selectedRequest);
-                }                       
+                }
                 JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
             }
         }
@@ -428,8 +426,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         if (!requestID.isEmpty()) {
             String requestDescription = Database.fetchSingle("description", "requests", "rid", requestID);
             tfDescription.setText(requestDescription);
-        }
-        else {
+        } else {
             tfDescription.setText("");
         }
     }//GEN-LAST:event_btnGetRequestInfoActionPerformed
@@ -499,28 +496,31 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             cobCustomers.addItem(email);
         }
     }
-    
+
     //Fills the comboBox with customers that have an existing request
-    private void fillCobRequestNames() { 
+    private void fillCobRequestNames() {
         //Empties the description text field and the combobox
         tfDescription.setText("");
         cobRequestsForCustomer.removeAllItems();
-        
+
         //Fetches the selected customer
         String selectedCustomerEmail = getCustomerEmail();
         ArrayList<String> requests;
         //If a customer is selected the requestbox will be filled with the customer requests that has been approved
         if (!selectedCustomerEmail.isEmpty()) {
-            cobRequestsForCustomer.addItem("");
+           
             String customerID = Database.fetchSingle("cid", "customer", "email", selectedCustomerEmail);
             requests = Database.fetchColumn(true, "rid", "requests", "customer", customerID + " and review_status = 'J'");
-        for (String requestsID : requests) {          
-            cobRequestsForCustomer.addItem(requestsID);
-        }
+            if (!requests.isEmpty()) {
+                for (String requestsID : requests) {
+                    cobRequestsForCustomer.addItem(requestsID);
+                }
+            } else {
+                cobRequestsForCustomer.addItem("Inga förfrågningar.");
+            }
         }
     }
-    
-    
+
     private ArrayList<String> getFabricsTf() {
         ArrayList<String> allFabrics = new ArrayList<>();
         ArrayList<String> fabricsWithValue = new ArrayList<>();
@@ -596,7 +596,6 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
 
     }
 
