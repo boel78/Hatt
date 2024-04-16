@@ -217,21 +217,29 @@ public class reviewRequest extends javax.swing.JFrame {
         return CBReviewsx;
     }
 
+    
+    // Jag kallar på funktionen när man klickar på att neka eller godkänna förfrågning
     public void sendEmail(String customerName, String recieverMail, String requestID, boolean requestAnswer) {
+        // Instansierar ett properties objekt, här lägger man in hur programmet ska koppla till
+        // Googles smtp
         Properties smtpconfig = new Properties();
 
+        // Alla inställningar för att koppla till smtp
         smtpconfig.put("mail.smtp.auth", "true");
         smtpconfig.put("mail.smtp.host", "smtp.gmail.com");
         smtpconfig.put("mail.smtp.socketFactory.port", "465");
         smtpconfig.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         smtpconfig.put("mail.smtp.socketFactory.fallback", "false");
 
+        // Inloggning till kontot, username är mail och andra strängen är app lösenordet
+        // Som är genererat genom google workspace
         Session session = Session.getDefaultInstance(smtpconfig, new javax.mail.Authenticator() {
             protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
                 return new javax.mail.PasswordAuthentication("Ottoshattmakeri@gmail.com", "hictjjmvbsnllqls");
             }
         });
-
+        
+        // Den här använder jag för att kolla ifall det blivit godkänt eller nekat. 
         String requestStatus = null;
 
         if (requestAnswer == false) {
@@ -241,22 +249,30 @@ public class reviewRequest extends javax.swing.JFrame {
         }
 
         try {
+            //Kollar om requestStatus är null, vilket aldrig ska hända
             if (requestStatus == null || requestStatus.isEmpty()) {
                 // Om detta någonsin händer så kommer mitt program att vara helt 
-                // förstört
+                // förstört, har detta här för att bryta om det går riktigt fel
                 System.out.println("Något gick allvarligt fel!");
-                throw new MessagingException("du är fucked");
+                throw new MessagingException("NÅGOT ALLVARLIGT FEL HAR SKETT");
             }
 
+            // Här börjar jag skapandet av mitt kära mail jag ska skicka
+            // Jag instansierar ett MimeMessage object med session som jag instansierade tidigare
+            // Det innehåller inloggningsinfo och kopplingen till gmail smtp-
+            // om jag förstått dokumentationen rätt från biblioteket
+            
             Message automatedMail = new MimeMessage(session);
-            automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com"));
-            automatedMail.setRecipients(
-                    Message.RecipientType.TO,
-                    InternetAddress.parse(recieverMail, false)
+            automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com")); // Vilken mail man skickar ifrån
+            automatedMail.setRecipients(                                             // Väljer vilka mails man ska skicka till
+                    Message.RecipientType.TO,                                        
+                    InternetAddress.parse(recieverMail, false)                       
             );
 
-            automatedMail.setSubject("Svar på kundförfrågan.");
+            automatedMail.setSubject("Svar på kundförfrågan."); // Denna kodrad gör precis vad den säger
 
+            
+            // Dessa if statements bygger innehållet i mailen, med .setText() funktionen
             if (requestAnswer == false) {
                 if (Validation.txtHasValue(txtDeniedRequest)) {
                     automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
@@ -272,7 +288,7 @@ public class reviewRequest extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
             }
 
-            Transport.send(automatedMail);
+            Transport.send(automatedMail); // skickar mailet
 
             System.out.println("Klar");
 
