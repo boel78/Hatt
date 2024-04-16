@@ -167,9 +167,11 @@ public class reviewRequest extends javax.swing.JFrame {
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
         String cbContent = cbDenyAccept.getSelectedItem().toString();
         String customerName = "";
+        String mail = "";
         
         try {
             customerName = idb.fetchSingle("SELECT name FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
+            mail = idb.fetchSingle("SELECT email FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
         } catch (InfException ex){
             ex.printStackTrace();
         }
@@ -250,7 +252,7 @@ public class reviewRequest extends javax.swing.JFrame {
             automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com"));
             automatedMail.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse("erik.regner4@gmail.com", false)
+                    InternetAddress.parse(recieverMail, false)
             );
 
             automatedMail.setSubject("Svar på kundförfrågan.");
