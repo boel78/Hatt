@@ -4,6 +4,8 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author joakimfockstedt
@@ -19,18 +21,28 @@ public class Calculate {
      */
     public static void main(String args[]) {
 
-
     }
 
-    public int addNumbers(String[] numbers) {
-        int result = 0;
+    public double addNumbers(ArrayList<String> numbers) {
+        double result = 0;
 
         for (String i : numbers) {
-            int j = Integer.valueOf(i);
+            double j = Double.valueOf(i);
             result += j;
         }
 
-        return result;
+        return round(result, 3);
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
 }
