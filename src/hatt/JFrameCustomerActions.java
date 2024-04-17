@@ -328,7 +328,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             if (Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
                 actions = new CustomerActions(customerID);
 
-                actions.updateCustomer(fetchedID, name, address, phone, email, orgNr);
+                actions.updateCustomer(fetchedID, name, address, phone, email, orgNr, fetchedOrgNr);
                 System.out.println("if i btnUpdate");
                 //Resettar combobox
                 cbCustomers.removeAllItems();
