@@ -94,7 +94,7 @@ public class CustomerActions {
                 JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
                 System.out.println(customerID);
                 
-                if(Validation.validateOrgNumber(orgNumber) && !orgNumber.equals(empty)) {
+                if(Validation.validateOrgNumber(orgNumber) && !orgNumber.equals(empty) && !Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
                     if(Validation.checkExistingCell("business_customer", "cid", customerID) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
                         preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
                         Database.updatePreparedQuery(preparedQuery);
@@ -121,8 +121,8 @@ public class CustomerActions {
                     }   else    {
                     System.out.println("Could not update Organization Number 2");
                     }
-                } else {
-                    System.out.println("fel i (Validation.validateOrgNumber(orgNumber) && !orgNumber.equals(empty))");
+                } else if (!Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
+                    JOptionPane.showMessageDialog(null, "Organsiationsnummret finns redan.");
                 }
                 if(orgNumber.equals(empty) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber) && Validation.checkExistingCell("business_customer", "cid", customerID)) {
                     int confirmUpdate3 = JOptionPane.showConfirmDialog(null, "Kunden är en företags kund, är du säker att du vill tabort organisationsnummer och göra om kunden till en privat kund?", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
