@@ -5,6 +5,7 @@
 package hatt;
 
 import hatt.Database;
+import hatt.Validation;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author joakimfockstedt
  */
-public class reviewRequest extends javax.swing.JFrame {
+public class Feedback1 extends javax.swing.JFrame {
 
     private InfDB idb;
     private String rID;
@@ -24,7 +25,7 @@ public class reviewRequest extends javax.swing.JFrame {
     /**
      * Creates new form reviewREquestt
      */
-    public reviewRequest() {
+    public Feedback1() {
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
@@ -42,37 +43,19 @@ public class reviewRequest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cbReviews = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        btnShowRequest = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDescription = new javax.swing.JTextArea();
         cbDenyAccept = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
         btnCompleteDenyAccept = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         KommenterarOmKund = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 400));
-
-        cbReviews.setModel(new javax.swing.DefaultComboBoxModel<>(getCBReviews()));
-        cbReviews.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbReviewsActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Välj förfrågan");
-
-        btnShowRequest.setText("Visa");
-        btnShowRequest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnShowRequestActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Beskrivning");
+        jLabel2 = new javax.swing.JLabel();
+        btnShowRequest = new javax.swing.JButton();
+        cbReviews = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        TFFeedb = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         txtAreaDescription.setColumns(20);
         txtAreaDescription.setRows(5);
@@ -85,14 +68,14 @@ public class reviewRequest extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Godkänn/Neka/Återkoppla förfrågan");
-
         btnCompleteDenyAccept.setText("Fullfölj");
         btnCompleteDenyAccept.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCompleteDenyAcceptActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Godkänn/Neka/Återkoppla förfrågan");
 
         KommenterarOmKund.setText("Kommentera kund");
         KommenterarOmKund.addActionListener(new java.awt.event.ActionListener() {
@@ -101,100 +84,85 @@ public class reviewRequest extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Beskrivning");
+
+        btnShowRequest.setText("Visa");
+        btnShowRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowRequestActionPerformed(evt);
+            }
+        });
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cbReviews.setModel(new javax.swing.DefaultComboBoxModel<>(getCBReviews()));
+        cbReviews.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbReviewsActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        jLabel1.setText("Lämna återkoppling nedan ");
+
+        jButton1.setText("Spara");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Välj kund:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(0, 116, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(btnShowRequest))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(34, 34, 34)
+                                .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 105, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnCompleteDenyAccept)
-                        .addGap(18, 18, 18)
-                        .addComponent(KommenterarOmKund)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(153, 153, 153)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShowRequest))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCompleteDenyAccept)
-                    .addComponent(KommenterarOmKund))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
-        String txt = "";
-        String cbContent = cbReviews.getSelectedItem().toString();
-        String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
-        rID = numbers;
-        txt = Database.fetchSingle("description", "requests", "rid", numbers);
-
-        txtAreaDescription.setText("");
-        txtAreaDescription.append(txt);
+       
     }//GEN-LAST:event_btnShowRequestActionPerformed
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
-        String cbContent = cbDenyAccept.getSelectedItem().toString();
-        if (cbContent == "Neka") {
-            try {
-                idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
-                idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
-                JOptionPane.showMessageDialog(null, "Förfågan har nekats.");
-            } catch (InfException ex) {
-                ex.printStackTrace();
-            }
-        } else if (cbContent == "Godkänn") {
-            try {
-                idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
-                idb.update("UPDATE requests SET review_status = 'J' WHERE rid = " + rID);
-                JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
-            } catch (InfException ex) {
-                ex.printStackTrace();
-            }
-            
-               
-            
-
-        }
+       
     }//GEN-LAST:event_btnCompleteDenyAcceptActionPerformed
 
     private void KommenterarOmKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KommenterarOmKundActionPerformed
@@ -203,26 +171,35 @@ public class reviewRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_KommenterarOmKundActionPerformed
 
     private void cbDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDenyAcceptActionPerformed
-       String cbContent = cbDenyAccept.getSelectedItem().toString();
-        if (cbContent == "Återkoppla") {
-           
-                //idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
-              //  idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
-                new Feedback1().setVisible(true);
-              
-              
-                
-            } 
+ 
     }//GEN-LAST:event_cbDenyAcceptActionPerformed
 
     private void cbReviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReviewsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbReviewsActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     try {
+             String feedback = TFFeedb.getText();
+
+            String query = "INSERT INTO Costumer (feedback) Values('" + feedback + "') WHERE customer.cid = requests.rid AND customer.name = '" + cbReviews.getSelectedItem().toString() + "'";    
+            if (Validation.validateDescription200(TFFeedb) && Validation.txtHasValue(TFFeedb)){
+             idb.insert(query);   
+          
+            }else{ 
+             JOptionPane.showMessageDialog(null, "Vänligen skriv något (max 200 tecken)");
+            }
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+        
+           
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public String[] getCBReviews() {
         ArrayList<String> CBAL = new ArrayList<>();
         ArrayList<String> rid = new ArrayList<>();
-        rid = Database.fetchColumn(false, "rid", "requests", "reviewed", "'N");
+        rid = Database.fetchColumn(false, "rid", "requests", "", "");
 
         try {
             for (String s : rid) {
@@ -255,14 +232,18 @@ public class reviewRequest extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Feedback1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Feedback1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Feedback1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(reviewRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Feedback1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -271,20 +252,23 @@ public class reviewRequest extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reviewRequest().setVisible(true);
+                new Feedback1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KommenterarOmKund;
+    private javax.swing.JTextField TFFeedb;
     private javax.swing.JButton btnCompleteDenyAccept;
     private javax.swing.JButton btnShowRequest;
     private javax.swing.JComboBox<String> cbDenyAccept;
     private javax.swing.JComboBox<String> cbReviews;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaDescription;
     // End of variables declaration//GEN-END:variables
