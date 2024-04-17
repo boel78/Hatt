@@ -272,7 +272,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 System.out.println("fetchedOrgNr: " + fetchedOrgNr);
                 System.out.println("fetchedID: " + fetchedID);
                 
-                actions.addCustomer(name, address, phone, email,fetchedOrgNr);
 
                 //Resettar combobox
                 cbCustomers.removeAllItems();
