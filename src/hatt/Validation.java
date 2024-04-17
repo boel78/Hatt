@@ -17,14 +17,13 @@ import oru.inf.InfException;
  */
 public class Validation {
 
-
     public Validation() {
 
     }
 
     public static boolean validateName(String name) {
         boolean valid = false;
-        if (name.matches("[a-zA-ZåäöÅÄÖ]+ \\s?+[a-zA-ZåäöÅÄÖ]+")) {
+        if (name.matches("[a-zA-ZåäöÅÄÖ]+\\s?+[a-zA-ZåäöÅÄÖ]+")) {
             System.out.println("NAMN OK");
             valid = true;
         }
@@ -39,15 +38,14 @@ public class Validation {
                 if (email.matches(emailRegex)) {
                     valid = true;
                 } else {
-                    JOptionPane.showMessageDialog(null, "Email cannot be longer than 50 characters");
+                    JOptionPane.showMessageDialog(null, "Email kan inte vara längre än 50 bokstäver");
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Email cannot be empty");
+            JOptionPane.showMessageDialog(null, "Email kan inte vara tomt.");
         }
         return valid;
     }
-
 
     public static boolean validatePhone(String phone) {
         boolean valid = false;
@@ -75,7 +73,6 @@ public class Validation {
         return valid;
     }
 
-
     public static boolean existsCustomerID(String customerID) {
         ArrayList<String> customerIDs = Database.getAllCustomerID();
         return customerIDs.contains(customerID);
@@ -98,7 +95,7 @@ public class Validation {
     }
 
     public static boolean validateAddress(String address) {
-        boolean valid = address.matches(".*\\d.*") && address.matches(".*[a-zA-ZåäöÅÄÖ].*");
+        boolean valid = address.matches(".*\\d*");
         return valid;
     }
 
@@ -112,7 +109,9 @@ public class Validation {
         for (HashMap<String, String> column : list) {
             for (String key : column.keySet()) {
                 if (key.equals(columnName)) {
-                    if (column.get(key).equals(keyWord)) {
+                    if (column.get(key) == null) {
+
+                    } else if (column.get(key).equals(keyWord)) {
                         exists = true;
                     }
                 }
@@ -121,7 +120,7 @@ public class Validation {
         return exists;
     }
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         new Validation();
     }
 
@@ -138,10 +137,9 @@ public class Validation {
     }
 
     //SKA IN I MAIN BRANCHEN
-
     //Kollar om accessoar arraylisten är tom och då söker den inte mot databasens material då en hatt inte måste ha en accessoar
     //Använder valideringsmetoden doesAccessoryExist
-        public static boolean accessoryValidation(ArrayList<String> accessories) {
+    public static boolean accessoryValidation(ArrayList<String> accessories) {
         boolean accessoriesNotEmpty = false;
         boolean accessoryExists = true;
         for (String accessory : accessories) {
@@ -151,21 +149,21 @@ public class Validation {
             }
         }
         if (accessoriesNotEmpty) {
-            if(!doesAccessoryExist(accessories)){
+            if (!doesAccessoryExist(accessories)) {
                 accessoryExists = false;
+            }
         }
-    }
         return accessoryExists;
     }
 
-     //Kollar om fabric finns i databasen med hjälp av doesFabricExist
-     //Kan gå att ta bort och bara använda doesFabricExist
+    //Kollar om fabric finns i databasen med hjälp av doesFabricExist
+    //Kan gå att ta bort och bara använda doesFabricExist
     public static boolean fabricValidation(ArrayList<String> fabrics) {
-       boolean exists = false;
-       if(doesFabricExist(fabrics)){
-           exists = true;
-       }
-       return exists;
+        boolean exists = false;
+        if (doesFabricExist(fabrics)) {
+            exists = true;
+        }
+        return exists;
     }
 
     //Validerar två fält och om någon utav de är tomma så kommer errormeddelande för createOrder
@@ -183,9 +181,9 @@ public class Validation {
     }
 
     //Validerar fält i createOrder då vissa fält kan vara tomma
-    public static boolean hasValueMandatory(JTextField tf){
+    public static boolean hasValueMandatory(JTextField tf) {
         boolean hasValue = true;
-        if(tf.getText().isEmpty()){
+        if (tf.getText().isEmpty()) {
             hasValue = false;
             JOptionPane.showMessageDialog(null, "Vänligen fyll i obligatoriska rutor!");
         }
@@ -194,9 +192,9 @@ public class Validation {
     }
 
     //Validerar fältet för description i createOrder
-    public static boolean validateDescription(JTextField tf){
+    public static boolean validateDescription(JTextField tf) {
         boolean correctLength = true;
-        if(tf.getText().length()>50){
+        if (tf.getText().length() > 50) {
             correctLength = false;
             JOptionPane.showMessageDialog(null, "Beskrivning kan max ha 50 tecken!");
         }
@@ -205,7 +203,7 @@ public class Validation {
 
     //Validerar fältet för estimated time i createOrder
     //Kan ersättas av isDouble metoden men då måste det komma upp ett felmeddelande som här
-    public static boolean isDoubleErrorMessage(JTextField tf){
+    public static boolean isDoubleErrorMessage(JTextField tf) {
         boolean b = false;
         try {
             Double.parseDouble(tf.getText());
@@ -219,15 +217,15 @@ public class Validation {
 
     //Kollar om ett fält är av double om den inte är tom
     //Om den inte är tom och inte är double så kallar man på metoden isDoubleErrorMessage
-    public static boolean isDoubleIfNotEmpty(JTextField tf){
+    public static boolean isDoubleIfNotEmpty(JTextField tf) {
         boolean isEmpty = false;
 
-        if(tf.getText().isEmpty()){
+        if (tf.getText().isEmpty()) {
             isEmpty = true;
-        }else if (isDoubleErrorMessage(tf)) {
+        } else if (isDoubleErrorMessage(tf)) {
             isEmpty = true;
         }
-            return isEmpty;
+        return isEmpty;
     }
 
     //Kollar om det man skriver in är ett befintligt tyg i databasen
@@ -268,6 +266,72 @@ public class Validation {
         return exists;
     }
 
+    public static boolean validateOrgNumber(String orgNumber) {
+        boolean valid = false;
 
+        // Kontrollera om strängen är null eller tom
+        if (orgNumber == null || orgNumber.isEmpty()) {
+            System.out.println("Empty org number");
+            return valid;
+        }
+
+        // Kontrollera om längden är felaktig
+        if (orgNumber.length() != 11) {
+            System.out.println("Invalid org number: Length must be 11 characters");
+            JOptionPane.showMessageDialog(null, "Fel längd på organisationsnummer.\nOrganisationsnummer måste vara 11 tecken långt.\nFormat: XXXXXX-XXXX", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Dela upp organisationsnumret med bindestrecket som skiljetecken
+        String[] parts = orgNumber.split("-");
+        if (parts.length != 2) {
+            System.out.println("Invalid org number: Format must be xxxxxx-xxxx");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid; // Felaktigt format om det inte finns exakt ett bindestreck
+        }
+
+        String firstPart = parts[0];
+        String secondPart = parts[1];
+
+        // Kontrollera att första delen består av sex siffror
+        if (!firstPart.matches("\\d{6}")) {
+            System.out.println("Invalid org number: First part must consist of 6 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Kontrollera att andra delen består av fyra siffror
+        if (!secondPart.matches("\\d{4}")) {
+            System.out.println("Invalid org number: Second part must consist of 4 digits");
+            JOptionPane.showMessageDialog(null, "Fel format på organisationsnummer.\nRegistrera kund som privatperson eller se över det inskrivna organisationsnummer.\n(XXXXXX-XXXX)", "Validation Error", JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+
+        // Om alla kontroller passerar, returnera true
+        valid = true;
+        System.out.println("Org number validations success.");
+        return valid;
+    }
+
+    public static boolean checkSupplierMaterial(String supplier, String material) {
+        boolean exists = false;
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "supplier_has_material", "", "");
+        for (HashMap<String, String> row : list) {
+            String supplierInstance = "";
+            String materialInstance = "";
+            for (String key : row.keySet()) {
+                if (key.equals("sid")) {
+                    supplierInstance = row.get(key);
+                } else {
+                    materialInstance = row.get(key);
+                }
+            }
+            if (supplierInstance.equals(supplier) && materialInstance.equals(material)) {
+                exists = true;
+            }
+        }
+
+        return exists;
+    }
 
 }

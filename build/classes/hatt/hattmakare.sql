@@ -35,7 +35,8 @@ create table customer
     name    varchar(25) null,
     address varchar(50) null,
     phone   varchar(25) null,
-    email   varchar(50) null
+    email   varchar(50) null,
+    comment varchar(200) null
 );
 
 create table business_customer
@@ -68,6 +69,17 @@ create table stocked_product
     name           varchar(25)  null,
     description    varchar(100) null,
     starting_price double       null
+);
+
+create table supplier_has_material
+(
+    mid int not null,
+    sid int not null,
+    primary key (mid, sid),
+    constraint supplier_has_material_materials_mid_fk
+        foreign key (mid) references materials (mid),
+    constraint supplier_has_material_supplier_sid_fk
+        foreign key (sid) references supplier (sid)
 );
 
 create table supplier
@@ -159,7 +171,7 @@ create table xOrder
     description    varchar(50) null,
     estimated_time double      null,
     created_by     int         not null,
-    customer       int         not null,
+    customer       int         null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint xOrder_employee_uid_fk
@@ -200,6 +212,7 @@ create table product_materials
 (
     sid int not null,
     mid int not null,
+    amount double not null,
     primary key (mid, sid),
     constraint product_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
@@ -216,6 +229,7 @@ create table requests
     reviewed    varchar(1)  not null,
     review_status varchar(1) not null,
     customer    int         not null,
+    feedback varchar(400) null,
     constraint requests_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint requests_employee_uid_fk
@@ -241,8 +255,8 @@ INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 1);
 INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 2);
 INSERT INTO hattmakardb.accountant_access (uid, inid) VALUES (3, 3);
 INSERT INTO hattmakardb.business_customer (cid, org_number) VALUES (3, '12345');
-INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (1, 'Billy', 'Skogen 3', '073-0675981', 'billy@svt.se');
-INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (2, 'Leif', 'Skogen 3', '073-0758691', 'leif@svt.se');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email, comment) VALUES (1, 'Billy', 'Skogen 3', '073-0675981', 'billy@svt.se', 'En bra kund');
+INSERT INTO hattmakardb.customer (cid, name, address, phone, email, comment) VALUES (2, 'Leif', 'Skogen 3', '073-0758691', 'leif@svt.se', 'En kund som betalar sent');
 INSERT INTO hattmakardb.customer (cid, name, address, phone, email) VALUES (3, 'Ulf Kristersson', 'Riksgatan 1', '070-1234785', 'ulf@kort.se');
 INSERT INTO hattmakardb.employee (uid) VALUES (1);
 INSERT INTO hattmakardb.employee (uid) VALUES (2);
@@ -268,8 +282,8 @@ INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
-INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
-INSERT INTO hattmakardb.requests (rid, description, reviewed_by, reviewed, review_status, customer) VALUES (1, 'En jeanshatt', 1, 'N', 'N', 1);
+INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3, 2);
+INSERT INTO hattmakardb.requests (rid, description, reviewed_by, reviewed, review_status, customer, feedback) VALUES (1, 'En jeanshatt', 1, 'N', 'N', 1, 'Går ej att fixa');
 INSERT INTO hattmakardb.stocked_product (sid, name, description, starting_price) VALUES (1, 'Doctorateshat', 'A Doctorates hat', 1200);
 INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (1, 'Lollos Jeans', 'lollo.jeans@gmail.com', '070-0000000');
 INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (2, 'Alis Accessories', 'aliexpress@gmail.com', '073-0200472');
