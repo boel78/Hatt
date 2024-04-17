@@ -37,12 +37,16 @@ public class Validation {
             if (email.length() <= 50) {
                 if (email.matches(emailRegex)) {
                     valid = true;
-                } else {
-                    JOptionPane.showMessageDialog(null, "Email kan inte vara längre än 50 bokstäver");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Var vänlig skriv en giltlig epost.");
                 }
             }
+            else {
+                    JOptionPane.showMessageDialog(null, "Email kan inte vara större än 50 tecken");
+                }
         } else {
-            JOptionPane.showMessageDialog(null, "Email kan inte vara tomt.");
+            JOptionPane.showMessageDialog(null, "Email kan inte vara tom");
         }
         return valid;
     }
@@ -312,6 +316,29 @@ public class Validation {
         System.out.println("Org number validations success.");
         return valid;
     }
+
+    public static boolean checkSupplierMaterial(String supplier, String material){
+        boolean exists = false;
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "supplier_has_material", "", "");
+        for(HashMap<String, String> row : list){
+            String supplierInstance = "";
+            String materialInstance = "";
+            for(String key : row.keySet()){
+                if(key.equals("sid")){
+                    supplierInstance = row.get(key);
+                }
+                else{
+                    materialInstance = row.get(key);
+                }
+            }
+            if(supplierInstance.equals(supplier) && materialInstance.equals(material)){
+                exists = true;
+            }
+        }
+
+        return exists;
+    }
+
 
     public static boolean checkSupplierMaterial(String supplier, String material) {
         boolean exists = false;
