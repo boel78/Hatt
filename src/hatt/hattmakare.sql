@@ -222,18 +222,21 @@ create table product_materials
 
 create table requests
 (
-    rid         int         not null
+    rid             int          not null
         primary key,
-    description varchar(100) null,
-    reviewed_by int         not null,
-    reviewed    varchar(1)  not null,
-    review_status varchar(1) not null,
-    customer    int         not null,
-    feedback varchar(400) null,
+    description     varchar(100) null,
+    reviewed_by     int          not null,
+    reviewed        varchar(1)   not null,
+    review_status   varchar(1)   not null,
+    customer        int          not null,
+    feedback        varchar(400) null,
+    stocked_product int          null,
     constraint requests_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint requests_employee_uid_fk
-        foreign key (reviewed_by) references employee (uid)
+        foreign key (reviewed_by) references employee (uid),
+    constraint requests_stocked_product_sid_fk
+        foreign key (stocked_product) references stocked_product (sid)
 );
 
 create table waybill
