@@ -224,20 +224,20 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         HashMap<String, String> customer = actions.getCustomer(customerID);
         String fetchedOrgNumber = actions.getOrgNumber(customerID);
-        
+
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
         String orgNumber = ""; //Database: customer/orgNumber
-        
+
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
             address = customer.get("address");
             phone = customer.get("phone");
             email = customer.get("email");
             orgNumber = customer.get("otgNumber");
-            
+
             txtName.setText(name != null ? name : "");
             txtAddress.setText(address != null ? address : "");
             txtPhone.setText(phone != null ? phone : "");
@@ -255,7 +255,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtPhone.setText("");
             txtEmail.setText("");
             txtOrgNumber.setText("");
-           
+
             System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
             JOptionPane.showMessageDialog(null, "Det gick inte att hitta kunden. Kontrollera uppgifterna.");
         }
@@ -269,20 +269,20 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String orgNumber = txtOrgNumber.getText();
 
-            if ((Validation.validateOrgNumber(orgNumber) || orgNumber.equals("")) &&
-                    Validation.txtHasValue(txtName) && 
-                    Validation.txtHasValue(txtEmail) && 
-                    Validation.txtHasValue(txtPhone) && 
-                    Validation.txtHasValue(txtAddress)) {
-                actions = new CustomerActions(customerID, name, address, phone, email, orgNumber);
+        if ((Validation.validateOrgNumber(orgNumber) || orgNumber.equals(""))
+                && Validation.txtHasValue(txtName)
+                && Validation.txtHasValue(txtEmail)
+                && Validation.txtHasValue(txtPhone)
+                && Validation.txtHasValue(txtAddress)) {
+            actions = new CustomerActions(customerID, name, address, phone, email, orgNumber);
 
-                actions.addCustomer(name, address, phone, email, orgNumber);
-                String fetchedOrgNumber = actions.getOrgNumber(customerID);
-                txtOrgNumber.setText(fetchedOrgNumber);
-                System.out.println("fetchedOrgNr: " + fetchedOrgNr);
-                System.out.println("fetchedID: " + fetchedID);
-                
-            }
+            actions.addCustomer(name, address, phone, email, orgNumber);
+            String fetchedOrgNumber = actions.getOrgNumber(customerID);
+            txtOrgNumber.setText(fetchedOrgNumber);
+            System.out.println("fetchedOrgNr: " + fetchedOrgNr);
+            System.out.println("fetchedID: " + fetchedID);
+
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -342,13 +342,13 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         txtPhone.setText("");
         txtEmail.setText("");
         txtOrgNumber.setText("");
-        
+
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentActionPerformed
-        // this.hide();
-        // Comment n = new Comment
-       // n.setVisible(true);
+
+        Comment n = new Comment();
+        n.setVisible(true);
     }//GEN-LAST:event_btnCommentActionPerformed
 
 

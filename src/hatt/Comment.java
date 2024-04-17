@@ -41,7 +41,6 @@ public class Comment extends javax.swing.JFrame {
         cbCustomer = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSaveComment.setText("Spara kommentar");
