@@ -33,7 +33,7 @@ create table customer
     cid     int         not null
         primary key,
     name    varchar(25) null,
-    address varchar(25) null,
+    address varchar(50) null,
     phone   varchar(25) null,
     email   varchar(50) null,
     comment varchar(200) null
@@ -87,7 +87,7 @@ create table supplier
     sid   int         not null
         primary key,
     name  varchar(25) null,
-    email varchar(25) null,
+    email varchar(50) null,
     phone varchar(25) null
 );
 
@@ -96,7 +96,7 @@ create table user
     uid      int         not null
         primary key,
     name     varchar(25) null,
-    email    varchar(25) null,
+    email    varchar(50) null,
     position varchar(25) null,
     phone    varchar(25) null
 );
@@ -126,14 +126,14 @@ create table employee
         foreign key (uid) references user (uid)
 );
 
-create table handles_product
+create table handles_stocked_product
 (
     uid int not null,
     sid int not null,
     primary key (uid, sid),
-    constraint handles_product_stocked_product_sid_fk
+    constraint handles_stocked_product_stocked_product_sid_fk
         foreign key (sid) references stocked_product (sid),
-    constraint handles_product_user_uid_fk
+    constraint handles_stocked_product_user_uid_fk
         foreign key (uid) references user (uid)
 );
 
@@ -158,42 +158,40 @@ create table accessories
 
 create table fabric
 (
-    mid  int    not null,
-    size double null,
+    mid   int    not null,
+    size  double null,
     constraint fabric_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
 
-create table `order`
+create table xOrder
 (
     oid            int         not null
         primary key,
-    description    varchar(25) null,
+    description    varchar(50) null,
     estimated_time double      null,
     created_by     int         not null,
-    invoice        int         null,
     customer       int         null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
-    constraint order_employee_uid_fk
-        foreign key (created_by) references employee (uid),
-    constraint order_invoice_inid_fk
-        foreign key (invoice) references invoice (inid)
+    constraint xOrder_employee_uid_fk
+        foreign key (created_by) references employee (uid)
 );
 
 alter table invoice
-    add constraint invoice_order_oid_fk
-        foreign key (oid) references `order` (oid);
+    add constraint invoice_xOrder_oid_fk
+        foreign key (oid) references xOrder (oid);
 
 create table order_consists_of_materials
 (
     oid int not null,
     mid int not null,
+    amount double null,
     primary key (mid, oid),
     constraint order_consists_of_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
-    constraint order_consists_of_materials_order_oid_fk
-        foreign key (oid) references `order` (oid)
+    constraint order_consists_of_materials_xOrder_oid_fk
+        foreign key (oid) references xOrder (oid)
 );
 
 create table ordering_materials
@@ -247,11 +245,11 @@ create table waybill
     oid           int         not null,
     volume        double      null,
     weight        double      null,
-    content       varchar(25) null,
+    content       varchar(50) null,
     package_count varchar(5)  null,
     primary key (wid, oid),
-    constraint waybill_order_oid_fk
-        foreign key (oid) references `order` (oid)
+    constraint waybill_xOrder_oid_fk
+        foreign key (oid) references xOrder (oid)
 );
 
 
@@ -297,8 +295,3 @@ INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (1, 'Ott
 INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (2, 'Judith', 'judithhatt@gmail.com', 'partner', '070-1234565');
 INSERT INTO hattmakardb.user (uid, name, email, position, phone) VALUES (3, 'Joakim', 'joakimrevisor@gmail.com', 'accountant', '073-9876543');
 INSERT INTO hattmakardb.waybill (wid, oid, volume, weight, content, package_count) VALUES (1, 1, 1, 5, 'Jeanshat', '1');
-
-
-SELECT rid FROM requests, customer WHERE customer.cid = requests.rid AND rid = 1;
-
-SELECT feedback FROM requests, customer WHERE customer.cid = requests.rid AND rid = '1';

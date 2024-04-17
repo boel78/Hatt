@@ -13,15 +13,14 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Login extends javax.swing.JFrame {
 
-    private Database db;
 
     /**
      * Creates new form login
      */
     public Login() {
         new Database();
-        initComponents();
         new Validation();
+        initComponents();
     }
 
     //Metod för att hämta id från namn

@@ -90,51 +90,50 @@ public class CustomerActions {
         try {
             int confirmUpdate1 = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
             if (confirmUpdate1 == JOptionPane.YES_OPTION) {
-             if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
-                Database.updatePreparedQuery(preparedQuery);
-                JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
-                System.out.println(customerID);
+                if (!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank()) {
+                    Database.updatePreparedQuery(preparedQuery);
+                    JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
+                    System.out.println(customerID);
 
-                if (Validation.validateOrgNumber(orgNumber) && !Validation.checkExistingCell("business_customer", "org_number", orgNumber)) {
-                    validOrgNr = true;
-                }
-
-                //
-                if(!orgNumber.equals(empty) && validOrgNr) {
-                    // if org number exists
-                    if (Validation.checkExistingCell("business_customer", "cid", customerID) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
-                        preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
-                        System.out.print(preparedQuery);
-                        Database.updatePreparedQuery(preparedQuery);
-                    } else  {
-                        System.out.println("Could not update Organization Number 1");
+                    if (Validation.validateOrgNumber(orgNumber) && !Validation.checkExistingCell("business_customer", "org_number", orgNumber)) {
+                        validOrgNr = true;
                     }
 
-                    // if org number needs too be added
-                    if (!Validation.checkExistingCell("business_customer", "cid", customerID) && !Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
-                        int confirmUpdate2 = JOptionPane.showConfirmDialog(null, "Kunden är en privat kund, är du säker att du vill lägga till organisationsnummer och göra om kunden till en företags kund?", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
-                            if (confirmUpdate2 == JOptionPane.YES_OPTION) {
-                                if(Validation.existsCustomerID(customerID)){
+                    //
+                    if (!orgNumber.equals(empty) && validOrgNr) {
+                        // if org number exists
+                        if (Validation.checkExistingCell("business_customer", "cid", customerID) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
+                            preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
+                            System.out.print(preparedQuery);
+                            Database.updatePreparedQuery(preparedQuery);
+                        } else {
+                            System.out.println("Could not update Organization Number 1");
+                        }
 
+                        // if org number needs too be added
+                        if (!Validation.checkExistingCell("business_customer", "cid", customerID) && !Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber)) {
+                            int confirmUpdate2 = JOptionPane.showConfirmDialog(null, "Kunden är en privat kund, är du säker att du vill lägga till organisationsnummer och göra om kunden till en företags kund?", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
+                            if (confirmUpdate2 == JOptionPane.YES_OPTION) {
+                                if (Validation.existsCustomerID(customerID)) {
 
                                     Database.insert("business_customer", "(cid, org_number)", values1);
 
                                     System.out.print("Added new org number");
                                     System.out.println(customerID + " " + values1);
-                                }   else    {
-                                System.out.println("Finns inget cid att placera org_number mot");
+                                } else {
+                                    System.out.println("Finns inget cid att placera org_number mot");
                                 }
-                            }   else {
+                            } else {
                                 System.out.println("fel i JOption");
                             }
-                    }   else    {
-                    System.out.println("Could not update Organization Number 2");
+                        } else {
+                            System.out.println("Could not update Organization Number 2");
+                        }
+                    } else if (!orgNumber.equals(empty)) {
+                        JOptionPane.showMessageDialog(null, "Organisations nummret finns redan.");
                     }
-                } else if(!orgNumber.equals(empty)) {
-                    JOptionPane.showMessageDialog(null, "Organisations nummret finns redan.");
-                }
                     // Om man vill ta bort ett existerande OrgNr
-                    if(orgNumber.equals(empty) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber) && Validation.checkExistingCell("business_customer", "cid", customerID)) {
+                    if (orgNumber.equals(empty) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber) && Validation.checkExistingCell("business_customer", "cid", customerID)) {
                         int confirmUpdate3 = JOptionPane.showConfirmDialog(null, "Kunden är en företags kund, är du säker att du vill tabort organisationsnummer och göra om kunden till en privat kund?", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
                         if (confirmUpdate3 == JOptionPane.YES_OPTION) {
                             Database.deleteRow("business_customer", "cid", customerID);
@@ -142,9 +141,9 @@ public class CustomerActions {
                             System.out.println("fel i JOption");
                         }
                     } else {
-                    System.out.println("fel i (orgNumber.equals(empty) && Validation.checkExistingCell(\"business_customer\", \"org_number\", orgNumber) && Validation.checkExistingCell(\"business_customer\", \"cid\", customerID))");
+                        System.out.println("fel i (orgNumber.equals(empty) && Validation.checkExistingCell(\"business_customer\", \"org_number\", orgNumber) && Validation.checkExistingCell(\"business_customer\", \"cid\", customerID))");
                     }
-              }
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -160,7 +159,7 @@ public class CustomerActions {
                 //Om kunden är privatkund
                 if (Validation.checkExistingCell("private_customer", "cid", customerID)) {
                     Database.deleteRow("private_customer", "cid", customerID);
-                } else if (Validation.checkExistingCell("business_customer", "cid", customerID)) {
+                }if (Validation.checkExistingCell("business_customer", "cid", customerID)) {
                     Database.deleteRow("business_customer", "cid", customerID);
                 }
 
@@ -200,7 +199,7 @@ public class CustomerActions {
                             }
                         }
 
-                        Database.deleteRow("xOrder", "customer", customerID);
+                        Database.updatePreparedQuery("UPDATE xOrder SET customer = null where oid = " + oid);
                     } else {
                         orderHittade = true;
                     }
