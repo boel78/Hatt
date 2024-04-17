@@ -202,7 +202,8 @@ public class Navigation extends javax.swing.JFrame {
             showOrders so = new showOrders();
             tbdPane.addTab("Visa ordrar", so);
             
-            
+            RegisterMaterial rm = new RegisterMaterial();
+            tbdPane.addTab("Registrera material", rm);
 
         } //Revisorn
         else {
