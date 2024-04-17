@@ -350,25 +350,6 @@ public class Validation {
     }
 
 
-    public static boolean checkSupplierMaterial(String supplier, String material) {
-        boolean exists = false;
-        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "supplier_has_material", "", "");
-        for (HashMap<String, String> row : list) {
-            String supplierInstance = "";
-            String materialInstance = "";
-            for (String key : row.keySet()) {
-                if (key.equals("sid")) {
-                    supplierInstance = row.get(key);
-                } else {
-                    materialInstance = row.get(key);
-                }
-            }
-            if (supplierInstance.equals(supplier) && materialInstance.equals(material)) {
-                exists = true;
-            }
-        }
-
-        return exists;
-    }
+   
 
 }
