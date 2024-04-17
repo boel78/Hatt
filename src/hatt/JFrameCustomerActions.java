@@ -6,6 +6,7 @@ package hatt;
 
 import java.util.HashMap;
 import javax.swing.JOptionPane;
+// import hatt.Feedback1;
 
 /**
  *
@@ -354,9 +355,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentActionPerformed
-        // this.hide();
-        // Comment n = new Comment
-       // n.setVisible(true);
+        // Feedback1 feedbackWindow = new Feedback1();
+        // feedbackWindow.setVisible(true);
+        
     }//GEN-LAST:event_btnCommentActionPerformed
 
 
