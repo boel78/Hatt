@@ -89,17 +89,20 @@ public class CustomerActions {
         try {
             int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
             if (confirmUpdate == JOptionPane.YES_OPTION) {
-            if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
-            Database.updatePreparedQuery(preparedQuery);
-            JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
+             if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
+                Database.updatePreparedQuery(preparedQuery);
+                JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
+                System.out.println(customerID);
+              if(Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)/*validering om or nummer finns*/) {
+              preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
+                 Database.updatePreparedQuery(preparedQuery);
             
-            if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
-            preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
-            Database.updatePreparedQuery(preparedQuery);
-            }
             } else  {
                 System.out.println("Could not update Organization Number");
-            }
+                    }
+             // if(Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)/*validering om or nummer finns*/)
+             }
+                
             }
         } catch (Exception ex) {
             ex.printStackTrace();
