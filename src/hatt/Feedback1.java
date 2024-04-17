@@ -11,6 +11,8 @@ import oru.inf.InfException;
 import java.util.ArrayList;
 import oru.inf.InfException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +22,7 @@ import javax.swing.JOptionPane;
 public class Feedback1 extends javax.swing.JFrame {
 
     private InfDB idb;
-    private String rID;
+    private String rid;
 
     /**
      * Creates new form reviewREquestt
@@ -31,6 +33,8 @@ public class Feedback1 extends javax.swing.JFrame {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
+        new Database();
+        new Validation();
         initComponents();
     }
 
@@ -56,6 +60,10 @@ public class Feedback1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         TFFeedb = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        txtDescription = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         txtAreaDescription.setColumns(20);
         txtAreaDescription.setRows(5);
@@ -96,6 +104,11 @@ public class Feedback1 extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cbReviews.setModel(new javax.swing.DefaultComboBoxModel<>(getCBReviews()));
+        cbReviews.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbReviewsItemStateChanged(evt);
+            }
+        });
         cbReviews.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbReviewsActionPerformed(evt);
@@ -112,7 +125,27 @@ public class Feedback1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Välj kund:");
+        jLabel4.setText("Välj förfrågning:");
+
+        jButton2.setText("Visa ev tidigare feedback");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        txtDescription.setEditable(false);
+        txtDescription.setColumns(20);
+        txtDescription.setText(Database.fetchSingle("description", "requests", "rid", "1"));
+        txtDescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDescriptionActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Feedback");
+
+        jLabel6.setText("Beskrivning");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,12 +156,17 @@ public class Feedback1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 105, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbReviews, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)))
@@ -136,20 +174,31 @@ public class Feedback1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(153, 153, 153)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(TFFeedb, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -158,20 +207,20 @@ public class Feedback1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
-       
+
     }//GEN-LAST:event_btnShowRequestActionPerformed
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
-       
+
     }//GEN-LAST:event_btnCompleteDenyAcceptActionPerformed
 
     private void KommenterarOmKundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KommenterarOmKundActionPerformed
-     new Comment().setVisible(true);
-     
+
+
     }//GEN-LAST:event_KommenterarOmKundActionPerformed
 
     private void cbDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDenyAcceptActionPerformed
- 
+
     }//GEN-LAST:event_cbDenyAcceptActionPerformed
 
     private void cbReviewsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbReviewsActionPerformed
@@ -179,22 +228,45 @@ public class Feedback1 extends javax.swing.JFrame {
     }//GEN-LAST:event_cbReviewsActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     try {
-             String feedback = TFFeedb.getText();
 
-            String query = "INSERT INTO Costumer (feedback) Values('" + feedback + "') WHERE customer.cid = requests.rid AND customer.name = '" + cbReviews.getSelectedItem().toString() + "'";    
-            if (Validation.validateDescription200(TFFeedb) && Validation.txtHasValue(TFFeedb)){
-             idb.insert(query);   
-          
-            }else{ 
-             JOptionPane.showMessageDialog(null, "Vänligen skriv något (max 200 tecken)");
+        String feedback = TFFeedb.getText();
+        String rid = cbReviews.getSelectedItem().toString();
+
+        if (!feedback.isEmpty()) {
+            if (Validation.validateDescription200(TFFeedb)) {
+                Database.updatePreparedQuery("UPDATE requests SET feedback = '" + feedback + "' WHERE rid = " + rid);
+                JOptionPane.showMessageDialog(null, "Feedback skickat!");
+                TFFeedb.setText(" ");
             }
-        } catch (InfException ex) {
-            ex.printStackTrace();
+        } else {
+            JOptionPane.showMessageDialog(null, "Vänligen skriv något");
         }
-        
-           
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String feedback = TFFeedb.getText();
+        String query1 = "SELECT feedback FROM requests, customer WHERE customer.cid = requests.rid AND rid = '" + rid + "'";
+
+        try {
+            String oldFeed = idb.fetchSingle(query1);
+            TFFeedb.setText(oldFeed);
+        } catch (InfException ex) {
+            Logger.getLogger(Feedback1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtDescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescriptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescriptionActionPerformed
+
+    private void cbReviewsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbReviewsItemStateChanged
+        rid = cbReviews.getSelectedItem().toString();
+
+        txtDescription.setText(Database.fetchSingle("description", "requests", "rid", rid));
+    }//GEN-LAST:event_cbReviewsItemStateChanged
 
     public String[] getCBReviews() {
         ArrayList<String> CBAL = new ArrayList<>();
@@ -203,7 +275,8 @@ public class Feedback1 extends javax.swing.JFrame {
 
         try {
             for (String s : rid) {
-                CBAL.add(idb.fetchSingle("SELECT name FROM customer WHERE cid IN (SELECT customer FROM requests WHERE rid = '" + s + "')") + " " + s);
+                String query = "SELECT rid FROM requests, customer WHERE customer.cid = requests.rid AND rid = '" + s + "'";
+                CBAL.add(idb.fetchSingle(query));
             }
         } catch (InfException ex) {
             ex.printStackTrace();
@@ -214,7 +287,7 @@ public class Feedback1 extends javax.swing.JFrame {
 
         return CBReviewsx;
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -222,7 +295,7 @@ public class Feedback1 extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -253,6 +326,7 @@ public class Feedback1 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Feedback1().setVisible(true);
+
             }
         });
     }
@@ -265,11 +339,15 @@ public class Feedback1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbDenyAccept;
     private javax.swing.JComboBox<String> cbReviews;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaDescription;
+    private javax.swing.JTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }
