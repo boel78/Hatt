@@ -81,28 +81,46 @@ public class CustomerActions {
 
     public void updateCustomer(String customerID, String name, String address, String phone, String email, String orgNumber) {
 
-        
+        String values1 = "('" + customerID + "', '" + orgNumber + "')";
         String empty = "";
         String preparedQuery = "UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID;
         System.out.println(preparedQuery);
         
         try {
-            int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
-            if (confirmUpdate == JOptionPane.YES_OPTION) {
+            int confirmUpdate1 = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
+            if (confirmUpdate1 == JOptionPane.YES_OPTION) {
              if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
                 Database.updatePreparedQuery(preparedQuery);
                 JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
                 System.out.println(customerID);
-              if(Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)/*validering om or nummer finns*/) {
-              preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
-                 Database.updatePreparedQuery(preparedQuery);
-            
-            } else  {
-                System.out.println("Could not update Organization Number");
-                    }
-             // if(Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)/*validering om or nummer finns*/)
-             }
                 
+                if(Validation.validateOrgNumber(orgNumber)) {
+                    if(Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)/*&& (validering om or nummer finns)*/) {
+                        preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
+                        Database.updatePreparedQuery(preparedQuery);
+            
+                    } else  {
+                        System.out.println("Could not update Organization Number");
+                    }
+                    if(!Validation.checkExistingCell("business_customer", "cid", customerID) && !orgNumber.equals(empty)/*&& (validering om or nummer finns)*/){
+                            int confirmUpdate2 = JOptionPane.showConfirmDialog(null, "Kunden är en privat kund, är du säker att du vill lägga till organisnummer och göra om kunden till en företags kund?", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
+                            if (confirmUpdate2 == JOptionPane.YES_OPTION) {
+                                if(Validation.existsCustomerID(customerID)){
+                                    
+                        
+                                    Database.insert("business_customer", "(cid, org_number)", values1);
+                        
+                                    System.out.print("Added new org number");
+                                    System.out.println(customerID + " " + values1);
+                                }   else    {
+                                System.out.println("Finns inget cid att placera org_number mot");
+                                }
+                            }    
+                    }   else    {
+                    System.out.println("Could not update Organization Number");
+                    }
+                }    
+              }   
             }
         } catch (Exception ex) {
             ex.printStackTrace();
