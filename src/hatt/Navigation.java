@@ -128,6 +128,8 @@ public class Navigation extends javax.swing.JFrame {
                 case "Hantera kunder":
                     JFrameCustomerActions ca = new JFrameCustomerActions();
                     tbdPane.setComponentAt(tabindex, ca.getContentPane());
+                    break;
+                    
             }
         }
 
@@ -187,6 +189,20 @@ public class Navigation extends javax.swing.JFrame {
             tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
             reviewRequest rr = new reviewRequest();
             tbdPane.addTab("Granska förfrågning", rr.getContentPane());
+            
+            Feedback1 fb = new Feedback1();
+            tbdPane.addTab("Lämna återkoppling på förfrågning", fb);
+            
+            Comment cm = new Comment();
+            tbdPane.addTab("Lämna kommentar på kund", cm);
+            
+            Supplier spl = new Supplier();
+            tbdPane.addTab("Leverantörsida", spl);
+            
+            showOrders so = new showOrders();
+            tbdPane.addTab("Visa ordrar", so);
+            
+            
 
         } //Revisorn
         else {
