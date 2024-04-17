@@ -304,11 +304,12 @@ public class RegisterMaterial extends javax.swing.JFrame {
             }
         }
 
-        if ((name != null) && (name.length() <= 25)
+        if ((!name.isEmpty()) && (name.length() <= 25)
                 && (konverteratPrice > 0)
                 && (materialText != null)
                 && (materialText.length() <= 25)
-                && materialTextValid) {
+                && materialTextValid
+                && !Validation.doesMaterialExist(name)) {
             if (materialType.equals("Tyg")) {
                 Database.insert("materials", "(mid, name, price, handled_by)", "(" + mid + ",'" + name + "'," + konverteratPrice + "," + userID + ")");
                 Database.insert("fabric", "(mid, size)", "(" + mid + "," + materialText + ")");
@@ -416,7 +417,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
             Integer.parseInt(input);
             valid = true;
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+           e.printStackTrace();
 
         }
         return valid;

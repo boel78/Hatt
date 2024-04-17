@@ -134,7 +134,7 @@ public class Validation {
     public static boolean isDouble(String input) {
         boolean b = false;
         try {
-            Double.parseDouble(input);
+            double x = Double.parseDouble(input);
             b = true;
         } catch (NumberFormatException e) {
             e.printStackTrace();
@@ -236,6 +236,21 @@ public class Validation {
             return isEmpty;
     }
 
+    //Kollar om det materialnamnet man skriver in är ett befintligt material i databasen
+    public static boolean doesMaterialExist(String materialName) {
+        boolean exists = false;
+        ArrayList<String> materials = Database.fetchColumn(false, "name", "materials", "", "");
+
+        for (String name : materials) {
+            if (name.equalsIgnoreCase(materialName)) {
+                exists = true;
+                JOptionPane.showMessageDialog(null, "Materialet med det namnet finns redan!");
+                break;
+            }
+        }
+        return exists;
+    }
+    
     //Kollar om det man skriver in är ett befintligt tyg i databasen
     public static boolean doesFabricExist(ArrayList<String> fabrics) {
         boolean exists = false;
