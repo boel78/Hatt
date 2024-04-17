@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
-
+import javax.swing.JTextField;
 /**
  *
  * @author lukasdenfete
@@ -103,7 +103,12 @@ public class Validation {
     }
 
     public static boolean validateAddress(String address) {
-        boolean valid = address.matches(".*\\d*");
+        boolean valid = false;
+
+        if (address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*")){
+            valid = true;
+        }
+
         return valid;
     }
 
@@ -283,6 +288,24 @@ public class Validation {
         }
         return exists;
     }
+    //Kollar om en Email redan finns i databasen
+public static boolean doesEmailExist(String Email) {
+
+    boolean doesntExists = true;
+     ArrayList<String> existingEmails = new ArrayList<>();
+    existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
+
+    for (String oneEmail : existingEmails) {
+        if (Email.equals(oneEmail)) {
+            doesntExists = false;
+            JOptionPane.showMessageDialog(null, "Denna email finns redan!");
+        }
+    }
+
+     return doesntExists;
+
+}
+
 
     public static boolean validateOrgNumber(String orgNumber) {
         boolean valid = false;
