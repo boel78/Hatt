@@ -53,19 +53,23 @@ public class Validation {
 
     public static boolean validatePhone(String phone) {
         boolean valid = false;
-        if (!phone.isEmpty()) {
-            if (phone.matches("\\d{3}-\\d{7}")) {
+        if(!phone.isEmpty()){
+            if(phone.matches("\\d{3}-\\d{7}")){
                 valid = true;
             }
-            if (!valid) {
-                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer\nTelefonnummer skrivs såhär:\nXXX-XXXXXXX");
+            if(!valid){
+                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer");
             }
-        } else {
+        }
+        else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         return valid;
 
     }
+
+
+
 
     public static boolean txtHasValue(JTextField txt) {
         boolean valid = true;
@@ -204,7 +208,7 @@ public class Validation {
         }
         return correctLength;
     }
-    
+
     //Validerar fältet för description i createOrder
     public static boolean validateDescription200(JTextField tf){
         boolean correctLength = true;
@@ -350,6 +354,6 @@ public class Validation {
     }
 
 
-   
+
 
 }

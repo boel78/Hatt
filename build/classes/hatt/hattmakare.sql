@@ -33,7 +33,7 @@ create table customer
     cid     int         not null
         primary key,
     name    varchar(25) null,
-    address varchar(50) null,
+    address varchar(25) null,
     phone   varchar(25) null,
     email   varchar(50) null,
     comment varchar(200) null
@@ -87,7 +87,7 @@ create table supplier
     sid   int         not null
         primary key,
     name  varchar(25) null,
-    email varchar(50) null,
+    email varchar(25) null,
     phone varchar(25) null
 );
 
@@ -96,7 +96,7 @@ create table user
     uid      int         not null
         primary key,
     name     varchar(25) null,
-    email    varchar(50) null,
+    email    varchar(25) null,
     position varchar(25) null,
     phone    varchar(25) null
 );
@@ -126,14 +126,14 @@ create table employee
         foreign key (uid) references user (uid)
 );
 
-create table handles_stocked_product
+create table handles_product
 (
     uid int not null,
     sid int not null,
     primary key (uid, sid),
-    constraint handles_stocked_product_stocked_product_sid_fk
+    constraint handles_product_stocked_product_sid_fk
         foreign key (sid) references stocked_product (sid),
-    constraint handles_stocked_product_user_uid_fk
+    constraint handles_product_user_uid_fk
         foreign key (uid) references user (uid)
 );
 
@@ -158,40 +158,42 @@ create table accessories
 
 create table fabric
 (
-    mid   int    not null,
-    size  double null,
+    mid  int    not null,
+    size double null,
     constraint fabric_materials_mid_fk
         foreign key (mid) references materials (mid)
 );
 
-create table xOrder
+create table `order`
 (
     oid            int         not null
         primary key,
-    description    varchar(50) null,
+    description    varchar(25) null,
     estimated_time double      null,
     created_by     int         not null,
+    invoice        int         null,
     customer       int         null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
-    constraint xOrder_employee_uid_fk
-        foreign key (created_by) references employee (uid)
+    constraint order_employee_uid_fk
+        foreign key (created_by) references employee (uid),
+    constraint order_invoice_inid_fk
+        foreign key (invoice) references invoice (inid)
 );
 
 alter table invoice
-    add constraint invoice_xOrder_oid_fk
-        foreign key (oid) references xOrder (oid);
+    add constraint invoice_order_oid_fk
+        foreign key (oid) references `order` (oid);
 
 create table order_consists_of_materials
 (
     oid int not null,
     mid int not null,
-    amount double null,
     primary key (mid, oid),
     constraint order_consists_of_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
-    constraint order_consists_of_materials_xOrder_oid_fk
-        foreign key (oid) references xOrder (oid)
+    constraint order_consists_of_materials_order_oid_fk
+        foreign key (oid) references `order` (oid)
 );
 
 create table ordering_materials
@@ -222,18 +224,21 @@ create table product_materials
 
 create table requests
 (
-    rid         int         not null
+    rid             int          not null
         primary key,
-    description varchar(100) null,
-    reviewed_by int         not null,
-    reviewed    varchar(1)  not null,
-    review_status varchar(1) not null,
-    customer    int         not null,
-    feedback varchar(400) null,
+    description     varchar(100) null,
+    reviewed_by     int          not null,
+    reviewed        varchar(1)   not null,
+    review_status   varchar(1)   not null,
+    customer        int          not null,
+    feedback        varchar(400) null,
+    stocked_product int          null,
     constraint requests_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint requests_employee_uid_fk
-        foreign key (reviewed_by) references employee (uid)
+        foreign key (reviewed_by) references employee (uid),
+    constraint requests_stocked_product_sid_fk
+        foreign key (stocked_product) references stocked_product (sid)
 );
 
 create table waybill
@@ -242,11 +247,11 @@ create table waybill
     oid           int         not null,
     volume        double      null,
     weight        double      null,
-    content       varchar(50) null,
+    content       varchar(25) null,
     package_count varchar(5)  null,
     primary key (wid, oid),
-    constraint waybill_xOrder_oid_fk
-        foreign key (oid) references xOrder (oid)
+    constraint waybill_order_oid_fk
+        foreign key (oid) references `order` (oid)
 );
 
 
