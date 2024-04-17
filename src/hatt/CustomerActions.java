@@ -133,11 +133,6 @@ public class CustomerActions {
                 } else if(!orgNumber.equals(empty)) {
                     JOptionPane.showMessageDialog(null, "Organisations nummret finns redan.");
                 }
-                
-                
-                
-                
-                
                     // Om man vill ta bort ett existerande OrgNr
                     if(orgNumber.equals(empty) && Validation.checkExistingCell("business_customer", "org_number", fetchedOrgNumber) && Validation.checkExistingCell("business_customer", "cid", customerID)) {
                         int confirmUpdate3 = JOptionPane.showConfirmDialog(null, "Kunden är en företags kund, är du säker att du vill tabort organisationsnummer och göra om kunden till en privat kund?", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
