@@ -12,11 +12,12 @@ import oru.inf.InfException;
 
 /**
  *
- * @author calletegerup
+ * @author Alex & Carl
  */
 public class JFrameCustomerActions extends javax.swing.JFrame {
 
     private String fetchedID;
+    private String fetchedOrgNr;
     private CustomerActions actions;
 
     public JFrameCustomerActions() {
@@ -99,6 +100,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
 
         txtCustomer.setForeground(new java.awt.Color(0, 0, 0));
         txtCustomer.setText("Kund:");
+        txtOrgNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtOrgNumberActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Organisations Nr:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,8 +140,36 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                         .addComponent(btnUpdate))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
-                        .addComponent(btnRemove)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnRemove))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblName)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAddress)
+                                .addGap(25, 25, 25)
+                                .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(lblEmail)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblCustomerID)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(btnGet))
+                            .addComponent(txtOrgNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,10 +185,20 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                             .addComponent(cbCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtCustomer))
                         .addGap(83, 83, 83)))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCustomerID)
+                            .addComponent(txtCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnGet))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtOrgNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -190,15 +237,19 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         
         fetchedID = numbers;
 
+        String customerID = txtCustomerID.getText();
         actions = new CustomerActions(customerID);
 
         HashMap<String, String> customer = actions.getCustomer(customerID);
-
+        String fetchedOrgNumber = actions.getOrgNumber(customerID);
+        
         String name = ""; //Database: customer/name
         String address = ""; //Database: customer/address
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
 
+
+        
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
             address = customer.get("address");
@@ -209,13 +260,20 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtAddress.setText(address != null ? address : "");
             txtPhone.setText(phone != null ? phone : "");
             txtEmail.setText(email != null ? email : "");
-            System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email);
+            txtOrgNumber.setText(fetchedOrgNumber);
+            System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email + " " + fetchedOrgNumber);
+            fetchedID = txtCustomerID.getText();
+            fetchedOrgNr = txtOrgNumber.getText();
+            System.out.println("fetchedOrgNr: " + fetchedOrgNr);
+            System.out.println("fetchedID: " + fetchedID);
         } else {
             // Kund inte hittad, rensa textfälten eller visa ett felmeddelande
             txtName.setText("");
             txtAddress.setText("");
             txtPhone.setText("");
             txtEmail.setText("");
+            
+            txtOrgNumber.setText("");
             System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
             JOptionPane.showMessageDialog(null, "Det gick inte att hitta kunden. Kontrollera uppgifterna.");
         }
@@ -227,14 +285,22 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String address = txtAddress.getText();
         String email = txtEmail.getText();
         String phone = txtPhone.getText();
+        String orgNumber = txtOrgNumber.getText();
 
-        if (Validation.doesEmailExist(email) && Validation.txtHasValue(txtAddress) && Validation.validateAddress(address)) {
-            if (Validation.txtHasValue(txtName) && (Validation.txtHasValue(txtEmail)) && (Validation.txtHasValue(txtPhone))) {
-                actions = new CustomerActions(customerID, name, address, phone, email);
+            if ((Validation.validateOrgNumber(orgNumber) || orgNumber.equals("")) &&
+                    Validation.txtHasValue(txtName) && 
+                    Validation.txtHasValue(txtEmail) && 
+                    Validation.txtHasValue(txtPhone) && 
+                    Validation.txtHasValue(txtAddress)) {
+                actions = new CustomerActions(customerID, name, address, phone, email, orgNumber);
 
-                actions.addCustomer(name, address, phone, email);
+                actions.addCustomer(name, address, phone, email, orgNumber);
+                String fetchedOrgNumber = actions.getOrgNumber(customerID);
+                txtOrgNumber.setText(fetchedOrgNumber);
+                System.out.println("fetchedOrgNr: " + fetchedOrgNr);
+                System.out.println("fetchedID: " + fetchedID);
+                
             }
-        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -250,6 +316,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 txtAddress.setText("");
                 txtPhone.setText("");
                 txtEmail.setText("");
+                txtOrgNumber.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "Kunde inte ta bort kunden.");
             }
@@ -270,7 +337,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             if (Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
                 actions = new CustomerActions(customerID);
 
-                actions.updateCustomer(fetchedID, name, address, phone, email);
+                actions.updateCustomer(fetchedID, name, address, phone, email, fetchedOrgNr);
                 System.out.println("if i btnUpdate");
             } else {
 
@@ -302,6 +369,10 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void txtOrgNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOrgNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtOrgNumberActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -309,6 +380,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbCustomers;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblEmail;
@@ -318,6 +390,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private javax.swing.JLabel txtCustomer;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtOrgNumber;
     private javax.swing.JTextField txtPhone;
     // End of variables declaration//GEN-END:variables
 }

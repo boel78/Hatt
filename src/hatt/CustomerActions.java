@@ -20,16 +20,16 @@ public class CustomerActions {
     private String address = ""; //Database: customer/address
     private String phone = ""; //Database: customer/phone
     private String email = ""; //Database: customer/email
-    // private String orgNumber = ""; //Database: business/org_number
+    private String orgNumber = ""; //Database: business/org_number
 
-    public CustomerActions(String customerID, String name, String address, String phone, String email) {
+    public CustomerActions(String customerID, String name, String address, String phone, String email, String orgNumber) {
         //Koppling till databsen sker i konstruktorn där kunden ska skapas. Koppla in den här när ni vill att systemet ska skapa en kund då kunden i förfrågan inte finns i systemet ännu.
         this.customerID = customerID;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.email = email;
-
+        this.orgNumber = orgNumber;
     }
 
     public CustomerActions(String customerID) {
@@ -37,39 +37,70 @@ public class CustomerActions {
         this.customerID = customerID;
     }
 
-    public void addCustomer(String name, String address, String phone, String email) {
+    public void addCustomer(String name, String address, String phone, String email, String orgNumber) {
 
         if (Validation.validateName(name) && Validation.validateAddress(address)
                 && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
 
             // Generera nytt customerID
             String id = Database.getAutoIncrement("customer", "cid");
-            System.out.println("id innan inser " + id);
+            System.out.println("id innan insert " + id);
 
             // Kontrollera om id är null innan det används
             if (id != null) {
                 // Förbered värden för infogning i databasen
-                String values = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
-
+                String values1 = "('" + id + "', '" + name + "', '" + address + "', '" + phone + "', '" + email + "');";
+                String values2 = "('" + id + "', '" + orgNumber + "')";
                 // Utför infogningen i databasen
-                Database.insert("customer", "(cid, name, address, phone, email)", values);
+                Database.insert("customer", "(cid, name, address, phone, email)", values1);
 
                 JOptionPane.showMessageDialog(null, "En ny kund har blivit tillagd i systemet.");
-                System.out.println(id + " " + values);
+                System.out.println(id + " " + values1);
+                
+                if(!orgNumber.equals(""))   {
+                    if(Validation.existsCustomerID(id)){
+                        
+                        Database.insert("business_customer", "(cid, org_number)", values2);
+                        
+                        System.out.print("Added as a business customer ");
+                        System.out.println(id + " " + values2);
+                    }   else    {
+                        System.out.println("Finns inget cid att placera org_number mot");
+                    }
+                }   else    {
+                    System.out.println("Added as a private customer");
+                }  
             } else {
                 JOptionPane.showMessageDialog(null, "Misslyckades att generera CustomerID.");
                 System.out.println(id);
             }
+        } else {
+            System.out.println("validering i addCustomer misslyckad");
         }
     }
 
-    public void updateCustomer(String customerID, String name, String address, String phone, String email) {
+    public void updateCustomer(String customerID, String name, String address, String phone, String email, String orgNumber) {
 
-        String preparedQuery = ("UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID);
+        
+        String empty = "";
+        String preparedQuery = "UPDATE customer SET name = '" + name + "', address = '" + address + "', phone = '" + phone + "', email = '" + email + "' WHERE cid = " + customerID;
         System.out.println(preparedQuery);
+        
         try {
+            int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill updatera kund", "Bekräfta ändering.", JOptionPane.YES_NO_OPTION);
+            if (confirmUpdate == JOptionPane.YES_OPTION) {
+            if(!name.isBlank() && !customerID.isBlank() && !address.isBlank() && !phone.isBlank() && !email.isBlank())    {
             Database.updatePreparedQuery(preparedQuery);
             JOptionPane.showMessageDialog(null, "Updatering av kund med ID: " + customerID + " lyckades.");
+            
+            if(!Database.fetchSingle("org_number", "business_customer", "cid", "org_number").equals(orgNumber) && !orgNumber.equals(empty)) {
+            preparedQuery = "UPDATE business_customer SET org_number = '" + orgNumber + "' WHERE cid = '" + customerID + "'";
+            Database.updatePreparedQuery(preparedQuery);
+            }
+            } else  {
+                System.out.println("Could not update Organization Number");
+            }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel Uppstod vid updatering av Kund information för kund med id: " + customerID + ".");
@@ -79,6 +110,8 @@ public class CustomerActions {
     public boolean removeCustomer(String customerID) {
         boolean valid = false;
         try {
+            int confirmUpdate = JOptionPane.showConfirmDialog(null, "Är du säker att du vill ta bort kund", "Bekräfta.", JOptionPane.YES_NO_OPTION);
+            if (confirmUpdate == JOptionPane.YES_OPTION) {
             //Om kunden är privatkund
             if (Validation.checkExistingCell("private_customer", "cid", customerID)) {
                 Database.deleteRow("private_customer", "cid", customerID);
@@ -146,6 +179,7 @@ public class CustomerActions {
             System.out.println("Kund borttagen");
             valid = true;
             JOptionPane.showMessageDialog(null, "Kunden med kundID " + customerID + " har tagits bort.");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             JOptionPane.showMessageDialog(null, "Ett fel uppstod med att ta bort kund.");
@@ -165,6 +199,18 @@ public class CustomerActions {
 
     }
 
+    public String getOrgNumber(String customerID) {
+        String columnName = "org_number";
+        String tableName = "business_customer";
+        String columnWhere = "cid";
+        
+        String customerOrgNumber = Database.fetchSingle(columnName, tableName, columnWhere, customerID);
+
+        
+        System.out.println(customerOrgNumber);
+        return customerOrgNumber;
+    }
+    
     public void testMethod(String test1, String test2) {
         String testName = test1;
         String testEmail = test2;
