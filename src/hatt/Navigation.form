@@ -62,6 +62,9 @@
       </Properties>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="tbdPane">
+      <Properties>
+        <Property name="focusTraversalKeysEnabled" type="boolean" value="false"/>
+      </Properties>
       <Events>
         <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="tbdPaneStateChanged"/>
       </Events>

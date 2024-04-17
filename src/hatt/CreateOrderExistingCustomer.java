@@ -501,11 +501,11 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             tfDescription.setText(requestDescription);
             String stockedID = Database.fetchSingle("stocked_product", "requests", "rid", requestID);
             int itemCount = cbStockedProducts.getItemCount();
-            if(requestID != null){
-                for(int i = 1; i < itemCount; i++){
+            if (requestID != null) {
+                for (int i = 1; i < itemCount; i++) {
                     System.out.println("HAHA: " + cbStockedProducts.getItemAt(i).toString());
                     String sid = Database.fetchSingle("sid", "stocked_product", "name", cbStockedProducts.getItemAt(i).toString());
-                    if(sid.equals(stockedID)){
+                    if (sid.equals(stockedID)) {
                         cbStockedProducts.setSelectedIndex(i);
                     }
                 }
@@ -538,7 +538,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         Double timeTaken = Double.parseDouble(tfEstimatedTime.getText().toString());
         Double workSum = timeTaken * Integer.parseInt(hourlyRate);
         valuesCalc.add(workSum.toString());
-        
+
         System.out.println(valuesCalc);
         Calculate c = new Calculate();
 
@@ -641,6 +641,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
             } else {
                 cobRequestsForCustomer.addItem("Inga förfrågningar.");
             }
+        } else {
+            cobRequestsForCustomer.addItem("Välj en kund");
         }
     }
 

@@ -4,6 +4,9 @@
  */
 package hatt;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author joakimfockstedt
@@ -136,6 +139,24 @@ public class Login extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);
+                
+                try {
+            // Set cross-platform Java L&F (also called "Metal")
+        UIManager.setLookAndFeel(
+            UIManager.getCrossPlatformLookAndFeelClassName());
+    } 
+    catch (UnsupportedLookAndFeelException e) {
+       // handle exception
+    }
+    catch (ClassNotFoundException e) {
+       // handle exception
+    }
+    catch (InstantiationException e) {
+       // handle exception
+    }
+    catch (IllegalAccessException e) {
+       // handle exception
+    }
             }
         });
     }

@@ -33,14 +33,18 @@ public class Navigation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField2 = new javax.swing.JTextField();
         lblUser = new javax.swing.JLabel();
         tbdPane = new javax.swing.JTabbedPane();
+
+        jTextField2.setText("jTextField2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 900));
 
         lblUser.setText("jLabel1");
 
+        tbdPane.setFocusTraversalKeysEnabled(false);
         tbdPane.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 tbdPaneStateChanged(evt);
@@ -101,8 +105,29 @@ public class Navigation extends javax.swing.JFrame {
                 case "Hantera kunder":
                     JFrameCustomerActions ca = new JFrameCustomerActions();
                     tbdPane.setComponentAt(tabindex, ca.getContentPane());
+                    break;
+                case "Lämna återkoppling på förfrågning":
+                    Feedback1 fb = new Feedback1();
+                    tbdPane.setComponentAt(tabindex, fb.getContentPane());
+                    break;
+                case "Lämna kommentar på kund":
+                    Comment cm = new Comment();
+                    tbdPane.setComponentAt(tabindex, cm.getContentPane());
+                    break;
+                case "Leverantörsida":
+                    Supplier spl = new Supplier();
+                    tbdPane.setComponentAt(tabindex, spl.getContentPane());
+                    break;
+                case "Visa ordrar":
+                    showOrders so = new showOrders();
+                    tbdPane.setComponentAt(tabindex, so.getContentPane());
+                    break;
+                case "Registrera material":
+                    RegisterMaterial rm = new RegisterMaterial();
+                    tbdPane.setComponentAt(tabindex, rm.getContentPane());
+                    break;
             }
-        //Revisorn
+            //Revisorn
         } else {
             switch (tab) {
                 case "Granska förfrågning":
@@ -129,7 +154,26 @@ public class Navigation extends javax.swing.JFrame {
                     JFrameCustomerActions ca = new JFrameCustomerActions();
                     tbdPane.setComponentAt(tabindex, ca.getContentPane());
                     break;
-                    
+                case "Lämna återkoppling på förfrågning":
+                    Feedback1 fb = new Feedback1();
+                    tbdPane.setComponentAt(tabindex, fb.getContentPane());
+                    break;
+                case "Lämna kommentar på kund":
+                    Comment cm = new Comment();
+                    tbdPane.setComponentAt(tabindex, cm.getContentPane());
+                    break;
+                case "Leverantörsida":
+                    Supplier spl = new Supplier();
+                    tbdPane.setComponentAt(tabindex, spl.getContentPane());
+                    break;
+                case "Visa ordrar":
+                    showOrders so = new showOrders();
+                    tbdPane.setComponentAt(tabindex, so.getContentPane());
+                    break;
+                case "Registrera material":
+                    RegisterMaterial rm = new RegisterMaterial();
+                    tbdPane.setComponentAt(tabindex, rm.getContentPane());
+                    break;
             }
         }
 
@@ -189,21 +233,21 @@ public class Navigation extends javax.swing.JFrame {
             tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
             reviewRequest rr = new reviewRequest();
             tbdPane.addTab("Granska förfrågning", rr.getContentPane());
-            
+
             Feedback1 fb = new Feedback1();
-            tbdPane.addTab("Lämna återkoppling på förfrågning", fb);
-            
+            tbdPane.addTab("Lämna återkoppling på förfrågning", fb.getContentPane());
+
             Comment cm = new Comment();
-            tbdPane.addTab("Lämna kommentar på kund", cm);
-            
+            tbdPane.addTab("Lämna kommentar på kund", cm.getContentPane());
+
             Supplier spl = new Supplier();
-            tbdPane.addTab("Leverantörsida", spl);
-            
+            tbdPane.addTab("Leverantörsida", spl.getContentPane());
+
             showOrders so = new showOrders();
-            tbdPane.addTab("Visa ordrar", so);
-            
+            tbdPane.addTab("Visa ordrar", so.getContentPane());
+
             RegisterMaterial rm = new RegisterMaterial();
-            tbdPane.addTab("Registrera material", rm);
+            tbdPane.addTab("Registrera material", rm.getContentPane());
 
         } //Revisorn
         else {
@@ -236,6 +280,7 @@ public class Navigation extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblUser;
     private javax.swing.JTabbedPane tbdPane;
     // End of variables declaration//GEN-END:variables
