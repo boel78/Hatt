@@ -284,6 +284,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 txtAddress.setText("");
                 txtPhone.setText("");
                 txtEmail.setText("");
+                txtOrgNumber.setText("");
             }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -327,6 +328,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         if (!fetchedID.isEmpty()) {
             if (Validation.existsCustomerID(fetchedID) && Validation.validateName(name) && Validation.validateAddress(address) && Validation.validateEmailTypo(email) && Validation.validatePhone(phone)) {
                 actions = new CustomerActions(customerID);
+                
 
                 actions.updateCustomer(fetchedID, name, address, phone, email, orgNr, fetchedOrgNr);
                 System.out.println("if i btnUpdate");
@@ -336,6 +338,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 for (String customer : customers) {
                     cbCustomers.addItem(customer);
                 }
+                fetchedOrgNr = txtOrgNumber.getText();
                 txtName.setText("");
                 txtAddress.setText("");
                 txtPhone.setText("");
