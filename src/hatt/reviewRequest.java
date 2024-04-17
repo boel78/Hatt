@@ -292,6 +292,9 @@ public class reviewRequest extends javax.swing.JFrame {
 
             System.out.println("Klar");
 
+            String dbQuery = "UPDATE requests SET feedback = '" + txtDeniedRequest.getText() + "' where rid = " + requestID;
+            Database.updatePreparedQuery(dbQuery);
+            
         } catch (MessagingException e) {
             e.printStackTrace();
         }
