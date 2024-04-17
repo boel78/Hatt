@@ -499,6 +499,17 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         if (!requestID.isEmpty()) {
             String requestDescription = Database.fetchSingle("description", "requests", "rid", requestID);
             tfDescription.setText(requestDescription);
+            String stockedID = Database.fetchSingle("stocked_product", "requests", "rid", requestID);
+            int itemCount = cbStockedProducts.getItemCount();
+            if(requestID != null){
+                for(int i = 1; i < itemCount; i++){
+                    System.out.println("HAHA: " + cbStockedProducts.getItemAt(i).toString());
+                    String sid = Database.fetchSingle("sid", "stocked_product", "name", cbStockedProducts.getItemAt(i).toString());
+                    if(sid.equals(stockedID)){
+                        cbStockedProducts.setSelectedIndex(i);
+                    }
+                }
+            }
         } else {
             tfDescription.setText("");
         }
