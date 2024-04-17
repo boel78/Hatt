@@ -35,7 +35,6 @@ public class showMaterialInfo extends javax.swing.JFrame {
         btnShowInfo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaShowInfo = new javax.swing.JTextArea();
-        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 500));
@@ -55,8 +54,6 @@ public class showMaterialInfo extends javax.swing.JFrame {
         txtAreaShowInfo.setRows(5);
         jScrollPane1.setViewportView(txtAreaShowInfo);
 
-        btnBack.setText("Tillbaka");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,9 +65,7 @@ public class showMaterialInfo extends javax.swing.JFrame {
                         .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(175, 175, 175)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnBack)
-                            .addComponent(btnShowInfo)))
+                        .addComponent(btnShowInfo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(174, 174, 174)
                         .addComponent(lblChooseMaterial))
@@ -90,9 +85,7 @@ public class showMaterialInfo extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnShowInfo)
-                .addGap(35, 35, 35)
-                .addComponent(btnBack)
-                .addGap(14, 14, 14))
+                .addGap(76, 76, 76))
         );
 
         pack();
@@ -178,7 +171,6 @@ public class showMaterialInfo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnShowInfo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblChooseMaterial;
