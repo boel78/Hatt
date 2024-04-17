@@ -45,7 +45,7 @@ public class Database {
 
     //columnName är kolumnnamnet på kolumnen du vill hämta ifrån, tableName är tabellnamnet, columnWhere är vilken kolumn ni har som "sökning" 
     //columnIdentifier är eran identifierare på sökningen, t.ex WHERE columnWhere = columnIdentifier
-    public String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
+    public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
         try {
