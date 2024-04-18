@@ -17,6 +17,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
     private String uid;
     private String hourlyRate;
+    private String totalPrice;
 
     public CreateOrderExistingCustomer(String uid) {
         this.uid = uid;
@@ -466,8 +467,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 String orderID = Database.getAutoIncrement("xOrder", "oid");
 
                 //Creates the order
-                String orderColumns = "(oid, description, estimated_time, created_by, customer)";
-                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + ")";
+                String orderColumns = "(oid, description, estimated_time, created_by, customer, price)";
+                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + ")";
                 Database.insert("xorder", orderColumns, ordeValues);
 
                 //Fetches the fabrics and accessories
@@ -556,6 +557,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         Calculate c = new Calculate();
 
         Double finalPrice = c.addNumbers(valuesCalc);
+        totalPrice = finalPrice.toString();
         txtPriceExMoms.setText(c.calculateMoms(finalPrice.toString()));
         txtEstimatedPrice.setText(finalPrice.toString());
     }//GEN-LAST:event_btnCalculateActionPerformed
