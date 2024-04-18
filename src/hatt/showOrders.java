@@ -47,11 +47,11 @@ public class showOrders extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Beskrivning", "Estimerad Tid", "Kund", "Skapad av"
+                "Beskrivning", "Estimerad Tid", "Kund", "Skapad av", "Pris ink moms", "Pris ex moms"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -106,12 +106,15 @@ public class showOrders extends javax.swing.JFrame {
     private void fillModel() {
         DefaultTableModel model = (DefaultTableModel) jTable.getModel();
         ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "xOrder", "", "");
+        Calculate c = new Calculate();
 
         for (HashMap<String, String> row : list) {
             String description = "";
             String timeEstimate = "";
             String customer = "";
             String creator = "";
+            String priceIncMoms = "";
+            String priceExMoms = "";
             for (String key : row.keySet()) {
                 switch (key) {
                     case "description":
@@ -126,9 +129,13 @@ public class showOrders extends javax.swing.JFrame {
                         }
                     case "created_by":
                         creator = Database.fetchSingle("name", "user", "uid", row.get(key));
+                        break;
+                    case "price":
+                        priceIncMoms = row.get(key);
+                        break;
                 }
             }
-            model.addRow(new Object[]{description, timeEstimate, customer, creator});
+            model.addRow(new Object[]{description, timeEstimate, customer, creator, priceIncMoms, c.calculateMoms(priceIncMoms)});
         }
     }
 
