@@ -172,6 +172,7 @@ create table xOrder
     estimated_time double      null,
     created_by     int         not null,
     customer       int         null,
+    price          double      not null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint xOrder_employee_uid_fk
@@ -277,9 +278,9 @@ INSERT INTO hattmakardb.fabric (mid, size) VALUES (3, 12);
 INSERT INTO hattmakardb.fabric (mid, size) VALUES (5, 5);
 INSERT INTO hattmakardb.accessories (amount, mid) VALUES (42, 2);
 INSERT INTO hattmakardb.accessories (amount, mid) VALUES (3, 4);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (1, 'Jeanshat', 4, 1, 1);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (2, 'Doctorateshat', 2, 1, 1);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (3, 'Silkbonnet', 3, 2, 2);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer, price) VALUES (1, 'Jeanshat', 4, 1, 1, 210);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer, price) VALUES (2, 'Doctorateshat', 2, 1, 1, 500);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer, price) VALUES (3, 'Silkbonnet', 3, 2, 2, 750);
 INSERT INTO hattmakardb.order_consists_of_materials (oid, mid, amount) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
