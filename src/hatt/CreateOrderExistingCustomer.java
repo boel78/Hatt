@@ -81,11 +81,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         cobRequestsForCustomer = new javax.swing.JComboBox<>();
         btnCalculate = new javax.swing.JButton();
         txtEstimatedPrice = new javax.swing.JTextField();
-        lblPrice = new javax.swing.JLabel();
+        lblPriceIncMoms = new javax.swing.JLabel();
         cbStockedProducts = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtStartingPrice = new javax.swing.JTextField();
         lblStartingPrice = new javax.swing.JLabel();
+        lblPriceExMoms = new javax.swing.JLabel();
+        txtPriceExMoms = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,7 +163,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
         txtEstimatedPrice.setColumns(10);
 
-        lblPrice.setText("Pris");
+        lblPriceIncMoms.setText("Pris ink. moms");
 
         cbStockedProducts.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -174,6 +176,10 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         txtStartingPrice.setColumns(7);
 
         lblStartingPrice.setText("Utgångspris:");
+
+        lblPriceExMoms.setText("Pris ex. moms");
+
+        txtPriceExMoms.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,7 +266,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                         .addComponent(lblRequestsForCustomer)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                                         .addComponent(lblStartingPrice)))
                                 .addGap(74, 74, 74))
                             .addGroup(layout.createSequentialGroup()
@@ -281,9 +287,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                 .addComponent(btnCalculate)
                                 .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPrice)
-                                    .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())
+                                    .addComponent(lblPriceIncMoms)
+                                    .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPriceExMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPriceExMoms))))
+                        .addContainerGap(7, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEstimatedTime)
@@ -397,7 +407,9 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                     .addGap(29, 29, 29))
                                 .addComponent(tfFabric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(lblPrice)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPriceIncMoms)
+                    .addComponent(lblPriceExMoms))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -405,7 +417,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                         .addComponent(lblMandatory))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCalculate)
-                        .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPriceExMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -543,6 +556,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         Calculate c = new Calculate();
 
         Double finalPrice = c.addNumbers(valuesCalc);
+        txtPriceExMoms.setText(c.calculateMoms(finalPrice.toString()));
         txtEstimatedPrice.setText(finalPrice.toString());
     }//GEN-LAST:event_btnCalculateActionPerformed
 
@@ -755,7 +769,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderInfo;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblPriceExMoms;
+    private javax.swing.JLabel lblPriceIncMoms;
     private javax.swing.JLabel lblRequests;
     private javax.swing.JLabel lblRequestsForCustomer;
     private javax.swing.JLabel lblSize;
@@ -784,6 +799,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField tfSize3;
     private javax.swing.JTextField tfSize4;
     private javax.swing.JTextField txtEstimatedPrice;
+    private javax.swing.JTextField txtPriceExMoms;
     private javax.swing.JTextField txtStartingPrice;
     // End of variables declaration//GEN-END:variables
 }

@@ -44,5 +44,17 @@ public class Calculate {
         long tmp = Math.round(value);
         return (double) tmp / factor;
     }
+    
+    public String calculateMoms(String input){
+        Double dinput = Double.parseDouble(input);
+        Double exmoms = (dinput*0.75);
+        Double rounded = round(exmoms, 3);
+        String output = rounded.toString();
+        
+        return output;
+        
+    
+    
+    }
 
 }
