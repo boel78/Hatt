@@ -4,13 +4,17 @@
  */
 package hatt;
 
-import hatt.Database;
 import oru.inf.InfDB;
-import oru.inf.InfException;
 import java.util.ArrayList;
 import oru.inf.InfException;
-import java.util.HashMap;
 import javax.swing.JOptionPane;
+import javax.mail.Message;
+import javax.mail.Transport;
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -25,11 +29,15 @@ public class reviewRequest extends javax.swing.JFrame {
      * Creates new form reviewREquestt
      */
     public reviewRequest() {
+        new Validation();
+
+        /* Create and display the form */
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
             ex.printStackTrace();
         }
+
         initComponents();
     }
 
@@ -51,6 +59,8 @@ public class reviewRequest extends javax.swing.JFrame {
         cbDenyAccept = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnCompleteDenyAccept = new javax.swing.JButton();
+        txtDeniedRequest = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 400));
@@ -83,54 +93,61 @@ public class reviewRequest extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Anledning till nekan av förfrågning");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnCompleteDenyAccept))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(btnShowRequest))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
-                                .addComponent(btnCompleteDenyAccept))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
-                        .addGap(0, 116, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(btnShowRequest))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addComponent(jLabel1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel4)
+                            .addComponent(txtDeniedRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(16, 16, 16)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbReviews, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnShowRequest))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtDeniedRequest)
+                    .addComponent(jScrollPane1))
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCompleteDenyAccept))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,11 +166,23 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
         String cbContent = cbDenyAccept.getSelectedItem().toString();
+        String customerName = "";
+        String mail = "";
+        
+        try {
+            customerName = idb.fetchSingle("SELECT name FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
+            mail = idb.fetchSingle("SELECT email FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
+        } catch (InfException ex){
+            ex.printStackTrace();
+        }
+        
+        System.out.println(customerName);
+
         if (cbContent == "Neka") {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
-                JOptionPane.showMessageDialog(null, "Förfågan har nekats.");
+                sendEmail(customerName, mail, rID, false);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -161,7 +190,7 @@ public class reviewRequest extends javax.swing.JFrame {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'J' WHERE rid = " + rID);
-                JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
+                sendEmail(customerName, mail, rID, true);
             } catch (InfException ex) {
                 ex.printStackTrace();
             }
@@ -187,7 +216,91 @@ public class reviewRequest extends javax.swing.JFrame {
 
         return CBReviewsx;
     }
+
     
+    // Jag kallar på funktionen när man klickar på att neka eller godkänna förfrågning
+    public void sendEmail(String customerName, String recieverMail, String requestID, boolean requestAnswer) {
+        // Instansierar ett properties objekt, här lägger man in hur programmet ska koppla till
+        // Googles smtp
+        Properties smtpconfig = new Properties();
+
+        // Alla inställningar för att koppla till smtp
+        smtpconfig.put("mail.smtp.auth", "true");
+        smtpconfig.put("mail.smtp.host", "smtp.gmail.com");
+        smtpconfig.put("mail.smtp.socketFactory.port", "465");
+        smtpconfig.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        smtpconfig.put("mail.smtp.socketFactory.fallback", "false");
+
+        // Inloggning till kontot, username är mail och andra strängen är app lösenordet
+        // Som är genererat genom google workspace
+        Session session = Session.getDefaultInstance(smtpconfig, new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication("Ottoshattmakeri@gmail.com", "hictjjmvbsnllqls");
+            }
+        });
+        
+        // Den här använder jag för att kolla ifall det blivit godkänt eller nekat. 
+        String requestStatus = null;
+
+        if (requestAnswer == false) {
+            requestStatus = "nekad";
+        } else if (requestAnswer == true) {
+            requestStatus = "godkänd";
+        }
+
+        try {
+            //Kollar om requestStatus är null, vilket aldrig ska hända
+            if (requestStatus == null || requestStatus.isEmpty()) {
+                // Om detta någonsin händer så kommer mitt program att vara helt 
+                // förstört, har detta här för att bryta om det går riktigt fel
+                System.out.println("Något gick allvarligt fel!");
+                throw new MessagingException("NÅGOT ALLVARLIGT FEL HAR SKETT");
+            }
+
+            // Här börjar jag skapandet av mitt kära mail jag ska skicka
+            // Jag instansierar ett MimeMessage object med session som jag instansierade tidigare
+            // Det innehåller inloggningsinfo och kopplingen till gmail smtp-
+            // om jag förstått dokumentationen rätt från biblioteket
+            
+            Message automatedMail = new MimeMessage(session);
+            automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com")); // Vilken mail man skickar ifrån
+            automatedMail.setRecipients(                                             // Väljer vilka mails man ska skicka till
+                    Message.RecipientType.TO,                                        
+                    InternetAddress.parse(recieverMail, false)                       
+            );
+
+            automatedMail.setSubject("Svar på kundförfrågan."); // Denna kodrad gör precis vad den säger
+
+            
+            // Dessa if statements bygger innehållet i mailen, med .setText() funktionen
+            if (requestAnswer == false) {
+                if (Validation.txtHasValue(txtDeniedRequest)) {
+                    automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
+                            + "\n\n med anledning: " + txtDeniedRequest.getText()
+                            + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
+                    JOptionPane.showMessageDialog(null, "Förfågan har nekats.");
+                } else {
+                    throw new MessagingException("Error");
+                }
+            } else if (requestAnswer == true) {
+                automatedMail.setText("Hej " + customerName + ", din order med id " + requestID + " har blivit " + requestStatus
+                        + "\n\n Med vänliga hälsningar, vi på Ottos Hattmakeri");
+                JOptionPane.showMessageDialog(null, "Förfågan har godkänts");
+            }
+
+            Transport.send(automatedMail); // skickar mailet
+
+            System.out.println("Klar");
+
+            String dbQuery = "UPDATE requests SET feedback = '" + txtDeniedRequest.getText() + "' where rid = " + requestID;
+            Database.updatePreparedQuery(dbQuery);
+            
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -218,7 +331,7 @@ public class reviewRequest extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        //sendEmail("erik.regner4@gmail.com", "EHFEFUHSFIU", "AA STENAMENA"); /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new reviewRequest().setVisible(true);
@@ -234,7 +347,9 @@ public class reviewRequest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtAreaDescription;
+    private javax.swing.JTextField txtDeniedRequest;
     // End of variables declaration//GEN-END:variables
 }

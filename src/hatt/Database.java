@@ -42,7 +42,7 @@ public class Database {
         new Database();
     }
 
-    //columnName är kolumnnamnet på kolumnen du vill hämta ifrån, tableName är tabellnamnet, columnWhere är vilken kolumn ni har som "sökning" 
+    //columnName är kolumnnamnet på kolumnen du vill hämta ifrån, tableName är tabellnamnet, columnWhere är vilken kolumn ni har som "sökning"
     //columnIdentifier är eran identifierare på sökningen, t.ex WHERE columnWhere = columnIdentifier
     public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
@@ -68,7 +68,7 @@ public class Database {
         } catch (InfException ex) {
             ex.printStackTrace();
         }
-        return response;    
+        return response;
     }
 
     public static ArrayList<HashMap<String, String>> fetchRows(boolean whereBool, String tableName, String where, String whereIdentifier) {
@@ -87,7 +87,7 @@ public class Database {
 
         return list;
     }
-    
+
     //whereBool ska vara true om man vill ha med WHERE eller false om man inte vill
     //columnName är kolumnnamnet på kolumnen du vill hämta ifrån
     //tableName är tabellnamnet
@@ -122,10 +122,11 @@ public class Database {
             ex.printStackTrace();
         }
 
+
     }
 
     //Ganska självförklarlig, tableName är tabellnamnet och columnName är kolumnnamnet
-    //som du vill ha inkrement-id ifrån. 
+    //som du vill ha inkrement-id ifrån.
     public static String getAutoIncrement(String tableName, String columnName) {
         String id = "0";
 
@@ -138,7 +139,7 @@ public class Database {
 
         return id;
     }
-    
+
     public static void deleteRow(String tableName, String where, String whereIdentifier) {
         try {
             String query = "DELETE FROM " + tableName + " WHERE " + where + " = '" + whereIdentifier + "'";
@@ -146,10 +147,10 @@ public class Database {
             System.out.println("Row deleted successfully");
         } catch (InfException ex) {
             ex.printStackTrace();
-            
+
         }
     }
-    
+
     public static void updatePreparedQuery(String preparedQuery){
         try {
             idb.update(preparedQuery);

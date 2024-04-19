@@ -135,10 +135,18 @@ public class createRequest extends javax.swing.JFrame {
 
             ID = Database.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
             String nextID = Database.getAutoIncrement("requests", "rid");
+            int workerID = 1;
 
             if (description.length() <= 100) {
-                Database.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + uid + ",  'N', 'N'," + ID + ")");
-                JOptionPane.showMessageDialog(null, "Förfrågningen är inlagd i systemet.");
+                String stocked = cbHatModel.getSelectedItem().toString();
+                if (stocked.isEmpty()) {
+                    Database.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer)", "(" + nextID + ", '" + description + "', " + workerID + ",  'N', 'N'," + ID + ")");
+                    JOptionPane.showMessageDialog(null, "Förfrågningen är inlagd i systemet.");
+                } else {
+                    String sid = Database.fetchSingle("sid", "stocked_product", "name", stocked);
+                    Database.insert("requests", "(rid, description, reviewed_by, reviewed, review_status, customer, stocked_product)", "(" + nextID + ", '" + description + "', " + workerID + ",  'N', 'N'," + ID + "," + sid + ")");
+                    JOptionPane.showMessageDialog(null, "Förfrågningen är inlagd i systemet.");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Var god och fyll i en beskrivning som är kortare än 100 bokstäver.");
             }

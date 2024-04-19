@@ -30,13 +30,14 @@ GRANT ALL PRIVILEGES ON hattmakardb.* TO hattmakare@localhost;
 
 create table customer
 (
-    cid     int         not null
+    cid      int          not null
         primary key,
-    name    varchar(25) null,
-    address varchar(50) null,
-    phone   varchar(25) null,
-    email   varchar(50) null,
-    comment varchar(200) null
+    name     varchar(25)  null,
+    address  varchar(50)  null,
+    phone    varchar(25)  null,
+    email    varchar(50)  null,
+    comment  varchar(200) null,
+    password varchar(35)  null
 );
 
 create table business_customer
@@ -172,6 +173,7 @@ create table xOrder
     estimated_time double      null,
     created_by     int         not null,
     customer       int         null,
+    price          double      not null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint xOrder_employee_uid_fk
@@ -212,6 +214,7 @@ create table product_materials
 (
     sid int not null,
     mid int not null,
+    amount double not null,
     primary key (mid, sid),
     constraint product_materials_materials_mid_fk
         foreign key (mid) references materials (mid),
@@ -221,18 +224,21 @@ create table product_materials
 
 create table requests
 (
-    rid         int         not null
+    rid             int          not null
         primary key,
-    description varchar(100) null,
-    reviewed_by int         not null,
-    reviewed    varchar(1)  not null,
-    review_status varchar(1) not null,
-    customer    int         not null,
-    feedback varchar(400) null,
+    description     varchar(100) null,
+    reviewed_by     int          not null,
+    reviewed        varchar(1)   not null,
+    review_status   varchar(1)   not null,
+    customer        int          not null,
+    feedback        varchar(400) null,
+    stocked_product int          null,
     constraint requests_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint requests_employee_uid_fk
-        foreign key (reviewed_by) references employee (uid)
+        foreign key (reviewed_by) references employee (uid),
+    constraint requests_stocked_product_sid_fk
+        foreign key (stocked_product) references stocked_product (sid)
 );
 
 create table waybill
@@ -273,15 +279,15 @@ INSERT INTO hattmakardb.fabric (mid, size) VALUES (3, 12);
 INSERT INTO hattmakardb.fabric (mid, size) VALUES (5, 5);
 INSERT INTO hattmakardb.accessories (amount, mid) VALUES (42, 2);
 INSERT INTO hattmakardb.accessories (amount, mid) VALUES (3, 4);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (1, 'Jeanshat', 4, 1, 1);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (2, 'Doctorateshat', 2, 1, 1);
-INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer) VALUES (3, 'Silkbonnet', 3, 2, 2);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer, price) VALUES (1, 'Jeanshat', 4, 1, 1, 210);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer, price) VALUES (2, 'Doctorateshat', 2, 1, 1, 500);
+INSERT INTO hattmakardb.xOrder (oid, description, estimated_time, created_by, customer, price) VALUES (3, 'Silkbonnet', 3, 2, 2, 750);
 INSERT INTO hattmakardb.order_consists_of_materials (oid, mid, amount) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (1, 1, 1);
 INSERT INTO hattmakardb.ordering_materials (mid, sid, inid) VALUES (2, 2, 3);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (1);
 INSERT INTO hattmakardb.private_customer (cid) VALUES (2);
-INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3);
+INSERT INTO hattmakardb.product_materials (sid, mid) VALUES (1, 3, 2);
 INSERT INTO hattmakardb.requests (rid, description, reviewed_by, reviewed, review_status, customer, feedback) VALUES (1, 'En jeanshatt', 1, 'N', 'N', 1, 'Går ej att fixa');
 INSERT INTO hattmakardb.stocked_product (sid, name, description, starting_price) VALUES (1, 'Doctorateshat', 'A Doctorates hat', 1200);
 INSERT INTO hattmakardb.supplier (sid, name, email, phone) VALUES (1, 'Lollos Jeans', 'lollo.jeans@gmail.com', '070-0000000');
