@@ -30,13 +30,14 @@ GRANT ALL PRIVILEGES ON hattmakardb.* TO hattmakare@localhost;
 
 create table customer
 (
-    cid     int         not null
+    cid      int          not null
         primary key,
-    name    varchar(25) null,
-    address varchar(50) null,
-    phone   varchar(25) null,
-    email   varchar(50) null,
-    comment varchar(200) null
+    name     varchar(25)  null,
+    address  varchar(50)  null,
+    phone    varchar(25)  null,
+    email    varchar(50)  null,
+    comment  varchar(200) null,
+    password varchar(35)  null
 );
 
 create table business_customer
