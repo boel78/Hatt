@@ -112,7 +112,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 btnGetActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGet, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 20, -1, -1));
+        getContentPane().add(btnGet, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
 
         cbCustomers.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomers()));
         getContentPane().add(cbCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
@@ -161,6 +161,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
         String orgNumber = ""; //Database: customer/orgNumber
+        String commentField = "";
 
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
@@ -168,12 +169,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             phone = customer.get("phone");
             email = customer.get("email");
             orgNumber = customer.get("otgNumber");
+            commentField = customer.get("comment"); 
 
             txtName.setText(name != null ? name : "");
             txtAddress.setText(address != null ? address : "");
             txtPhone.setText(phone != null ? phone : "");
             txtEmail.setText(email != null ? email : "");
             txtOrgNumber.setText(fetchedOrgNumber);
+            txtComment.setText(commentField);
             System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email + " " + fetchedOrgNumber);
 
             fetchedOrgNr = txtOrgNumber.getText();
@@ -186,6 +189,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtPhone.setText("");
             txtEmail.setText("");
             txtOrgNumber.setText("");
+            txtComment.setText("");
 
             System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
             JOptionPane.showMessageDialog(null, "Det gick inte att hitta kunden. Kontrollera uppgifterna.");
