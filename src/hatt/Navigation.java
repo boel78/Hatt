@@ -12,17 +12,20 @@ public class Navigation extends javax.swing.JFrame {
 
     private String user;
     private String uid;
+    private String cid;
 
     /**
      * Creates new form navigation
      */
-    public Navigation(String user, String uid) {
+    public Navigation(String user, String uid, String cid) {
         this.user = user;
         this.uid = uid;
+        this.cid = cid;
         initComponents();
         lblUser.setText(user);
-        loadPane();
+        loadPane();     
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,7 +83,7 @@ public class Navigation extends javax.swing.JFrame {
         int tabindex = tbdPane.getSelectedIndex();
 
         //Otto och Judith
-        if (uid != "3") {
+        if (uid.equals("1") || uid.equals("2")) {
             switch (tab) {
                 case "Granska förfrågning":
                     reviewRequest rr = new reviewRequest();
@@ -95,7 +98,7 @@ public class Navigation extends javax.swing.JFrame {
                     tbdPane.setComponentAt(tabindex, smi.getContentPane());
                     break;
                 case "Skapa förfrågning":
-                    createRequest cr = new createRequest(uid);
+                    createRequest cr = new createRequest(uid, "");
                     tbdPane.setComponentAt(tabindex, cr.getContentPane());
                     break;
                 case "Skapa order för existerande kund":
@@ -128,7 +131,7 @@ public class Navigation extends javax.swing.JFrame {
                     break;
             }
             //Revisorn
-        } else {
+        } else if (uid.equals("3")) {
             switch (tab) {
                 case "Granska förfrågning":
                     reviewRequest rr = new reviewRequest();
@@ -143,7 +146,7 @@ public class Navigation extends javax.swing.JFrame {
                     tbdPane.setComponentAt(tabindex, smi.getContentPane());
                     break;
                 case "Skapa förfrågning":
-                    createRequest cr = new createRequest(uid);
+                    createRequest cr = new createRequest(uid, "");
                     tbdPane.setComponentAt(tabindex, cr.getContentPane());
                     break;
                 case "Skapa order för existerande kund":
@@ -175,6 +178,14 @@ public class Navigation extends javax.swing.JFrame {
                     tbdPane.setComponentAt(tabindex, rm.getContentPane());
                     break;
             }
+        }
+        else if (uid.isEmpty()) {
+            switch (tab){
+            case "Skapa förfrågning":
+                    createRequest cr = new createRequest("", cid);
+                    tbdPane.setComponentAt(tabindex, cr.getContentPane());
+                    break;
+        }
         }
 
     }//GEN-LAST:event_tbdPaneStateChanged
@@ -220,12 +231,12 @@ public class Navigation extends javax.swing.JFrame {
     private void loadPane() {
 
         //Om det är Judith eller Otto
-        if (uid != "3") {
+        if (uid.equals("1") || uid.equals("2")) {
             JFrameCustomerActions ca = new JFrameCustomerActions();
             tbdPane.addTab("Hantera kunder", ca.getContentPane());
             CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
             tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
-            createRequest cr = new createRequest(uid);
+            createRequest cr = new createRequest(uid,"");
             tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
             showMaterialInfo smi = new showMaterialInfo();
             tbdPane.addTab("Visa material info", smi.getContentPane());
@@ -250,7 +261,7 @@ public class Navigation extends javax.swing.JFrame {
             tbdPane.addTab("Registrera material", rm.getContentPane());
 
         } //Revisorn
-        else {
+        else if (uid.equals("3")) {
             RegisterStockedProduct rsp = new RegisterStockedProduct();
             tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
 
@@ -260,7 +271,7 @@ public class Navigation extends javax.swing.JFrame {
             reviewRequest rr = new reviewRequest();
             tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
-            createRequest cr = new createRequest(uid);
+            createRequest cr = new createRequest(uid,"");
             tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
 
             CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
@@ -269,6 +280,10 @@ public class Navigation extends javax.swing.JFrame {
             JFrameCustomerActions ca = new JFrameCustomerActions();
             tbdPane.addTab("Hantera kunder", ca.getContentPane());
 
+        }
+        else if (uid.isEmpty()) {
+            createRequest cr = new createRequest("",cid);
+            tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
         }
 
 
