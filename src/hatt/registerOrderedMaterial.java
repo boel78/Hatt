@@ -242,7 +242,7 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCalculateActionPerformed
 
-    private String calculatePrice(String mid, String amount) {
+    public String calculatePrice(String mid, String amount) {
         Double materialPrice = Double.parseDouble(Database.fetchSingle("price", "materials", "mid", mid));
         Double selectedAmount = Double.parseDouble(amount);
         Double totalPrice = Calculate.round((materialPrice * selectedAmount), 3);

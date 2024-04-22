@@ -450,6 +450,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        calcPriceTotal();
         ArrayList<String> fabrics = getFabricsTf();
         ArrayList<String> accessories = getAccessoriesTf();
         if (Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)) {
@@ -467,29 +468,47 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 String orderID = Database.getAutoIncrement("xOrder", "oid");
 
                 //Creates the order
-                String orderColumns = "(oid, description, estimated_time, created_by, customer, price)";
-                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + ")";
+                String orderColumns = "(oid, description, estimated_time, created_by, customer, price, ordertype)";
+                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + ",'" + "J" + "')";
                 Database.insert("xorder", orderColumns, ordeValues);
 
                 //Fetches the fabrics and accessories
                 HashMap<String, String> accessoriesAmounts = getAccessoriesWithAmount();
                 HashMap<String, String> fabricSizes = getFabricsWithSize();
-                
-                
-                
 
                 //Loops trough the fabrics
                 for (String fabricMaterials : fabricSizes.keySet()) {
                     String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
                     String fabricAmount = fabricSizes.get(fabricMaterials);
-                    
+
                     //Checks if amount is 0 in db, if so order materials
                     String fetch = Database.fetchSingle("size", "fabric", "mid", fabricMid);
                     Double x = Double.parseDouble(fetch);
                     Double y = Double.parseDouble(fabricAmount);
-                    Double z = x-y;
-                    if(z <= 0){
-                        
+                    Double z = x - y;
+                    System.out.println("ZZZZZ" + z);
+                    if (z <= 0) {
+                        Double sum = 0 - z;
+                        System.out.println("SUMMMMM" + sum);
+
+                        int result = JOptionPane.showConfirmDialog(null, "Det finns inte tillräckligt med material, vill du beställa mer?", "Swing Tester",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
+                            registerOrderedMaterial rom = new registerOrderedMaterial(uid);
+                            String price = rom.calculatePrice(fabricMid, sum.toString());
+                            System.out.println("PIRIIIICE" + price);
+                            String oid = Database.getAutoIncrement("xorder", "oid");
+                            rom.createMaterialOrder(oid, fabricMaterials, price, uid);
+
+                            String query = "UPDATE fabric set size = " + "0.0" + "where mid = " + fabricMid;
+                            Database.updatePreparedQuery(query);
+                        } else if (result == JOptionPane.NO_OPTION) {
+
+                        }
+                    } else {
+                        String query = "UPDATE fabric set size = " + z + "where mid = " + fabricMid;
+                        Database.updatePreparedQuery(query);
                     }
 
                     //Adds the orderID, materialID and the amount to "order_consists_of_materials"
@@ -507,12 +526,44 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                     String consistsOfColumns = "(oid, mid, amount)";
                     String cosistsOfValues = "(" + orderID + "," + accessoriesMid + "," + accessoriesAmount + ")";
                     Database.insert("order_consists_of_materials", consistsOfColumns, cosistsOfValues);
+                    
+                    //Checks if amount is 0 in db, if so order materials
+                    String fetch = Database.fetchSingle("amount", "accessories", "mid", accessoriesMid);
+                    Double x = Double.parseDouble(fetch);
+                    Double y = Double.parseDouble(accessoriesAmount);
+                    Double z = x - y;
+                    System.out.println("ZZZZZ" + z);
+                    if (z <= 0) {
+                        Double sum = 0 - z;
+                        System.out.println("SUMMMMM" + sum);
+
+                        int result = JOptionPane.showConfirmDialog(null, "Det finns inte tillräckligt med material, vill du beställa mer?", "Swing Tester",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
+                            registerOrderedMaterial rom = new registerOrderedMaterial(uid);
+                            String price = rom.calculatePrice(accessoriesMid, sum.toString());
+                            System.out.println("PIRIIIICE" + price);
+                            String oid = Database.getAutoIncrement("xorder", "oid");
+                            rom.createMaterialOrder(oid, accessoriesMaterials, price, uid);
+
+                            String query = "UPDATE accessories set amount = " + "0.0" + "where mid = " + accessoriesMid;
+                            Database.updatePreparedQuery(query);
+                        } else if (result == JOptionPane.NO_OPTION) {
+
+                        }
+                    } else {
+                        String query = "UPDATE accessories set amount = " + z + "where mid = " + accessoriesMid;
+                        Database.updatePreparedQuery(query);
+                    }
                 }
 
                 //Fetches the request (if one is chosen) and deletes it from "requests"
                 String selectedRequest = cobRequestsForCustomer.getSelectedItem().toString();
-                if (!selectedRequest.isEmpty()) {
+                if (selectedRequest.equals("Inga förfrågningar.")) {
+                } else {
                     Database.deleteRow("requests", "rid", selectedRequest);
+
                 }
                 JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
             }
@@ -542,6 +593,12 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGetRequestInfoActionPerformed
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
+
+        calcPriceTotal();
+
+    }//GEN-LAST:event_btnCalculateActionPerformed
+
+    private void calcPriceTotal() {
         HashMap<String, String> fabric = getFabricsWithSize();
         HashMap<String, String> accessories = getAccessoriesWithAmount();
         ArrayList<String> valuesCalc = new ArrayList<>();
@@ -572,7 +629,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         totalPrice = finalPrice.toString();
         txtPriceExMoms.setText(c.calculateMoms(finalPrice.toString()));
         txtEstimatedPrice.setText(finalPrice.toString());
-    }//GEN-LAST:event_btnCalculateActionPerformed
+    }
 
     private void cbStockedProductsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStockedProductsItemStateChanged
         // TODO add your handling code here:
