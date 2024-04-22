@@ -474,11 +474,23 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 //Fetches the fabrics and accessories
                 HashMap<String, String> accessoriesAmounts = getAccessoriesWithAmount();
                 HashMap<String, String> fabricSizes = getFabricsWithSize();
+                
+                
+                
 
                 //Loops trough the fabrics
                 for (String fabricMaterials : fabricSizes.keySet()) {
                     String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
                     String fabricAmount = fabricSizes.get(fabricMaterials);
+                    
+                    //Checks if amount is 0 in db, if so order materials
+                    String fetch = Database.fetchSingle("size", "fabric", "mid", fabricMid);
+                    Double x = Double.parseDouble(fetch);
+                    Double y = Double.parseDouble(fabricAmount);
+                    Double z = x-y;
+                    if(z <= 0){
+                        
+                    }
 
                     //Adds the orderID, materialID and the amount to "order_consists_of_materials"
                     String consistsOfColumns = "(oid, mid, amount)";
