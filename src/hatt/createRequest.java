@@ -43,6 +43,7 @@ public class createRequest extends javax.swing.JFrame {
         lblCustomer = new javax.swing.JLabel();
         cbCustomer = new javax.swing.JComboBox<>();
         txtDescription = new javax.swing.JTextField();
+        btnSizeGuide = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -75,6 +76,13 @@ public class createRequest extends javax.swing.JFrame {
             }
         });
 
+        btnSizeGuide.setText("Måttguide");
+        btnSizeGuide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSizeGuideActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,7 +104,9 @@ public class createRequest extends javax.swing.JFrame {
                 .addGap(98, 98, 98)
                 .addComponent(lblDescription))
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addContainerGap()
+                .addComponent(btnSizeGuide)
+                .addGap(18, 18, 18)
                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(159, 159, 159)
@@ -121,7 +131,9 @@ public class createRequest extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(lblDescription)
                 .addGap(12, 12, 12)
-                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSizeGuide))
                 .addGap(18, 18, 18)
                 .addComponent(lblCreateRequest)
                 .addGap(6, 6, 6)
@@ -162,6 +174,11 @@ public class createRequest extends javax.swing.JFrame {
         }
         j++;
     }//GEN-LAST:event_txtDescriptionFocusGained
+
+    private void btnSizeGuideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSizeGuideActionPerformed
+        //SizeGuide sg = new SizeGuide();
+        //sg.setVisible(true);
+    }//GEN-LAST:event_btnSizeGuideActionPerformed
 
     public String[] getCBHatModels() {
         ArrayList<String> CBAL = new ArrayList<>();
@@ -205,6 +222,7 @@ public class createRequest extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;
+    private javax.swing.JButton btnSizeGuide;
     private javax.swing.JComboBox<String> cbCustomer;
     private javax.swing.JComboBox<String> cbHatModel;
     private javax.swing.JLabel lblCreateRequest;

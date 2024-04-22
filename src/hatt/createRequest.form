@@ -45,7 +45,9 @@
               <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace min="98" pref="98" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="btnSizeGuide" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="txtDescription" min="-2" pref="210" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -76,8 +78,11 @@
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Component id="lblDescription" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
-              <Component id="txtDescription" min="-2" pref="90" max="-2" attributes="0"/>
-              <EmptySpace min="18" pref="18" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtDescription" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Component id="btnSizeGuide" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="lblCreateRequest" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Component id="btnSend" min="-2" max="-2" attributes="0"/>
@@ -145,6 +150,14 @@
       </Properties>
       <Events>
         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtDescriptionFocusGained"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSizeGuide">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="M&#xe5;ttguide"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSizeGuideActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
