@@ -35,6 +35,7 @@ public class LoginCustomer extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
+        btnCreateAccount = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +47,13 @@ public class LoginCustomer extends javax.swing.JFrame {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnCreateAccount.setText("Skapa konto");
+        btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAccountActionPerformed(evt);
             }
         });
 
@@ -63,7 +71,9 @@ public class LoginCustomer extends javax.swing.JFrame {
                             .addComponent(tfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
                             .addComponent(pfPassword)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
+                        .addContainerGap()
+                        .addComponent(btnCreateAccount)
+                        .addGap(59, 59, 59)
                         .addComponent(btnLogin)))
                 .addContainerGap(141, Short.MAX_VALUE))
         );
@@ -79,7 +89,9 @@ public class LoginCustomer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(btnLogin)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLogin)
+                    .addComponent(btnCreateAccount))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -96,12 +108,17 @@ public class LoginCustomer extends javax.swing.JFrame {
         String correctPassword = Database.fetchSingle("password", "customer", "email", email);
         
         if (password.equals(correctPassword)) {
-            new Navigation(email,"",cid).setVisible(true);
+            new Navigation(email,"",cid, false).setVisible(true);
         }
         else {
             JOptionPane.showMessageDialog(null, "Fel inloggningsuppgifter");
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+        CreateCustomer cc = new CreateCustomer(false);
+        cc.setVisible(true);
+    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,6 +156,7 @@ public class LoginCustomer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateAccount;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblPassword;

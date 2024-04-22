@@ -13,19 +13,20 @@ public class Navigation extends javax.swing.JFrame {
     private String user;
     private String uid;
     private String cid;
+    private boolean isStaff;
 
     /**
      * Creates new form navigation
      */
-    public Navigation(String user, String uid, String cid) {
+    public Navigation(String user, String uid, String cid, boolean isStaff) {
         this.user = user;
         this.uid = uid;
         this.cid = cid;
+        this.isStaff = isStaff;
         initComponents();
         lblUser.setText(user);
-        loadPane();     
+        loadPane();
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,110 +83,115 @@ public class Navigation extends javax.swing.JFrame {
         String tab = tbdPane.getTitleAt(tbdPane.getSelectedIndex());
         int tabindex = tbdPane.getSelectedIndex();
 
-        //Otto och Judith
-        if (uid.equals("1") || uid.equals("2")) {
-            switch (tab) {
-                case "Granska förfrågning":
-                    reviewRequest rr = new reviewRequest();
-                    tbdPane.setComponentAt(tabindex, rr.getContentPane());
-                    break;
-                case "Lagerför en modell":
-                    RegisterStockedProduct rsp = new RegisterStockedProduct();
-                    tbdPane.setComponentAt(tabindex, rsp.getContentPane());
-                    break;
-                case "Visa material info":
-                    showMaterialInfo smi = new showMaterialInfo();
-                    tbdPane.setComponentAt(tabindex, smi.getContentPane());
-                    break;
-                case "Skapa förfrågning":
-                    createRequest cr = new createRequest(uid, "");
-                    tbdPane.setComponentAt(tabindex, cr.getContentPane());
-                    break;
-                case "Skapa order för existerande kund":
-                    CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
-                    tbdPane.setComponentAt(tabindex, coec.getContentPane());
-                    break;
-                case "Hantera kunder":
-                    JFrameCustomerActions ca = new JFrameCustomerActions();
-                    tbdPane.setComponentAt(tabindex, ca.getContentPane());
-                    break;
-                case "Lämna återkoppling på förfrågning":
-                    Feedback1 fb = new Feedback1();
-                    tbdPane.setComponentAt(tabindex, fb.getContentPane());
-                    break;
-                case "Lämna kommentar på kund":
-                    Comment cm = new Comment();
-                    tbdPane.setComponentAt(tabindex, cm.getContentPane());
-                    break;
-                case "Leverantörsida":
-                    Supplier spl = new Supplier();
-                    tbdPane.setComponentAt(tabindex, spl.getContentPane());
-                    break;
-                case "Visa ordrar":
-                    showOrders so = new showOrders();
-                    tbdPane.setComponentAt(tabindex, so.getContentPane());
-                    break;
-                case "Registrera material":
-                    RegisterMaterial rm = new RegisterMaterial();
-                    tbdPane.setComponentAt(tabindex, rm.getContentPane());
-                    break;
+        if (isStaff) {
+            //Otto och Judith
+            if (uid.equals("1") || uid.equals("2")) {
+                switch (tab) {
+                    case "Granska förfrågning":
+                        reviewRequest rr = new reviewRequest();
+                        tbdPane.setComponentAt(tabindex, rr.getContentPane());
+                        break;
+                    case "Lagerför en modell":
+                        RegisterStockedProduct rsp = new RegisterStockedProduct();
+                        tbdPane.setComponentAt(tabindex, rsp.getContentPane());
+                        break;
+                    case "Visa material info":
+                        showMaterialInfo smi = new showMaterialInfo();
+                        tbdPane.setComponentAt(tabindex, smi.getContentPane());
+                        break;
+                    case "Skapa förfrågning":
+                        createRequest cr = new createRequest(uid, "");
+                        tbdPane.setComponentAt(tabindex, cr.getContentPane());
+                        break;
+                    case "Skapa order för existerande kund":
+                        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
+                        tbdPane.setComponentAt(tabindex, coec.getContentPane());
+                        break;
+                    case "Hantera kunder":
+                        JFrameCustomerActions ca = new JFrameCustomerActions();
+                        tbdPane.setComponentAt(tabindex, ca.getContentPane());
+                        break;
+                    case "Lämna återkoppling på förfrågning":
+                        Feedback1 fb = new Feedback1();
+                        tbdPane.setComponentAt(tabindex, fb.getContentPane());
+                        break;
+                    case "Lämna kommentar på kund":
+                        Comment cm = new Comment();
+                        tbdPane.setComponentAt(tabindex, cm.getContentPane());
+                        break;
+                    case "Leverantörsida":
+                        Supplier spl = new Supplier();
+                        tbdPane.setComponentAt(tabindex, spl.getContentPane());
+                        break;
+                    case "Visa ordrar":
+                        showOrders so = new showOrders();
+                        tbdPane.setComponentAt(tabindex, so.getContentPane());
+                        break;
+                    case "Registrera material":
+                        RegisterMaterial rm = new RegisterMaterial();
+                        tbdPane.setComponentAt(tabindex, rm.getContentPane());
+                        break;
+                        case "Skapa Kund":
+                        CreateCustomer cc = new CreateCustomer(true);
+                        tbdPane.setComponentAt(tabindex, cc.getContentPane());
+                        break;
+                }
+                //Revisorn
+            } else if (uid.equals("3")) {
+                switch (tab) {
+                    case "Granska förfrågning":
+                        reviewRequest rr = new reviewRequest();
+                        tbdPane.setComponentAt(tabindex, rr.getContentPane());
+                        break;
+                    case "Lagerför en modell":
+                        RegisterStockedProduct rsp = new RegisterStockedProduct();
+                        tbdPane.setComponentAt(tabindex, rsp.getContentPane());
+                        break;
+                    case "Visa material info":
+                        showMaterialInfo smi = new showMaterialInfo();
+                        tbdPane.setComponentAt(tabindex, smi.getContentPane());
+                        break;
+                    case "Skapa förfrågning":
+                        createRequest cr = new createRequest(uid, "");
+                        tbdPane.setComponentAt(tabindex, cr.getContentPane());
+                        break;
+                    case "Skapa order för existerande kund":
+                        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
+                        tbdPane.setComponentAt(tabindex, coec.getContentPane());
+                        break;
+                    case "Hantera kunder":
+                        JFrameCustomerActions ca = new JFrameCustomerActions();
+                        tbdPane.setComponentAt(tabindex, ca.getContentPane());
+                        break;
+                    case "Lämna återkoppling på förfrågning":
+                        Feedback1 fb = new Feedback1();
+                        tbdPane.setComponentAt(tabindex, fb.getContentPane());
+                        break;
+                    case "Lämna kommentar på kund":
+                        Comment cm = new Comment();
+                        tbdPane.setComponentAt(tabindex, cm.getContentPane());
+                        break;
+                    case "Leverantörsida":
+                        Supplier spl = new Supplier();
+                        tbdPane.setComponentAt(tabindex, spl.getContentPane());
+                        break;
+                    case "Visa ordrar":
+                        showOrders so = new showOrders();
+                        tbdPane.setComponentAt(tabindex, so.getContentPane());
+                        break;
+                    case "Registrera material":
+                        RegisterMaterial rm = new RegisterMaterial();
+                        tbdPane.setComponentAt(tabindex, rm.getContentPane());
+                        break;
+                }
             }
-            //Revisorn
-        } else if (uid.equals("3")) {
+        } else {
             switch (tab) {
-                case "Granska förfrågning":
-                    reviewRequest rr = new reviewRequest();
-                    tbdPane.setComponentAt(tabindex, rr.getContentPane());
-                    break;
-                case "Lagerför en modell":
-                    RegisterStockedProduct rsp = new RegisterStockedProduct();
-                    tbdPane.setComponentAt(tabindex, rsp.getContentPane());
-                    break;
-                case "Visa material info":
-                    showMaterialInfo smi = new showMaterialInfo();
-                    tbdPane.setComponentAt(tabindex, smi.getContentPane());
-                    break;
                 case "Skapa förfrågning":
-                    createRequest cr = new createRequest(uid, "");
-                    tbdPane.setComponentAt(tabindex, cr.getContentPane());
-                    break;
-                case "Skapa order för existerande kund":
-                    CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
-                    tbdPane.setComponentAt(tabindex, coec.getContentPane());
-                    break;
-                case "Hantera kunder":
-                    JFrameCustomerActions ca = new JFrameCustomerActions();
-                    tbdPane.setComponentAt(tabindex, ca.getContentPane());
-                    break;
-                case "Lämna återkoppling på förfrågning":
-                    Feedback1 fb = new Feedback1();
-                    tbdPane.setComponentAt(tabindex, fb.getContentPane());
-                    break;
-                case "Lämna kommentar på kund":
-                    Comment cm = new Comment();
-                    tbdPane.setComponentAt(tabindex, cm.getContentPane());
-                    break;
-                case "Leverantörsida":
-                    Supplier spl = new Supplier();
-                    tbdPane.setComponentAt(tabindex, spl.getContentPane());
-                    break;
-                case "Visa ordrar":
-                    showOrders so = new showOrders();
-                    tbdPane.setComponentAt(tabindex, so.getContentPane());
-                    break;
-                case "Registrera material":
-                    RegisterMaterial rm = new RegisterMaterial();
-                    tbdPane.setComponentAt(tabindex, rm.getContentPane());
-                    break;
-            }
-        }
-        else if (uid.isEmpty()) {
-            switch (tab){
-            case "Skapa förfrågning":
                     createRequest cr = new createRequest("", cid);
                     tbdPane.setComponentAt(tabindex, cr.getContentPane());
                     break;
-        }
+            }
         }
 
     }//GEN-LAST:event_tbdPaneStateChanged
@@ -230,59 +236,63 @@ public class Navigation extends javax.swing.JFrame {
     //Fyller tabbedPane med alla JFrames
     private void loadPane() {
 
-        //Om det är Judith eller Otto
-        if (uid.equals("1") || uid.equals("2")) {
-            JFrameCustomerActions ca = new JFrameCustomerActions();
-            tbdPane.addTab("Hantera kunder", ca.getContentPane());
-            CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
-            tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
-            createRequest cr = new createRequest(uid,"");
-            tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
-            showMaterialInfo smi = new showMaterialInfo();
-            tbdPane.addTab("Visa material info", smi.getContentPane());
-            RegisterStockedProduct rsp = new RegisterStockedProduct();
-            tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
-            reviewRequest rr = new reviewRequest();
-            tbdPane.addTab("Granska förfrågning", rr.getContentPane());
+        if (isStaff) {
+            //Om det är Judith eller Otto
+            if (uid.equals("1") || uid.equals("2")) {
+                JFrameCustomerActions ca = new JFrameCustomerActions();
+                tbdPane.addTab("Hantera kunder", ca.getContentPane());
+                CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
+                tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+                createRequest cr = new createRequest(uid, "");
+                tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+                showMaterialInfo smi = new showMaterialInfo();
+                tbdPane.addTab("Visa material info", smi.getContentPane());
+                RegisterStockedProduct rsp = new RegisterStockedProduct();
+                tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
+                reviewRequest rr = new reviewRequest();
+                tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
-            Feedback1 fb = new Feedback1();
-            tbdPane.addTab("Lämna återkoppling på förfrågning", fb.getContentPane());
+                Feedback1 fb = new Feedback1();
+                tbdPane.addTab("Lämna återkoppling på förfrågning", fb.getContentPane());
 
-            Comment cm = new Comment();
-            tbdPane.addTab("Lämna kommentar på kund", cm.getContentPane());
+                Comment cm = new Comment();
+                tbdPane.addTab("Lämna kommentar på kund", cm.getContentPane());
 
-            Supplier spl = new Supplier();
-            tbdPane.addTab("Leverantörsida", spl.getContentPane());
+                Supplier spl = new Supplier();
+                tbdPane.addTab("Leverantörsida", spl.getContentPane());
 
-            showOrders so = new showOrders();
-            tbdPane.addTab("Visa ordrar", so.getContentPane());
+                showOrders so = new showOrders();
+                tbdPane.addTab("Visa ordrar", so.getContentPane());
 
-            RegisterMaterial rm = new RegisterMaterial();
-            tbdPane.addTab("Registrera material", rm.getContentPane());
+                RegisterMaterial rm = new RegisterMaterial();
+                tbdPane.addTab("Registrera material", rm.getContentPane());
 
-        } //Revisorn
-        else if (uid.equals("3")) {
-            RegisterStockedProduct rsp = new RegisterStockedProduct();
-            tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
+                CreateCustomer cc = new CreateCustomer(true);
+                tbdPane.addTab("Skapa kund", cc.getContentPane());
 
-            showMaterialInfo smi = new showMaterialInfo();
-            tbdPane.addTab("Visa material info", smi.getContentPane());
+            } //Revisorn
+            else if (uid.equals("3")) {
+                RegisterStockedProduct rsp = new RegisterStockedProduct();
+                tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
 
-            reviewRequest rr = new reviewRequest();
-            tbdPane.addTab("Granska förfrågning", rr.getContentPane());
+                showMaterialInfo smi = new showMaterialInfo();
+                tbdPane.addTab("Visa material info", smi.getContentPane());
 
-            createRequest cr = new createRequest(uid,"");
-            tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+                reviewRequest rr = new reviewRequest();
+                tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
-            CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
-            tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
+                createRequest cr = new createRequest(uid, "");
+                tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
 
-            JFrameCustomerActions ca = new JFrameCustomerActions();
-            tbdPane.addTab("Hantera kunder", ca.getContentPane());
+                CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
+                tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
 
-        }
-        else if (uid.isEmpty()) {
-            createRequest cr = new createRequest("",cid);
+                JFrameCustomerActions ca = new JFrameCustomerActions();
+                tbdPane.addTab("Hantera kunder", ca.getContentPane());
+
+            }
+        } else {
+            createRequest cr = new createRequest("", cid);
             tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
         }
 

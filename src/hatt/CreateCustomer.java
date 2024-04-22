@@ -3,25 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package hatt;
+
 /**
  *
  * @author johan
  */
-
 import javax.swing.JOptionPane;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-
 public class CreateCustomer extends javax.swing.JFrame {
+
     private static InfDB idb;
-    
-    public CreateCustomer() {
+    private boolean isStaff;
+
+    public CreateCustomer(boolean staff) {
+        this.isStaff = staff;
         initComponents();
+        if (isStaff) {
+            lblPW.setVisible(false);
+            pwField.setVisible(false);
+        } else {
+            lblPW.setVisible(true);
+            pwField.setVisible(true);
+        }
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
-        }
-        catch(InfException ex){
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
     }
@@ -45,8 +53,8 @@ public class CreateCustomer extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        lblPW = new javax.swing.JLabel();
+        pwField = new javax.swing.JPasswordField();
 
         lblNewCustomer.setText("Skapa en ny kund");
 
@@ -65,6 +73,10 @@ public class CreateCustomer extends javax.swing.JFrame {
             }
         });
 
+        lblPW.setText("Lösenord");
+
+        pwField.setColumns(7);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,17 +88,21 @@ public class CreateCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblName)
-                            .addComponent(lblPhone)
-                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAddress)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEmail)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblName)
+                                    .addComponent(lblPhone)
+                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPW))
+                                .addGap(137, 137, 137)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblAddress)
+                                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblEmail)
+                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCreate)
@@ -113,58 +129,69 @@ public class CreateCustomer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(btnCreate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblPW)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreate)
+                    .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-       
+
         try {
-        String id = idb.getAutoIncrement("customer","cid");
-        
-        String name = txtName.getText();
-        String address = txtAddress.getText();
-        String email = txtEmail.getText();
-        String phone = txtPhone.getText();
-        
-        if (Validation.doesEmailExist(email) && Validation.txtHasValue(txtAddress) && Validation.txtHasValue(txtName) && Validation.validateName(txtName.getText()) && Validation.validateAddress(txtAddress.getText()) && Validation.validateEmailTypo(txtEmail.getText()) && Validation.validatePhone(txtPhone.getText()) && txtName.getText().length() < 25){
-           
-        
-        
-        String fraga = "Insert into customer values ("+id+",'"+name+"','"+address+"','"+phone+"','"+email+"')";
-        idb.insert(fraga);
-        
-        JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
-        }
-             else if (txtName.getText().length() > 25){
+            String id = idb.getAutoIncrement("customer", "cid");
+
+            String name = txtName.getText();
+            String address = txtAddress.getText();
+            String email = txtEmail.getText();
+            String phone = txtPhone.getText();
+            String password = pwField.getText();
+
+            if (Validation.doesEmailExist(email) && Validation.txtHasValue(txtAddress) && Validation.txtHasValue(txtName) && Validation.validateName(txtName.getText()) && Validation.validateAddress(txtAddress.getText()) && Validation.validateEmailTypo(txtEmail.getText()) && Validation.validatePhone(txtPhone.getText()) && txtName.getText().length() < 25) {
+
+                if (isStaff) {
+
+                    String fraga = "Insert into customer values (" + id + ",'" + name + "','" + address + "','" + phone + "','" + email + "')";
+                    idb.insert(fraga);
+
+                    JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
+                } else {
+                    if (!password.isEmpty() && password.length() < 35) {
+                        String fraga = "Insert into customer values (" + id + ",'" + name + "','" + address + "','" + phone + "','" + email + "')";
+                        idb.insert(fraga);
+
+                        JOptionPane.showMessageDialog(rootPane, "Ditt konto har nu lagts till");
+                    }
+                }
+            } else if (txtName.getText().length() > 25) {
                 JOptionPane.showMessageDialog(null, "Namnet kan högst vara 25 tecken.");
-            } else if (txtAddress.getText().length() > 50){
+            } else if (txtAddress.getText().length() > 50) {
                 JOptionPane.showMessageDialog(null, "Adressen kan inte vara längre än 50 tecken.");
-            } else if (txtEmail.getText().length() > 50){
+            } else if (txtEmail.getText().length() > 50) {
                 JOptionPane.showMessageDialog(null, "Eposten kan inte vara längre än 50 tecken.");
             }
-        }
-        catch (InfException ex){
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
+
     }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   /* public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+       /* try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -183,12 +210,12 @@ public class CreateCustomer extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CreateCustomer().setVisible(true);
             }
-        });
-    }
+        });*/
+    //}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreate;
@@ -196,7 +223,9 @@ public class CreateCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblNewCustomer;
+    private javax.swing.JLabel lblPW;
     private javax.swing.JLabel lblPhone;
+    private javax.swing.JPasswordField pwField;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
