@@ -4,17 +4,29 @@
  */
 package hatt;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joakimfockstedt
  */
 public class registerOrderedMaterial extends javax.swing.JFrame {
 
+    private String mid;
+    private String user;
+
     /**
      * Creates new form registerOrderedMaterial
      */
-    public registerOrderedMaterial() {
+    public registerOrderedMaterial(String user) {
+        new Database();
+        new Validation();
+        this.user = user;
         initComponents();
+        fillMaterials();
+
     }
 
     /**
@@ -26,9 +38,9 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbMaterial = new javax.swing.JComboBox<>();
         txtPrice = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtAmount = new javax.swing.JTextField();
         btnCalculate = new javax.swing.JButton();
         btnCreateOrder = new javax.swing.JButton();
         lblHeader = new javax.swing.JLabel();
@@ -36,20 +48,35 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbMaterial.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbMaterialItemStateChanged(evt);
+            }
+        });
 
         txtPrice.setEditable(false);
         txtPrice.setColumns(6);
 
-        jTextField2.setColumns(6);
+        txtAmount.setColumns(6);
 
         btnCalculate.setText("Beräkna pris");
+        btnCalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculateActionPerformed(evt);
+            }
+        });
 
         btnCreateOrder.setText("Lägg order");
+        btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateOrderActionPerformed(evt);
+            }
+        });
 
         lblHeader.setText("Lägg material order");
 
@@ -59,33 +86,17 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
 
         jLabel3.setText("Beräknat pris");
 
-        jLabel4.setText("Leverantör");
+        jLabel4.setText("Leverantörer");
 
-        jTextField1.setEditable(false);
-        jTextField1.setColumns(10);
+        txtArea.setEditable(false);
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane1.setViewportView(txtArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(lblHeader))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCreateOrder))
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,37 +104,169 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
                     .addComponent(btnCalculate)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(lblHeader))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(69, 69, 69))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2)
+                                            .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(141, 141, 141)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnCreateOrder))
+                                .addGap(10, 10, 10)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblHeader)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCalculate)
-                    .addComponent(btnCreateOrder))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(cbMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addGap(5, 5, 5)
+                                .addComponent(txtAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCalculate)
+                            .addComponent(btnCreateOrder)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel4)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cbMaterialItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbMaterialItemStateChanged
+       txtArea.setText("");
+        mid = Database.fetchSingle("mid", "materials", "name", cbMaterial.getSelectedItem().toString());
+        ArrayList<HashMap<String, String>> suppliers = Database.fetchRows(true, "supplier_has_material", "mid", mid);
+        for (HashMap<String, String> row : suppliers) {
+            for (String key : row.keySet()) {
+                if (key.equals("sid")) {
+
+                    String name = Database.fetchSingle("name", "supplier", "sid", row.get(key));
+                    txtArea.append(name + "\n");
+                }
+            }
+            
+        }
+
+
+    }//GEN-LAST:event_cbMaterialItemStateChanged
+
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+
+        Double materialPrice = Double.parseDouble(Database.fetchSingle("price", "materials", "mid", mid));
+        if (Validation.checkExistingCell("fabric", "mid", mid)) {
+            if (Validation.isDouble(txtAmount.getText())) {
+                String oid = Database.getAutoIncrement("xOrder", "oid");
+                String name = cbMaterial.getSelectedItem().toString();
+                String price = calculatePrice(mid, txtAmount.getText());
+                createMaterialOrder(oid, name, price, user);
+
+                Double selectedAmount = Double.parseDouble(txtAmount.getText());
+                String stock = Database.fetchSingle("size", "fabric", "mid", mid);
+                Double newStock = selectedAmount + Double.parseDouble(stock);
+                String query = "UPDATE fabric set size = " + newStock + "where mid = " + mid;
+                Database.updatePreparedQuery(query);
+                JOptionPane.showMessageDialog(null, "Ordern har lagts till");
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Var vänlig fyll i en giltig mängd.");
+            }
+
+        } else {
+
+            if (Validation.validateInt(txtAmount.getText())) {
+                String oid = Database.getAutoIncrement("xOrder", "oid");
+                String name = cbMaterial.getSelectedItem().toString();
+                String price = calculatePrice(mid, txtAmount.getText());
+                createMaterialOrder(oid, name, price, user);
+
+                Double selectedAmount = Double.parseDouble(txtAmount.getText());
+                String stock = Database.fetchSingle("amount", "accessories", "mid", mid);
+                Double newStock = selectedAmount + Double.parseDouble(stock);
+                String query = "UPDATE accessories set amount = " + newStock + "where mid = " + mid;
+                Database.updatePreparedQuery(query);
+                JOptionPane.showMessageDialog(null, "Ordern har lagts till");
+            } else {
+                JOptionPane.showMessageDialog(null, "Var vänlig fyll i ett heltal.");
+            }
+        }
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
+
+    private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
+        String amount = txtAmount.getText();
+
+        if (Validation.checkExistingCell("fabric", "mid", mid)) {
+            if (Validation.isDouble(amount)) {
+                String price = calculatePrice(mid, amount);
+                txtPrice.setText(price);
+            }
+        } else {
+            if (Validation.validateInt(amount)) {
+                String price = calculatePrice(mid, amount);
+                txtPrice.setText(price);
+            }
+        }
+    }//GEN-LAST:event_btnCalculateActionPerformed
+
+    private String calculatePrice(String mid, String amount) {
+        Double materialPrice = Double.parseDouble(Database.fetchSingle("price", "materials", "mid", mid));
+        Double selectedAmount = Double.parseDouble(amount);
+        Double totalPrice = Calculate.round((materialPrice * selectedAmount), 3);
+        String price = totalPrice.toString();
+        return price;
+
+    }
+
+    private void fillMaterials() {
+        ArrayList<String> cbValues = new ArrayList<>();
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "materials", "", "");
+        for (HashMap<String, String> row : list) {
+            for (String key : row.keySet()) {
+                if (key.equals("name")) {
+                    cbMaterial.addItem(row.get(key));
+                }
+            }
+        }
+
+    }
+
+    public void createMaterialOrder(String oid, String description, String price, String createdBy) {
+        Database.insert("xOrder", "(oid, description, price, created_by, ordertype)", "(" + oid + ",'" + description + "'," + price + "," + createdBy + ",'" + "N" + "')");
+    }
 
     /**
      * @param args the command line arguments
@@ -155,7 +298,7 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new registerOrderedMaterial().setVisible(true);
+                new registerOrderedMaterial("1").setVisible(true);
             }
         });
     }
@@ -163,14 +306,15 @@ public class registerOrderedMaterial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalculate;
     private javax.swing.JButton btnCreateOrder;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbMaterial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblHeader;
+    private javax.swing.JTextField txtAmount;
+    private javax.swing.JTextArea txtArea;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 }
