@@ -29,8 +29,6 @@ public class SizeGuide extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 3)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SizeguideBild (kopia).jpg"))); // NOI18N
 
