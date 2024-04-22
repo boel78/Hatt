@@ -50,7 +50,6 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         txtCustomer = new javax.swing.JLabel();
         lblKund = new javax.swing.JLabel();
         txtOrgNumber = new javax.swing.JTextField();
-        btnComment = new javax.swing.JButton();
         txtComment = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -117,24 +116,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         cbCustomers.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomers()));
         getContentPane().add(cbCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
-        txtCustomer.setForeground(new java.awt.Color(0, 0, 0));
         txtCustomer.setText("Organisations Nr:");
         getContentPane().add(txtCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        lblKund.setForeground(new java.awt.Color(0, 0, 0));
         lblKund.setText("Kund:");
         getContentPane().add(lblKund, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         txtOrgNumber.setColumns(10);
         getContentPane().add(txtOrgNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 70, -1));
-
-        btnComment.setText("Kommentera kund");
-        btnComment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCommentActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 460, -1, -1));
         getContentPane().add(txtComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 430, 130));
 
         pack();
@@ -323,16 +312,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOrgNumberActionPerformed
 
-    private void btnCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentActionPerformed
-
-        //Comment c = new Comment();
-        //c.setVisible(true);
-    }//GEN-LAST:event_btnCommentActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnComment;
     private javax.swing.JButton btnGet;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
