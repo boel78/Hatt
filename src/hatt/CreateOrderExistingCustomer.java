@@ -454,7 +454,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         ArrayList<String> accessories = getAccessoriesTf();
         if (Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)) {
             if (Validation.fabricValidation(fabrics) && Validation.accessoryValidation(accessories) && Validation.isDoubleErrorMessage(tfEstimatedTime) && Validation.validateDescription(tfDescription) && Validation.isDoubleIfNotEmpty(tfAmount1) && Validation.isDoubleIfNotEmpty(tfAmount2) && Validation.isDoubleIfNotEmpty(tfAmount3) && Validation.isDoubleIfNotEmpty(tfAmount4) && Validation.isDoubleIfNotEmpty(tfSize1) && Validation.isDoubleIfNotEmpty(tfSize2) && Validation.isDoubleIfNotEmpty(tfSize3) && Validation.isDoubleIfNotEmpty(tfSize4)) {
-
+                if(!txtEstimatedPrice.getText().isEmpty()){
                 //Fetches the customer info based on the choice in the combobox
                 String customerEmail = getCustomerEmail();
                 String customerID = Database.fetchSingle("cid", "customer", "Email", customerEmail);
@@ -465,12 +465,12 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
                 //Creates a new orderID and the ordertype
                 String orderID = Database.getAutoIncrement("xOrder", "oid");
-                String ordertype = "J";
+                String ordertype = "'J'";
 
                 //Creates the order
                 String orderColumns = "(oid, description, estimated_time, created_by, customer, price, ordertype)";
-                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + "," + ordertype + ")";
-                Database.insert("xorder", orderColumns, ordeValues);
+                String orderValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + "," + ordertype + ")";
+                Database.insert("xorder", orderColumns, orderValues);
 
                 //Fetches the fabrics and accessories
                 HashMap<String, String> accessoriesAmounts = getAccessoriesWithAmount();
@@ -500,10 +500,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
                 //Fetches the request (if one is chosen) and deletes it from "requests"
                 String selectedRequest = cobRequestsForCustomer.getSelectedItem().toString();
-                if (!selectedRequest.isEmpty()) {
+                if (!cobRequestsForCustomer.getSelectedItem().equals("Inga förfrågningar.")) {
                     Database.deleteRow("requests", "rid", selectedRequest);
                 }
                 JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
+            }else{
+                    JOptionPane.showMessageDialog(null, "Vänligen beräkna priset innan ordern bekräftas");
+                }
             }
         }
     }//GEN-LAST:event_btnConfirmActionPerformed
