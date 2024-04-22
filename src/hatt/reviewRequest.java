@@ -191,14 +191,20 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
         String txt = "";
+        String feedback = "";
+        txtStatus.setText("");
+        
         String cbContent = cbReviews.getSelectedItem().toString();
         String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
         rID = numbers;
         txt = Database.fetchSingle("description", "requests", "rid", numbers);
-
+        feedback = Database.fetchSingle("feedback", "requests", "rid", numbers);
+        
+        
         txtAreaDescription.setText("");
         txtAreaDescription.append(txt);
-
+        txtDeniedRequest.setText(feedback);
+        
         String reviewedBy = "";
         String reviewStatus = "";
         boolean reviewed = false;
