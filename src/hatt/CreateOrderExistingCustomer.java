@@ -463,12 +463,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 String description = tfDescription.getText();
                 double estimatedTime = Double.parseDouble(tfEstimatedTime.getText());
 
-                //Creates a new orderID
+                //Creates a new orderID and the ordertype
                 String orderID = Database.getAutoIncrement("xOrder", "oid");
+                String ordertype = "J";
 
                 //Creates the order
-                String orderColumns = "(oid, description, estimated_time, created_by, customer, price)";
-                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + ")";
+                String orderColumns = "(oid, description, estimated_time, created_by, customer, price, ordertype)";
+                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + "," + ordertype + ")";
                 Database.insert("xorder", orderColumns, ordeValues);
 
                 //Fetches the fabrics and accessories
