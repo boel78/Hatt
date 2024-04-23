@@ -174,11 +174,13 @@ create table xOrder
     created_by     int         not null,
     customer       int         null,
     price          double      not null,
+    ordertype      varchar(1)  not null,
     constraint xOrder_customer_cid_fk
         foreign key (customer) references customer (cid),
     constraint xOrder_employee_uid_fk
         foreign key (created_by) references employee (uid)
 );
+
 
 alter table invoice
     add constraint invoice_xOrder_oid_fk
