@@ -4,6 +4,7 @@
  */
 package hatt;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -198,6 +199,8 @@ public class getPDFSend extends javax.swing.JFrame {
 
         Database.insert("waybill", "(wid, oid, volume, weight, content, package_count)", "(" + wid + "," + oid + "," + volume + "," + weight + ", 'En handgjord hatt.'," + package_count + ")");
         
+        String dir = "/Users/joakimfockstedt/desktop/";
+        
         try {
             PDDocument document = new PDDocument();
 
@@ -224,7 +227,7 @@ public class getPDFSend extends javax.swing.JFrame {
 
             contentStream.newLineAtOffset(0, -50);
             
-            contentStream.showText("Varuvärde: " + Database.fetchSingle("price", "xOrder", "oid", oid) + " inkl. Moms");
+            contentStream.showText("Varuvärde: " + Database.fetchSingle("price", "xOrder", "oid", oid) + "kr inkl. Moms");
             
             contentStream.newLineAtOffset(0, -50);
             
@@ -242,12 +245,12 @@ public class getPDFSend extends javax.swing.JFrame {
 
             contentStream.close();
 
-            document.save(fileName);
+            document.save(new File(dir + fileName));
 
             document.close();
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("");
         }
     }
 
