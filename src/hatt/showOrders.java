@@ -20,7 +20,8 @@ public class showOrders extends javax.swing.JFrame {
     public showOrders() {
         initComponents();
         new Database();
-        fillModel();
+        fillModelSales();
+        fillModelBuy();
     }
 
     /**
@@ -33,8 +34,20 @@ public class showOrders extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable = new javax.swing.JTable();
+        jTableBuy = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableSale = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblMomsSale = new javax.swing.JLabel();
+        lblMomsBuy = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblPriceTotalBuy = new javax.swing.JLabel();
+        lblPriceTotalSale = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(600, 600));
@@ -42,7 +55,30 @@ public class showOrders extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTableBuy.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Material", "Skapad av", "Pris ink moms", "Pris ex moms"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableBuy);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 560, 160));
+
+        jLabel1.setText("Visa ordrar");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 0, -1, -1));
+
+        jTableSale.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -58,12 +94,31 @@ public class showOrders extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable);
+        jScrollPane2.setViewportView(jTableSale);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 27, 560, 358));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 27, 560, 160));
 
-        jLabel1.setText("Visa ordrar");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 0, -1, -1));
+        jLabel2.setText("Sammanställning moms:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, -1, -1));
+
+        jLabel3.setText("Sammanställning moms:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
+
+        jLabel4.setText("Inköp");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        jLabel5.setText("Försäljningar");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(lblMomsSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, -1, -1));
+        getContentPane().add(lblMomsBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, -1));
+
+        jLabel6.setText("Sammanställning pris: ");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
+
+        jLabel7.setText("Sammanställning pris: ");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, -1, -1));
+        getContentPane().add(lblPriceTotalBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, -1, -1));
+        getContentPane().add(lblPriceTotalSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,9 +158,9 @@ public class showOrders extends javax.swing.JFrame {
         });
     }
 
-    private void fillModel() {
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "xOrder", "", "");
+    private void fillModelSales() {
+        DefaultTableModel model = (DefaultTableModel) jTableSale.getModel();
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(true, "xOrder", "ordertype", "'J'");
         Calculate c = new Calculate();
 
         for (HashMap<String, String> row : list) {
@@ -137,11 +192,70 @@ public class showOrders extends javax.swing.JFrame {
             }
             model.addRow(new Object[]{description, timeEstimate, customer, creator, priceIncMoms, c.calculateMoms(priceIncMoms)});
         }
+        lblMomsSale.setText(calculateTotalMoms(true, "'J'"));
+        lblPriceTotalSale.setText(calculateTotalMoms(false, "'J'"));
+    }
+
+    private void fillModelBuy() {
+        DefaultTableModel model = (DefaultTableModel) jTableBuy.getModel();
+        ArrayList<HashMap<String, String>> list = Database.fetchRows(true, "xOrder", "ordertype", "'N'");
+        Calculate c = new Calculate();
+
+        for (HashMap<String, String> row : list) {
+            String description = "";
+            String creator = "";
+            String priceIncMoms = "";
+            String priceExMoms = "";
+            for (String key : row.keySet()) {
+                switch (key) {
+                    case "description":
+                        description = row.get(key);
+                    case "created_by":
+                        creator = Database.fetchSingle("name", "user", "uid", row.get(key));
+                        break;
+                    case "price":
+                        priceIncMoms = row.get(key);
+                        break;
+                }
+            }
+            model.addRow(new Object[]{description, creator, priceIncMoms, c.calculateMoms(priceIncMoms)});
+        }
+        lblMomsBuy.setText(calculateTotalMoms(true, "'N'"));
+        lblPriceTotalBuy.setText(calculateTotalMoms(false, "'N'"));
+    }
+
+    //Returnerar moms ifall boolean är true
+    private String calculateTotalMoms(boolean returnMoms, String ordertype) {
+        String sumString = "";
+        Double sum = 0.0;
+        ArrayList<String> list = Database.fetchColumn(true, "price", "xOrder", "ordertype", ordertype);
+        for (String priceInstance : list) {
+            Double priceInstanceD = Double.parseDouble(priceInstance);
+            sum += priceInstanceD;
+        }
+        if (returnMoms) {
+            sum = sum * 0.25;
+        }
+        sum = Calculate.round(sum, 3);
+        sumString = sum.toString();
+        return sumString;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableBuy;
+    private javax.swing.JTable jTableSale;
+    private javax.swing.JLabel lblMomsBuy;
+    private javax.swing.JLabel lblMomsSale;
+    private javax.swing.JLabel lblPriceTotalBuy;
+    private javax.swing.JLabel lblPriceTotalSale;
     // End of variables declaration//GEN-END:variables
 }
