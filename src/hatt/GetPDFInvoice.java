@@ -4,15 +4,14 @@
  */
 package hatt;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
-import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -48,8 +47,6 @@ public class GetPDFInvoice extends javax.swing.JFrame {
 
         CBxOrder = new javax.swing.JComboBox<>();
         btwCreateInvoice = new javax.swing.JButton();
-        txtDate = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,21 +59,15 @@ public class GetPDFInvoice extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Datum");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(CBxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)
-                        .addComponent(btwCreateInvoice))
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(CBxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(btwCreateInvoice)
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -86,11 +77,7 @@ public class GetPDFInvoice extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CBxOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btwCreateInvoice))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(2, 2, 2)
-                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addContainerGap(247, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,13 +106,16 @@ public class GetPDFInvoice extends javax.swing.JFrame {
     
     public void createPDF()
     {   
+                LocalDate localdate = LocalDate.now();
+
         String amount = "";
         String productName = ""; 
-        String date = "";
+        String date = localdate.toString();
         String InvoiceID = "";
         
+        
+        
         HashMap<String, String> infoHM = new HashMap<>();
-        date = txtDate.getText();
         
         try{
             amount = idb.fetchSingle("SELECT cost FROM invoice WHERE oid in "
@@ -244,7 +234,5 @@ public class GetPDFInvoice extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CBxOrder;
     private javax.swing.JButton btwCreateInvoice;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField txtDate;
     // End of variables declaration//GEN-END:variables
 }

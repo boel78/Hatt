@@ -5,6 +5,7 @@
 package hatt;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -201,6 +202,8 @@ public class getPDFSend extends javax.swing.JFrame {
         
         String dir = "/Users/joakimfockstedt/desktop/";
         
+        LocalDate localdate = LocalDate.now();
+        
         try {
             PDDocument document = new PDDocument();
 
@@ -216,6 +219,10 @@ public class getPDFSend extends javax.swing.JFrame {
             contentStream.newLineAtOffset(100, 700);
 
             contentStream.showText("FraktID: " + wid);
+            
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Datum: " + localdate.toString());
             
             contentStream.newLineAtOffset(0, -50);
             
