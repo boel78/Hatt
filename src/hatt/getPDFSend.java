@@ -6,13 +6,12 @@ package hatt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
-import org.apache.pdfbox.pdmodel.font.Standard14Fonts.FontName;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -23,6 +22,8 @@ import oru.inf.InfException;
 public class getPDFSend extends javax.swing.JFrame {
 
     InfDB idb;
+    private String oid;
+    private String customerName;
 
     /**
      * Creates new form getPDFSend
@@ -59,6 +60,12 @@ public class getPDFSend extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        cbOrder.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbOrderItemStateChanged(evt);
+            }
+        });
 
         btnCreateWaybill.setText("Skapa och skriv ut fraktsedel");
         btnCreateWaybill.addActionListener(new java.awt.event.ActionListener() {
@@ -134,8 +141,25 @@ public class getPDFSend extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateWaybillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateWaybillActionPerformed
+        String weight = txtWeight.getText();
+        String volume = txtVolume.getText();
+        String amountPackages = txtAmountPackages.getText();
+
+        if (Validation.isDouble(weight) && Validation.validateInt(amountPackages) && Validation.isDouble(volume)) {
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i giltiga siffor");
+        }
         
+        
+        createPDF(volume, weight, amountPackages);
     }//GEN-LAST:event_btnCreateWaybillActionPerformed
+
+    private void cbOrderItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbOrderItemStateChanged
+        String[] x = cbOrder.getSelectedItem().toString().split(" ");
+        oid = x[0];
+        customerName = x[2];
+    }//GEN-LAST:event_cbOrderItemStateChanged
 
     private void fillCB() {
         HashMap<String, String> list = new HashMap<>();
@@ -143,7 +167,7 @@ public class getPDFSend extends javax.swing.JFrame {
         for (HashMap<String, String> row : response) {
             String column = "";
             String desc = "";
-            String customer = ""; 
+            String customer = "";
             for (String key : row.keySet()) {
                 switch (key) {
                     case "oid":
@@ -157,7 +181,7 @@ public class getPDFSend extends javax.swing.JFrame {
                         break;
                 }
             }
-            
+
             list.put(column, desc + " " + customer);
         }
         for (String key : list.keySet()) {
@@ -165,10 +189,15 @@ public class getPDFSend extends javax.swing.JFrame {
         }
     }
 
-    public void createPDF(String wid, String oid, String customerName, String volume, String weight, String content, String package_count) {
-        String fileName = "ofkewpfkkw.pdf";
+    public void createPDF(String volume, String weight, String package_count) {
+        String wid = Database.getAutoIncrement("waybill", "wid");
+        
+        String cid  = Database.fetchSingle("customer", "xOrder", "oid", oid);
 
+        String fileName = "Fraktsedel_" + wid + ".pdf";
 
+        Database.insert("waybill", "(wid, oid, volume, weight, content, package_count)", "(" + wid + "," + oid + "," + volume + "," + weight + ", 'En handgjord hatt.'," + package_count + ")");
+        
         try {
             PDDocument document = new PDDocument();
 
@@ -183,8 +212,32 @@ public class getPDFSend extends javax.swing.JFrame {
 
             contentStream.newLineAtOffset(100, 700);
 
-            contentStream.showText("skit på dig");
+            contentStream.showText("FraktID: " + wid);
+            
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Avsändare: Ottos Hattmakeri, Örebro, Hattmakarvgen 1, 019-303 878");
+            
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Mottagare: " + customerName + ", " + Database.fetchSingle("address", "customer", "cid", cid) + ", " + Database.fetchSingle("phone", "customer", "cid", cid));
 
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Varuvärde: " + Database.fetchSingle("price", "xOrder", "oid", oid) + " inkl. Moms");
+            
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Vikt: " + weight);
+            
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Volym: " + volume);
+            
+            contentStream.newLineAtOffset(0, -50);
+            
+            contentStream.showText("Antal paket: " + package_count);
+            
             contentStream.endText();
 
             contentStream.close();

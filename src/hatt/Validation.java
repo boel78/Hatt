@@ -375,6 +375,17 @@ public static boolean doesEmailExist(String Email) {
 
         return exists;
     }
+    
+    public static boolean validateInt(String input) {
+        boolean valid = false;
+        try {
+            Integer.parseInt(input);
+            valid = true;
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+    return valid;
+    }
 
 
 
