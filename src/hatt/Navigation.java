@@ -131,9 +131,13 @@ public class Navigation extends javax.swing.JFrame {
                         RegisterMaterial rm = new RegisterMaterial();
                         tbdPane.setComponentAt(tabindex, rm.getContentPane());
                         break;
-                        case "Skapa Kund":
+                    case "Skapa Kund":
                         CreateCustomer cc = new CreateCustomer(true);
                         tbdPane.setComponentAt(tabindex, cc.getContentPane());
+                        break;
+                    case "Visa lagerförda modeller":
+                        ShowStockedProduct ssp = new ShowStockedProduct();
+                        tbdPane.setComponentAt(tabindex, ssp.getContentPane());
                         break;
                 }
                 //Revisorn
@@ -183,6 +187,7 @@ public class Navigation extends javax.swing.JFrame {
                         RegisterMaterial rm = new RegisterMaterial();
                         tbdPane.setComponentAt(tabindex, rm.getContentPane());
                         break;
+
                 }
             }
         } else {
@@ -190,6 +195,10 @@ public class Navigation extends javax.swing.JFrame {
                 case "Skapa förfrågning":
                     createRequest cr = new createRequest("", cid);
                     tbdPane.setComponentAt(tabindex, cr.getContentPane());
+                    break;
+                case "Visa lagerförda modeller":
+                    ShowStockedProduct ssp = new ShowStockedProduct();
+                    tbdPane.setComponentAt(tabindex, ssp.getContentPane());
                     break;
             }
         }
@@ -270,6 +279,9 @@ public class Navigation extends javax.swing.JFrame {
                 CreateCustomer cc = new CreateCustomer(true);
                 tbdPane.addTab("Skapa kund", cc.getContentPane());
 
+                ShowStockedProduct ssp = new ShowStockedProduct();
+                tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
+
             } //Revisorn
             else if (uid.equals("3")) {
                 RegisterStockedProduct rsp = new RegisterStockedProduct();
@@ -290,10 +302,16 @@ public class Navigation extends javax.swing.JFrame {
                 JFrameCustomerActions ca = new JFrameCustomerActions();
                 tbdPane.addTab("Hantera kunder", ca.getContentPane());
 
+                ShowStockedProduct ssp = new ShowStockedProduct();
+                tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
+
             }
         } else {
             createRequest cr = new createRequest("", cid);
             tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
+
+            ShowStockedProduct ssp = new ShowStockedProduct();
+            tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
         }
 
 
