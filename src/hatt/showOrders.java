@@ -225,7 +225,7 @@ public class showOrders extends javax.swing.JFrame {
     }
 
     //Returnerar moms ifall boolean är true
-    private String calculateTotalMoms(boolean returnMoms, String ordertype) {
+    public String calculateTotalMoms(boolean returnMoms, String ordertype) {
         String sumString = "";
         Double sum = 0.0;
         ArrayList<String> list = Database.fetchColumn(true, "price", "xOrder", "ordertype", ordertype);
