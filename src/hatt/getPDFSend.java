@@ -22,8 +22,8 @@ import oru.inf.InfException;
  */
 public class getPDFSend extends javax.swing.JFrame {
 
-    
     InfDB idb;
+
     /**
      * Creates new form getPDFSend
      */
@@ -34,8 +34,9 @@ public class getPDFSend extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         new Database();
-        
+
         initComponents();
+        fillCB();
     }
 
     /**
@@ -47,101 +48,156 @@ public class getPDFSend extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CBwaybill = new javax.swing.JComboBox<>();
-        btnWaybill = new javax.swing.JButton();
+        cbOrder = new javax.swing.JComboBox<>();
+        btnCreateWaybill = new javax.swing.JButton();
+        lblOrder = new javax.swing.JLabel();
+        txtWeight = new javax.swing.JTextField();
+        txtVolume = new javax.swing.JTextField();
+        txtAmountPackages = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        CBwaybill.setModel(new javax.swing.DefaultComboBoxModel<>(getCBWaybill()));
+        btnCreateWaybill.setText("Skapa och skriv ut fraktsedel");
+        btnCreateWaybill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateWaybillActionPerformed(evt);
+            }
+        });
+
+        lblOrder.setText("Ordrar");
+
+        txtWeight.setColumns(5);
+
+        txtVolume.setColumns(5);
+
+        txtAmountPackages.setColumns(5);
+
+        jLabel1.setText("Vikt (kg)");
+
+        jLabel2.setText("Volym");
+
+        jLabel3.setText("Mängd paket");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(CBwaybill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnWaybill)
-                .addContainerGap(211, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(btnCreateWaybill))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblOrder)
+                            .addComponent(cbOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAmountPackages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CBwaybill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnWaybill, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(7, 7, 7)
+                .addComponent(lblOrder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(3, 3, 3)
+                .addComponent(txtWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(4, 4, 4)
+                .addComponent(txtVolume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addGap(2, 2, 2)
+                .addComponent(txtAmountPackages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(btnCreateWaybill, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public String[] getCBWaybill(){
-        ArrayList<String> CBAL = new ArrayList<>();
+    private void btnCreateWaybillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateWaybillActionPerformed
         
-        CBAL = Database.fetchColumn(false, "content", "waybill", "", "");
-        
-        String[] CBwaybills = new String[CBAL.size()];
-        CBAL.toArray(CBwaybills);
-        
-        return CBwaybills;
-    }
-    
-    public void createPDF()
-    {
-        String fileName = "ofkewpfkkw.pdf";
-        
-        String wid = "";
-        String oid = "";
-        String customerName = "";
-        String volume = "";
-        int weight = 0;
-        String content = "";
-        String package_count = "";
-        
-        try{
-            wid = idb.fetchSingle("SELECT wid from waybill where content = '" 
-                    + CBwaybill.getSelectedItem().toString() + "'");
-            oid = idb.fetchSingle("Select oid from waybill where content = '"
-                    + CBwaybill.getSelectedItem().toString() + "'");
-            customerName = idb.fetchSingle("Select name from customer where cid in "
-                    + "(select customer from xorder where oid = "+ oid + ")");
-            System.out.println(customerName);
-        } catch (Exception ex){
-            ex.printStackTrace();
+    }//GEN-LAST:event_btnCreateWaybillActionPerformed
+
+    private void fillCB() {
+        HashMap<String, String> list = new HashMap<>();
+        ArrayList<HashMap<String, String>> response = Database.fetchRows(true, "xOrder", "ordertype", "'J'");
+        for (HashMap<String, String> row : response) {
+            String column = "";
+            String desc = "";
+            String customer = ""; 
+            for (String key : row.keySet()) {
+                switch (key) {
+                    case "oid":
+                        column = row.get(key);
+                        break;
+                    case "description":
+                        desc = row.get(key);
+                        break;
+                    case "customer":
+                        customer = Database.fetchSingle("name", "customer", "cid", row.get(key));
+                        break;
+                }
+            }
+            
+            list.put(column, desc + " " + customer);
         }
-        
+        for (String key : list.keySet()) {
+            cbOrder.addItem(key + " " + list.get(key));
+        }
+    }
+
+    public void createPDF(String wid, String oid, String customerName, String volume, String weight, String content, String package_count) {
+        String fileName = "ofkewpfkkw.pdf";
+
+
         try {
             PDDocument document = new PDDocument();
-            
+
             PDPage page = new PDPage();
             document.addPage(page);
-            
+
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            
+
             contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
-            
+
             contentStream.beginText();
-            
+
             contentStream.newLineAtOffset(100, 700);
-            
+
             contentStream.showText("skit på dig");
-            
+
             contentStream.endText();
-            
+
             contentStream.close();
-            
+
             document.save(fileName);
-            
+
             document.close();
-            
-        } catch (Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -178,7 +234,14 @@ public class getPDFSend extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> CBwaybill;
-    private javax.swing.JButton btnWaybill;
+    private javax.swing.JButton btnCreateWaybill;
+    private javax.swing.JComboBox<String> cbOrder;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblOrder;
+    private javax.swing.JTextField txtAmountPackages;
+    private javax.swing.JTextField txtVolume;
+    private javax.swing.JTextField txtWeight;
     // End of variables declaration//GEN-END:variables
 }
