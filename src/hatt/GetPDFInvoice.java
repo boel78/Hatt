@@ -107,7 +107,6 @@ public class GetPDFInvoice extends javax.swing.JFrame {
     
     public String[] getCBInvoice(){
         ArrayList<String> CBAL = new ArrayList<>();
-        ArrayList<String> oid = new ArrayList<>();
         
         CBAL = Database.fetchColumn(false, "description", "xorder", "", "");
         
@@ -141,7 +140,7 @@ public class GetPDFInvoice extends javax.swing.JFrame {
         } catch (Exception ex){
             ex.printStackTrace();
         }
-        String fileName = "toplaner.pdf";
+        String fileName = InvoiceID + " " + productName + ".pdf";
         ArrayList<String> infoAL = new ArrayList<>();
         String[] info = new String[infoHM.size()];
         for(HashMap.Entry<String, String> entry : infoHM.entrySet()){
@@ -163,13 +162,40 @@ public class GetPDFInvoice extends javax.swing.JFrame {
             
             contentStream.newLineAtOffset(100, 700);
             
-            String line1 = "Belopp: " + amount;
-            String line2 = "Produkt: " + productName;
-            
-            contentStream.showText(line1);
-            contentStream.newLine();
-            contentStream.showText(line2);
+            //for(int i = 0; i < 6; i++){
+               // switch (i){
+               //     case 0:
+                //        contentStream.showText("Belopp: " + amount);
+                //    case 1:
+               //         contentStream.newLineAtOffset(i , 700);
+                        
+              //  }   
                 
+              
+              
+              String info1 = info[0];
+              String info2 = info[1];
+              String info3 = info[2];
+            
+            
+            contentStream.showText("Belopp: " + amount);
+            contentStream.newLineAtOffset(0, -50);
+            contentStream.showText("produkt: " + productName);
+            contentStream.newLineAtOffset(0, -50);
+            contentStream.showText("Fakturanummer: " + InvoiceID);
+            contentStream.newLineAtOffset(0, -50);
+            contentStream.showText("Kunduppgifter: " + info1 +" "+ info2 +" "+ info3);
+            contentStream.newLineAtOffset(0, -50);
+            contentStream.showText("Ottos Hattmakeri, Örebro, Hattmakarvgen 1, 019-303 878");
+            contentStream.newLineAtOffset(0, -50);
+                
+           // "Belopp: " + amount    
+            //        + "\rprodukt: " + productName
+            //        + "\rDatum: " + date 
+            //        + "\rFakturanummer" + InvoiceID
+            //        + "\rHandlares personuppgifter: " + info 
+            //        + "\rOttos Hattmakeri, Örebro, Hattmakarvgen 1, 019-303 878"
+            
             
             contentStream.endText();
             
