@@ -125,13 +125,12 @@ public class GetPDFInvoice extends javax.swing.JFrame {
         String InvoiceID = "";
         
         HashMap<String, String> infoHM = new HashMap<>();
-        
+        date = txtDate.getText();
         
         try{
             amount = idb.fetchSingle("SELECT cost FROM invoice WHERE oid in "
                     + "(SELECT oid FROM xorder WHERE description = '" + CBxOrder.getSelectedItem().toString() +  "')"  );
             productName = CBxOrder.getSelectedItem().toString();
-            date = txtDate.getText();
             InvoiceID = idb.fetchSingle("SELECT inid FROM invoice WHERE oid in " 
                     + "(SELECT oid FROM xOrder WHERE description = '" + CBxOrder.getSelectedItem().toString() +"')");
             infoHM = idb.fetchRow("SELECT name, address, phone, email FROM customer WHERE cid in "
