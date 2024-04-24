@@ -74,6 +74,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe4;mta totala inkomster"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIncomeActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -94,6 +97,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe4;mta totala utgifter"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExpensesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSoldAccessories">
       <Properties>

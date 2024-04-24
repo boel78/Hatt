@@ -46,12 +46,22 @@ public class Statistics extends javax.swing.JFrame {
         });
 
         btnIncome.setText("Hämta totala inkomster");
+        btnIncome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIncomeActionPerformed(evt);
+            }
+        });
 
         txtAreaInfo.setColumns(20);
         txtAreaInfo.setRows(5);
         jScrollPane1.setViewportView(txtAreaInfo);
 
         btnExpenses.setText("Hämta totala utgifter");
+        btnExpenses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExpensesActionPerformed(evt);
+            }
+        });
 
         btnSoldAccessories.setText("Hämta mest sålda accessoarer");
         btnSoldAccessories.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +140,18 @@ public class Statistics extends javax.swing.JFrame {
             txtAreaInfo.append(value.get("totalt_antal_sålda") + "\n");
         }
     }//GEN-LAST:event_btnSoldAccessoriesActionPerformed
+
+    private void btnIncomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncomeActionPerformed
+        // TODO add your handling code here:
+        //String incomes = calculateTotalMoms(true, "J");
+        // TextAreaInfo.append(incomes);
+    }//GEN-LAST:event_btnIncomeActionPerformed
+
+    private void btnExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpensesActionPerformed
+        // TODO add your handling code here:
+       // String expences = calculateTotalMoms(false, "N");  
+       // txtAreaInfo.append(expences);
+    }//GEN-LAST:event_btnExpensesActionPerformed
 
     /**
      * @param args the command line arguments
