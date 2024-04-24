@@ -88,7 +88,7 @@ public class Navigation extends javax.swing.JFrame {
             if (uid.equals("1") || uid.equals("2")) {
                 switch (tab) {
                     case "Granska förfrågning":
-                        reviewRequest rr = new reviewRequest();
+                        reviewRequest rr = new reviewRequest(uid);
                         tbdPane.setComponentAt(tabindex, rr.getContentPane());
                         break;
                     case "Lagerför en modell":
@@ -148,7 +148,7 @@ public class Navigation extends javax.swing.JFrame {
             } else if (uid.equals("3")) {
                 switch (tab) {
                     case "Granska förfrågning":
-                        reviewRequest rr = new reviewRequest();
+                        reviewRequest rr = new reviewRequest(uid);
                         tbdPane.setComponentAt(tabindex, rr.getContentPane());
                         break;
                     case "Lagerför en modell":
@@ -266,7 +266,7 @@ public class Navigation extends javax.swing.JFrame {
                 tbdPane.addTab("Visa material info", smi.getContentPane());
                 RegisterStockedProduct rsp = new RegisterStockedProduct();
                 tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
-                reviewRequest rr = new reviewRequest();
+                reviewRequest rr = new reviewRequest(uid);
                 tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
                 Feedback1 fb = new Feedback1();
@@ -301,7 +301,7 @@ public class Navigation extends javax.swing.JFrame {
                 showMaterialInfo smi = new showMaterialInfo();
                 tbdPane.addTab("Visa material info", smi.getContentPane());
 
-                reviewRequest rr = new reviewRequest();
+                reviewRequest rr = new reviewRequest(uid);
                 tbdPane.addTab("Granska förfrågning", rr.getContentPane());
 
                 createRequest cr = new createRequest(uid, "");
