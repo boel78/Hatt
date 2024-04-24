@@ -87,6 +87,19 @@ public class Database {
 
         return list;
     }
+    
+    //Fetch rows för join query
+    public static ArrayList<HashMap<String, String>> fetchRowsJoin(String query) {
+        ArrayList<HashMap<String, String>> list = new ArrayList<>();
+
+        try {
+            list = idb.fetchRows(query);
+        } catch (InfException ex) {
+            ex.printStackTrace();
+        }
+
+        return list;
+    }
 
     //whereBool ska vara true om man vill ha med WHERE eller false om man inte vill
     //columnName är kolumnnamnet på kolumnen du vill hämta ifrån
