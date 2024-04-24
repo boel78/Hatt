@@ -6,6 +6,7 @@ package hatt;
 
 import oru.inf.InfDB;
 import java.util.ArrayList;
+import java.util.HashMap;
 import oru.inf.InfException;
 import javax.swing.JOptionPane;
 import javax.mail.Message;
@@ -24,11 +25,13 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private InfDB idb;
     private String rID;
+    private String uid;
 
     /**
      * Creates new form reviewREquestt
      */
-    public reviewRequest() {
+    public reviewRequest(String uid) {
+        this.uid = uid;
         new Validation();
 
         /* Create and display the form */
@@ -61,6 +64,10 @@ public class reviewRequest extends javax.swing.JFrame {
         btnCompleteDenyAccept = new javax.swing.JButton();
         txtDeniedRequest = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        txtReviewedBy = new javax.swing.JTextField();
+        lblReviewedBy = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        txtStatus = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 400));
@@ -95,6 +102,14 @@ public class reviewRequest extends javax.swing.JFrame {
 
         jLabel4.setText("Anledning till nekan av förfrågning");
 
+        txtReviewedBy.setColumns(10);
+
+        lblReviewedBy.setText("Granskad av");
+
+        lblStatus.setText("Status");
+
+        txtStatus.setColumns(10);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,9 +135,21 @@ public class reviewRequest extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtDeniedRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(75, 75, 75)
+                                .addComponent(lblReviewedBy)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtDeniedRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtReviewedBy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(lblStatus)
+                                        .addGap(49, 49, 49))
+                                    .addComponent(txtStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,17 +163,26 @@ public class reviewRequest extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(lblReviewedBy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDeniedRequest)
-                    .addComponent(jScrollPane1))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCompleteDenyAccept))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDeniedRequest)
+                            .addComponent(jScrollPane1))
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbDenyAccept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCompleteDenyAccept)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtReviewedBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(lblStatus)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -155,33 +191,78 @@ public class reviewRequest extends javax.swing.JFrame {
 
     private void btnShowRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowRequestActionPerformed
         String txt = "";
+        String feedback = "";
+        txtStatus.setText("");
+        
         String cbContent = cbReviews.getSelectedItem().toString();
         String numbers = cbContent.replaceAll("^.*\\s(\\d+)$", "$1");
         rID = numbers;
         txt = Database.fetchSingle("description", "requests", "rid", numbers);
-
+        feedback = Database.fetchSingle("feedback", "requests", "rid", numbers);
+        
+        
         txtAreaDescription.setText("");
         txtAreaDescription.append(txt);
+        txtDeniedRequest.setText(feedback);
+        
+        String reviewedBy = "";
+        String reviewStatus = "";
+        boolean reviewed = false;
+
+        HashMap<String, String> row = Database.fetchRow("requests", "rid", rID);
+
+        for (String key : row.keySet()) {
+            System.out.println(key);
+
+            if (key.equals("reviewed")) {
+                if (row.get(key).equals("J")) {
+                    reviewed = true;
+                    System.out.println("hejhej");
+                }
+            }
+            if (key.equals("reviewed_by")) {
+                reviewedBy = Database.fetchSingle("name", "user", "uid", row.get(key));
+            }
+            if (key.equals("review_status")) {
+                reviewStatus = row.get(key);
+            }
+            if (reviewed) {
+                txtReviewedBy.setText(reviewedBy);
+                if (reviewStatus.equals("J")) {
+
+                    txtStatus.setText("Godkänd");
+                } else {
+                    txtStatus.setText("Nekad.");
+                }
+
+            } else {
+                txtReviewedBy.setText("Ej granskad.");
+            }
+        }
+
+
     }//GEN-LAST:event_btnShowRequestActionPerformed
 
     private void btnCompleteDenyAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteDenyAcceptActionPerformed
         String cbContent = cbDenyAccept.getSelectedItem().toString();
         String customerName = "";
         String mail = "";
-        
+
         try {
             customerName = idb.fetchSingle("SELECT name FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
             mail = idb.fetchSingle("SELECT email FROM customer WHERE cid in (SELECT customer FROM requests WHERE rid = '" + rID + "')");
-        } catch (InfException ex){
+        } catch (InfException ex) {
             ex.printStackTrace();
         }
-        
+
         System.out.println(customerName);
 
         if (cbContent == "Neka") {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'N' WHERE rid = " + rID);
+                idb.update("UPDATE requests SET reviewed_by = " + uid + " WHERE rid = " + rID);
+
                 sendEmail(customerName, mail, rID, false);
             } catch (InfException ex) {
                 ex.printStackTrace();
@@ -190,6 +271,8 @@ public class reviewRequest extends javax.swing.JFrame {
             try {
                 idb.update("UPDATE requests SET reviewed = 'J' WHERE rid = " + rID);
                 idb.update("UPDATE requests SET review_status = 'J' WHERE rid = " + rID);
+                idb.update("UPDATE requests SET reviewed_by = " + uid + " WHERE rid = " + rID);
+
                 sendEmail(customerName, mail, rID, true);
             } catch (InfException ex) {
                 ex.printStackTrace();
@@ -217,7 +300,6 @@ public class reviewRequest extends javax.swing.JFrame {
         return CBReviewsx;
     }
 
-    
     // Jag kallar på funktionen när man klickar på att neka eller godkänna förfrågning
     public void sendEmail(String customerName, String recieverMail, String requestID, boolean requestAnswer) {
         // Instansierar ett properties objekt, här lägger man in hur programmet ska koppla till
@@ -238,7 +320,7 @@ public class reviewRequest extends javax.swing.JFrame {
                 return new javax.mail.PasswordAuthentication("Ottoshattmakeri@gmail.com", "hictjjmvbsnllqls");
             }
         });
-        
+
         // Den här använder jag för att kolla ifall det blivit godkänt eller nekat. 
         String requestStatus = null;
 
@@ -261,17 +343,15 @@ public class reviewRequest extends javax.swing.JFrame {
             // Jag instansierar ett MimeMessage object med session som jag instansierade tidigare
             // Det innehåller inloggningsinfo och kopplingen till gmail smtp-
             // om jag förstått dokumentationen rätt från biblioteket
-            
             Message automatedMail = new MimeMessage(session);
             automatedMail.setFrom(new InternetAddress("Ottoshattmakeri@gmail.com")); // Vilken mail man skickar ifrån
-            automatedMail.setRecipients(                                             // Väljer vilka mails man ska skicka till
-                    Message.RecipientType.TO,                                        
-                    InternetAddress.parse(recieverMail, false)                       
+            automatedMail.setRecipients( // Väljer vilka mails man ska skicka till
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(recieverMail, false)
             );
 
             automatedMail.setSubject("Svar på kundförfrågan."); // Denna kodrad gör precis vad den säger
 
-            
             // Dessa if statements bygger innehållet i mailen, med .setText() funktionen
             if (requestAnswer == false) {
                 if (Validation.txtHasValue(txtDeniedRequest)) {
@@ -294,7 +374,7 @@ public class reviewRequest extends javax.swing.JFrame {
 
             String dbQuery = "UPDATE requests SET feedback = '" + txtDeniedRequest.getText() + "' where rid = " + requestID;
             Database.updatePreparedQuery(dbQuery);
-            
+
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -304,13 +384,13 @@ public class reviewRequest extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+   /* public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+        /*try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -332,12 +412,12 @@ public class reviewRequest extends javax.swing.JFrame {
         //</editor-fold>
 
         //sendEmail("erik.regner4@gmail.com", "EHFEFUHSFIU", "AA STENAMENA"); /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new reviewRequest().setVisible(true);
+                new reviewRequest("2").setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCompleteDenyAccept;
@@ -349,7 +429,11 @@ public class reviewRequest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblReviewedBy;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JTextArea txtAreaDescription;
     private javax.swing.JTextField txtDeniedRequest;
+    private javax.swing.JTextField txtReviewedBy;
+    private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
 }
