@@ -47,7 +47,6 @@ public class Database {
     public static String fetchSingle(String columnName, String tableName, String columnWhere, String columnIdentifier) {
         String query = "SELECT " + columnName + " FROM " + tableName + " WHERE " + columnWhere + " = '" + columnIdentifier + "'";
         String response = "";
-        System.out.println(query);
         try {
             response = idb.fetchSingle(query);
         } catch (InfException ex) {
@@ -62,7 +61,6 @@ public class Database {
     public static HashMap<String, String> fetchRow(String tableName, String where, String whereIdentifier) {
         String query = "SELECT * FROM " + tableName + " WHERE " + where + " = " + whereIdentifier;
         HashMap<String, String> response = new HashMap<String, String>();
-        System.out.println(query);
         try {
             response = idb.fetchRow(query);
         } catch (InfException ex) {

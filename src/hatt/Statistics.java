@@ -111,31 +111,31 @@ public class Statistics extends javax.swing.JFrame {
     private void btnSoldFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldFabricActionPerformed
         txtAreaInfo.setText("");
         txtAreaInfo.append("mid" + "\t" + "Namn" + "\t" + "Såld mängd (cm2)" + "\n");
-        ArrayList<HashMap<String, String>> values = Database.fetchRowsJoin("SELECT order_consists_of_materials.mid, materials.`name`, SUM(amount) AS totalt_antal_sålda\n" +
-"FROM order_consists_of_materials\n" +
-"JOIN materials ON order_consists_of_materials.mid = materials.mid\n" +
-"JOIN fabric ON materials.mid = fabric.mid\n" +
-"GROUP BY mid");
-        
-        for(HashMap<String, String> value : values){
+        ArrayList<HashMap<String, String>> values = Database.fetchRowsJoin("SELECT order_consists_of_materials.mid, materials.`name`, SUM(amount) AS totalt_antal_sålda\n"
+                + "FROM order_consists_of_materials\n"
+                + "JOIN materials ON order_consists_of_materials.mid = materials.mid\n"
+                + "JOIN fabric ON materials.mid = fabric.mid\n"
+                + "GROUP BY mid");
+
+        for (HashMap<String, String> value : values) {
             txtAreaInfo.append(value.get("mid") + "\t");
             txtAreaInfo.append(value.get("name") + "\t");
             txtAreaInfo.append(value.get("totalt_antal_sålda") + "\n");
         }
-        
-        
+
+
     }//GEN-LAST:event_btnSoldFabricActionPerformed
 
     private void btnSoldAccessoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldAccessoriesActionPerformed
         txtAreaInfo.setText("");
         txtAreaInfo.append("mid" + "\t" + "Namn" + "\t" + "Såld mängd (st)" + "\n");
-        ArrayList<HashMap<String, String>> values = Database.fetchRowsJoin("SELECT order_consists_of_materials.mid, materials.`name`, SUM(order_consists_of_materials.amount) AS totalt_antal_sålda\n" +
-"FROM order_consists_of_materials\n" +
-"JOIN materials ON order_consists_of_materials.mid = materials.mid\n" +
-"JOIN accessories ON materials.mid = accessories.mid\n" +
-"GROUP BY mid");
-        
-        for(HashMap<String, String> value : values){
+        ArrayList<HashMap<String, String>> values = Database.fetchRowsJoin("SELECT order_consists_of_materials.mid, materials.`name`, SUM(order_consists_of_materials.amount) AS totalt_antal_sålda\n"
+                + "FROM order_consists_of_materials\n"
+                + "JOIN materials ON order_consists_of_materials.mid = materials.mid\n"
+                + "JOIN accessories ON materials.mid = accessories.mid\n"
+                + "GROUP BY mid");
+
+        for (HashMap<String, String> value : values) {
             txtAreaInfo.append(value.get("mid") + "\t");
             txtAreaInfo.append(value.get("name") + "\t");
             txtAreaInfo.append(value.get("totalt_antal_sålda") + "\n");
@@ -144,14 +144,25 @@ public class Statistics extends javax.swing.JFrame {
 
     private void btnIncomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncomeActionPerformed
         // TODO add your handling code here:
-        String incomes = showOrders.calculateTotalMoms(true, "J");
-        TextAreaInfo.append(incomes);
+        txtAreaInfo.setText("");
+        showOrders s = new showOrders();
+        Calculate c = new Calculate();
+        String incomesInc = s.calculateTotalMoms(false, "'J'");
+        txtAreaInfo.append(incomesInc + " inkl. Moms \n");
+        String incomesEx = c.calculateMoms(incomesInc);
+        txtAreaInfo.append(incomesEx + " ex. Moms");
     }//GEN-LAST:event_btnIncomeActionPerformed
 
     private void btnExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpensesActionPerformed
         // TODO add your handling code here:
-       String expences = showOrders.calculateTotalMoms(false, "N");  
-       txtAreaInfo.append(expences);
+        txtAreaInfo.setText("");
+        showOrders s = new showOrders();
+        Calculate c = new Calculate();
+        String expencesInc = s.calculateTotalMoms(false, "'N'");
+        txtAreaInfo.setText(expencesInc + " inkl. Moms \n");
+        String incomesEx = c.calculateMoms(expencesInc);
+        txtAreaInfo.append(incomesEx + " ex. Moms");
+
     }//GEN-LAST:event_btnExpensesActionPerformed
 
     /**
