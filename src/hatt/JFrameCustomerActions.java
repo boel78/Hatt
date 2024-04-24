@@ -50,19 +50,35 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         txtCustomer = new javax.swing.JLabel();
         lblKund = new javax.swing.JLabel();
         txtOrgNumber = new javax.swing.JTextField();
-        btnComment = new javax.swing.JButton();
+        txtComment = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblName.setForeground(new java.awt.Color(0, 0, 0));
         lblName.setText("Namn:");
+        getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
         lblAddress.setText("Adress:");
+        getContentPane().add(lblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, -1));
 
         lblPhone.setText("Tel. Nr:");
+        getContentPane().add(lblPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         lblEmail.setText("Epost:");
+        getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        txtName.setColumns(10);
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, -1, -1));
+
+        txtAddress.setColumns(10);
+        getContentPane().add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+
+        txtPhone.setColumns(10);
+        getContentPane().add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, -1, -1));
+
+        txtEmail.setColumns(10);
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         btnAdd.setText("Lägg Till");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +86,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
 
         btnUpdate.setText("Uppdatera");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +94,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
+        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 300, -1, -1));
 
         btnRemove.setForeground(new java.awt.Color(255, 51, 51));
         btnRemove.setText("Ta Bort");
@@ -85,6 +103,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 btnRemoveActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
 
         btnGet.setText("Hämta");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
@@ -92,102 +111,20 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
                 btnGetActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGet, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, -1, -1));
 
         cbCustomers.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomers()));
+        getContentPane().add(cbCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
-        txtCustomer.setForeground(new java.awt.Color(0, 0, 0));
         txtCustomer.setText("Organisations Nr:");
+        getContentPane().add(txtCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        lblKund.setForeground(new java.awt.Color(0, 0, 0));
         lblKund.setText("Kund:");
+        getContentPane().add(lblKund, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        btnComment.setText("Kommentera kund");
-        btnComment.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCommentActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblName)
-                            .addComponent(lblAddress)
-                            .addComponent(lblPhone)
-                            .addComponent(lblEmail)
-                            .addComponent(txtCustomer)
-                            .addComponent(lblKund))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGet))
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtOrgNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(btnAdd)
-                        .addGap(78, 78, 78)
-                        .addComponent(btnUpdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnComment))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(btnRemove)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblKund)
-                    .addComponent(btnGet))
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCustomer)
-                    .addComponent(txtOrgNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(lblAddress)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPhone)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdd)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnUpdate)
-                        .addComponent(btnComment)))
-                .addGap(13, 13, 13)
-                .addComponent(btnRemove))
-        );
+        txtOrgNumber.setColumns(10);
+        getContentPane().add(txtOrgNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 70, -1));
+        getContentPane().add(txtComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 430, 130));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,6 +150,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         String phone = ""; //Database: customer/phone
         String email = ""; //Database: customer/email
         String orgNumber = ""; //Database: customer/orgNumber
+        String commentField = "";
 
         if (customer != null && !customer.isEmpty()) {
             name = customer.get("name");
@@ -220,12 +158,14 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             phone = customer.get("phone");
             email = customer.get("email");
             orgNumber = customer.get("otgNumber");
+            commentField = customer.get("comment"); 
 
             txtName.setText(name != null ? name : "");
             txtAddress.setText(address != null ? address : "");
             txtPhone.setText(phone != null ? phone : "");
             txtEmail.setText(email != null ? email : "");
             txtOrgNumber.setText(fetchedOrgNumber);
+            txtComment.setText(commentField);
             System.out.println("test lyckats " + name + " " + address + " " + phone + " " + email + " " + fetchedOrgNumber);
 
             fetchedOrgNr = txtOrgNumber.getText();
@@ -238,6 +178,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
             txtPhone.setText("");
             txtEmail.setText("");
             txtOrgNumber.setText("");
+            txtComment.setText("");
 
             System.out.println("test lyckades inte " + name + " " + address + " " + phone + " " + email);
             JOptionPane.showMessageDialog(null, "Det gick inte att hitta kunden. Kontrollera uppgifterna.");
@@ -371,16 +312,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtOrgNumberActionPerformed
 
-    private void btnCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCommentActionPerformed
-
-        //Comment c = new Comment();
-        //c.setVisible(true);
-    }//GEN-LAST:event_btnCommentActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnComment;
     private javax.swing.JButton btnGet;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
@@ -392,6 +326,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhone;
     private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtComment;
     private javax.swing.JLabel txtCustomer;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
