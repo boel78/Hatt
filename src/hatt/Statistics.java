@@ -143,13 +143,13 @@ public class Statistics extends javax.swing.JFrame {
 
     private void btnIncomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncomeActionPerformed
         // TODO add your handling code here:
-        //String incomes = calculateTotalMoms(true, "J");
+        //String incomes = showOrders.calculateTotalMoms(true, "J");
         // TextAreaInfo.append(incomes);
     }//GEN-LAST:event_btnIncomeActionPerformed
 
     private void btnExpensesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpensesActionPerformed
         // TODO add your handling code here:
-       // String expences = calculateTotalMoms(false, "N");  
+       // String expences = showOrders.calculateTotalMoms(false, "N");  
        // txtAreaInfo.append(expences);
     }//GEN-LAST:event_btnExpensesActionPerformed
 
