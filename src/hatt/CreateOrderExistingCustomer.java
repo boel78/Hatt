@@ -23,6 +23,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         this.uid = uid;
         hourlyRate = "200";
         initComponents();
+        lblExpress.setVisible(false);
         fillCobCustomers();
         fillCobRequestNames();
         fillCobStockedProducts();
@@ -89,40 +90,75 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         lblStartingPrice = new javax.swing.JLabel();
         lblPriceExMoms = new javax.swing.JLabel();
         txtPriceExMoms = new javax.swing.JTextField();
+        lblExpress = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tfName.setEditable(false);
+        getContentPane().add(tfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 148, 170, -1));
 
         lblName.setText("Namn");
+        getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 125, -1, -1));
 
         lblAddress.setText("Adress");
+        getContentPane().add(lblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 187, -1, -1));
 
         tfAddress.setEditable(false);
+        getContentPane().add(tfAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 210, 170, -1));
 
         lblEmail.setText("Epost");
+        getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 311, -1, -1));
 
         tfEmail.setEditable(false);
+        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 334, 170, -1));
 
         tfPhone.setEditable(false);
+        getContentPane().add(tfPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 272, 170, -1));
 
         lblPhone.setText("Telefonnummer");
+        getContentPane().add(lblPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 249, -1, -1));
 
         lblCustomerInfo.setText("Kundinfo");
+        getContentPane().add(lblCustomerInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 29, -1, -1));
 
         lblOrderInfo.setText("Beställningsinfo");
+        getContentPane().add(lblOrderInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 29, -1, -1));
 
         lblDescription.setText("Beskrivning*");
+        getContentPane().add(lblDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 98, -1, -1));
+        getContentPane().add(tfFabric2, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 297, 120, -1));
+        getContentPane().add(tfFabric4, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 359, 120, -1));
+        getContentPane().add(tfFabric3, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 330, 120, -1));
+        getContentPane().add(tfFabric1, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 264, 120, -1));
 
         lblMaterial.setText("Tyg");
+        getContentPane().add(lblMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 241, -1, -1));
+        getContentPane().add(tfAccessories3, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 330, 120, -1));
+        getContentPane().add(tfAccessories1, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 264, 120, -1));
+        getContentPane().add(tfAccessories2, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 297, 120, -1));
+        getContentPane().add(tfAccessories4, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 362, 120, -1));
+        getContentPane().add(tfSize3, new org.netbeans.lib.awtextra.AbsoluteConstraints(641, 333, 39, -1));
+        getContentPane().add(tfSize1, new org.netbeans.lib.awtextra.AbsoluteConstraints(641, 264, 39, -1));
 
         lblSize.setText("Storlek (cm2)");
+        getContentPane().add(lblSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(641, 241, -1, -1));
+        getContentPane().add(tfAmount3, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 330, 39, -1));
+        getContentPane().add(tfAmount1, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 264, 39, -1));
+        getContentPane().add(tfAmount2, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 297, 39, -1));
+        getContentPane().add(tfAmount4, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 362, 39, -1));
+        getContentPane().add(tfSize2, new org.netbeans.lib.awtextra.AbsoluteConstraints(641, 300, 39, -1));
+        getContentPane().add(tfSize4, new org.netbeans.lib.awtextra.AbsoluteConstraints(641, 362, 39, -1));
+        getContentPane().add(tfEstimatedTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 195, 35, -1));
 
         lblEstimatedTime.setText("Estimerad tid*");
+        getContentPane().add(lblEstimatedTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 172, -1, -1));
 
         lblAccessories.setText("Accessoarer");
+        getContentPane().add(lblAccessories, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 241, -1, -1));
 
         lblAmount.setText("Antal (st)");
+        getContentPane().add(lblAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 241, -1, -1));
 
         cobCustomers.setEditable(true);
         cobCustomers.addActionListener(new java.awt.event.ActionListener() {
@@ -130,8 +166,11 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 cobCustomersActionPerformed(evt);
             }
         });
+        getContentPane().add(cobCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 80, 170, -1));
 
         lblCustomers.setText("Befintlig kund");
+        getContentPane().add(lblCustomers, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 58, -1, -1));
+        getContentPane().add(tfDescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 127, 179, -1));
 
         btnConfirm.setText("Bekräfta order");
         btnConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -139,10 +178,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 btnConfirmActionPerformed(evt);
             }
         });
+        getContentPane().add(btnConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 436, -1, -1));
 
         lblStar.setText("*");
+        getContentPane().add(lblStar, new org.netbeans.lib.awtextra.AbsoluteConstraints(686, 264, 22, 30));
 
         lblMandatory.setText("* är obligatoriska fält");
+        getContentPane().add(lblMandatory, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 446, -1, -1));
 
         btnGetRequestInfo.setText("Hämta förfrågning");
         btnGetRequestInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -150,10 +192,15 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 btnGetRequestInfoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGetRequestInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(509, 91, -1, -1));
 
         lblRequestsForCustomer.setText("Förfrågningar tillhörande kund");
+        getContentPane().add(lblRequestsForCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 29, -1, -1));
 
         lblRequests.setText("Förfrågningar:");
+        getContentPane().add(lblRequests, new org.netbeans.lib.awtextra.AbsoluteConstraints(472, 63, -1, -1));
+
+        getContentPane().add(cobRequestsForCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(569, 58, -1, -1));
 
         btnCalculate.setText("Beräkna pris");
         btnCalculate.addActionListener(new java.awt.event.ActionListener() {
@@ -161,267 +208,39 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 btnCalculateActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCalculate, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 436, -1, -1));
 
         txtEstimatedPrice.setColumns(10);
+        getContentPane().add(txtEstimatedPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 436, -1, -1));
 
         lblPriceIncMoms.setText("Pris ink. moms");
+        getContentPane().add(lblPriceIncMoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(578, 413, -1, -1));
 
         cbStockedProducts.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbStockedProductsItemStateChanged(evt);
             }
         });
+        getContentPane().add(cbStockedProducts, new org.netbeans.lib.awtextra.AbsoluteConstraints(734, 91, -1, -1));
 
         jLabel1.setText("Lagerförda modeller");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 63, -1, -1));
 
         txtStartingPrice.setColumns(7);
+        getContentPane().add(txtStartingPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(723, 187, -1, -1));
 
         lblStartingPrice.setText("Utgångspris:");
+        getContentPane().add(lblStartingPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(736, 153, -1, -1));
 
         lblPriceExMoms.setText("Pris ex. moms");
+        getContentPane().add(lblPriceExMoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(744, 413, -1, -1));
 
         txtPriceExMoms.setColumns(10);
+        getContentPane().add(txtPriceExMoms, new org.netbeans.lib.awtextra.AbsoluteConstraints(744, 436, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(lblCustomerInfo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(lblCustomers))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(cobCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMandatory)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(lblPhone)
-                                .addComponent(lblEmail)
-                                .addComponent(lblAddress)
-                                .addComponent(lblName)
-                                .addComponent(tfAddress)
-                                .addComponent(tfEmail)
-                                .addComponent(tfName)
-                                .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(tfAccessories1)
-                                            .addComponent(tfAccessories2)
-                                            .addComponent(tfAccessories3)
-                                            .addComponent(tfAccessories4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblAccessories)
-                                        .addGap(60, 60, 60)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAmount)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(tfAmount3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(tfAmount2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(tfAmount1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(tfAmount4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(lblOrderInfo))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(43, 43, 43)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(lblMaterial)
-                                                    .addComponent(tfFabric1)
-                                                    .addComponent(tfFabric2)
-                                                    .addComponent(tfFabric3)
-                                                    .addComponent(tfFabric4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(lblSize)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                            .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                            .addComponent(tfSize3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                            .addComponent(tfSize2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                            .addComponent(tfSize1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(lblStar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnGetRequestInfo)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(cbStockedProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addComponent(lblRequestsForCustomer)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
-                                        .addComponent(lblStartingPrice)))
-                                .addGap(74, 74, 74))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblRequests)
-                                .addGap(18, 18, 18)
-                                .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addGap(58, 58, 58))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblDescription)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnConfirm)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnCalculate)
-                                .addGap(40, 40, 40)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPriceIncMoms)
-                                    .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPriceExMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblPriceExMoms))))
-                        .addContainerGap(7, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEstimatedTime)
-                            .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtStartingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblCustomerInfo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCustomers)
-                        .addGap(5, 5, 5)
-                        .addComponent(cobCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStartingPrice))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAddress)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPhone)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblRequestsForCustomer, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblOrderInfo))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(lblDescription)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfDescription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblEstimatedTime)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfEstimatedTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cobRequestsForCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblRequests)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnGetRequestInfo)
-                                    .addComponent(cbStockedProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(69, 69, 69)
-                                .addComponent(txtStartingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(lblAccessories)
-                                        .addComponent(lblAmount))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(tfAmount1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfAmount2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfAmount3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(5, 5, 5)
-                                            .addComponent(tfAmount4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(tfAccessories1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfAccessories2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(tfAccessories3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(5, 5, 5)
-                                            .addComponent(tfAccessories4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblSize)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(tfSize1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblStar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfSize2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(tfSize3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29))
-                                    .addComponent(tfSize4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblMaterial)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfFabric1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfFabric2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tfFabric3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(29, 29, 29))
-                                .addComponent(tfFabric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPriceIncMoms)
-                    .addComponent(lblPriceExMoms))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnConfirm)
-                        .addComponent(lblMandatory))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnCalculate)
-                        .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPriceExMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(9, Short.MAX_VALUE))
-        );
+        lblExpress.setForeground(new java.awt.Color(255, 0, 0));
+        lblExpress.setText("* +25% expressbeställning");
+        getContentPane().add(lblExpress, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -617,15 +436,28 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         if (!txtStartingPrice.getText().isEmpty()) {
             valuesCalc.add(txtStartingPrice.getText());
         }
+        
+
 
         Double timeTaken = Double.parseDouble(tfEstimatedTime.getText().toString());
         Double workSum = timeTaken * Integer.parseInt(hourlyRate);
         valuesCalc.add(workSum.toString());
+        
+        
 
         System.out.println(valuesCalc);
         Calculate c = new Calculate();
 
+        
+        
         Double finalPrice = c.addNumbers(valuesCalc);
+        if (timeTaken <= 2) {
+            finalPrice = finalPrice * 1.25;
+            lblExpress.setVisible(true);
+        } else {
+            lblExpress.setVisible(false);
+        }
+        
         totalPrice = finalPrice.toString();
         txtPriceExMoms.setText(c.calculateMoms(finalPrice.toString()));
         txtEstimatedPrice.setText(finalPrice.toString());
@@ -835,6 +667,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblEstimatedTime;
+    private javax.swing.JLabel lblExpress;
     private javax.swing.JLabel lblMandatory;
     private javax.swing.JLabel lblMaterial;
     private javax.swing.JLabel lblName;
