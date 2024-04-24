@@ -128,7 +128,7 @@
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace pref="249" max="32767" attributes="0"/>
+                                      <EmptySpace pref="254" max="32767" attributes="0"/>
                                       <Component id="lblStartingPrice" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -155,12 +155,17 @@
                               <Component id="btnCalculate" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblPrice" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtEstimatedPrice" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPriceIncMoms" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtEstimatedPrice" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtPriceExMoms" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblPriceExMoms" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="7" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -302,7 +307,10 @@
                   </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lblPrice" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblPriceIncMoms" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPriceExMoms" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="9" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
@@ -312,6 +320,7 @@
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="btnCalculate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtEstimatedPrice" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtPriceExMoms" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="9" max="32767" attributes="0"/>
@@ -514,9 +523,9 @@
         <Property name="columns" type="int" value="10"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblPrice">
+    <Component class="javax.swing.JLabel" name="lblPriceIncMoms">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pris"/>
+        <Property name="text" type="java.lang.String" value="Pris ink. moms"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbStockedProducts">
@@ -545,6 +554,16 @@
     <Component class="javax.swing.JLabel" name="lblStartingPrice">
       <Properties>
         <Property name="text" type="java.lang.String" value="Utg&#xe5;ngspris:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblPriceExMoms">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pris ex. moms"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtPriceExMoms">
+      <Properties>
+        <Property name="columns" type="int" value="10"/>
       </Properties>
     </Component>
   </SubComponents>

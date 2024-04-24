@@ -17,6 +17,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
     private String uid;
     private String hourlyRate;
+    private String totalPrice;
 
     public CreateOrderExistingCustomer(String uid) {
         this.uid = uid;
@@ -81,11 +82,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         cobRequestsForCustomer = new javax.swing.JComboBox<>();
         btnCalculate = new javax.swing.JButton();
         txtEstimatedPrice = new javax.swing.JTextField();
-        lblPrice = new javax.swing.JLabel();
+        lblPriceIncMoms = new javax.swing.JLabel();
         cbStockedProducts = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtStartingPrice = new javax.swing.JTextField();
         lblStartingPrice = new javax.swing.JLabel();
+        lblPriceExMoms = new javax.swing.JLabel();
+        txtPriceExMoms = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,7 +164,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
 
         txtEstimatedPrice.setColumns(10);
 
-        lblPrice.setText("Pris");
+        lblPriceIncMoms.setText("Pris ink. moms");
 
         cbStockedProducts.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -174,6 +177,10 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         txtStartingPrice.setColumns(7);
 
         lblStartingPrice.setText("Utgångspris:");
+
+        lblPriceExMoms.setText("Pris ex. moms");
+
+        txtPriceExMoms.setColumns(10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -260,7 +267,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                         .addComponent(lblRequestsForCustomer)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 254, Short.MAX_VALUE)
                                         .addComponent(lblStartingPrice)))
                                 .addGap(74, 74, 74))
                             .addGroup(layout.createSequentialGroup()
@@ -281,9 +288,13 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                 .addComponent(btnCalculate)
                                 .addGap(40, 40, 40)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPrice)
-                                    .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())
+                                    .addComponent(lblPriceIncMoms)
+                                    .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPriceExMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPriceExMoms))))
+                        .addContainerGap(7, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEstimatedTime)
@@ -397,7 +408,9 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                                     .addGap(29, 29, 29))
                                 .addComponent(tfFabric4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(18, 18, 18)
-                .addComponent(lblPrice)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPriceIncMoms)
+                    .addComponent(lblPriceExMoms))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -405,7 +418,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                         .addComponent(lblMandatory))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnCalculate)
-                        .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtEstimatedPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPriceExMoms, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -436,6 +450,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_cobCustomersActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        calcPriceTotal();
         ArrayList<String> fabrics = getFabricsTf();
         ArrayList<String> accessories = getAccessoriesTf();
         if (Validation.hasValueMandatory(tfName) && Validation.hasValueMandatory(tfDescription) && Validation.hasValueMandatory(tfEstimatedTime) && Validation.hasValueMandatory(tfFabric1) && Validation.hasValueTwoFields(tfAccessories1, tfAmount1) && Validation.hasValueTwoFields(tfAccessories2, tfAmount2) && Validation.hasValueTwoFields(tfAccessories3, tfAmount3) && Validation.hasValueTwoFields(tfAccessories4, tfAmount4) && Validation.hasValueTwoFields(tfFabric1, tfSize1) && Validation.hasValueTwoFields(tfFabric2, tfSize2) && Validation.hasValueTwoFields(tfFabric3, tfSize3) && Validation.hasValueTwoFields(tfFabric4, tfSize4)) {
@@ -453,8 +468,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 String orderID = Database.getAutoIncrement("xOrder", "oid");
 
                 //Creates the order
-                String orderColumns = "(oid, description, estimated_time, created_by, customer)";
-                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + ")";
+                String orderColumns = "(oid, description, estimated_time, created_by, customer, price, ordertype)";
+                String ordeValues = "(" + orderID + ",'" + description + "'," + estimatedTime + "," + uid + "," + customerID + "," + totalPrice + ",'" + "J" + "')";
                 Database.insert("xorder", orderColumns, ordeValues);
 
                 //Fetches the fabrics and accessories
@@ -465,6 +480,36 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                 for (String fabricMaterials : fabricSizes.keySet()) {
                     String fabricMid = Database.fetchSingle("mid", "materials", "name", fabricMaterials);
                     String fabricAmount = fabricSizes.get(fabricMaterials);
+
+                    //Checks if amount is 0 in db, if so order materials
+                    String fetch = Database.fetchSingle("size", "fabric", "mid", fabricMid);
+                    Double x = Double.parseDouble(fetch);
+                    Double y = Double.parseDouble(fabricAmount);
+                    Double z = x - y;
+                    System.out.println("ZZZZZ" + z);
+                    if (z <= 0) {
+                        Double sum = 0 - z;
+                        System.out.println("SUMMMMM" + sum);
+
+                        int result = JOptionPane.showConfirmDialog(null, "Det finns inte tillräckligt med material, vill du beställa mer?", "Swing Tester",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
+                            registerOrderedMaterial rom = new registerOrderedMaterial(uid);
+                            String price = rom.calculatePrice(fabricMid, sum.toString());
+                            System.out.println("PIRIIIICE" + price);
+                            String oid = Database.getAutoIncrement("xorder", "oid");
+                            rom.createMaterialOrder(oid, fabricMaterials, price, uid);
+
+                            String query = "UPDATE fabric set size = " + "0.0" + "where mid = " + fabricMid;
+                            Database.updatePreparedQuery(query);
+                        } else if (result == JOptionPane.NO_OPTION) {
+
+                        }
+                    } else {
+                        String query = "UPDATE fabric set size = " + z + "where mid = " + fabricMid;
+                        Database.updatePreparedQuery(query);
+                    }
 
                     //Adds the orderID, materialID and the amount to "order_consists_of_materials"
                     String consistsOfColumns = "(oid, mid, amount)";
@@ -481,12 +526,44 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
                     String consistsOfColumns = "(oid, mid, amount)";
                     String cosistsOfValues = "(" + orderID + "," + accessoriesMid + "," + accessoriesAmount + ")";
                     Database.insert("order_consists_of_materials", consistsOfColumns, cosistsOfValues);
+                    
+                    //Checks if amount is 0 in db, if so order materials
+                    String fetch = Database.fetchSingle("amount", "accessories", "mid", accessoriesMid);
+                    Double x = Double.parseDouble(fetch);
+                    Double y = Double.parseDouble(accessoriesAmount);
+                    Double z = x - y;
+                    System.out.println("ZZZZZ" + z);
+                    if (z <= 0) {
+                        Double sum = 0 - z;
+                        System.out.println("SUMMMMM" + sum);
+
+                        int result = JOptionPane.showConfirmDialog(null, "Det finns inte tillräckligt med material, vill du beställa mer?", "Swing Tester",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
+                        if (result == JOptionPane.YES_OPTION) {
+                            registerOrderedMaterial rom = new registerOrderedMaterial(uid);
+                            String price = rom.calculatePrice(accessoriesMid, sum.toString());
+                            System.out.println("PIRIIIICE" + price);
+                            String oid = Database.getAutoIncrement("xorder", "oid");
+                            rom.createMaterialOrder(oid, accessoriesMaterials, price, uid);
+
+                            String query = "UPDATE accessories set amount = " + "0.0" + "where mid = " + accessoriesMid;
+                            Database.updatePreparedQuery(query);
+                        } else if (result == JOptionPane.NO_OPTION) {
+
+                        }
+                    } else {
+                        String query = "UPDATE accessories set amount = " + z + "where mid = " + accessoriesMid;
+                        Database.updatePreparedQuery(query);
+                    }
                 }
 
                 //Fetches the request (if one is chosen) and deletes it from "requests"
                 String selectedRequest = cobRequestsForCustomer.getSelectedItem().toString();
-                if (!selectedRequest.isEmpty()) {
+                if (selectedRequest.equals("Inga förfrågningar.")) {
+                } else {
                     Database.deleteRow("requests", "rid", selectedRequest);
+
                 }
                 JOptionPane.showMessageDialog(null, "Ny beställning skapad!");
             }
@@ -516,6 +593,12 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGetRequestInfoActionPerformed
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
+
+        calcPriceTotal();
+
+    }//GEN-LAST:event_btnCalculateActionPerformed
+
+    private void calcPriceTotal() {
         HashMap<String, String> fabric = getFabricsWithSize();
         HashMap<String, String> accessories = getAccessoriesWithAmount();
         ArrayList<String> valuesCalc = new ArrayList<>();
@@ -543,8 +626,10 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
         Calculate c = new Calculate();
 
         Double finalPrice = c.addNumbers(valuesCalc);
+        totalPrice = finalPrice.toString();
+        txtPriceExMoms.setText(c.calculateMoms(finalPrice.toString()));
         txtEstimatedPrice.setText(finalPrice.toString());
-    }//GEN-LAST:event_btnCalculateActionPerformed
+    }
 
     private void cbStockedProductsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStockedProductsItemStateChanged
         // TODO add your handling code here:
@@ -755,7 +840,8 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblOrderInfo;
     private javax.swing.JLabel lblPhone;
-    private javax.swing.JLabel lblPrice;
+    private javax.swing.JLabel lblPriceExMoms;
+    private javax.swing.JLabel lblPriceIncMoms;
     private javax.swing.JLabel lblRequests;
     private javax.swing.JLabel lblRequestsForCustomer;
     private javax.swing.JLabel lblSize;
@@ -784,6 +870,7 @@ public class CreateOrderExistingCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField tfSize3;
     private javax.swing.JTextField tfSize4;
     private javax.swing.JTextField txtEstimatedPrice;
+    private javax.swing.JTextField txtPriceExMoms;
     private javax.swing.JTextField txtStartingPrice;
     // End of variables declaration//GEN-END:variables
 }

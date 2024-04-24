@@ -25,10 +25,13 @@ public class Calculate {
 
     public double addNumbers(ArrayList<String> numbers) {
         double result = 0;
+        System.out.println(numbers);
 
         for (String i : numbers) {
-            double j = Double.valueOf(i);
-            result += j;
+            if (i != null) {
+                double j = Double.valueOf(i);
+                result += j;
+            }
         }
 
         return round(result, 3);
@@ -43,6 +46,16 @@ public class Calculate {
         value = value * factor;
         long tmp = Math.round(value);
         return (double) tmp / factor;
+    }
+
+    public String calculateMoms(String input) {
+        Double dinput = Double.parseDouble(input);
+        Double exmoms = (dinput * 0.75);
+        Double rounded = round(exmoms, 3);
+        String output = rounded.toString();
+
+        return output;
+
     }
 
 }

@@ -11,6 +11,7 @@ import javax.swing.JTextField;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import javax.swing.JTextField;
+
 /**
  *
  * @author lukasdenfete
@@ -37,14 +38,12 @@ public class Validation {
             if (email.length() <= 50) {
                 if (email.matches(emailRegex)) {
                     valid = true;
-                }
-                else {
+                } else {
                     JOptionPane.showMessageDialog(null, "Var vänlig skriv en giltlig epost.");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Email kan inte vara större än 50 tecken");
             }
-            else {
-                    JOptionPane.showMessageDialog(null, "Email kan inte vara större än 50 tecken");
-                }
         } else {
             JOptionPane.showMessageDialog(null, "Email kan inte vara tom");
         }
@@ -53,23 +52,19 @@ public class Validation {
 
     public static boolean validatePhone(String phone) {
         boolean valid = false;
-        if(!phone.isEmpty()){
-            if(phone.matches("\\d{3}-\\d{7}")){
+        if (!phone.isEmpty()) {
+            if (phone.matches("\\d{3}-\\d{7}")) {
                 valid = true;
             }
-            if(!valid){
+            if (!valid) {
                 JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer");
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         return valid;
 
     }
-
-
-
 
     public static boolean txtHasValue(JTextField txt) {
         boolean valid = true;
@@ -105,7 +100,7 @@ public class Validation {
     public static boolean validateAddress(String address) {
         boolean valid = false;
 
-        if (address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*")){
+        if (address.matches(".*\\d.*") && address.matches(".*[a-zA-Z].*")) {
             valid = true;
         }
 
@@ -215,9 +210,9 @@ public class Validation {
     }
 
     //Validerar fältet för description i createOrder
-    public static boolean validateDescription200(JTextField tf){
+    public static boolean validateDescription200(JTextField tf) {
         boolean correctLength = true;
-        if(tf.getText().length()>200){
+        if (tf.getText().length() > 200) {
             correctLength = false;
             JOptionPane.showMessageDialog(null, "Beskrivning kan max ha 200 tecken!");
         }
@@ -289,23 +284,23 @@ public class Validation {
         return exists;
     }
     //Kollar om en Email redan finns i databasen
-public static boolean doesEmailExist(String Email) {
 
-    boolean doesntExists = true;
-     ArrayList<String> existingEmails = new ArrayList<>();
-    existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
+    public static boolean doesEmailExist(String Email) {
 
-    for (String oneEmail : existingEmails) {
-        if (Email.equals(oneEmail)) {
-            doesntExists = false;
-            JOptionPane.showMessageDialog(null, "Denna email finns redan!");
+        boolean doesntExists = true;
+        ArrayList<String> existingEmails = new ArrayList<>();
+        existingEmails = Database.fetchColumn(false, "email", "customer", "", "");
+
+        for (String oneEmail : existingEmails) {
+            if (Email.equals(oneEmail)) {
+                doesntExists = false;
+                JOptionPane.showMessageDialog(null, "Denna email finns redan!");
+            }
         }
+
+        return doesntExists;
+
     }
-
-     return doesntExists;
-
-}
-
 
     public static boolean validateOrgNumber(String orgNumber) {
         boolean valid = false;
@@ -354,21 +349,20 @@ public static boolean doesEmailExist(String Email) {
         return valid;
     }
 
-    public static boolean checkSupplierMaterial(String supplier, String material){
+    public static boolean checkSupplierMaterial(String supplier, String material) {
         boolean exists = false;
         ArrayList<HashMap<String, String>> list = Database.fetchRows(false, "supplier_has_material", "", "");
-        for(HashMap<String, String> row : list){
+        for (HashMap<String, String> row : list) {
             String supplierInstance = "";
             String materialInstance = "";
-            for(String key : row.keySet()){
-                if(key.equals("sid")){
+            for (String key : row.keySet()) {
+                if (key.equals("sid")) {
                     supplierInstance = row.get(key);
-                }
-                else{
+                } else {
                     materialInstance = row.get(key);
                 }
             }
-            if(supplierInstance.equals(supplier) && materialInstance.equals(material)){
+            if (supplierInstance.equals(supplier) && materialInstance.equals(material)) {
                 exists = true;
             }
         }
@@ -376,7 +370,15 @@ public static boolean doesEmailExist(String Email) {
         return exists;
     }
 
-
-
+    public static boolean validateInt(String input) {
+        boolean valid = false;
+        try {
+            Integer.parseInt(input);
+            valid = true;
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
+    return valid;
+    }
 
 }

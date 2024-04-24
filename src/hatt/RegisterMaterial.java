@@ -58,8 +58,6 @@ public class RegisterMaterial extends javax.swing.JFrame {
         cbNewMaterialType = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         btnUpdate = new javax.swing.JButton();
-        txtExistingMaterial = new javax.swing.JTextField();
-        lblExistingMaterial = new javax.swing.JLabel();
         lblNewMaterial = new javax.swing.JLabel();
         txtNewMaterial = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -113,10 +111,6 @@ public class RegisterMaterial extends javax.swing.JFrame {
             }
         });
 
-        txtExistingMaterial.setColumns(9);
-
-        lblExistingMaterial.setText("Mängd");
-
         lblNewMaterial.setText("Mängd");
 
         txtNewMaterial.setColumns(9);
@@ -127,56 +121,53 @@ public class RegisterMaterial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbExistingMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblExistingMaterial)
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtExistingMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtExistingName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtExistingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(btnUpdate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNewName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNewPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblNewMaterial)
-                        .addGap(23, 23, 23)
-                        .addComponent(txtNewMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRegister)
-                        .addGap(52, 52, 52))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbNewMaterialType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)))
-                .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
                 .addGap(228, 228, 228)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(132, 132, 132))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(132, 132, 132))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(63, 63, 63)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtExistingName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtExistingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(btnUpdate)
+                            .addComponent(cbExistingMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbNewMaterialType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(87, 87, 87))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblNewMaterial)
+                                .addGap(23, 23, 23)
+                                .addComponent(txtNewMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnRegister)
+                                .addGap(90, 90, 90))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNewName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNewPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(38, 38, 38))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,18 +176,13 @@ public class RegisterMaterial extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cbExistingMaterials, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtExistingMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblExistingMaterial)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtExistingName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,10 +233,8 @@ public class RegisterMaterial extends javax.swing.JFrame {
         txtExistingPrice.setText(Database.fetchSingle("price", "materials", "name", cbExistingMaterials.getSelectedItem().toString()));
         if (Validation.checkExistingCell("fabric", "mid", mid)) {
             String materialInfo = Database.fetchSingle("size", "fabric", "mid", mid);
-            txtExistingMaterial.setText(materialInfo);
         } else {
             String materialInfo = Database.fetchSingle("amount", "accessories", "mid", mid);
-            txtExistingMaterial.setText(materialInfo);
         }
 
 
@@ -260,9 +244,8 @@ public class RegisterMaterial extends javax.swing.JFrame {
         String mid = Database.fetchSingle("mid", "materials", "name", cbExistingMaterials.getSelectedItem().toString());
         String price = txtExistingPrice.getText();
         String name = txtExistingName.getText();
-        String materialText = txtExistingMaterial.getText();
 
-        updateMaterial(mid, price, name, materialText);
+        updateMaterial(mid, price, name);
 
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -322,18 +305,13 @@ public class RegisterMaterial extends javax.swing.JFrame {
         }
     }
 
-    public void updateMaterial(String mid, String price, String name, String materialText) {
+    public void updateMaterial(String mid, String price, String name) {
         //ÄR ETT FABRIC
         if (Validation.checkExistingCell("fabric", "mid", mid)) {
             if (Validation.isDouble(price)) {
                 if (Validation.validateName(name)) {
-                    if (Validation.isDouble(materialText)) {
-                        Database.updatePreparedQuery("UPDATE fabric SET size= " + materialText + " WHERE mid= " + mid);
-                        Database.updatePreparedQuery("UPDATE materials SET name = '" + name + "', price = " + price + ", handled_by= " + userID + " WHERE mid = " + mid);
-                        JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Var god och fyll i en giltig mängd");
-                    }
+                    Database.updatePreparedQuery("UPDATE materials SET name = '" + name + "', price = " + price + ", handled_by= " + userID + " WHERE mid = " + mid);
+                    JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
                 } else {
                     JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt namn.");
                 }
@@ -344,13 +322,9 @@ public class RegisterMaterial extends javax.swing.JFrame {
         } else {
             if (Validation.isDouble(price)) {
                 if (Validation.validateName(name)) {
-                    if (validateInt(materialText)) {
-                        Database.updatePreparedQuery("UPDATE accessories SET amount= " + materialText + " WHERE mid= " + mid);
-                        Database.updatePreparedQuery("UPDATE materials SET name = '" + name + "', price = " + price + ", handled_by= " + userID + " WHERE mid = " + mid);
-                        JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Var god och fyll i en giltig mängd");
-                    }
+                    Database.updatePreparedQuery("UPDATE materials SET name = '" + name + "', price = " + price + ", handled_by= " + userID + " WHERE mid = " + mid);
+                    JOptionPane.showMessageDialog(null, "Uppdatering lyckades.");
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Var god och fyll i ett giltigt namn.");
                 }
@@ -454,9 +428,7 @@ public class RegisterMaterial extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JLabel lblExistingMaterial;
     private javax.swing.JLabel lblNewMaterial;
-    private javax.swing.JTextField txtExistingMaterial;
     private javax.swing.JTextField txtExistingName;
     private javax.swing.JTextField txtExistingPrice;
     private javax.swing.JTextField txtNewMaterial;
