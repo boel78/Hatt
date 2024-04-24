@@ -200,8 +200,6 @@ public class getPDFSend extends javax.swing.JFrame {
 
         Database.insert("waybill", "(wid, oid, volume, weight, content, package_count)", "(" + wid + "," + oid + "," + volume + "," + weight + ", 'En handgjord hatt.'," + package_count + ")");
         
-        String dir = "/Users/joakimfockstedt/desktop/";
-        
         LocalDate localdate = LocalDate.now();
         
         try {
@@ -252,7 +250,7 @@ public class getPDFSend extends javax.swing.JFrame {
 
             contentStream.close();
 
-            document.save(new File(dir + fileName));
+            document.save(fileName);
 
             document.close();
 
