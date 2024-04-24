@@ -51,6 +51,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         lblKund = new javax.swing.JLabel();
         txtOrgNumber = new javax.swing.JTextField();
         txtComment = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -125,6 +126,9 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
         txtOrgNumber.setColumns(10);
         getContentPane().add(txtOrgNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 70, -1));
         getContentPane().add(txtComment, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 430, 130));
+
+        jLabel1.setText("Kundkommentar");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -319,6 +323,7 @@ public class JFrameCustomerActions extends javax.swing.JFrame {
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JComboBox<String> cbCustomers;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblEmail;

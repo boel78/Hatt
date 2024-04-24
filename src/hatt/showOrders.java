@@ -109,8 +109,12 @@ public class showOrders extends javax.swing.JFrame {
 
         jLabel5.setText("Försäljningar");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-        getContentPane().add(lblMomsSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, -1, -1));
-        getContentPane().add(lblMomsBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, -1));
+
+        lblMomsSale.setText("0.0");
+        getContentPane().add(lblMomsSale, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, -1, -1));
+
+        lblMomsBuy.setText("0.0");
+        getContentPane().add(lblMomsBuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 410, -1, -1));
 
         jLabel6.setText("Sammanställning pris: ");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));

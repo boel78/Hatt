@@ -130,7 +130,7 @@ public class Navigation extends javax.swing.JFrame {
                         Comment cm = new Comment();
                         tbdPane.setComponentAt(tabindex, cm.getContentPane());
                         break;
-                    case "Leverantörsida":
+                    case "Leverantörer":
                         Supplier spl = new Supplier();
                         tbdPane.setComponentAt(tabindex, spl.getContentPane());
                         break;
@@ -141,10 +141,6 @@ public class Navigation extends javax.swing.JFrame {
                     case "Registrera material":
                         RegisterMaterial rm = new RegisterMaterial();
                         tbdPane.setComponentAt(tabindex, rm.getContentPane());
-                        break;
-                    case "Skapa Kund":
-                        CreateCustomer cc = new CreateCustomer(true);
-                        tbdPane.setComponentAt(tabindex, cc.getContentPane());
                         break;
                     case "Visa lagerförda modeller":
                         ShowStockedProduct ssp = new ShowStockedProduct();
@@ -162,54 +158,30 @@ public class Navigation extends javax.swing.JFrame {
                         getPDFSend pdfs = new getPDFSend();
                         tbdPane.setComponentAt(tabindex, pdfs.getContentPane());
                         break;
+                    case "Beställ material":
+                        registerOrderedMaterial romm = new registerOrderedMaterial(uid);
+                        tbdPane.setComponentAt(tabindex, romm.getContentPane());
+                        break;
 
                 }
                 //Revisorn
             } else if (uid.equals("3")) {
                 switch (tab) {
-                    case "Granska förfrågning":
-                        reviewRequest rr = new reviewRequest(uid);
-                        tbdPane.setComponentAt(tabindex, rr.getContentPane());
-                        break;
-                    case "Lagerför en modell":
-                        RegisterStockedProduct rsp = new RegisterStockedProduct();
-                        tbdPane.setComponentAt(tabindex, rsp.getContentPane());
-                        break;
                     case "Visa material info":
                         showMaterialInfo smi = new showMaterialInfo();
                         tbdPane.setComponentAt(tabindex, smi.getContentPane());
-                        break;
-                    case "Skapa förfrågning":
-                        createRequest cr = new createRequest(uid, "");
-                        tbdPane.setComponentAt(tabindex, cr.getContentPane());
-                        break;
-                    case "Skapa order för existerande kund":
-                        CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
-                        tbdPane.setComponentAt(tabindex, coec.getContentPane());
                         break;
                     case "Hantera kunder":
                         JFrameCustomerActions ca = new JFrameCustomerActions();
                         tbdPane.setComponentAt(tabindex, ca.getContentPane());
                         break;
-                    case "Lämna återkoppling på förfrågning":
-                        Feedback1 fb = new Feedback1();
-                        tbdPane.setComponentAt(tabindex, fb.getContentPane());
-                        break;
-                    case "Lämna kommentar på kund":
-                        Comment cm = new Comment();
-                        tbdPane.setComponentAt(tabindex, cm.getContentPane());
-                        break;
-                    case "Leverantörsida":
+                    case "Leverantörer":
                         Supplier spl = new Supplier();
                         tbdPane.setComponentAt(tabindex, spl.getContentPane());
                         break;
                     case "Visa ordrar":
                         showOrders so = new showOrders();
                         tbdPane.setComponentAt(tabindex, so.getContentPane());
-                        break;
-                    case "Registrera material":
-                        RegisterMaterial rm = new RegisterMaterial();
-                        tbdPane.setComponentAt(tabindex, rm.getContentPane());
                         break;
                     case "Statistik":
                         Statistics s = new Statistics();
@@ -306,16 +278,13 @@ public class Navigation extends javax.swing.JFrame {
                 tbdPane.addTab("Lämna kommentar på kund", cm.getContentPane());
 
                 Supplier spl = new Supplier();
-                tbdPane.addTab("Leverantörsida", spl.getContentPane());
+                tbdPane.addTab("Leverantörer", spl.getContentPane());
 
                 showOrders so = new showOrders();
                 tbdPane.addTab("Visa ordrar", so.getContentPane());
 
                 RegisterMaterial rm = new RegisterMaterial();
                 tbdPane.addTab("Registrera material", rm.getContentPane());
-
-                CreateCustomer cc = new CreateCustomer(true);
-                tbdPane.addTab("Skapa kund", cc.getContentPane());
 
                 ShowStockedProduct ssp = new ShowStockedProduct();
                 tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
@@ -329,34 +298,29 @@ public class Navigation extends javax.swing.JFrame {
                 getPDFSend pdfs = new getPDFSend();
                 tbdPane.addTab("Skapa fraktsedel pdf", pdfs.getContentPane());
 
+                registerOrderedMaterial romm = new registerOrderedMaterial(uid);
+                tbdPane.addTab("Beställ material", romm.getContentPane());
+
             } //Revisorn
             else if (uid.equals("3")) {
-                RegisterStockedProduct rsp = new RegisterStockedProduct();
-                tbdPane.addTab("Lagerför en modell", rsp.getContentPane());
-
-                showMaterialInfo smi = new showMaterialInfo();
-                tbdPane.addTab("Visa material info", smi.getContentPane());
-
-                reviewRequest rr = new reviewRequest(uid);
-                tbdPane.addTab("Granska förfrågning", rr.getContentPane());
-
-                createRequest cr = new createRequest(uid, "");
-                tbdPane.addTab("Skapa förfrågning", cr.getContentPane());
-
-                CreateOrderExistingCustomer coec = new CreateOrderExistingCustomer(uid);
-                tbdPane.addTab("Skapa order för existerande kund", coec.getContentPane());
 
                 JFrameCustomerActions ca = new JFrameCustomerActions();
                 tbdPane.addTab("Hantera kunder", ca.getContentPane());
-
-                ShowStockedProduct ssp = new ShowStockedProduct();
-                tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
+                
+                showMaterialInfo smi = new showMaterialInfo();
+                tbdPane.addTab("Visa material info", smi.getContentPane());
 
                 Statistics s = new Statistics();
                 tbdPane.addTab("Statistik", s.getContentPane());
+                
+                showOrders so = new showOrders();
+                tbdPane.addTab("Visa ordrar", so.getContentPane());
 
                 GetPDFInvoice pdfi = new GetPDFInvoice();
                 tbdPane.addTab("Skapa faktura pdf", pdfi.getContentPane());
+                
+                Supplier spl = new Supplier();
+                tbdPane.addTab("Leverantörer", spl.getContentPane());
 
             }
         } else {

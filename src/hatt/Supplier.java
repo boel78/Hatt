@@ -73,13 +73,13 @@ public class Supplier extends javax.swing.JFrame {
         jLabel1.setText("Välj leverantör");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 14, -1, -1));
 
-        txtName.setColumns(7);
+        txtName.setColumns(12);
         getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 105, -1, -1));
 
-        txtEmail.setColumns(7);
+        txtEmail.setColumns(12);
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 167, -1, -1));
 
-        txtPhone.setColumns(7);
+        txtPhone.setColumns(12);
         getContentPane().add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 221, -1, -1));
 
         lblName.setText("Namn:");
