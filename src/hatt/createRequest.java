@@ -16,43 +16,47 @@ public class createRequest extends javax.swing.JFrame {
     private boolean createOrder;
     private InfDB idb;
     private String uid;
+    private String cid;
 
-    public createRequest(String uid) {
+    public createRequest(String uid, String cid) {
         this.uid = uid;
+        this.cid = cid;
         try {
             idb = new InfDB("hattmakardb", "3306", "hattmakare", "Hattsweatshop");
         } catch (InfException ex) {
             ex.printStackTrace();
         }
         initComponents();
+        setComboboxVisible();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
+        lblModel = new javax.swing.JLabel();
         cbHatModel = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblDescription = new javax.swing.JLabel();
+        lblCreateRequest = new javax.swing.JLabel();
         btnSend = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        lblCustomer = new javax.swing.JLabel();
         cbCustomer = new javax.swing.JComboBox<>();
         txtDescription = new javax.swing.JTextField();
+        btnSizeGuide = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jLabel1.setText("Skapa orderförfrågan");
+        lblTitle.setText("Skapa orderförfrågan");
 
-        jLabel2.setText("Baserad på redan lagerförd modell?");
+        lblModel.setText("Baserad på redan lagerförd modell?");
 
         cbHatModel.setModel(new javax.swing.DefaultComboBoxModel<>(getCBHatModels()));
 
-        jLabel3.setText("Beskrivning:");
+        lblDescription.setText("Beskrivning:");
 
-        jLabel4.setText("Skapa förfrågan");
+        lblCreateRequest.setText("Skapa förfrågan");
 
         btnSend.setText("Skapa");
         btnSend.addActionListener(new java.awt.event.ActionListener() {
@@ -61,7 +65,7 @@ public class createRequest extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setText("Vilken kund?");
+        lblCustomer.setText("Vilken kund?");
 
         cbCustomer.setModel(new javax.swing.DefaultComboBoxModel<>(getCBCustomer()));
 
@@ -72,18 +76,25 @@ public class createRequest extends javax.swing.JFrame {
             }
         });
 
+        btnSizeGuide.setText("Måttguide");
+        btnSizeGuide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSizeGuideActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(137, 137, 137)
-                .addComponent(jLabel1))
+                .addComponent(lblTitle))
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabel2)
+                .addComponent(lblModel)
                 .addGap(26, 26, 26)
-                .addComponent(jLabel5))
+                .addComponent(lblCustomer))
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addComponent(cbHatModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -91,13 +102,15 @@ public class createRequest extends javax.swing.JFrame {
                 .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
-                .addComponent(jLabel3))
+                .addComponent(lblDescription))
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
+                .addContainerGap()
+                .addComponent(btnSizeGuide)
+                .addGap(18, 18, 18)
                 .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(159, 159, 159)
-                .addComponent(jLabel4))
+                .addComponent(lblCreateRequest))
             .addGroup(layout.createSequentialGroup()
                 .addGap(159, 159, 159)
                 .addComponent(btnSend))
@@ -106,21 +119,23 @@ public class createRequest extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(lblModel)
+                    .addComponent(lblCustomer))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbHatModel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
-                .addComponent(jLabel3)
+                .addComponent(lblDescription)
                 .addGap(12, 12, 12)
-                .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSizeGuide))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(lblCreateRequest)
                 .addGap(6, 6, 6)
                 .addComponent(btnSend))
         );
@@ -133,7 +148,7 @@ public class createRequest extends javax.swing.JFrame {
             description = txtDescription.getText();
             hatModel = cbHatModel.getSelectedItem().toString();
 
-            ID = Database.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
+            ID = getCustomerID();
             String nextID = Database.getAutoIncrement("requests", "rid");
             int workerID = 1;
 
@@ -160,6 +175,11 @@ public class createRequest extends javax.swing.JFrame {
         j++;
     }//GEN-LAST:event_txtDescriptionFocusGained
 
+    private void btnSizeGuideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSizeGuideActionPerformed
+        //SizeGuide sg = new SizeGuide();
+        //sg.setVisible(true);
+    }//GEN-LAST:event_btnSizeGuideActionPerformed
+
     public String[] getCBHatModels() {
         ArrayList<String> CBAL = new ArrayList<>();
         CBAL = Database.fetchColumn(false, "Name", "stocked_product", "", "");
@@ -181,17 +201,35 @@ public class createRequest extends javax.swing.JFrame {
 
         return CBCustomer;
     }
+    
+    private void setComboboxVisible() {
+        if (uid.isEmpty()){
+            lblCustomer.setVisible(false);
+            cbCustomer.setVisible(false);
+        }
+    }
+    
+    private String getCustomerID(){
+        if (cid.isEmpty()){
+        ID = Database.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
+        }
+        else {
+            ID = cid;
+        }
+        return ID;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;
+    private javax.swing.JButton btnSizeGuide;
     private javax.swing.JComboBox<String> cbCustomer;
     private javax.swing.JComboBox<String> cbHatModel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel lblCreateRequest;
+    private javax.swing.JLabel lblCustomer;
+    private javax.swing.JLabel lblDescription;
+    private javax.swing.JLabel lblModel;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtDescription;
     // End of variables declaration//GEN-END:variables
 }

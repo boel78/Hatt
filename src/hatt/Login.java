@@ -90,21 +90,21 @@ public class Login extends javax.swing.JFrame {
     private void btnOttoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOttoActionPerformed
         this.hide();
         String name = btnOtto.getText();
-        Navigation n = new Navigation(name, getID(name));
+        Navigation n = new Navigation(name, getID(name),"", true);
         n.setVisible(true);
     }//GEN-LAST:event_btnOttoActionPerformed
 
     private void btnJudithActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJudithActionPerformed
         this.hide();
         String name = btnJudith.getText();
-        Navigation n = new Navigation(name, getID(name));
+        Navigation n = new Navigation(name, getID(name),"", true);
         n.setVisible(true);
     }//GEN-LAST:event_btnJudithActionPerformed
 
     private void btnAccountantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccountantActionPerformed
         this.hide();
         //String name = btnAccountant.getText();
-        Navigation n = new Navigation("Joakim", getID("Joakim"));
+        Navigation n = new Navigation("Joakim", getID("Joakim"),"", true);
         n.setVisible(true);
     }//GEN-LAST:event_btnAccountantActionPerformed
 
