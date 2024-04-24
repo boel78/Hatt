@@ -139,6 +139,10 @@ public class Navigation extends javax.swing.JFrame {
                         ShowStockedProduct ssp = new ShowStockedProduct();
                         tbdPane.setComponentAt(tabindex, ssp.getContentPane());
                         break;
+                    case "Statistik":
+                        Statistics s = new Statistics();
+                        tbdPane.setComponentAt(tabindex, s.getContentPane());
+                        break;
                 }
                 //Revisorn
             } else if (uid.equals("3")) {
@@ -186,6 +190,10 @@ public class Navigation extends javax.swing.JFrame {
                     case "Registrera material":
                         RegisterMaterial rm = new RegisterMaterial();
                         tbdPane.setComponentAt(tabindex, rm.getContentPane());
+                        break;
+                    case "Statistik":
+                        Statistics s = new Statistics();
+                        tbdPane.setComponentAt(tabindex, s.getContentPane());
                         break;
 
                 }
@@ -282,6 +290,9 @@ public class Navigation extends javax.swing.JFrame {
                 ShowStockedProduct ssp = new ShowStockedProduct();
                 tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
 
+                Statistics s = new Statistics();
+                tbdPane.addTab("Statistik", s.getContentPane());
+
             } //Revisorn
             else if (uid.equals("3")) {
                 RegisterStockedProduct rsp = new RegisterStockedProduct();
@@ -304,6 +315,9 @@ public class Navigation extends javax.swing.JFrame {
 
                 ShowStockedProduct ssp = new ShowStockedProduct();
                 tbdPane.addTab("Visa lagerförda modeller", ssp.getContentPane());
+
+                Statistics s = new Statistics();
+                tbdPane.addTab("Statistik", s.getContentPane());
 
             }
         } else {
