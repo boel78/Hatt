@@ -178,7 +178,7 @@ public class createRequest extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescriptionFocusGained
 
     private void SizeGuidebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SizeGuidebtnActionPerformed
-new SizeGuide().setVisible(true); 
+        new SizeGuide().setVisible(true);
 
     }//GEN-LAST:event_SizeGuidebtnActionPerformed
 
