@@ -137,7 +137,8 @@ public class createRequest extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblCreateRequest)
                 .addGap(6, 6, 6)
-                .addComponent(btnSend))
+                .addComponent(btnSend)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,14 +202,14 @@ public class createRequest extends javax.swing.JFrame {
 
         return CBCustomer;
     }
-    
+
     private void setComboboxVisible() {
         if (uid.isEmpty()){
             lblCustomer.setVisible(false);
             cbCustomer.setVisible(false);
         }
     }
-    
+
     private String getCustomerID(){
         if (cid.isEmpty()){
         ID = Database.fetchSingle("cid", "customer", "name", cbCustomer.getSelectedItem().toString());
@@ -221,6 +222,7 @@ public class createRequest extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SizeGuidebtn;
     private javax.swing.JButton btnSend;
     private javax.swing.JButton btnSizeGuide;
     private javax.swing.JComboBox<String> cbCustomer;

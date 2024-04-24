@@ -201,6 +201,7 @@ public class Feedback1 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String feedback = TFFeedb.getText();
+        String rid = cbReviews.getSelectedItem().toString();
         String query1 = "SELECT feedback FROM requests, customer WHERE customer.cid = requests.rid AND rid = '" + rid + "'";
 
         try {
