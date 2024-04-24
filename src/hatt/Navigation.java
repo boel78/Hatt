@@ -154,6 +154,15 @@ public class Navigation extends javax.swing.JFrame {
                         Statistics s = new Statistics();
                         tbdPane.setComponentAt(tabindex, s.getContentPane());
                         break;
+                    case "Skapa faktura pdf":
+                        GetPDFInvoice pdfi = new GetPDFInvoice();
+                        tbdPane.setComponentAt(tabindex, pdfi.getContentPane());
+                        break;
+                    case "Skapa fraktsedel pdf":
+                        getPDFSend pdfs = new getPDFSend();
+                        tbdPane.setComponentAt(tabindex, pdfs.getContentPane());
+                        break;
+
                 }
                 //Revisorn
             } else if (uid.equals("3")) {
@@ -205,6 +214,10 @@ public class Navigation extends javax.swing.JFrame {
                     case "Statistik":
                         Statistics s = new Statistics();
                         tbdPane.setComponentAt(tabindex, s.getContentPane());
+                        break;
+                    case "Skapa faktura pdf":
+                        GetPDFInvoice pdfi = new GetPDFInvoice();
+                        tbdPane.setComponentAt(tabindex, pdfi.getContentPane());
                         break;
 
                 }
@@ -310,6 +323,12 @@ public class Navigation extends javax.swing.JFrame {
                 Statistics s = new Statistics();
                 tbdPane.addTab("Statistik", s.getContentPane());
 
+                GetPDFInvoice pdfi = new GetPDFInvoice();
+                tbdPane.addTab("Skapa faktura pdf", pdfi.getContentPane());
+
+                getPDFSend pdfs = new getPDFSend();
+                tbdPane.addTab("Skapa fraktsedel pdf", pdfs.getContentPane());
+
             } //Revisorn
             else if (uid.equals("3")) {
                 RegisterStockedProduct rsp = new RegisterStockedProduct();
@@ -335,6 +354,9 @@ public class Navigation extends javax.swing.JFrame {
 
                 Statistics s = new Statistics();
                 tbdPane.addTab("Statistik", s.getContentPane());
+
+                GetPDFInvoice pdfi = new GetPDFInvoice();
+                tbdPane.addTab("Skapa faktura pdf", pdfi.getContentPane());
 
             }
         } else {
