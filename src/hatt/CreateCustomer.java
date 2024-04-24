@@ -163,7 +163,7 @@ public class CreateCustomer extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "En ny kund har nu lagts till");
                 } else {
                     if (!password.isEmpty() && password.length() < 35) {
-                        String fraga = "Insert into customer values (" + id + ",'" + name + "','" + address + "','" + phone + "','" + email + "')";
+                        String fraga = "Insert into customer values (" + id + ",'" + name + "','" + address + "','" + phone + "','" + email + "','" + "' ,'" + password + "')";
                         idb.insert(fraga);
 
                         JOptionPane.showMessageDialog(rootPane, "Ditt konto har nu lagts till");
