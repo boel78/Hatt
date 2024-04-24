@@ -17,6 +17,7 @@ public class Statistics extends javax.swing.JFrame {
      * Creates new form Statistics
      */
     public Statistics() {
+        new Database();
         initComponents();
     }
 
