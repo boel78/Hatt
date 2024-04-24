@@ -99,7 +99,7 @@ public class Statistics extends javax.swing.JFrame {
 
     private void btnSoldFabricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldFabricActionPerformed
         txtAreaInfo.setText("");
-        txtAreaInfo.append("mid" + "\t" + "Namn" + "\t" + "Såld mängd" + "\n");
+        txtAreaInfo.append("mid" + "\t" + "Namn" + "\t" + "Såld mängd (cm2)" + "\n");
         ArrayList<HashMap<String, String>> values = Database.fetchRowsJoin("SELECT order_consists_of_materials.mid, materials.`name`, SUM(amount) AS totalt_antal_sålda\n" +
 "FROM order_consists_of_materials\n" +
 "JOIN materials ON order_consists_of_materials.mid = materials.mid\n" +
@@ -117,7 +117,7 @@ public class Statistics extends javax.swing.JFrame {
 
     private void btnSoldAccessoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldAccessoriesActionPerformed
         txtAreaInfo.setText("");
-        txtAreaInfo.append("mid" + "\t" + "Namn" + "\t" + "Antal sålda" + "\n");
+        txtAreaInfo.append("mid" + "\t" + "Namn" + "\t" + "Såld mängd (st)" + "\n");
         ArrayList<HashMap<String, String>> values = Database.fetchRowsJoin("SELECT order_consists_of_materials.mid, materials.`name`, SUM(order_consists_of_materials.amount) AS totalt_antal_sålda\n" +
 "FROM order_consists_of_materials\n" +
 "JOIN materials ON order_consists_of_materials.mid = materials.mid\n" +
