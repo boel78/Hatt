@@ -25,6 +25,7 @@ public class Test {
             ex.printStackTrace();
         }
         new Database();
+        new Statistics().setVisible(true);
         
     }
     //public void hej då{

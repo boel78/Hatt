@@ -87,7 +87,7 @@ public class Database {
 
         return list;
     }
-    
+
     //Fetch rows för join query
     public static ArrayList<HashMap<String, String>> fetchRowsJoin(String query) {
         ArrayList<HashMap<String, String>> list = new ArrayList<>();
