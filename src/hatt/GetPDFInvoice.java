@@ -121,7 +121,7 @@ public class GetPDFInvoice extends javax.swing.JFrame {
         HashMap<String, String> infoHM = new HashMap<>();
 
         try {
-            amount = idb.fetchSingle("SELECT cost FROM invoice WHERE oid in "
+            amount = idb.fetchSingle("SELECT price FROM xOrder WHERE oid in "
                     + "(SELECT oid FROM xorder WHERE description = '" + CBxOrder.getSelectedItem().toString() + "')");
             productName = CBxOrder.getSelectedItem().toString();
             InvoiceID = idb.fetchSingle("SELECT inid FROM invoice WHERE oid in "
@@ -131,6 +131,9 @@ public class GetPDFInvoice extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+        if (InvoiceID == null) {
+            InvoiceID = Database.getAutoIncrement("invoice", "inid");
         }
         String fileName = InvoiceID + " " + productName + ".pdf";
         ArrayList<String> infoAL = new ArrayList<>();
@@ -160,18 +163,34 @@ public class GetPDFInvoice extends javax.swing.JFrame {
             //        contentStream.showText("Belopp: " + amount);
             //    case 1:
             //         contentStream.newLineAtOffset(i , 700);
-            //  }   
-            String info1 = info[0];
-            String info2 = info[1];
-            String info3 = info[2];
+            //  } 
+            boolean showCustomer = false;
+            String info1 = "";
+            String info2 = "";
+            String info3 = "";
+            String info4 = "";
+            if (infoHM.size() == 4) {
+                info1 = info[0];
+                info2 = info[1];
+                info3 = info[2];
+                info4 = info[3];
+                showCustomer = true;
+            }
 
-            contentStream.showText("Belopp: " + amount);
+            contentStream.showText("Belopp: " + amount + " inkl. moms");
             contentStream.newLineAtOffset(0, -50);
             contentStream.showText("produkt: " + productName);
             contentStream.newLineAtOffset(0, -50);
             contentStream.showText("Fakturanummer: " + InvoiceID);
             contentStream.newLineAtOffset(0, -50);
-            contentStream.showText("Kunduppgifter: " + info1 + " " + info2 + " " + info3);
+            if (showCustomer) {
+                contentStream.showText("Försäljning.");
+                contentStream.newLineAtOffset(0, -50);
+                contentStream.showText("Kunduppgifter: " + info1 + " " + info2 + " " + info3 + " " + info4);
+            } else {
+                contentStream.showText("Inköp av material.");
+
+            }
             contentStream.newLineAtOffset(0, -50);
             contentStream.showText("Ottos Hattmakeri, Örebro, Hattmakarvgen 1, 019-303 878");
             contentStream.newLineAtOffset(0, -50);
