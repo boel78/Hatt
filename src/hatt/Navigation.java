@@ -25,6 +25,7 @@ public class Navigation extends javax.swing.JFrame {
         this.isStaff = isStaff;
         initComponents();
         lblUser.setText(user);
+        btnBack.setVisible(false);
         loadPane();
     }
 
@@ -95,6 +96,7 @@ public class Navigation extends javax.swing.JFrame {
         int tabindex = tbdPane.getSelectedIndex();
 
         if (isStaff) {
+            btnBack.setVisible(true);
             //Otto och Judith
             if (uid.equals("1") || uid.equals("2")) {
                 switch (tab) {

@@ -102,7 +102,7 @@ public class showMaterialInfo extends javax.swing.JFrame {
                 txtAreaShowInfo.append("Mängd: " + accessories.get("amount") + "\n");
             } else {
                 txtAreaShowInfo.append("Typ: Tyg\n");
-                txtAreaShowInfo.append("Storlek(cm²): " + fabrics.get("size") + "\n");
+                txtAreaShowInfo.append("Storlek(cm²) i lager: " + fabrics.get("size") + "\n");
             }
             txtAreaShowInfo.append("Pris: " + Database.fetchSingle("price", "materials", "mid", id));
 

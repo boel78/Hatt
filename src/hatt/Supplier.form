@@ -67,7 +67,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtName">
       <Properties>
-        <Property name="columns" type="int" value="12"/>
+        <Property name="columns" type="int" value="15"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -77,7 +77,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtEmail">
       <Properties>
-        <Property name="columns" type="int" value="12"/>
+        <Property name="columns" type="int" value="15"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -87,7 +87,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPhone">
       <Properties>
-        <Property name="columns" type="int" value="12"/>
+        <Property name="columns" type="int" value="15"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
