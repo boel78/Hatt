@@ -56,15 +56,34 @@ public class CreateCustomer extends javax.swing.JFrame {
         lblPW = new javax.swing.JLabel();
         pwField = new javax.swing.JPasswordField();
 
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         lblNewCustomer.setText("Skapa en ny kund");
+        getContentPane().add(lblNewCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 6, -1, -1));
+
+        txtName.setColumns(10);
+        getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 74, -1, -1));
 
         lblName.setText("Namn");
+        getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 51, -1, -1));
+
+        txtAddress.setColumns(14);
+        getContentPane().add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 74, 160, -1));
 
         lblAddress.setText("Adress");
+        getContentPane().add(lblAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 51, -1, -1));
 
         lblPhone.setText("Telefonnummer");
+        getContentPane().add(lblPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 119, -1, -1));
+
+        txtPhone.setColumns(10);
+        getContentPane().add(txtPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 142, 130, -1));
 
         lblEmail.setText("Epost");
+        getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 119, -1, -1));
+
+        txtEmail.setColumns(14);
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(299, 142, 160, -1));
 
         btnCreate.setText("Skapa kund");
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -72,71 +91,13 @@ public class CreateCustomer extends javax.swing.JFrame {
                 btnCreateActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 208, -1, -1));
 
         lblPW.setText("Lösenord");
+        getContentPane().add(lblPW, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 181, -1, -1));
 
-        pwField.setColumns(7);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNewCustomer)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblName)
-                                    .addComponent(lblPhone)
-                                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblPW))
-                                .addGap(137, 137, 137)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblAddress)
-                                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblEmail)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCreate)
-                .addGap(73, 73, 73))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblNewCustomer)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(lblAddress))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPhone)
-                    .addComponent(lblEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPW)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreate)
-                    .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
-        );
+        pwField.setColumns(10);
+        getContentPane().add(pwField, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 208, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
