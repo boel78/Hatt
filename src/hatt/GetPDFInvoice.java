@@ -22,7 +22,7 @@ import oru.inf.InfException;
 public class GetPDFInvoice extends javax.swing.JFrame {
 
     InfDB idb;
-    
+
     /**
      * Creates new form GetPDFInvoice
      */
@@ -99,114 +99,102 @@ public class GetPDFInvoice extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-    public String[] getCBInvoice(){
+    public String[] getCBInvoice() {
         ArrayList<String> CBAL = new ArrayList<>();
-        
+
         CBAL = Database.fetchColumn(false, "description", "xorder", "", "");
-        
-        
+
         String[] CBOrders = new String[CBAL.size()];
         CBAL.toArray(CBOrders);
-        
+
         return CBOrders;
     }
-    
-    public void createPDF()
-    {   
-                LocalDate localdate = LocalDate.now();
+
+    public void createPDF() {
+        LocalDate localdate = LocalDate.now();
 
         String amount = "";
-        String productName = ""; 
+        String productName = "";
         String date = localdate.toString();
         String InvoiceID = "";
-        
-        
-        
+
         HashMap<String, String> infoHM = new HashMap<>();
-        
-        try{
+
+        try {
             amount = idb.fetchSingle("SELECT cost FROM invoice WHERE oid in "
-                    + "(SELECT oid FROM xorder WHERE description = '" + CBxOrder.getSelectedItem().toString() +  "')"  );
+                    + "(SELECT oid FROM xorder WHERE description = '" + CBxOrder.getSelectedItem().toString() + "')");
             productName = CBxOrder.getSelectedItem().toString();
-            InvoiceID = idb.fetchSingle("SELECT inid FROM invoice WHERE oid in " 
-                    + "(SELECT oid FROM xOrder WHERE description = '" + CBxOrder.getSelectedItem().toString() +"')");
+            InvoiceID = idb.fetchSingle("SELECT inid FROM invoice WHERE oid in "
+                    + "(SELECT oid FROM xOrder WHERE description = '" + CBxOrder.getSelectedItem().toString() + "')");
             infoHM = idb.fetchRow("SELECT name, address, phone, email FROM customer WHERE cid in "
                     + "(SELECT customer FROM xorder WHERE description = '" + CBxOrder.getSelectedItem().toString() + "')");
-            
-        } catch (Exception ex){
+
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         String fileName = InvoiceID + " " + productName + ".pdf";
         ArrayList<String> infoAL = new ArrayList<>();
         String[] info = new String[infoHM.size()];
-        for(HashMap.Entry<String, String> entry : infoHM.entrySet()){
-        infoAL.add(entry.getValue());
-    }
+        for (HashMap.Entry<String, String> entry : infoHM.entrySet()) {
+            infoAL.add(entry.getValue());
+        }
         infoAL.toArray(info);
-        
+
         try {
             PDDocument document = new PDDocument();
-            
+
             PDPage page = new PDPage();
             document.addPage(page);
-            
+
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
-            
+
             contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN), 12);
-            
+
             contentStream.beginText();
-            
+
             contentStream.newLineAtOffset(100, 700);
-            
+
             //for(int i = 0; i < 6; i++){
-               // switch (i){
-               //     case 0:
-                //        contentStream.showText("Belopp: " + amount);
-                //    case 1:
-               //         contentStream.newLineAtOffset(i , 700);
-                        
-              //  }   
-                
-              
-              
-              String info1 = info[0];
-              String info2 = info[1];
-              String info3 = info[2];
-            
-            
+            // switch (i){
+            //     case 0:
+            //        contentStream.showText("Belopp: " + amount);
+            //    case 1:
+            //         contentStream.newLineAtOffset(i , 700);
+            //  }   
+            String info1 = info[0];
+            String info2 = info[1];
+            String info3 = info[2];
+
             contentStream.showText("Belopp: " + amount);
             contentStream.newLineAtOffset(0, -50);
             contentStream.showText("produkt: " + productName);
             contentStream.newLineAtOffset(0, -50);
             contentStream.showText("Fakturanummer: " + InvoiceID);
             contentStream.newLineAtOffset(0, -50);
-            contentStream.showText("Kunduppgifter: " + info1 +" "+ info2 +" "+ info3);
+            contentStream.showText("Kunduppgifter: " + info1 + " " + info2 + " " + info3);
             contentStream.newLineAtOffset(0, -50);
             contentStream.showText("Ottos Hattmakeri, Örebro, Hattmakarvgen 1, 019-303 878");
             contentStream.newLineAtOffset(0, -50);
-                
-           // "Belopp: " + amount    
+
+            // "Belopp: " + amount    
             //        + "\rprodukt: " + productName
             //        + "\rDatum: " + date 
             //        + "\rFakturanummer" + InvoiceID
             //        + "\rHandlares personuppgifter: " + info 
             //        + "\rOttos Hattmakeri, Örebro, Hattmakarvgen 1, 019-303 878"
-            
-            
             contentStream.endText();
-            
+
             contentStream.close();
-            
+
             document.save(fileName);
-            
+
             document.close();
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

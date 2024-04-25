@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
  */
 public class showMaterialInfo extends javax.swing.JFrame {
 
-
     /**
      * Creates new form showMaterialInfo
      */
@@ -38,10 +37,13 @@ public class showMaterialInfo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(500, 500));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblChooseMaterial.setText("Sök material");
+        getContentPane().add(lblChooseMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 21, -1, -1));
 
         txtMaterial.setColumns(10);
+        getContentPane().add(txtMaterial, new org.netbeans.lib.awtextra.AbsoluteConstraints(325, 50, -1, -1));
 
         btnShowInfo.setText("Visa info");
         btnShowInfo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -49,44 +51,13 @@ public class showMaterialInfo extends javax.swing.JFrame {
                 btnShowInfoMouseClicked(evt);
             }
         });
+        getContentPane().add(btnShowInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
         txtAreaShowInfo.setColumns(20);
         txtAreaShowInfo.setRows(5);
         jScrollPane1.setViewportView(txtAreaShowInfo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(175, 175, 175)
-                        .addComponent(btnShowInfo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(lblChooseMaterial))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(133, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(lblChooseMaterial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnShowInfo)
-                .addGap(76, 76, 76))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 310, 170));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -97,27 +68,33 @@ public class showMaterialInfo extends javax.swing.JFrame {
         txtAreaShowInfo.setText("");
         String id = Database.fetchSingle("mid", "materials", "name", name);
         if (id != null) {
-            String supplierID = Database.fetchSingle("sid", "ordering_materials", "mid", id);
-            
-            
-            HashMap<String, String> supplierInfo = new HashMap<>();
-            supplierInfo = Database.fetchRow("supplier", "sid", supplierID);
-            for (String key : supplierInfo.keySet()) {
-                if (!key.equals("sid")) {
-                    String input = "";
-                    switch(key){
-                        case "name": input = "Namn";
-                        break;
-                        case "email": input = "Email";
-                        break;
-                        case "phone": input = "Telefon";
-                        break;
+            if (Validation.checkExistingCell("supplier_has_material", "mid", id)) {
+                String supplierID = Database.fetchSingle("sid", "supplier_has_material", "mid", id);
+
+                HashMap<String, String> supplierInfo = new HashMap<>();
+                supplierInfo = Database.fetchRow("supplier", "sid", supplierID);
+                for (String key : supplierInfo.keySet()) {
+                    if (!key.equals("sid")) {
+                        String input = "";
+                        switch (key) {
+                            case "name":
+                                input = "Namn";
+                                break;
+                            case "email":
+                                input = "Email";
+                                break;
+                            case "phone":
+                                input = "Telefon";
+                                break;
+                        }
+                        txtAreaShowInfo.append(input + ": " + supplierInfo.get(key) + "\n");
                     }
-                    txtAreaShowInfo.append(input + ": " + supplierInfo.get(key) + "\n");
                 }
             }
-            
-            
+            else{
+                txtAreaShowInfo.append("Ingen leverantör är kopplad till materialet än \n");
+            }
+
             HashMap<String, String> fabrics = Database.fetchRow("fabric", "mid", id);
             if (fabrics.isEmpty()) {
                 HashMap<String, String> accessories = Database.fetchRow("accessories", "mid", id);
@@ -130,7 +107,7 @@ public class showMaterialInfo extends javax.swing.JFrame {
             txtAreaShowInfo.append("Pris: " + Database.fetchSingle("price", "materials", "mid", id));
 
         } else {
-            JOptionPane.showMessageDialog(null,"Materialet finns inte. Kolla efter stavfel.");
+            JOptionPane.showMessageDialog(null, "Materialet finns inte. Kolla efter stavfel.");
         }
     }//GEN-LAST:event_btnShowInfoMouseClicked
 
