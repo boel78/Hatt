@@ -36,8 +36,12 @@ public class Login extends javax.swing.JFrame {
         btnOtto = new javax.swing.JButton();
         btnAccountant = new javax.swing.JButton();
         btnJudith = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnOtto.setText("Otto");
         btnOtto.addActionListener(new java.awt.event.ActionListener() {
@@ -45,6 +49,7 @@ public class Login extends javax.swing.JFrame {
                 btnOttoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnOtto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 400, -1, -1));
 
         btnAccountant.setText("Revisor");
         btnAccountant.addActionListener(new java.awt.event.ActionListener() {
@@ -52,6 +57,7 @@ public class Login extends javax.swing.JFrame {
                 btnAccountantActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAccountant, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, -1, -1));
 
         btnJudith.setText("Judith");
         btnJudith.addActionListener(new java.awt.event.ActionListener() {
@@ -59,30 +65,19 @@ public class Login extends javax.swing.JFrame {
                 btnJudithActionPerformed(evt);
             }
         });
+        getContentPane().add(btnJudith, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(btnJudith)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(btnOtto)
-                .addGap(46, 46, 46)
-                .addComponent(btnAccountant)
-                .addGap(39, 39, 39))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(235, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnJudith)
-                    .addComponent(btnOtto)
-                    .addComponent(btnAccountant))
-                .addGap(38, 38, 38))
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hatt/FriendlyKate-sjkLLyy3RLw7dMG-removebg-preview.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jLabel2.setMaximumSize(new java.awt.Dimension(300, 300));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-130, 0, 310, 605));
+
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 36)); // NOI18N
+        jLabel1.setText("Ottos hattmakeri");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 330, 90));
+
+        jLabel3.setText("Logga in");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 330, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -160,5 +155,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnAccountant;
     private javax.swing.JButton btnJudith;
     private javax.swing.JButton btnOtto;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }

@@ -36,12 +36,19 @@ public class LoginCustomer extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         btnCreateAccount = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 171, -1));
+        getContentPane().add(pfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 360, 171, -1));
 
         lblEmail.setText("Epost:");
+        getContentPane().add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 270, -1, -1));
 
         lblPassword.setText("Lösenord:");
+        getContentPane().add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
 
         btnLogin.setText("Logga in");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -49,6 +56,7 @@ public class LoginCustomer extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, -1, -1));
 
         btnCreateAccount.setText("Skapa konto");
         btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -56,44 +64,15 @@ public class LoginCustomer extends javax.swing.JFrame {
                 btnCreateAccountActionPerformed(evt);
             }
         });
+        getContentPane().add(btnCreateAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblPassword)
-                            .addComponent(lblEmail)
-                            .addComponent(tfEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
-                            .addComponent(pfPassword)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCreateAccount)
-                        .addGap(59, 59, 59)
-                        .addComponent(btnLogin)))
-                .addContainerGap(141, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(lblEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addComponent(lblPassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnCreateAccount))
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/hatt/FriendlyKate-sjkLLyy3RLw7dMG-removebg-preview.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-120, 10, 329, -1));
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
+        jLabel2.setText("Ottos hattmakeri");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -158,6 +137,8 @@ public class LoginCustomer extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCreateAccount;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JPasswordField pfPassword;
